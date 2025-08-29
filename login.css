@@ -1,0 +1,145 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fbf5ffcf;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.login-container {
+    background: #fffffff4;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 15px;
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+    z-index: 1;
+}
+.header {
+    background: #fff;
+    padding: 15px;
+}
+.header img {
+    height: 50px;
+}
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #fff;
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 45px;
+}
+.avatar-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+form {
+    padding: 20px;
+}
+.input-group {
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+.input-group input {
+    width: 90%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+}
+.btn {
+    width: 50%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #3f73e2, #2c76f5);
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn:hover {
+    opacity: 0.85;
+}
+.register {
+    margin-top: 15px;
+    font-size: 14px;
+    color: white;
+}
+.register a {
+    color: #fff;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.phone {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@media (max-width: 480px) {
+    .avatar {
+        width: 80px;
+        height: 80px;
+        font-size: 35px;
+    }
+}
+@media (max-height: 500px) {
+    .login-container {
+        transform: scale(0.85);
+        transform-origin: top center;
+        margin-top: 10px;
+        min-height: auto;
+    }
+    .olas{
+        width: 100%;
+    }
+}
+.olas {
+    position: fixed;
+    bottom: -20px;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+}
+#preloader {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+#preloader img {
+    width: 300px;
+    animation: girar 1.5s linear infinite;
+}
+@keyframes girar {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
