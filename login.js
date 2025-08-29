@@ -26,13 +26,13 @@ form.addEventListener("submit", function (e) {
 
     axios.post(`${API_URL}/api/auth/login`, { username, password })
         .then(response => {
-            console.log("Respuesta del servidor:", response.data);
+            // console.log("Respuesta del servidor:", response.data);
             localStorage.setItem("loginResponse", JSON.stringify(response.data));
             alert("Inicio de sesión exitoso");
-            // window.location.href = "dashboard.html";
+            window.location.href = "../administrador/inicio/inicioAdmin.html";
         })
         .catch(error => {
-            console.error("Error en la petición:", error);
+            // console.error("Error en la petición:", error);
             alert("Error al iniciar sesión");
         });
 });
