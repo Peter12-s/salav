@@ -7,23 +7,24 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelector(".login-container").style.display = "block";
         }, 500);
     }, 1000);
+});
 
-    const form = document.querySelector("form");
-    form.addEventListener("submit", function (e) {
-        e.preventDefault();
 
-        const username = form.querySelector("input[type='text']").value.trim();
-        const password = form.querySelector("input[type='password']").value.trim();
 
-        if (!username || !password) {
-            alert("Por favor, completa todos los campos");
-            return;
-        }
+//peticion al servidor login guardar en localstorage el token
+const form = document.querySelector("form");
+form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-        axios.post("https://nest-api-855316206046.us-central1.run.app/api/auth/login", {
-            username: username,
-            password: password
-        })
+    const username = form.querySelector("input[type='text']").value.trim();
+    const password = form.querySelector("input[type='password']").value.trim();
+
+    if (!username || !password) {
+        alert("Por favor, completa todos los campos");
+        return;
+    }
+
+    axios.post(`${API_URL}/api/auth/login`, { username, password })
         .then(response => {
             console.log("Respuesta del servidor:", response.data);
             localStorage.setItem("loginResponse", JSON.stringify(response.data));
@@ -34,5 +35,4 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Error en la petición:", error);
             alert("Error al iniciar sesión");
         });
-    });
 });
