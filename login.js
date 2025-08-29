@@ -1,3 +1,4 @@
+//animacion del preloader 
 document.addEventListener("DOMContentLoaded", function () {
     setTimeout(function () {
         document.getElementById("preloader").style.opacity = "0";
