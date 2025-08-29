@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRUD Usuarios con Paginación</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+    h1 {
+      text-align: center;
+      color: white;
+      margin-bottom: 1.5rem;
+    }
+    form {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      margin-bottom: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+    form .row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    input, select, button {
+      padding: 0.8rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      width: 100%;
+    }
+    button {
+      background: #2575fc;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #6a11cb;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1rem;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    th, td {
+      padding: 1rem;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background: #2575fc;
+      color: white;
+    }
+    tr:hover td {
+      background: #f2f2f2;
+    }
+    .actions button {
+      margin-right: 0.5rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+    }
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .pagination button {
+      background: white;
+      color: #2575fc;
+      border: 1px solid #2575fc;
+    }
+    .pagination button.active {
+      background: #2575fc;
+      color: white;
+    }
+    @media (max-width: 768px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+      thead {
+        display: none;
+      }
+      tr {
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 0.5rem;
+      }
+      td {
+        border: none;
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem;
+      }
+      td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Gestión de Usuarios</h1>
+
+    <!-- Formulario -->
+    <form id="userForm">
+      <div class="row">
+        <input type="text" id="nombre" placeholder="Nombre completo" required>
+        <input type="tel" id="telefono" placeholder="Teléfono" required>
+        <input type="text" id="direccion" placeholder="Dirección" required>
+        <input type="email" id="correo" placeholder="Correo electrónico" required>
+        <select id="sexo" required>
+          <option value="">Sexo</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Femenino">Femenino</option>
+          <option value="Otro">Otro</option>
+        </select>
+        <select id="rol" required>
+          <option value="">Tipo de Rol</option>
+          <option value="Administrador">Administrador</option>
+          <option value="Freelance">Freelance</option>
+          <option value="Empresa">Empresa</option>
+        </select>
+      </div>
+      <button type="submit">Guardar Usuario</button>
+    </form>
+
+    <!-- Tabla -->
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Teléfono</th>
+          <th>Dirección</th>
+          <th>Correo</th>
+          <th>Sexo</th>
+          <th>Rol</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="userTable"></tbody>
+    </table>
+
+    <!-- Paginación -->
+    <div class="pagination" id="pagination"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById("userForm");
+    const tableBody = document.getElementById("userTable");
+    const pagination = document.getElementById("pagination");
+
+    let users = [];
+    let currentPage = 1;
+    const rowsPerPage = 2;
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const user = {
+        nombre: document.getElementById("nombre").value,
+        telefono: document.getElementById("telefono").value,
+        direccion: document.getElementById("direccion").value,
+        correo: document.getElementById("correo").value,
+        sexo: document.getElementById("sexo").value,
+        rol: document.getElementById("rol").value
+      };
+      users.push(user);
+      form.reset();
+      displayTable();
+    });
+
+    function displayTable() {
+      tableBody.innerHTML = "";
+      let start = (currentPage - 1) * rowsPerPage;
+      let end = start + rowsPerPage;
+      let paginatedUsers = users.slice(start, end);
+
+      paginatedUsers.forEach((user, index) => {
+        const row = `<tr>
+          <td data-label="Nombre">${user.nombre}</td>
+          <td data-label="Teléfono">${user.telefono}</td>
+          <td data-label="Dirección">${user.direccion}</td>
+          <td data-label="Correo">${user.correo}</td>
+          <td data-label="Sexo">${user.sexo}</td>
+          <td data-label="Rol">${user.rol}</td>
+          <td data-label="Acciones" class="actions">
+            <button onclick="deleteUser(${start + index})">Eliminar</button>
+          </td>
+        </tr>`;
+        tableBody.innerHTML += row;
+      });
+      displayPagination();
+    }
+
+    function displayPagination() {
+      pagination.innerHTML = "";
+      let totalPages = Math.ceil(users.length / rowsPerPage);
+
+      for (let i = 1; i <= totalPages; i++) {
+        let button = document.createElement("button");
+        button.innerText = i;
+        button.classList.toggle("active", i === currentPage);
+        button.addEventListener("click", () => {
+          currentPage = i;
+          displayTable();
+        });
+        pagination.appendChild(button);
+      }
+    }
+
+    function deleteUser(index) {
+      users.splice(index, 1);
+      if ((currentPage - 1) * rowsPerPage >= users.length && currentPage > 1) {
+        currentPage--;
+      }
+      displayTable();
+    }
+  </script>
+</body>
+</html>

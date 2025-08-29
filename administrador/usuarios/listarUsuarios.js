@@ -1,4 +1,44 @@
-// ====== MENÚ RESPONSIVO Y SUBMENÚ ======
+let users = [
+    { nombre: "Juan Pérez", telefono: "5551234567", direccion: "Av. Reforma 123", correo: "juan@example.com", sexo: "Masculino", rol: "Administrador" },
+    { nombre: "María López", telefono: "5559876543", direccion: "Calle 5 #234", correo: "maria@example.com", sexo: "Femenino", rol: "Freelance" },
+    { nombre: "Carlos Ramírez", telefono: "5556789123", direccion: "Col. Centro", correo: "carlos@example.com", sexo: "Masculino", rol: "Empresa" },
+    { nombre: "Ana Torres", telefono: "5554567891", direccion: "Av. Universidad 55", correo: "ana@example.com", sexo: "Femenino", rol: "Administrador" },
+    { nombre: "Luis Hernández", telefono: "5553456789", direccion: "Blvd. Insurgentes", correo: "luis@example.com", sexo: "Masculino", rol: "Freelance" },
+    { nombre: "Sofía Morales", telefono: "5558765432", direccion: "Col. Roma", correo: "sofia@example.com", sexo: "Femenino", rol: "Empresa" },
+    { nombre: "Pedro Castillo", telefono: "5557654321", direccion: "Calle Hidalgo", correo: "pedro@example.com", sexo: "Masculino", rol: "Administrador" },
+    { nombre: "Laura Gómez", telefono: "5552345678", direccion: "Av. Juárez", correo: "laura@example.com", sexo: "Femenino", rol: "Freelance" },
+    { nombre: "Jorge Rivas", telefono: "5551122334", direccion: "Col. Del Valle", correo: "jorge@example.com", sexo: "Masculino", rol: "Empresa" },
+    { nombre: "Marta Sánchez", telefono: "5559988776", direccion: "Calle Morelos", correo: "marta@example.com", sexo: "Femenino", rol: "Administrador" },
+    { nombre: "Raúl Díaz", telefono: "5556655443", direccion: "Col. Polanco", correo: "raul@example.com", sexo: "Masculino", rol: "Freelance" },
+
+    { nombre: "Laura Gómez", telefono: "5552345678", direccion: "Av. Juárez", correo: "laura@example.com", sexo: "Femenino", rol: "Freelance" },
+    { nombre: "Jorge Rivas", telefono: "5551122334", direccion: "Col. Del Valle", correo: "jorge@example.com", sexo: "Masculino", rol: "Empresa" },
+    { nombre: "Marta Sánchez", telefono: "5559988776", direccion: "Calle Morelos", correo: "marta@example.com", sexo: "Femenino", rol: "Administrador" },
+    { nombre: "Raúl Díaz", telefono: "5556655443", direccion: "Col. Polanco", correo: "raul@example.com", sexo: "Masculino", rol: "Freelance" },
+    { nombre: "Patricia Vega", telefono: "5554433221", direccion: "Av. Chapultepec", correo: "patricia@example.com", sexo: "Femenino", rol: "Empresa" },
+    { nombre: "Laura Gómez", telefono: "5552345678", direccion: "Av. Juárez", correo: "laura@example.com", sexo: "Femenino", rol: "Freelance" },
+    { nombre: "Jorge Rivas", telefono: "5551122334", direccion: "Col. Del Valle", correo: "jorge@example.com", sexo: "Masculino", rol: "Empresa" },
+    { nombre: "Marta Sánchez", telefono: "5559988776", direccion: "Calle Morelos", correo: "marta@example.com", sexo: "Femenino", rol: "Administrador" },
+    { nombre: "Raúl Díaz", telefono: "5556655443", direccion: "Col. Polanco", correo: "raul@example.com", sexo: "Masculino", rol: "Freelance" },
+    { nombre: "Patricia Vega", telefono: "5554433221", direccion: "Av. Chapultepec", correo: "patricia@example.com", sexo: "Femenino", rol: "Empresa" },
+    { nombre: "Laura Gómez", telefono: "5552345678", direccion: "Av. Juárez", correo: "laura@example.com", sexo: "Femenino", rol: "Freelance" },
+    { nombre: "Jorge Rivas", telefono: "5551122334", direccion: "Col. Del Valle", correo: "jorge@example.com", sexo: "Masculino", rol: "Empresa" },
+    { nombre: "Marta Sánchez", telefono: "5559988776", direccion: "Calle Morelos", correo: "marta@example.com", sexo: "Femenino", rol: "Administrador" },
+    { nombre: "Raúl Díaz", telefono: "5556655443", direccion: "Col. Polanco", correo: "raul@example.com", sexo: "Masculino", rol: "Freelance" },
+    { nombre: "Patricia Vega", telefono: "5554433221", direccion: "Av. Chapultepec", correo: "patricia@example.com", sexo: "Femenino", rol: "Empresa" },
+    { nombre: "Patricia Vega", telefono: "5554433221", direccion: "Av. Chapultepec", correo: "patricia@example.com", sexo: "Femenino", rol: "Empresa" },
+    { nombre: "Laura Gómez", telefono: "5552345678", direccion: "Av. Juárez", correo: "laura@example.com", sexo: "Femenino", rol: "Freelance" },
+    { nombre: "Jorge Rivas", telefono: "5551122334", direccion: "Col. Del Valle", correo: "jorge@example.com", sexo: "Masculino", rol: "Empresa" },
+    { nombre: "Marta Sánchez", telefono: "5559988776", direccion: "Calle Morelos", correo: "marta@example.com", sexo: "Femenino", rol: "Administrador" },
+    { nombre: "Raúl Díaz", telefono: "5556655443", direccion: "Col. Polanco", correo: "raul@example.com", sexo: "Masculino", rol: "Freelance" },
+    { nombre: "Patricia Vega", telefono: "5554433221", direccion: "Av. Chapultepec", correo: "patricia@example.com", sexo: "Femenino", rol: "Empresa" },
+    { nombre: "Laura Gómez", telefono: "5552345678", direccion: "Av. Juárez", correo: "laura@example.com", sexo: "Femenino", rol: "Freelance" },
+    { nombre: "Jorge Rivas", telefono: "5551122334", direccion: "Col. Del Valle", correo: "jorge@example.com", sexo: "Masculino", rol: "Empresa" },
+    { nombre: "Marta Sánchez", telefono: "5559988776", direccion: "Calle Morelos", correo: "marta@example.com", sexo: "Femenino", rol: "Administrador" },
+    { nombre: "Raúl Díaz", telefono: "5556655443", direccion: "Col. Polanco", correo: "raul@example.com", sexo: "Masculino", rol: "Freelance" },
+    { nombre: "Patricia Vega", telefono: "5554433221", direccion: "Av. Chapultepec", correo: "patricia@example.com", sexo: "Femenino", rol: "Empresa" },
+    { nombre: "Andrés Jiménez", telefono: "5553344556", direccion: "Col. Condesa", correo: "andres@example.com", sexo: "Masculino", rol: "Freelance" }
+];
 document.addEventListener("DOMContentLoaded", () => {
     const hamburger = document.getElementById("hamburger");
     const menu = document.getElementById("menu");
@@ -18,17 +58,92 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
+      renderUsers(users);
 });
 
-// ====== DATOS DE USUARIOS (DUMMY) ======
-const users = [
-    { nombre: "Juan Pérez", telefono: "5551234567", direccion: "Av. Reforma 123", correo: "juan@example.com", sexo: "Masculino", rol: "Administrador" },
-    { nombre: "María López", telefono: "5559876543", direccion: "Calle 5 #234", correo: "maria@example.com", sexo: "Femenino", rol: "Freelance" },
-    { nombre: "Carlos Ramírez", telefono: "5556789123", direccion: "Col. Centro", correo: "carlos@example.com", sexo: "Masculino", rol: "Empresa" },
-    // ...agrega más usuarios si lo necesitas
-];
 
-// ====== TABLA Y PAGINACIÓN ======
+// Lista de 13 usuarios dummy
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const hamburger = document.getElementById("hamburger");
+    const menu = document.getElementById("menu");
+    const menuItems = document.querySelectorAll(".menu-item > a");
+
+    // Menú principal en móvil
+    hamburger.addEventListener("click", () => {
+        menu.classList.toggle("show");
+    });
+
+    // Submenús
+    menuItems.forEach(item => {
+        item.addEventListener("click", (e) => {
+            if (window.innerWidth <= 768) { // móvil
+                e.preventDefault();
+                item.parentElement.classList.toggle("active");
+            }
+        });
+    });
+
+    // ======== TABLA DE USUARIOS ========
+    const userTable = document.getElementById("userTable");
+    const searchInput = document.getElementById("searchInput");
+
+ 
+
+    // Mostrar todos al inicio
+  
+
+    // Filtrar usuarios por nombre
+    searchInput.addEventListener("input", () => {
+        const query = searchInput.value.toLowerCase();
+        const filtered = users.filter(user => user.nombre.toLowerCase().includes(query));
+        renderUsers(filtered);
+    });
+});
+
+
+   // Función para mostrar usuarios en la tabla
+    function renderUsers(filteredUsers) {
+        userTable.innerHTML = ""; // limpiar tabla
+        filteredUsers.forEach(user => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${user.nombre}</td>
+                <td>${user.telefono}</td>
+                <td>${user.direccion}</td>
+                <td>${user.correo}</td>
+                <td>${user.sexo}</td>
+                <td>${user.rol}</td>
+               <td>${user.nombre}</td>
+    <td>${user.telefono}</td>
+    <td>${user.direccion}</td>
+    <td>${user.correo}</td>
+    <td>${user.sexo}</td>
+    <td>${user.rol}</td>
+    <td class="actions">
+        <button title="Editar" onclick="alert('Editar: ${user.nombre}')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#4CAF50" viewBox="0 0 24 24">
+                <path d="M3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25zM21.41 
+                6.34c.39-.39.39-1.02 0-1.41l-2.34-2.34a1.003 
+                1.003 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 
+                1.84-1.83z"/>
+            </svg>
+        </button>
+        <button title="Eliminar" onclick="alert('Eliminar: ${user.nombre}')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#F44336" viewBox="0 0 24 24">
+                <path d="M16 9v10H8V9h8m-1.5-6h-5l-1 
+                1H5v2h14V4h-4.5l-1-1z"/>
+            </svg>
+        </button>
+    </td>
+                
+            `;
+            userTable.appendChild(row);
+        });
+    }
+
+
 document.addEventListener("DOMContentLoaded", () => {
     const userTable = document.getElementById("userTable");
     const searchInput = document.getElementById("searchInput");
@@ -53,7 +168,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentPage = 1;
     let filteredUsers = [...users];
 
-    // Renderiza la tabla de usuarios paginada
     function renderUsersPage() {
         userTable.innerHTML = "";
         const start = (currentPage - 1) * usersPerPage;
@@ -69,22 +183,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 <td>${user.correo}</td>
                 <td>${user.sexo}</td>
                 <td>${user.rol}</td>
-                <td class="actions">
-                    <button title="Editar" onclick="alert('Editar: ${user.nombre}')">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#4CAF50" viewBox="0 0 24 24">
-                            <path d="M3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25zM21.41 
-                            6.34c.39-.39.39-1.02 0-1.41l-2.34-2.34a1.003 
-                            1.003 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 
-                            1.84-1.83z"/>
-                        </svg>
-                    </button>
-                    <button title="Eliminar" onclick="alert('Eliminar: ${user.nombre}')">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#F44336" viewBox="0 0 24 24">
-                            <path d="M16 9v10H8V9h8m-1.5-6h-5l-1 
-                            1H5v2h14V4h-4.5l-1-1z"/>
-                        </svg>
-                    </button>
-                </td>
+
+    <td class="actions">
+        <button title="Editar" onclick="alert('Editar: ${user.nombre}')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#4CAF50" viewBox="0 0 24 24">
+                <path d="M3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25zM21.41 
+                6.34c.39-.39.39-1.02 0-1.41l-2.34-2.34a1.003 
+                1.003 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 
+                1.84-1.83z"/>
+            </svg>
+        </button>
+        <button title="Eliminar" onclick="alert('Eliminar: ${user.nombre}')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#F44336" viewBox="0 0 24 24">
+                <path d="M16 9v10H8V9h8m-1.5-6h-5l-1 
+                1H5v2h14V4h-4.5l-1-1z"/>
+            </svg>
+        </button>
+    </td>
             `;
             userTable.appendChild(row);
         });
@@ -133,4 +248,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Render inicial
     renderUsersPage();
+});
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const hamburger = document.getElementById("hamburger");
+    const menu = document.getElementById("menu");
+    const menuItems = document.querySelectorAll(".menu-item > a");
+
+    // Menú principal en móvil
+    hamburger.addEventListener("click", () => {
+        menu.classList.toggle("show");
+    });
+
+    // Submenús
+    menuItems.forEach(item => {
+        item.addEventListener("click", (e) => {
+            if (window.innerWidth <= 768) { // móvil
+                e.preventDefault();
+                item.parentElement.classList.toggle("active");
+            }
+        });
+    });
 });
