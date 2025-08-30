@@ -5,65 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Empresa - SALAV</title>
   <link rel="stylesheet" href="../../plantilla.css">
+  <link rel="stylesheet" href="inicioEmpresa.css">
+  
 </head>
 <body>
-  <!-- ======== HEADER ======== -->
-  <header>
-    <img style="width: 100px;" src="../../img/Silueta Clara.png" alt="">
+
+  <plantilla-salav>
+    <div class="slot-header" slot="header">
+      <img style="width: 100px;" src="../../img/Silueta Clara.png" alt="">
     <nav id="menu">
-      <!-- <div class="menu-item">
-        <a href="#">Usuarios ▾</a>
-        <div class="submenu">
-          <a href="listar-usuarios.html">Listar usuarios</a>
-          <a href="registrar-usuario.html">Registrar usuario</a>
-        </div>
-      </div> -->
       <a href="#">Nueva solicitud</a>
       <a href="#">Estudios Socioeconomicos</a>
-      <!-- <a href="#">Configuración</a> -->
     </nav>
     <div class="hamburger" id="hamburger">
       <span></span>
       <span></span>
       <span></span>
     </div>
-  </header>
-
-  <!-- ======== CONTENIDO PRINCIPAL ======== -->
-  <main>
-    <h1>Bienvenido [Pintar nombre de la empresa]</h1>
+    </div>
+    <div slot="main">
+       <h1>Bienvenido [Pintar nombre de la empresa]</h1>
     <p>Este es tu panel de control.</p>
-    <img src="../img/saluda3.png" alt="">
-  </main>
+    <img class="imagen-inicio" src="../img/saluda3.png" alt="">
+    </div>
 
-  <!-- ======== OLAS ======== -->
-  <div class="olas">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-      <defs>
-        <linearGradient id="olaGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#9F38B8" />
-          <stop offset="100%" stop-color="#D9358C" />
-        </linearGradient>
-      </defs>
-      <path fill="url(#olaGradient)" fill-opacity=".5"
-        d="M0,96L60,90.7C120,85,240,75,360,90.7C480,107,600,149,720,181.3C840,213,960,235,1080,202.7C1200,171,1320,85,1380,42.7L1440,0L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z">
-      </path>
-    </svg>
-  </div>
-  <div class="olas-2">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-      <defs>
-        <linearGradient id="olaGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#9F38B8" />
-          <stop offset="100%" stop-color="#D9358C" />
-        </linearGradient>
-      </defs>
-      <path fill="url(#olaGradient)" fill-opacity="1"
-        d="M0,96L60,90.7C120,85,240,75,360,90.7C480,107,600,149,720,181.3C840,213,960,235,1080,202.7C1200,171,1320,85,1380,42.7L1440,0L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z">
-      </path>
-    </svg>
-  </div>
-  <script src="inicioEmpresas.js"></script>
+  </plantilla-salav>
+
+
+
+  <script src="inicioEmpresa.js"></script>
   <script src="../../config.js"></script>
+  <script src="../../plantilla.js"></script>
 </body>
+
 </html>

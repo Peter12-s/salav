@@ -170,6 +170,7 @@ nav a:hover {
 #menu a {
     text-decoration: none;
     padding: 8px 12px;
+    text-align: center;
 }
 
 .submenu a :hover {
@@ -282,6 +283,7 @@ main img {
     display: block;
 }
 
+
 @media (max-height: 600px) {
     main img {
         display: none;
@@ -297,6 +299,13 @@ main p {
     color: #4b2363;
     text-align: center;
     font-size: 1.2rem;
+}
+
+.slot-header {
+  display: flex;
+  align-items: center; /* centra verticalmente */
+  justify-content: space-between; /* separa imagen a la izq y menú a la der */
+  padding: 0 20px;
 }
 
 .footer {

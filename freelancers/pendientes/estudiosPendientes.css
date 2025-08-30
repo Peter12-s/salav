@@ -1,0 +1,27 @@
+ .caja-candidatos {
+      border: 2px solid #a261decd;
+      background-color: #f7e3fa;
+      border-radius: 12px;
+      padding: 10px;
+      max-height: 200px;
+      overflow-y: auto;
+      margin:0 auto;
+      width: 80%;
+    }
+
+
+     .candidato {
+      padding: 10px;
+      border: 1px solid #4CAF50;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .candidato:hover {
+      background: #e8f5e9;
+    }
+    .candidato.seleccionado {
+      background: #81c784;
+      color: white;
+    }

@@ -13,8 +13,19 @@
         transform-origin: top center;
         margin-top: 10px;
         min-height: auto;
+            margin-top: 120px;
     }
+    
     .olas{
         width: 100%;
     }
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra verticalmente */
+    align-items: center;     /* Centra horizontalmente */
+    margin: 0;
 }
