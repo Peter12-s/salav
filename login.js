@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-
 //peticion al servidor login guardar en localstorage el token
 const form = document.querySelector("form");
 form.addEventListener("submit", function (e) {
@@ -24,7 +23,7 @@ form.addEventListener("submit", function (e) {
         return;
     }
 
-    axios.post(`${API_URL}/api/auth/login`, { username, password })
+    axios.post(`${API_URL}auth/login`, { username, password })
         .then(response => {
             // console.log("Respuesta del servidor:", response.data);
             localStorage.setItem("loginResponse", JSON.stringify(response.data));

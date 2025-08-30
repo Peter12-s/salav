@@ -1,0 +1,71 @@
+
+
+
+/* Hover y Focus */
+form input:hover,
+form select:hover {
+    border-color: #9F38B8;
+}
+
+form input:focus,
+form select:focus {
+    border-color: #D9358C;
+    box-shadow: 0 0 6px rgba(217, 53, 140, 0.4);
+    outline: none;
+}
+
+
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+form {
+    background-color: #cfadf97f;
+    padding: .8rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    margin-bottom: 2rem;
+    display: grid;
+    gap: 1rem;
+}
+
+form .row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+input,
+select,
+button {
+    padding: 0.8rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    width: 100%;
+}
+
+form button {
+    width: 30%;
+    padding: 14px;
+    background: linear-gradient(90deg, #9F38B8 0%, #D9358C 100%);
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    display: block;         /* ✅ Hace que sea un bloque */
+    margin: 20px auto 0;    /* ✅ Centrado horizontal */
+}
+
+form button:hover {
+    background: linear-gradient(90deg, #8a2ca0 0%, #c72e7c 100%);
+    transform: translateY(-1px);
+}
+
+

@@ -1,0 +1,147 @@
+.form-container {
+    background-color: #cfadf97f;
+    padding: 20px;
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 20px;
+
+}
+
+/* Etiquetas */
+.form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 400;
+    color: #4b2363;
+    font-size: 15px;
+}
+
+/* Input y Select */
+.form input,
+.form select {
+    width: 100%; /* ✅ Ocupa todo el ancho disponible */
+    padding: 12px 14px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 15px;
+    background-color: #fff;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box; /* ✅ Incluye padding y borde en el ancho */
+}
+
+/* Hover y Focus */
+.form input:hover,
+.form select:hover {
+    border-color: #9F38B8;
+}
+
+.form input:focus,
+.form select:focus {
+    border-color: #D9358C;
+    box-shadow: 0 0 6px rgba(217, 53, 140, 0.4);
+    outline: none;
+}
+
+/* Archivos */
+.form input[type="file"] {
+    padding: 8px;
+    background: #fafafa;
+}
+
+
+/* Botón */
+.form button {
+    width: 30%;
+    padding: 14px;
+    background: linear-gradient(90deg, #9F38B8 0%, #D9358C 100%);
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.form button:hover {
+    background: linear-gradient(90deg, #8a2ca0 0%, #c72e7c 100%);
+    transform: translateY(-1px);
+}
+
+/* Direcciones */
+.direccion {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* ✅ 2 columnas iguales */
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+
+.footer {
+    font-size: .8rem;
+    width: 100%;
+    bottom: 0px;
+    position: fixed;
+    z-index: 999;
+    text-align: end;
+    color: rgb(212, 157, 239);
+}
+
+.footer p {
+    margin: 5px 10px;
+}
+/* ====== RESPONSIVE ====== */
+@media (max-width: 900px) {
+    .direccion {
+        grid-template-columns: 1fr; /* ✅ Una sola columna en móvil */
+    }
+
+    .form button {
+        width: 100%; /* Botón ancho completo en móvil */
+    }
+}
+
+.form button {
+    width: 40%;
+    padding: 14px;
+    background: linear-gradient(90deg, #9F38B8 0%, #D9358C 100%);
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    display: block;         /* ✅ Hace que sea un bloque */
+    margin: 20px auto 0;    /* ✅ Centrado horizontal */
+}
+
+.form button:hover {
+    background: linear-gradient(90deg, #8a2ca0 0%, #c72e7c 100%);
+    transform: translateY(-1px);
+}
+
+
+/* Tablet: ancho máximo 700px */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .form-container {
+        max-height: 600px;
+    }
+}
+
+/* Laptop: ancho máximo 600px */
+@media (min-width: 1025px) {
+    .form-container {
+        max-height: 500px;
+    }
+}
+
+/* Celular: ancho máximo 500px */
+@media (max-width: 768px) {
+    .form-container {
+        max-height: 650px;
+    }
+}
+       
