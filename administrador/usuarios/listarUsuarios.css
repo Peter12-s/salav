@@ -1,4 +1,10 @@
 
+ h1 {
+  color: #4b2363;
+  text-align: center;
+}
+
+
 /* ===== TABLA ===== */
 .table-responsive {
     overflow-x: auto;

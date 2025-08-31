@@ -69,6 +69,7 @@ nav a:hover {
 #menu {
   align-items: end;
   gap: 15px;
+  margin-top: 25px;
 }
 
 .menu-item {

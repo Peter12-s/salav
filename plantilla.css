@@ -227,6 +227,9 @@ nav a:hover {
 
 /* ======== NAV MÓVIL ======== */
 @media (max-width: 768px) {
+    #menu {
+    margin-top: 25px;
+}
     .footer {
         display: none;
     }

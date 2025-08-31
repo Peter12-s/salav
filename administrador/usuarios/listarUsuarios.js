@@ -1,3 +1,24 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const hamburger = document.getElementById("hamburger");
+    const menu = document.getElementById("menu");
+    const menuItems = document.querySelectorAll(".menu-item > a");
+
+    // Menú principal en móvil
+    hamburger.addEventListener("click", () => {
+        menu.classList.toggle("show");
+    });
+
+    // Submenús
+    menuItems.forEach(item => {
+        item.addEventListener("click", (e) => {
+            if (window.innerWidth <= 768) { // móvil
+                e.preventDefault();
+                item.parentElement.classList.toggle("active");
+            }
+        });
+    });
+});
+
 let users = [
     { nombre: "Juan Pérez", telefono: "5551234567", direccion: "Av. Reforma 123", correo: "juan@example.com", sexo: "Masculino", rol: "Administrador" },
     { nombre: "María López", telefono: "5559876543", direccion: "Calle 5 #234", correo: "maria@example.com", sexo: "Femenino", rol: "Freelance" },

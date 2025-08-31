@@ -1,5 +1,12 @@
 
 
+ h1 {
+  color: #4b2363;
+  text-align: center;
+}
+
+
+
 
 /* Hover y Focus */
 form input:hover,
