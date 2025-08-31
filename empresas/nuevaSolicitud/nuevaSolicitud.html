@@ -4,113 +4,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nueva solicitud </title>
+    <title>SALAV</title>
+    <link rel="stylesheet" href="../../plantilla.css">
     <link rel="stylesheet" href="nuevaSolicitud.css">
-    <link rel="stylesheet" href="../../plantilla2.css">
+
 </head>
 
 <body>
-    <!-- ======== HEADER ======== -->
-    <header>
-        <img style="width: 100px;" src="img /Silueta Clara.png" alt="">
-        <nav id="menu">
-            <!-- <div class="menu-item">
+
+    <plantilla-salav>
+        <div class="slot-header" slot="header">
+            <img class="logo-header" style="width: 150px;" src="../../img/Silueta Clara.png" alt="">
+            <nav id="menu">
+                <!-- <div class="menu-item">
                 <a href="#">Usuarios ▾</a>
                 <div class="submenu">
                     <a href="listar-usuarios.html">Listar usuarios</a>
                     <a href="registrar-usuario.html">Registrar usuario</a>
                 </div>
             </div> -->
-            <a href="#">Nueva Solicitud</a>
-            <a href="#">Estudios socioeconomicos</a>
-            <!-- <a href="#">Configuración</a> -->
-        </nav>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
+                <a href="#">Nueva Solicitud</a>
+                <a href="#">Estudios socioeconomicos</a>
+                <!-- <a href="#">Configuración</a> -->
+            </nav>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-    </header>
-
-    <!-- ======== CONTENIDO PRINCIPAL ======== -->
-    <main>
-        <!-- <h1>Bienvenido Administrador</h1>
-    <p>Este es tu panel de control.</p> -->
-
-
-        <div class="container">
+        <div slot="main">
             <h1>Solicitud [[Pinatr numero de solicitud]]</h1>
 
-<div  class="form-container">
-            <form class="form">
-                <label for="nombre">Nombre del candidato</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Escribe el nombre">
 
-                <label for="direccion">Dirección</label>
-                <div class="direccion">
-                    <input type="text" placeholder="Estado">
-                    <input type="text" placeholder="Municipio">
-                    <input type="text" placeholder="Colonia">
-                    <input type="text" placeholder="Completar dirección">
-                </div>
+            <div class="form-container">
+                <form class="form">
+                    <label for="nombre">Nombre del candidato</label>
+                    <div class="nombre">
+                        <input id="nombres" type="text" placeholder="Nombre del candidato">
+                        <input id="apellido-paterno" type="text" placeholder="Apellido paterno">
+                        <input id="apellido-materno" type="text" placeholder="Apellido materno">
 
-                <label for="telefono">WhatsApp / Teléfono</label>
-                <input type="tel" id="telefono" name="telefono" placeholder="Ej: 555 123 4567">
+                    </div>
 
-                <label for="cv">Currículum Vitae</label>
-                <input type="file" id="cv" name="cv">
+                    <label for="direccion">Dirección</label>
+                    <div class="direccion">
+                        <input type="text" placeholder="Estado">
+                        <input type="text" placeholder="Municipio">
+                        <input type="text" placeholder="Colonia">
+                        <input type="text" placeholder="Completar dirección">
+                    </div>
 
-                <button type="submit">Enviar solicitud</button>
-                <br><br>
-                <br>
-                <br><br>
-                <br>
+                    <label for="telefono">WhatsApp / Teléfono</label>
+                    <input type="tel" id="telefono" name="telefono" placeholder="Ej: 555 123 4567">
 
-            </form>
-</div>
+                    <label for="cv">Currículum Vitae</label>
+                    <input type="file" id="cv" name="cv">
 
+                    <button type="submit">Enviar solicitud</button>
+                    <br><br>
+                    <br>
+                    <br><br>
+                    <br>
+
+                </form>
+            </div>
         </div>
-    </main>
- <div class="footer">
-        <p>© 2024 SALAV soluciones empresariales. Derechos reservados.</p>
-    </div>
-    <!-- ======== OLAS ======== -->
-    <div class="olas">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-            <defs>
-                <!-- Gradiente horizontal -->
-                <linearGradient id="olaGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#9F38B8" />
-                    <stop offset="100%" stop-color="#D9358C" />
-                </linearGradient>
-            </defs>
 
-            <!-- Ola usando el gradiente -->
-            <path fill="url(#olaGradient)" fill-opacity=".5"
-                d="M0,96L60,90.7C120,85,240,75,360,90.7C480,107,600,149,720,181.3C840,213,960,235,1080,202.7C1200,171,1320,85,1380,42.7L1440,0L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z">
-            </path>
-        </svg>
-    </div>
-
-    <div class="olas-2">
-
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-            <defs>
-                <!-- Gradiente horizontal -->
-                <linearGradient id="olaGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#9F38B8" />
-                    <stop offset="100%" stop-color="#D9358C" />
-                </linearGradient>
-            </defs>
-
-            <!-- Ola usando el gradiente -->
-            <path fill="url(#olaGradient)" fill-opacity="1"
-                d="M0,96L60,90.7C120,85,240,75,360,90.7C480,107,600,149,720,181.3C840,213,960,235,1080,202.7C1200,171,1320,85,1380,42.7L1440,0L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z">
-            </path>
-        </svg>
-    </div>
+    </plantilla-salav>
 
 
+
+    <script src="inicioAdmin.js"></script>
+    <script src="../../config.js"></script>
+    <script src="../../plantilla.js"></script>
 </body>
-<script src="../../config.js"></script>
+
 </html>
