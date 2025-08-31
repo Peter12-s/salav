@@ -1,27 +1,95 @@
- .caja-candidatos {
-      border: 2px solid #a261decd;
-      background-color: #f7e3fa;
-      border-radius: 12px;
-      padding: 10px;
-      max-height: 200px;
-      overflow-y: auto;
-      margin:0 auto;
-      width: 80%;
-    }
+  h1 {
+    color: #4b2363;
+    text-align: center;
+  }
+  h4 {
+    color: #4b2363;
+    text-align: start;
+    margin-bottom: 20px;
+  }
 
 
-     .candidato {
-      padding: 10px;
-      border: 1px solid #4CAF50;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      cursor: pointer;
-      transition: background 0.3s;
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .caja-candidatos {
+    border: 2px solid #a261decd;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    margin: 0 auto;
+    width: 80%;
+    margin-bottom: 10px;
+  }
+
+  .candidato {
+    padding: 10px;
+    border: 2px solid #a261decd;
+    background-color: #a261decd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .candidato:hover {
+    background: #b35ee5;
+  }
+
+  .candidato.seleccionado {
+    background: #8e20ce;
+    color: white;
+  }
+
+
+  .acciones {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+
+  .acciones button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .acciones button:hover {
+    transform: scale(1.05);
+  }
+
+  .btn-aceptar {
+    background: #a542d7;
+    color: white;
+  }
+
+  .btn-rechazar {
+    background: #a542d7;
+    color: white;
+  }
+
+  .nota {
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 10px;
+    text-align: justify;
+  }
+
+  @media (max-width: 600px) {
+    .acciones {
+      flex-direction: column;
     }
-    .candidato:hover {
-      background: #e8f5e9;
+
+    .acciones button {
+      width: 100%;
     }
-    .candidato.seleccionado {
-      background: #81c784;
-      color: white;
-    }
+  }
