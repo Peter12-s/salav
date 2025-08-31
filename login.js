@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 1000);
 });
 
-
+let User="";
 //peticion al servidor login guardar en localstorage el token
 const form = document.querySelector("form");
 form.addEventListener("submit", function (e) {
@@ -27,11 +27,13 @@ form.addEventListener("submit", function (e) {
         .then(response => {
             // console.log("Respuesta del servidor:", response.data);
             localStorage.setItem("loginResponse", JSON.stringify(response.data));
-            alert("Inicio de sesión exitoso");
-            window.location.href = "../administrador/inicio/inicioAdmin.html";
+            User = response.data.full_name.name;
+            alert("Inicio de sesión exitoso", User);
         })
         .catch(error => {
             // console.error("Error en la petición:", error);
-            alert("Error al iniciar sesión");
+            alert("Error al iniciar sesión", error);
+            console.log(error);
+            
         });
 });

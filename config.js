@@ -1,4 +1,4 @@
-const API_URL = "https://nest-api-855316206046.us-central1.run.app";
+const API_URL = "http://localhost:8080/api/";
 
 
 
