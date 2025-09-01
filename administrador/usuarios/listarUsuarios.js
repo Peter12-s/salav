@@ -20,45 +20,45 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 let users = [
-    { nombre: "Juan Pérez", telefono: "5551234567", direccion: "Av. Reforma 123", correo: "juan@example.com", sexo: "Masculino", rol: "Administrador" },
-    { nombre: "María López", telefono: "5559876543", direccion: "Calle 5 #234", correo: "maria@example.com", sexo: "Femenino", rol: "Freelance" },
-    { nombre: "Carlos Ramírez", telefono: "5556789123", direccion: "Col. Centro", correo: "carlos@example.com", sexo: "Masculino", rol: "Empresa" },
-    { nombre: "Ana Torres", telefono: "5554567891", direccion: "Av. Universidad 55", correo: "ana@example.com", sexo: "Femenino", rol: "Administrador" },
-    { nombre: "Luis Hernández", telefono: "5553456789", direccion: "Blvd. Insurgentes", correo: "luis@example.com", sexo: "Masculino", rol: "Freelance" },
-    { nombre: "Sofía Morales", telefono: "5558765432", direccion: "Col. Roma", correo: "sofia@example.com", sexo: "Femenino", rol: "Empresa" },
-    { nombre: "Pedro Castillo", telefono: "5557654321", direccion: "Calle Hidalgo", correo: "pedro@example.com", sexo: "Masculino", rol: "Administrador" },
-    { nombre: "Laura Gómez", telefono: "5552345678", direccion: "Av. Juárez", correo: "laura@example.com", sexo: "Femenino", rol: "Freelance" },
-    { nombre: "Jorge Rivas", telefono: "5551122334", direccion: "Col. Del Valle", correo: "jorge@example.com", sexo: "Masculino", rol: "Empresa" },
-    { nombre: "Marta Sánchez", telefono: "5559988776", direccion: "Calle Morelos", correo: "marta@example.com", sexo: "Femenino", rol: "Administrador" },
-    { nombre: "Raúl Díaz", telefono: "5556655443", direccion: "Col. Polanco", correo: "raul@example.com", sexo: "Masculino", rol: "Freelance" },
+    { nombre: "Juan Pérez", telefono: "5551234567", direccion: "Av. Reforma 123", correo: "juan@example.com",  rol: "Administrador" },
+    { nombre: "María López", telefono: "5559876543", direccion: "Calle 5 #234", correo: "maria@example.com", rol: "Freelance" },
+    { nombre: "Carlos Ramírez", telefono: "5556789123", direccion: "Col. Centro", correo: "carlos@example.com",  rol: "Empresa" },
+    { nombre: "Ana Torres", telefono: "5554567891", direccion: "Av. Universidad 55", correo: "ana@example.com", rol: "Administrador" },
+    { nombre: "Luis Hernández", telefono: "5553456789", direccion: "Blvd. Insurgentes", correo: "luis@example.com",  rol: "Freelance" },
+    { nombre: "Sofía Morales", telefono: "5558765432", direccion: "Col. Roma", correo: "sofia@example.com", rol: "Empresa" },
+    { nombre: "Pedro Castillo", telefono: "5557654321", direccion: "Calle Hidalgo", correo: "pedro@example.com",  rol: "Administrador" },
+    { nombre: "Laura Gómez", telefono: "5552345678", direccion: "Av. Juárez", correo: "laura@example.com", rol: "Freelance" },
+    { nombre: "Jorge Rivas", telefono: "5551122334", direccion: "Col. Del Valle", correo: "jorge@example.com",  rol: "Empresa" },
+    { nombre: "Marta Sánchez", telefono: "5559988776", direccion: "Calle Morelos", correo: "marta@example.com", rol: "Administrador" },
+    { nombre: "Raúl Díaz", telefono: "5556655443", direccion: "Col. Polanco", correo: "raul@example.com",  rol: "Freelance" },
 
-    { nombre: "Laura Gómez", telefono: "5552345678", direccion: "Av. Juárez", correo: "laura@example.com", sexo: "Femenino", rol: "Freelance" },
-    { nombre: "Jorge Rivas", telefono: "5551122334", direccion: "Col. Del Valle", correo: "jorge@example.com", sexo: "Masculino", rol: "Empresa" },
-    { nombre: "Marta Sánchez", telefono: "5559988776", direccion: "Calle Morelos", correo: "marta@example.com", sexo: "Femenino", rol: "Administrador" },
-    { nombre: "Raúl Díaz", telefono: "5556655443", direccion: "Col. Polanco", correo: "raul@example.com", sexo: "Masculino", rol: "Freelance" },
-    { nombre: "Patricia Vega", telefono: "5554433221", direccion: "Av. Chapultepec", correo: "patricia@example.com", sexo: "Femenino", rol: "Empresa" },
-    { nombre: "Laura Gómez", telefono: "5552345678", direccion: "Av. Juárez", correo: "laura@example.com", sexo: "Femenino", rol: "Freelance" },
-    { nombre: "Jorge Rivas", telefono: "5551122334", direccion: "Col. Del Valle", correo: "jorge@example.com", sexo: "Masculino", rol: "Empresa" },
-    { nombre: "Marta Sánchez", telefono: "5559988776", direccion: "Calle Morelos", correo: "marta@example.com", sexo: "Femenino", rol: "Administrador" },
-    { nombre: "Raúl Díaz", telefono: "5556655443", direccion: "Col. Polanco", correo: "raul@example.com", sexo: "Masculino", rol: "Freelance" },
-    { nombre: "Patricia Vega", telefono: "5554433221", direccion: "Av. Chapultepec", correo: "patricia@example.com", sexo: "Femenino", rol: "Empresa" },
-    { nombre: "Laura Gómez", telefono: "5552345678", direccion: "Av. Juárez", correo: "laura@example.com", sexo: "Femenino", rol: "Freelance" },
-    { nombre: "Jorge Rivas", telefono: "5551122334", direccion: "Col. Del Valle", correo: "jorge@example.com", sexo: "Masculino", rol: "Empresa" },
-    { nombre: "Marta Sánchez", telefono: "5559988776", direccion: "Calle Morelos", correo: "marta@example.com", sexo: "Femenino", rol: "Administrador" },
-    { nombre: "Raúl Díaz", telefono: "5556655443", direccion: "Col. Polanco", correo: "raul@example.com", sexo: "Masculino", rol: "Freelance" },
-    { nombre: "Patricia Vega", telefono: "5554433221", direccion: "Av. Chapultepec", correo: "patricia@example.com", sexo: "Femenino", rol: "Empresa" },
-    { nombre: "Patricia Vega", telefono: "5554433221", direccion: "Av. Chapultepec", correo: "patricia@example.com", sexo: "Femenino", rol: "Empresa" },
-    { nombre: "Laura Gómez", telefono: "5552345678", direccion: "Av. Juárez", correo: "laura@example.com", sexo: "Femenino", rol: "Freelance" },
-    { nombre: "Jorge Rivas", telefono: "5551122334", direccion: "Col. Del Valle", correo: "jorge@example.com", sexo: "Masculino", rol: "Empresa" },
-    { nombre: "Marta Sánchez", telefono: "5559988776", direccion: "Calle Morelos", correo: "marta@example.com", sexo: "Femenino", rol: "Administrador" },
-    { nombre: "Raúl Díaz", telefono: "5556655443", direccion: "Col. Polanco", correo: "raul@example.com", sexo: "Masculino", rol: "Freelance" },
-    { nombre: "Patricia Vega", telefono: "5554433221", direccion: "Av. Chapultepec", correo: "patricia@example.com", sexo: "Femenino", rol: "Empresa" },
-    { nombre: "Laura Gómez", telefono: "5552345678", direccion: "Av. Juárez", correo: "laura@example.com", sexo: "Femenino", rol: "Freelance" },
-    { nombre: "Jorge Rivas", telefono: "5551122334", direccion: "Col. Del Valle", correo: "jorge@example.com", sexo: "Masculino", rol: "Empresa" },
-    { nombre: "Marta Sánchez", telefono: "5559988776", direccion: "Calle Morelos", correo: "marta@example.com", sexo: "Femenino", rol: "Administrador" },
-    { nombre: "Raúl Díaz", telefono: "5556655443", direccion: "Col. Polanco", correo: "raul@example.com", sexo: "Masculino", rol: "Freelance" },
-    { nombre: "Patricia Vega", telefono: "5554433221", direccion: "Av. Chapultepec", correo: "patricia@example.com", sexo: "Femenino", rol: "Empresa" },
-    { nombre: "Andrés Jiménez", telefono: "5553344556", direccion: "Col. Condesa", correo: "andres@example.com", sexo: "Masculino", rol: "Freelance" }
+    { nombre: "Laura Gómez", telefono: "5552345678", direccion: "Av. Juárez", correo: "laura@example.com", rol: "Freelance" },
+    { nombre: "Jorge Rivas", telefono: "5551122334", direccion: "Col. Del Valle", correo: "jorge@example.com",  rol: "Empresa" },
+    { nombre: "Marta Sánchez", telefono: "5559988776", direccion: "Calle Morelos", correo: "marta@example.com", rol: "Administrador" },
+    { nombre: "Raúl Díaz", telefono: "5556655443", direccion: "Col. Polanco", correo: "raul@example.com",  rol: "Freelance" },
+    { nombre: "Patricia Vega", telefono: "5554433221", direccion: "Av. Chapultepec", correo: "patricia@example.com", rol: "Empresa" },
+    { nombre: "Laura Gómez", telefono: "5552345678", direccion: "Av. Juárez", correo: "laura@example.com", rol: "Freelance" },
+    { nombre: "Jorge Rivas", telefono: "5551122334", direccion: "Col. Del Valle", correo: "jorge@example.com",  rol: "Empresa" },
+    { nombre: "Marta Sánchez", telefono: "5559988776", direccion: "Calle Morelos", correo: "marta@example.com", rol: "Administrador" },
+    { nombre: "Raúl Díaz", telefono: "5556655443", direccion: "Col. Polanco", correo: "raul@example.com",  rol: "Freelance" },
+    { nombre: "Patricia Vega", telefono: "5554433221", direccion: "Av. Chapultepec", correo: "patricia@example.com", rol: "Empresa" },
+    { nombre: "Laura Gómez", telefono: "5552345678", direccion: "Av. Juárez", correo: "laura@example.com", rol: "Freelance" },
+    { nombre: "Jorge Rivas", telefono: "5551122334", direccion: "Col. Del Valle", correo: "jorge@example.com",  rol: "Empresa" },
+    { nombre: "Marta Sánchez", telefono: "5559988776", direccion: "Calle Morelos", correo: "marta@example.com", rol: "Administrador" },
+    { nombre: "Raúl Díaz", telefono: "5556655443", direccion: "Col. Polanco", correo: "raul@example.com",  rol: "Freelance" },
+    { nombre: "Patricia Vega", telefono: "5554433221", direccion: "Av. Chapultepec", correo: "patricia@example.com", rol: "Empresa" },
+    { nombre: "Patricia Vega", telefono: "5554433221", direccion: "Av. Chapultepec", correo: "patricia@example.com", rol: "Empresa" },
+    { nombre: "Laura Gómez", telefono: "5552345678", direccion: "Av. Juárez", correo: "laura@example.com", rol: "Freelance" },
+    { nombre: "Jorge Rivas", telefono: "5551122334", direccion: "Col. Del Valle", correo: "jorge@example.com",  rol: "Empresa" },
+    { nombre: "Marta Sánchez", telefono: "5559988776", direccion: "Calle Morelos", correo: "marta@example.com", rol: "Administrador" },
+    { nombre: "Raúl Díaz", telefono: "5556655443", direccion: "Col. Polanco", correo: "raul@example.com",  rol: "Freelance" },
+    { nombre: "Patricia Vega", telefono: "5554433221", direccion: "Av. Chapultepec", correo: "patricia@example.com", rol: "Empresa" },
+    { nombre: "Laura Gómez", telefono: "5552345678", direccion: "Av. Juárez", correo: "laura@example.com", rol: "Freelance" },
+    { nombre: "Jorge Rivas", telefono: "5551122334", direccion: "Col. Del Valle", correo: "jorge@example.com",  rol: "Empresa" },
+    { nombre: "Marta Sánchez", telefono: "5559988776", direccion: "Calle Morelos", correo: "marta@example.com", rol: "Administrador" },
+    { nombre: "Raúl Díaz", telefono: "5556655443", direccion: "Col. Polanco", correo: "raul@example.com",  rol: "Freelance" },
+    { nombre: "Patricia Vega", telefono: "5554433221", direccion: "Av. Chapultepec", correo: "patricia@example.com", rol: "Empresa" },
+    { nombre: "Andrés Jiménez", telefono: "5553344556", direccion: "Col. Condesa", correo: "andres@example.com",  rol: "Freelance" }
 ];
 document.addEventListener("DOMContentLoaded", () => {
     const hamburger = document.getElementById("hamburger");
@@ -134,13 +134,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 <td>${user.telefono}</td>
                 <td>${user.direccion}</td>
                 <td>${user.correo}</td>
-                <td>${user.sexo}</td>
+                
                 <td>${user.rol}</td>
                <td>${user.nombre}</td>
     <td>${user.telefono}</td>
     <td>${user.direccion}</td>
     <td>${user.correo}</td>
-    <td>${user.sexo}</td>
+   
     <td>${user.rol}</td>
     <td class="actions">
         <button title="Editar" onclick="alert('Editar: ${user.nombre}')">
@@ -202,7 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <td>${user.telefono}</td>
                 <td>${user.direccion}</td>
                 <td>${user.correo}</td>
-                <td>${user.sexo}</td>
+          
                 <td>${user.rol}</td>
 
     <td class="actions">
