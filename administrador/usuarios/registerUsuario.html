@@ -24,6 +24,20 @@
                 </div>
                 <a href="#">Estudios pendientes</a>
                 <a href="#">Estudios finalizados</a>
+                <!-- Botón Logout con SVG -->
+                <button class="logout-btn" id="btnLogout" aria-label="Cerrar sesión" title="Cerrar sesión">
+                    <!-- SVG de logout (salir) -->
+                    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                        <!-- Flecha de salida -->
+                        <path d="M16 17l5-5-5-5" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M21 12H9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <!-- Marco/puerta -->
+                        <path d="M13 21H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                </button>
             </nav>
             <div class="hamburger" id="hamburger">
                 <span></span>
@@ -33,34 +47,34 @@
         </div>
         <div slot="main">
             <div class="container">
-            <h1>Registo de Usuarios</h1>
+                <h1>Registo de Usuarios</h1>
 
-            <!-- Formulario -->
-            <form id="userForm">
-                <div class="row">
-                    <input type="text" id="nombre" placeholder="Nombre" required>
-                    <input type="text" id="apellidoPaterno" placeholder="Apellido Paterno" required>
-                    <input type="text" id="apellidoMaterno" placeholder="Apellido Materno" required>
-                    <input type="tel" id="telefono" placeholder="Teléfono" required>
-                    <input type="text" id="Estado" placeholder="Estado" required>
-                    <input type="text" id="Municipio" placeholder="Municipio" required>
-                    <input type="text" id="Colonia" placeholder="Colonia" required>
-                    <input type="text" id="Refencias" placeholder="Refencias" required>
-                    <input type="email" id="correo" placeholder="Correo electrónico" required>
-                    <input type="password" id="password" placeholder="Contraseña" required>
-                    <select id="rol" required>
-                        <option value="">Tipo de Rol</option>
-                        <option value="Administrador">Administrador</option>
-                        <option value="Freelance">Freelance</option>
-                        <option value="Empresa">Empresa</option>
-                    </select>
+                <!-- Formulario -->
+                <form id="userForm">
+                    <div class="row">
+                        <input type="text" id="nombre" placeholder="Nombre" required>
+                        <input type="text" id="apellidoPaterno" placeholder="Apellido Paterno" required>
+                        <input type="text" id="apellidoMaterno" placeholder="Apellido Materno" required>
+                        <input type="tel" id="telefono" placeholder="Teléfono" required>
+                        <input type="text" id="Estado" placeholder="Estado" required>
+                        <input type="text" id="Municipio" placeholder="Municipio" required>
+                        <input type="text" id="Colonia" placeholder="Colonia" required>
+                        <input type="text" id="Refencias" placeholder="Refencias" required>
+                        <input type="email" id="correo" placeholder="Correo electrónico" required>
+                        <input type="password" id="password" placeholder="Contraseña" required>
+                        <select id="rol" required>
+                            <option value="">Tipo de Rol</option>
+                            <option value="Administrador">Administrador</option>
+                            <option value="Freelance">Freelance</option>
+                            <option value="Empresa">Empresa</option>
+                        </select>
+                    </div>
+                    <button type="submit">Guardar</button>
+                </form>
+                <div class="search-container">
+
                 </div>
-                <button type="submit">Guardar</button>
-            </form>
-            <div class="search-container">
-
             </div>
-        </div>
 
     </plantilla-salav>
     <script src="registerUsuario.js"></script>

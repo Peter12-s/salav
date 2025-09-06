@@ -24,6 +24,20 @@
       <a href="#">Estudios pendientes</a>
       <a href="#">Estudios en proceso</a>
       <!-- <a href="#">Configuración</a> -->
+        <!-- Botón Logout con SVG -->
+        <button class="logout-btn" id="btnLogout" aria-label="Cerrar sesión" title="Cerrar sesión">
+          <!-- SVG de logout (salir) -->
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+            <!-- Flecha de salida -->
+            <path d="M16 17l5-5-5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M21 12H9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <!-- Marco/puerta -->
+            <path d="M13 21H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" />
+          </svg>
+        </button>
     </nav>
     <div class="hamburger" id="hamburger">
       <span></span>
@@ -32,7 +46,7 @@
     </div>
     </div>
     <div slot="main">
-       <h1>Bienvenido [Pintar nombre del freelancer]</h1>
+       <h1>Bienvenido <span id="user"></span></h1>
     <p>Este es tu panel de control.</p>
     <img class="imagen-inicio" src="../img/saluda5.png" alt="">
     </div>
