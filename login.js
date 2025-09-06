@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("preloader").style.display = "none";
             document.querySelector(".login-container").style.display = "block";
         }, 500);
-    }, 1000);
+    }, 800);
 });
 
 //peticion al servidor login guardar en localstorage el token

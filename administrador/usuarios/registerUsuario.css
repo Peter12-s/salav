@@ -46,8 +46,7 @@ form .row {
 }
 
 input,
-select,
-button {
+select {
     padding: 0.8rem;
     border-radius: 8px;
     border: 1px solid #ccc;

@@ -29,3 +29,31 @@ body {
     align-items: center;     /* Centra horizontalmente */
     margin: 0;
 }
+
+.login-input-group {
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.login-input-group {
+    width: 90%;
+    padding: 12px;
+    border-radius: 8px;
+    outline: none;
+    font-size: 15px;
+}
+
+
+/* Hover y Focus */
+ .login-input-group:hover {
+    border-color: #9F38B8;
+}
+
+/* Resalta el input activo */
+.login-input-group:focus {
+    border: 2px solid #D9358C;
+    box-shadow: 0 0 8px rgba(217, 53, 140, 0.3);
+    /* background-color: #f7eafd; */
+    outline: none;
+}

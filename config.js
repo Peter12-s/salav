@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const menu = document.getElementById("menu");
     const menuItems = document.querySelectorAll(".menu-item > a");
 
+
+    if (hamburger) {
     // Menú principal en móvil
     hamburger.addEventListener("click", () => {
         menu.classList.toggle("show");
@@ -22,8 +24,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
+  }
 });
 
+if (document.getElementById('btnLogout')) {
 document.getElementById('btnLogout').addEventListener('click', async () => {
   try {
     localStorage.removeItem("access_token");
@@ -36,3 +40,4 @@ document.getElementById('btnLogout').addEventListener('click', async () => {
     alert('No se pudo cerrar la sesión. Intenta de nuevo.');
   }
 });
+}
