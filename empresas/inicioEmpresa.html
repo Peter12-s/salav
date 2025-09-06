@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SALAV</title>
   <link rel="stylesheet" href="../../plantilla.css">
   <link rel="stylesheet" href="inicioEmpresa.css">
-  
+
 </head>
+
 <body>
 
   <plantilla-salav>
     <div class="slot-header" slot="header">
       <img style="width: 150px;" src="../../img/Silueta Clara.png" alt="">
-    <nav id="menu">
-      <a href="#">Nueva solicitud</a>
-      <a href="#">Estudios Socioeconomicos</a>
-       <!-- Botón Logout con SVG -->
+      <nav id="menu">
+        <a href="#">Nueva solicitud</a>
+        <a href="#">Estudios Socioeconomicos</a>
+        <!-- Botón Logout con SVG -->
         <button class="logout-btn" id="btnLogout" aria-label="Cerrar sesión" title="Cerrar sesión">
           <!-- SVG de logout (salir) -->
           <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
@@ -30,17 +32,17 @@
               stroke-linecap="round" />
           </svg>
         </button>
-    </nav>
-    <div class="hamburger" id="hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+      </nav>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
     <div slot="main">
-       <h1>Bienvenido [Pintar nombre de la empresa]</h1>
-    <p>Este es tu panel de control.</p>
-    <img class="imagen-inicio" src="../img/saluda3.png" alt="">
+      <h1>Bienvenido <span id="user"></span></h1>
+      <p>Este es tu panel de control.</p>
+      <img class="imagen-inicio" src="../img/saluda3.png" alt="">
     </div>
 
   </plantilla-salav>
