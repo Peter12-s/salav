@@ -75,21 +75,6 @@ nav {
     gap: 20px;
 }
 
-.login-input-group {
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-}
-
-.login-input-group input {
-    width: 90%;
-    padding: 12px;
-    border-radius: 8px;
-    border: none;
-    outline: none;
-    font-size: 15px;
-}
-
 form {
     padding: 20px;
 }
@@ -228,7 +213,7 @@ nav a:hover {
 /* ======== NAV MÓVIL ======== */
 @media (max-width: 768px) {
     #menu {
-    margin-top: 25px;
+    margin-top: 15px;
 }
     .footer {
         display: none;
@@ -363,4 +348,25 @@ main p {
 
 .btn:hover {
     opacity: 0.85;
+}
+
+
+.logout-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 999px;
+  background: transparent; /* Cambia a color si lo prefieres */
+  cursor: pointer;
+   color: #fffcfe;            /* Hereda para el SVG (currentColor) */
+  transition: background 0.2s, transform 0.05s, color 0.2s;
+}
+
+.logout-btn:hover {
+  background: rgba(0,0,0,0.06);
+  color: #761bdf;          /* Color al pasar el mouse */
+  transform: scale(1.2);
 }

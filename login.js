@@ -6,10 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("preloader").style.display = "none";
             document.querySelector(".login-container").style.display = "block";
         }, 500);
-    }, 1000);
+    }, 800);
 });
 
-let User="";
 //peticion al servidor login guardar en localstorage el token
 const form = document.querySelector("form");
 form.addEventListener("submit", function (e) {
@@ -25,15 +24,44 @@ form.addEventListener("submit", function (e) {
 
     axios.post(`${API_URL}auth/login`, { username, password })
         .then(response => {
-            // console.log("Respuesta del servidor:", response.data);
-            localStorage.setItem("loginResponse", JSON.stringify(response.data));
-            User = response.data.full_name.name;
-            alert("Inicio de sesión exitoso", User);
-        })
-        .catch(error => {
-            // console.error("Error en la petición:", error);
-            alert("Error al iniciar sesión", error);
-            console.log(error);
-            
-        });
+            // Guardar el access_token en localStorage
+        localStorage.setItem("access_token", response.data.access_token);
+        localStorage.setItem("user_type", response.data.user_type);
+        localStorage.setItem("user_name", response.data.full_name.name);
+
+        // Crear overlay de transición
+        const transitionDiv = document.createElement("div");
+        transitionDiv.style.position = "fixed";
+        transitionDiv.style.top = "0";
+        transitionDiv.style.left = "0";
+        transitionDiv.style.width = "100vw";
+        transitionDiv.style.height = "100vh";
+        transitionDiv.style.background = "#fff";
+        transitionDiv.style.opacity = "0";
+        transitionDiv.style.transition = "opacity 0.6s";
+        transitionDiv.style.zIndex = "99999";
+        document.body.appendChild(transitionDiv);
+
+        // Iniciar transición
+        setTimeout(() => {
+            transitionDiv.style.opacity = "1";
+        }, 50);
+
+        // Redirigir después de la transición
+        setTimeout(() => {
+            const userType = response.data.user_type;
+            if (userType === "ADMINISTRADOR") {
+                window.location.href = "administrador/inicioAdmin.html";
+            } else if (userType === "FREELANCE") {
+                window.location.href = "freelancers/inicioFreelancer.html";
+            } else if (userType === "EMPRESA") {
+                window.location.href = "empresas/inicioEmpresa.html";
+            } else {
+                alert("Tipo de usuario no reconocido");
+            }
+        }, 650);
+    })
+    .catch(error => {
+        alert("Error al iniciar sesión");
+    });
 });

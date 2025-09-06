@@ -1,0 +1,106 @@
+  h1 {
+    color: #4b2363;
+    text-align: center;
+  }
+
+  h4 {
+    color: #4b2363;
+    text-align: start;
+    margin-bottom: 20px;
+  }
+
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .caja-candidatos {
+    border: 2px solid #a261decd;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #a261decd transparent;
+    margin: 0 auto;
+    width: 80%;
+    color: aliceblue;
+    margin-bottom: 10px;
+  }
+
+  .candidato {
+    padding: 10px;
+    border: 2px solid #a261decd;
+    background-color: #a261decd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .candidato:hover {
+    background: #b35ee5;
+  }
+
+  .candidato.seleccionado {
+    background: #8e20ce;
+    color: white;
+  }
+
+
+  .acciones {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+
+  .acciones button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .acciones button:hover {
+    transform: scale(1.05);
+    background-color: #4b2363;
+  }
+
+  .btn-aceptar {
+    background: #a542d7;
+    color: white;
+  }
+
+  .btn-rechazar {
+    background: #a542d7;
+    color: white;
+  }
+
+  .nota {
+    font-size: 0.9rem;
+    margin: 0 auto;
+    width: 80%;
+    color: #36065a;
+    margin-top: 10px;
+    text-align: justify;
+    background-color: rgba(235, 225, 237, 0.689);
+    border-radius: 10px;
+    padding: 6px;
+  }
+
+  @media (max-width: 600px) {
+    .acciones {
+      flex-direction: column;
+    }
+
+    .acciones button {
+      width: 40%;
+      margin: 0 auto;
+    }
+  }

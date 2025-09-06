@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SALAV</title>
+    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
     <link rel="stylesheet" href="../../plantilla.css">
     <link rel="stylesheet" href="registerUsuario.css">
 </head>
@@ -18,12 +19,26 @@
                 <div class="menu-item">
                     <a href="#">Usuarios ▾</a>
                     <div class="submenu">
-                        <a href="#">Listar usuarios</a>
-                        <a href="#">Registrar usuario</a>
+                        <a href="usuarios/listarUsuarios.html">Listar usuarios</a>
+                        <a href="usuarios/registerUsuario.html">Registrar usuario</a>
                     </div>
                 </div>
-                <a href="#">Estudios pendientes</a>
-                <a href="#">Estudios finalizados</a>
+                <a href="../estudios/estudiosPendientes.html">Estudios pendientes</a>
+                <a href="../estudios/estudiosFinalizados.html">Estudios finalizados</a>
+                <!-- Botón Logout con SVG -->
+                <button class="logout-btn" id="btnLogout" aria-label="Cerrar sesión" title="Cerrar sesión">
+                    <!-- SVG de logout (salir) -->
+                    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                        <!-- Flecha de salida -->
+                        <path d="M16 17l5-5-5-5" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M21 12H9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <!-- Marco/puerta -->
+                        <path d="M13 21H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                </button>
             </nav>
             <div class="hamburger" id="hamburger">
                 <span></span>
