@@ -17,45 +17,66 @@
   }
 
   .caja-candidatos {
-    border: 2px solid #a261decd;
-    background-color: #ffffff;
-    border-radius: 12px;
-    padding: 10px;
-    max-height: 200px;
+    border: none;
+    background: linear-gradient(145deg, #f0e6ff, #ffffff);
+    border-radius: 16px;
+    padding: 15px;
+    max-height: 250px;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: #a261decd transparent;
     margin: 0 auto;
     width: 80%;
-    color: aliceblue;
-    margin-bottom: 10px;
+    box-shadow: 0 8px 20px rgba(162, 97, 222, 0.25);
+    perspective: 1000px;
+    /* Para el efecto 3D */
   }
 
   .candidato {
+    padding: 12px;
+    border: none;
+    background: linear-gradient(145deg, #a261de, #9a4ed6);
+    border-radius: 12px;
+    margin-bottom: 12px;
     padding: 10px;
-    border: 2px solid #a261decd;
-    background-color: #a261decd;
-    border-radius: 8px;
-    margin-bottom: 10px;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: white;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 8px rgba(162, 97, 222, 0.3);
+    transform-style: preserve-3d;
   }
 
   .candidato:hover {
-    background: #b35ee5;
+    transform: scale(.9);
+    box-shadow: 0 12px 25px rgba(162, 97, 222, 0.5);
   }
 
   .candidato.seleccionado {
-    background: #8e20ce;
-    color: white;
+    background: linear-gradient(145deg, #8e20ce, #7a1cb0);
+    box-shadow: 0 8px 10px rgba(142, 32, 206, 0.5);
   }
 
+  /* Scrollbar personalizada */
+  .caja-candidatos::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .caja-candidatos::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .caja-candidatos::-webkit-scrollbar-thumb {
+    background-color: #a261decd;
+    border-radius: 4px;
+  }
 
   .acciones {
     display: flex;
     justify-content: center;
     gap: 15px;
-    margin-bottom: 15px;
+    margin-top: 15px;
   }
 
   .acciones button {
@@ -96,11 +117,75 @@
 
   @media (max-width: 600px) {
     .acciones {
-      flex-direction: column;
+      flex-direction: row;
     }
 
     .acciones button {
-      width: 40%;
+      width: 30%;
       margin: 0 auto;
+      font-size: .8rem;
     }
+    .tooltip {
+    max-width: 90%; /* Que no se salga de la pantalla */
+    font-size: 0.85rem;
+    top: 30px;       /* desde arriba, ajusta según tu header */
+    right: 10%;  
+    position: fixed; /* fijo en pantalla */
   }
+ 
+}
+.tooltip {
+  position: fixed; /* fijo en pantalla */
+  top: 10%;       /* desde arriba, ajusta según tu header */
+  right: 10%;     /* desde la derecha */
+  background: #b179d7;
+  color: #4b2363;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  max-width: 300px;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+.tooltip.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes eliminar {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    height: auto;
+    margin-bottom: 12px;
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.9);
+    height: auto;
+    margin-bottom: 12px;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+    height: 0;
+    margin-bottom: 0;
+    padding: 0;
+  }
+}
+
+.candidato.eliminando {
+  animation: eliminar 0.4s forwards;
+}
+
+
+.nota {
+    margin-top: 15px;
+    color: #8e20ce;
+    font-size: 1.1rem;
+    text-align: center;
+    font-weight: 500;
+}

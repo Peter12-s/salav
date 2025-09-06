@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SALAV</title>
   <link rel="stylesheet" href="../../plantilla.css">
-  <link rel="stylesheet" href="estudiosPendientes.css">
+  <link rel="stylesheet" href="estudiosProceso.css">
   <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
 
 </head>
@@ -44,23 +44,30 @@
 
       <h1>Caja de candidatos</h1>
 
-      <h4>Solicitudes en proceso</h4>
+      <h4>Solicitudes pendientes</h4>
       <div class="caja-candidatos" id="listaCandidatos">
-        <div class="candidato">Candidato A</div>
-        <div class="candidato">Candidato B</div>
-        <div class="candidato">Candidato C</div>
-        <div class="candidato">Candidato D</div>
-        <div class="candidato">Candidato E</div>
-        <div class="candidato">Candidato F</div>
+          <div class="notaCandidatos">No hay solicitudes de candidatos</div>
       </div>
-
+      <!-- Tooltip -->
+      <div id="tooltip" class="tooltip"></div>
+      <div class="acciones">
+        <button class="btn-aceptar" onclick="aceptar()">Aceptar Solicitud</button>
+        <button class="btn-rechazar" onclick="rechazar()">Rechazar Solicitud</button>
+      </div>
+    
+      <div class="nota">
+        <p><b>NOTA:</b> Cuando seleccionas un candidato se muestra la información general del mismo para que el
+          Freelancer tome la decisión de aceptar o rechazar la ejecución del estudio socioeconómico.</p>
+        <p>Cuando el freelance rechace la solicitud, esta vuelve a la caja de SALAV para que se asigne a otro freelance.
+        </p>
+      </div>
     </div>
 
   </plantilla-salav>
 
 
 
-  <script src="estudiosPendientes.js"></script>
+  <script src="estudiosProceso.js"></script>
   <script src="../../config.js"></script>
   <script src="../../plantilla.js"></script>
 </body>
