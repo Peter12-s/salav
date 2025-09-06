@@ -31,11 +31,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // 👇 Tomar token desde localStorage
     //const loginData = JSON.parse(localStorage.getItem("loginResponse"));
     //const token = loginData?.access_token;
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmYWFiZTY0MS01YjQxLTQxNDgtODg3Ny04YjhlZDU5MjUzYTgiLCJpYXQiOjE3NTcwNDU5ODgsImV4cCI6MTc1NzEzMjM4OH0.yvh_jqn_J-eq5HK9nhkYTrJg4yV8owAFjpWXeW9W2bU";
- 
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmYWFiZTY0MS01YjQxLTQxNDgtODg3Ny04YjhlZDU5MjUzYTgiLCJ1c2VyX3R5cGUiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzU3MTg1ODAxLCJleHAiOjE3NTcxODY3MDF9.yPjaQKjfhKLJJ9vNM1XjASNYP5cFlVgd06I-IxLqKLc";
 
     if (!token) {
-        alert("No hay sesión activa. Por favor, inicia sesión primero.");
+        alert("No hay sesión activa. Por favor, inicia sesión.");
         // No redirigimos, solo mostramos alerta
         return;
     }
@@ -55,33 +54,30 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // ======= FUNCIONES =======
-    async function fetchUsers() {
-        try {
-            const res = await fetch("http://localhost:8080/api/users", {
-                method: "GET",
-                headers: {
-                    "Authorization": `Bearer ${token}`,
-                    "Content-Type": "application/json"
-                }
-            });
-
-            if (!res.ok) {
-                const error = await res.json();
-                console.error("Error:", error);
-                alert("❌ Error al obtener usuarios: " + error.message);
-                return;
+// ======= FUNCIONES =======
+async function fetchUsers() {
+    try {
+        const res = await axios.get("http://localhost:8080/api/users", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
             }
+        });
 
-            users = await res.json(); // ya viene en JSON desde el back
-            filteredUsers = [...users];
-            renderUsersPage();
-        } catch (err) {
+        // Si la respuesta es exitosa
+        users = res.data; // axios ya lo da en JSON
+        filteredUsers = [...users];
+        renderUsersPage();
+    } catch (err) {
+        if (err.response) {
+            console.error("Error:", err.response.data);
+            alert("❌ Error al obtener usuarios: " + err.response.data.message);
+        } else {
             console.error("Error de red:", err);
             alert("⚠️ No se pudo conectar con el servidor");
         }
     }
-
+}
     function renderUsersPage() {
         userTable.innerHTML = "";
         const start = (currentPage - 1) * usersPerPage;
