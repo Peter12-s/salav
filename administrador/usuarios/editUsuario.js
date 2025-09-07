@@ -1,21 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const preloader = document.getElementById("preloader");
 
-    // ====== MENÚ HAMBURGUESA ======
-    const hamburger = document.getElementById("hamburger");
-    const menu = document.getElementById("menu");
-    const menuItems = document.querySelectorAll(".menu-item > a");
-
-    hamburger.addEventListener("click", () => menu.classList.toggle("show"));
-
-    menuItems.forEach(item => {
-        item.addEventListener("click", (e) => {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                item.parentElement.classList.toggle("active");
-            }
-        });
-    });
 
     // ====== FORMULARIO ======
     const form = document.getElementById("userForm");

@@ -270,36 +270,6 @@ main p {
     </div>
 </body> `;
   }
-  connectedCallback() {
-    // Espera a que el slot "header" esté renderizado
-    const shadow = this.shadowRoot;
-    // Busca dentro del slot-header los elementos del menú
-    const slot = shadow.querySelector('slot[name="header"]');
-    slot.addEventListener('slotchange', () => {
-      const nodes = slot.assignedNodes({ flatten: true });
-      // Busca los elementos por clase o id dentro del slot
-      const headerContent = nodes.find(n => n.nodeType === 1); // primer elemento
-      if (headerContent) {
-        const hamburger = headerContent.querySelector(".hamburger");
-        const menu = headerContent.querySelector("#menu");
-        const menuItems = headerContent.querySelectorAll(".menu-item > a");
 
-        if (hamburger && menu) {
-          hamburger.addEventListener("click", () => {
-            menu.classList.toggle("show");
-          });
-        }
-
-        menuItems.forEach(item => {
-          item.addEventListener("click", (e) => {
-            if (window.innerWidth <= 768) {
-              e.preventDefault();
-              item.parentElement.classList.toggle("active");
-            }
-          });
-        });
-      }
-    });
-  }
 }
 customElements.define('plantilla-salav', Salav);
