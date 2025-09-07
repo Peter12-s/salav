@@ -1,26 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // ===================== MENÚ =====================
-  const hamburger = document.getElementById("hamburger");
-  const menu = document.getElementById("menu");
-  const menuItems = document.querySelectorAll(".menu-item > a");
-
-  // Menú principal en móvil
-  if (hamburger) {
-    hamburger.addEventListener("click", () => {
-      menu.classList.toggle("show");
-    });
-  }
-
-  // Submenús
-  menuItems.forEach(item => {
-    item.addEventListener("click", (e) => {
-      if (window.innerWidth <= 768) { // móvil
-        e.preventDefault();
-        item.parentElement.classList.toggle("active");
-      }
-    });
-  });
-
   // ===================== REGISTRO DE USUARIO =====================
   const form = document.getElementById("userForm");
 
