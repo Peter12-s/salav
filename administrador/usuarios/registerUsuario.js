@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       try {
-        const response = await axios.post("http://localhost:8080/api/users", userData, {
+        const response = await axios.post("http://localhost:8080/api/user", userData, {
           headers: {
             "Authorization": `Bearer ${token}`,
             "Content-Type": "application/json"

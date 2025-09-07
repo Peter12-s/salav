@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // ====== FUNCION PARA CARGAR USUARIO ======
     async function cargarUsuario() {
         try {
-            const res = await axios.get(`http://localhost:8080/api/users/${userId}`, {
+            const res = await axios.get(`http://localhost:8080/api/user/${userId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             const user = res.data.user || res.data;

@@ -50,23 +50,21 @@
         <div slot="main">
             <h1>Solicitud de Estudio</h1>
 
-
             <div class="form-container">
                 <form class="form">
-                    <label for="nombre">Nombre del candidato</label>
+                    <label for="nombres">Nombre del candidato</label>
                     <div class="nombre">
                         <input id="nombres" type="text" placeholder="Nombre del candidato">
-                        <input id="apellido-paterno" type="text" placeholder="Apellido paterno">
-                        <input id="apellido-materno" type="text" placeholder="Apellido materno">
-
+                        <input id="apellidoPaterno" type="text" placeholder="Apellido paterno">
+                        <input id="apellidoMaterno" type="text" placeholder="Apellido materno">
                     </div>
 
-                    <label for="direccion">Dirección</label>
+                    <label for="estado">Dirección</label>
                     <div class="direccion">
-                        <input type="text" placeholder="Estado">
-                        <input type="text" placeholder="Municipio">
-                        <input type="text" placeholder="Colonia">
-                        <input type="text" placeholder="Completar dirección">
+                        <input id="estado" type="text" placeholder="Estado">
+                        <input id="municipio" type="text" placeholder="Municipio">
+                        <input id="colonia" type="text" placeholder="Colonia">
+                        <input id="direccionCompleta" type="text" placeholder="Completar dirección">
                     </div>
 
                     <label for="telefono">WhatsApp / Teléfono</label>
@@ -76,12 +74,7 @@
                     <input type="file" id="cv" name="cv">
 
                     <button type="submit">Enviar solicitud</button>
-                    <br><br>
-                    <br>
-                    <br><br>
-                    <br>
-
-                </form>
+                    </form>
             </div>
         </div>
 
@@ -89,7 +82,7 @@
 
 
 
-    <script src="inicioAdmin.js"></script>
+    <script src="nuevaSolicitud.js"></script>
     <script src="../../config.js"></script>
     <script src="../../plantilla.js"></script>
 </body>
