@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const form = document.getElementById("userForm");
     const params = new URLSearchParams(window.location.search);
     const userId = params.get("id");
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJ1c2VyX3R5cGUiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzU3MjE2OTI1LCJleHAiOjE3NTczMDMzMjV9.ac_Hkoap_rFZCBd7hVT8__O4jUR1v6PepYmgwVMCUBo";
+      const token = localStorage.getItem("access_token");
 
     const nombre = document.getElementById("nombre");
     const apellidoPaterno = document.getElementById("apellidoPaterno");
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         try {
-            await axios.patch(`http://localhost:8080/api/users/${userId}`, payload, {
+            await axios.patch(`http://localhost:8080/api/user/${userId}`, payload, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             alert("✅ Usuario actualizado correctamente");

@@ -1,0 +1,96 @@
+/* ===== Tabla ===== */
+#tablaSolicitudes {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+#tablaSolicitudes th {
+    background-color: #9F38B8; /* Morado principal */
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+}
+
+#tablaSolicitudes td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+}
+
+/* Hover de fila */
+#tablaSolicitudes tbody tr:hover {
+    background-color: rgba(159, 56, 184, 0.05);
+}
+
+/* ===== Tooltip ===== */
+.tooltip {
+    position: relative;
+    cursor: pointer;
+    color: #333;
+    font-weight: 500;
+}
+
+/* Tooltip */
+.tooltip {
+    position: relative;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.tooltip .tooltip-text {
+    position: fixed; /* ✅ Para que no se corte con overflow */
+    visibility: hidden;
+    opacity: 0;
+    background-color: #f2f2f2;
+    color: #c243c6;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    line-height: 1.4;
+    white-space: pre-line;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: opacity 0.2s ease;
+    z-index: 9999; /* ✅ Siempre encima */
+}
+
+/* Hover del tooltip con colores parecidos */
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+    box-shadow: 0 0 6px rgba(217, 53, 140, 0.4);
+}
+
+
+/* Hover del tooltip con colores parecidos */
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+    box-shadow: 0 0 6px rgba(217, 53, 140, 0.4);
+}
+
+/* ===== Select ===== */
+#tablaSolicitudes select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Hover y Focus del select (mismos colores que userForm) */
+#tablaSolicitudes select:hover {
+    border-color: #9F38B8;
+}
+
+#tablaSolicitudes select:focus {
+    border-color: #D9358C;
+    box-shadow: 0 0 6px rgba(217, 53, 140, 0.4);
+    outline: none;
+}
