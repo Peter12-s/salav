@@ -3,6 +3,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const menu = document.getElementById("menu");
     const menuItems = document.querySelectorAll(".menu-item > a");
 
+    // ======= PRELOADER =======
+    const preloader = document.getElementById("preloader"); // 👈 asegúrate que exista en tu HTML
+
+    function showPreloader() {
+        if (preloader) preloader.style.display = "flex";
+    }
+
+    function hidePreloader() {
+        if (preloader) preloader.style.display = "none";
+    }
+
     // Menú principal en móvil
     hamburger.addEventListener("click", () => {
         menu.classList.toggle("show");
@@ -28,8 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalPagesSpan = document.getElementById("totalPages");
     const goPageBtn = document.getElementById("goPage");
 
-    // 👇 Token (puedes usar localStorage después)
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmYWFiZTY0MS01YjQxLTQxNDgtODg3Ny04YjhlZDU5MjUzYTgiLCJ1c2VyX3R5cGUiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzU3MTkxNzM0LCJleHAiOjE3NTcxOTI2MzR9.oVXiAwCmYGOlEOINVmBOofVky8QdoJP_MvyRr8WMYBw";
+    // 👇 Token desde localStorage
+    const token = localStorage.getItem("access_token");
 
     if (!token) {
         alert("No hay sesión activa. Por favor, inicia sesión.");
@@ -53,6 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ======= FUNCIONES =======
     async function fetchUsers() {
+        showPreloader();
         try {
             const res = await axios.get("http://localhost:8080/api/users", {
                 headers: {
@@ -66,12 +78,12 @@ document.addEventListener("DOMContentLoaded", () => {
             renderUsersPage();
         } catch (err) {
             if (err.response) {
-                //console.error("Error:", err.response.data);
                 alert("❌ Error al obtener usuarios: " + err.response.data.message);
             } else {
-                //console.error("Error de red:", err);
                 alert("⚠️ No se pudo conectar con el servidor");
             }
+        } finally {
+            hidePreloader();
         }
     }
 
@@ -80,8 +92,9 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        showPreloader();
         try {
-            const res = await axios.delete(`http://localhost:8080/api/users/${userId}`, {
+            await axios.delete(`http://localhost:8080/api/users/${userId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json"
@@ -92,12 +105,12 @@ document.addEventListener("DOMContentLoaded", () => {
             await fetchUsers(); // refrescar tabla
         } catch (err) {
             if (err.response) {
-                //console.error("Error al eliminar:", err.response.data);
                 alert("❌ No se pudo eliminar: " + err.response.data.message);
             } else {
-                //console.error("Error de red:", err);
                 alert("⚠️ No se pudo conectar con el servidor");
             }
+        } finally {
+            hidePreloader();
         }
     }
 
