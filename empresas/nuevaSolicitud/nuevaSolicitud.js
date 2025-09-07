@@ -1,19 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Menú hamburguesa y submenús
-    const hamburger = document.getElementById("hamburger");
-    const menu = document.getElementById("menu");
-    const menuItems = document.querySelectorAll(".menu-item > a");
-    hamburger.addEventListener("click", () => menu.classList.toggle("show"));
-    menuItems.forEach(item => {
-        item.addEventListener("click", (e) => {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                item.parentElement.classList.toggle("active");
-            }
-        });
-    });
 
- const token = localStorage.getItem("access_token");
+    // const token = localStorage.getItem("access_token");
+    const token="yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJ1c2VyX3R5cGUiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzU3MjcxMzQwLCJleHAiOjE3NTcyNzIyNDB9.R3aJMp9kUFXt-BMMIoP3cerY82kAOLYlvXDt04PqnWU";
     const form = document.querySelector(".form");
 
     form.addEventListener("submit", function (e) {
@@ -37,19 +25,19 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        axios.post(`${API_URL}empresas/solicitud`, data, {
+        axios.post(`${API_URL}applicant`, data, {
             headers: {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json"
             }
         })
-        .then(res => {
-            alert("Solicitud enviada correctamente");
-            form.reset();
-        })
-        .catch(err => {
-            alert("Error al enviar la solicitud");
-            console.error(err);
-        });
+            .then(res => {
+                alert("Solicitud enviada correctamente");
+                form.reset();
+            })
+            .catch(err => {
+                alert("Error al enviar la solicitud");
+                console.error(err);
+            });
     });
 });

@@ -39,7 +39,6 @@
 .tooltip {
     position: relative;
     cursor: pointer;
-    color: #333;
     font-weight: 500;
 }
 
@@ -47,8 +46,8 @@
     position: fixed; /* ✅ Para que no se corte con overflow */
     visibility: hidden;
     opacity: 0;
-    background-color: #333;
-    color: #fff;
+    background-color: #f2f2f2;
+    color: #c243c6;
     padding: 8px 12px;
     border-radius: 6px;
     font-size: 14px;
@@ -63,7 +62,6 @@
 .tooltip:hover .tooltip-text {
     visibility: visible;
     opacity: 1;
-    background-color: #D9358C;
     box-shadow: 0 0 6px rgba(217, 53, 140, 0.4);
 }
 
@@ -72,7 +70,6 @@
 .tooltip:hover .tooltip-text {
     visibility: visible;
     opacity: 1;
-    background-color: #D9358C;
     box-shadow: 0 0 6px rgba(217, 53, 140, 0.4);
 }
 
