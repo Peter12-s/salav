@@ -28,14 +28,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalPagesSpan = document.getElementById("totalPages");
     const goPageBtn = document.getElementById("goPage");
 
-    // 👇 Tomar token desde localStorage
-    //const loginData = JSON.parse(localStorage.getItem("loginResponse"));
-    //const token = loginData?.access_token;
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmYWFiZTY0MS01YjQxLTQxNDgtODg3Ny04YjhlZDU5MjUzYTgiLCJ1c2VyX3R5cGUiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzU3MTg1ODAxLCJleHAiOjE3NTcxODY3MDF9.yPjaQKjfhKLJJ9vNM1XjASNYP5cFlVgd06I-IxLqKLc";
+    // 👇 Token (puedes usar localStorage después)
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmYWFiZTY0MS01YjQxLTQxNDgtODg3Ny04YjhlZDU5MjUzYTgiLCJ1c2VyX3R5cGUiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzU3MTkxNzM0LCJleHAiOjE3NTcxOTI2MzR9.oVXiAwCmYGOlEOINVmBOofVky8QdoJP_MvyRr8WMYBw";
 
     if (!token) {
         alert("No hay sesión activa. Por favor, inicia sesión.");
-        // No redirigimos, solo mostramos alerta
         return;
     }
 
@@ -54,30 +51,56 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-// ======= FUNCIONES =======
-async function fetchUsers() {
-    try {
-        const res = await axios.get("http://localhost:8080/api/users", {
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json"
-            }
-        });
+    // ======= FUNCIONES =======
+    async function fetchUsers() {
+        try {
+            const res = await axios.get("http://localhost:8080/api/users", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            });
 
-        // Si la respuesta es exitosa
-        users = res.data; // axios ya lo da en JSON
-        filteredUsers = [...users];
-        renderUsersPage();
-    } catch (err) {
-        if (err.response) {
-            console.error("Error:", err.response.data);
-            alert("❌ Error al obtener usuarios: " + err.response.data.message);
-        } else {
-            console.error("Error de red:", err);
-            alert("⚠️ No se pudo conectar con el servidor");
+            users = res.data;
+            filteredUsers = [...users];
+            renderUsersPage();
+        } catch (err) {
+            if (err.response) {
+                console.error("Error:", err.response.data);
+                alert("❌ Error al obtener usuarios: " + err.response.data.message);
+            } else {
+                console.error("Error de red:", err);
+                alert("⚠️ No se pudo conectar con el servidor");
+            }
         }
     }
-}
+
+    async function eliminarUsuario(userId, userName) {
+        if (!confirm(`¿Seguro que deseas eliminar al usuario "${userName}"?`)) {
+            return;
+        }
+
+        try {
+            const res = await axios.delete(`http://localhost:8080/api/users/${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            });
+
+            alert("✅ Usuario eliminado correctamente");
+            await fetchUsers(); // refrescar tabla
+        } catch (err) {
+            if (err.response) {
+                console.error("Error al eliminar:", err.response.data);
+                alert("❌ No se pudo eliminar: " + err.response.data.message);
+            } else {
+                console.error("Error de red:", err);
+                alert("⚠️ No se pudo conectar con el servidor");
+            }
+        }
+    }
+
     function renderUsersPage() {
         userTable.innerHTML = "";
         const start = (currentPage - 1) * usersPerPage;
@@ -87,14 +110,14 @@ async function fetchUsers() {
         pageUsers.forEach(user => {
             const row = document.createElement("tr");
             row.innerHTML = `
-                <td>${user.name} ${user.f_surname} ${user.s_surname}</td>
+                <td>${user.name} ${user.f_surname || ""} ${user.s_surname || ""}</td>
                 <td>${user.phone || ""}</td>
                 <td>${user.state || ""}, ${user.town || ""}, ${user.settlement || ""}</td>
                 <td>${user.email || ""}</td>
                 <td>${user.user_type || ""}</td>
                 <td class="actions">
-                <button title="Editar" onclick="editarUsuario('${user._id}')">✏️</button>
-                <button title="Eliminar" onclick="alert('Eliminar: ${user.name}')">🗑️</button>
+                    <button title="Editar" onclick="editarUsuario('${user._id}')">✏️</button>
+                    <button title="Eliminar" onclick="eliminarUsuario('${user._id}', '${user.name}')">🗑️</button>
                 </td>
             `;
             userTable.appendChild(row);
@@ -138,7 +161,7 @@ async function fetchUsers() {
     searchInput.addEventListener("input", () => {
         const query = searchInput.value.toLowerCase();
         filteredUsers = users.filter(user =>
-            (`${user.name} ${user.f_surname} ${user.s_surname}`).toLowerCase().includes(query)
+            (`${user.name} ${user.f_surname || ""} ${user.s_surname || ""}`).toLowerCase().includes(query)
         );
         currentPage = 1;
         renderUsersPage();
@@ -146,6 +169,9 @@ async function fetchUsers() {
 
     // Llamada inicial
     fetchUsers();
+
+    // Expongo la función eliminar al scope global
+    window.eliminarUsuario = eliminarUsuario;
 });
 
 // === FUNCIÓN GLOBAL PARA EDITAR ===

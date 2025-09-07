@@ -28,13 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      // Recuperar token dinámico de localStorage
-      // const loginData = JSON.parse(localStorage.getItem("loginResponse"));
-      // const token = loginData?.access_token;
-
-      // Provisional (para pruebas)
-      const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmYWFiZTY0MS01YjQxLTQxNDgtODg3Ny04YjhlZDU5MjUzYTgiLCJpYXQiOjE3NTY5MTc1MzMsImV4cCI6MTc1NzAwMzkzM30.JuTJiGp83yZ8wQPC6OwZfElEfcapoyP08NsppR7uMKI";
-
+      // Recuperar token desde localStorage
+      const token = localStorage.getItem("access_token");
 
       if (!token) {
         alert("No tienes sesión activa. Inicia sesión primero.");
@@ -50,37 +45,29 @@ document.addEventListener("DOMContentLoaded", () => {
         state: document.getElementById("Estado").value,
         town: document.getElementById("Municipio").value,
         settlement: document.getElementById("Colonia").value,
-        address_references: document.getElementById("Refencias").value, // ⚠️ typo en HTML
+        address_references: document.getElementById("Refencias").value, // ⚠️ ojo: en HTML está mal escrito
         email: document.getElementById("correo").value,
         password: document.getElementById("password").value,
         user_type: document.getElementById("rol").value.toUpperCase()
       };
 
       try {
-        const response = await fetch("http://localhost:8080/api/users", {
-          method: "POST",
+        const response = await axios.post("http://localhost:8080/api/users", userData, {
           headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-          },
-          body: JSON.stringify(userData)
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+          }
         });
 
-        if (!response.ok) {
-          const errorData = await response.json();
-          console.error("Error:", errorData);
-          alert("❌ Error al registrar usuario: " + (errorData.message || response.status));
-          return;
-        }
-
-        const result = await response.json();
-        console.log("✅ Usuario creado:", result);
+        //console.log("✅ Usuario creado:", response.data);
         alert("Usuario registrado con éxito!");
         form.reset();
+
       } catch (err) {
-        console.error("⚠️ Error de red:", err);
-        alert("Error de red al registrar usuario.");
+        //console.error("❌ Error al registrar usuario:", err.response?.data || err.message);
+        alert("Error al registrar usuario: " + (err.response?.data?.message || err.message));
       }
     });
   }
 });
+
