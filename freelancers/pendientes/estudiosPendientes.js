@@ -82,11 +82,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     // Funciones globales para botones
     window.aceptar = function () {
+        alert(`✅ Has aceptado la solicitud de ${seleccionado.textContent}`);
         animacion();
         elimiarCandidato();
         validarCandidatos();
     };
     window.rechazar = function () {
+        alert(`❌ Has rechazado la solicitud de ${seleccionado.textContent}`);
         animacion();
         elimiarCandidato();
         validarCandidatos();
