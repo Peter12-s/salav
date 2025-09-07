@@ -270,6 +270,12 @@ main img {
     margin:  auto;
     display: block;
 }
+ h1 {
+  color: #4b2363;
+  text-align: center;
+}
+
+
 
 
 @media (max-height: 600px) {
@@ -277,6 +283,8 @@ main img {
         display: none;
     }
 }
+
+
 
 main h1 {
     color: #4b2363;
