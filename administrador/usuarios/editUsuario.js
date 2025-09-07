@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const form = document.getElementById("userForm");
     const params = new URLSearchParams(window.location.search);
     const userId = params.get("id");
-    const token = "TU_TOKEN_AQUI";
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJ1c2VyX3R5cGUiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzU3MjE2OTI1LCJleHAiOjE3NTcyMTc4MjV9.rrcJ5mQV1Huzrw_9Hb_tFO3eCGXdoFHMadg-TZpnD14";
 
     const nombre = document.getElementById("nombre");
     const apellidoPaterno = document.getElementById("apellidoPaterno");

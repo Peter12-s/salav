@@ -29,7 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
 
       // Recuperar token desde localStorage
-      const token = localStorage.getItem("access_token");
+      //const token = localStorage.getItem("access_token");
+      const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJ1c2VyX3R5cGUiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzU3MjE2OTI1LCJleHAiOjE3NTcyMTc4MjV9.rrcJ5mQV1Huzrw_9Hb_tFO3eCGXdoFHMadg-TZpnD14";
 
       if (!token) {
         alert("No tienes sesión activa. Inicia sesión primero.");

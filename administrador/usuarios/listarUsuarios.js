@@ -38,9 +38,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const pageInput = document.getElementById("pageInput");
     const totalPagesSpan = document.getElementById("totalPages");
     const goPageBtn = document.getElementById("goPage");
-
+    
     // 👇 Token desde localStorage
-    const token = localStorage.getItem("access_token");
+    //const token = localStorage.getItem("access_token");
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJ1c2VyX3R5cGUiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzU3MjE2OTI1LCJleHAiOjE3NTczMDMzMjV9.ac_Hkoap_rFZCBd7hVT8__O4jUR1v6PepYmgwVMCUBo";
 
     if (!token) {
         alert("No hay sesión activa. Por favor, inicia sesión.");
@@ -94,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         showPreloader();
         try {
-            await axios.delete(`http://localhost:8080/api/users/${userId}`, {
+            await axios.delete(`http://localhost:8080/api/user/${userId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json"
