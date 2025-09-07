@@ -9,6 +9,21 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 800);
 });
 
+
+    const mensajeWhatsApp = encodeURIComponent("Hola, quisiera más información");
+
+    // Evento para llamar
+    document.getElementById("btnLlamar").addEventListener("click", () => {
+        window.location.href = `tel:${numeroLlamada}`;
+    });
+
+    // Evento para WhatsApp
+    document.getElementById("btnWhatsApp").addEventListener("click", () => {
+        window.open(`https://wa.me/${numeroWhatsApp}?text=${mensajeWhatsApp}`, "_blank");
+    });
+
+
+
 //peticion al servidor login guardar en localstorage el token
 const form = document.querySelector("form");
 form.addEventListener("submit", function (e) {

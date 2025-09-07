@@ -1,6 +1,10 @@
 const API_URL = "http://localhost:8080/api/";
 
+// Número de teléfono para llamar
+    const numeroLlamada = "521234567890"; // Formato internacional
 
+    // Número y mensaje para WhatsApp
+    const numeroWhatsApp = "521234567890";
 
 //funcione el menu y submenus
 document.addEventListener("DOMContentLoaded", () => {
