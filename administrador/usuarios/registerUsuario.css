@@ -1,61 +1,70 @@
-
-
- h1 {
+/* ====== TÍTULO ====== */
+h1 {
   color: #4b2363;
   text-align: center;
+  margin-bottom: 20px;
 }
 
+/* ====== CONTENEDOR ====== */
+.container {
+    background-color: #cfadf97f;
+    padding: 20px;
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
 
+/* ====== LABELS ====== */
+#userForm label {
+    display: block;
+    margin: 15px 0 6px;
+    font-weight: 500;
+    color: #4b2363;
+    font-size: 15px;
+}
 
+/* ====== INPUTS Y SELECT ====== */
+#userForm input,
+#userForm select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 15px;
+    background-color: #fff;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+}
 
 /* Hover y Focus */
-form input:hover,
-form select:hover {
+#userForm input:hover,
+#userForm select:hover {
     border-color: #9F38B8;
 }
 
-form input:focus,
-form select:focus {
+#userForm input:focus,
+#userForm select:focus {
     border-color: #D9358C;
     box-shadow: 0 0 6px rgba(217, 53, 140, 0.4);
     outline: none;
 }
 
-
-
-
-* {
-    box-sizing: border-box;
-}
-
-
-form {
-    background-color: #cfadf97f;
-    padding: .8rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    margin-bottom: 2rem;
+/* ====== SECCIONES EN GRID ====== */
+.nombre,
+.contacto,
+.direccion,
+.acceso {
     display: grid;
-    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr); /* ✅ 2 columnas */
+    gap: 15px;
+    margin-bottom: 15px;
 }
 
-form .row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1rem;
-}
-
-input,
-select {
-    padding: 0.8rem;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    width: 100%;
-}
-
-form button {
-    width: 30%;
+/* ====== BOTÓN ====== */
+#userForm button {
+    width: 40%;
     padding: 14px;
     background: linear-gradient(90deg, #9F38B8 0%, #D9358C 100%);
     border: none;
@@ -65,13 +74,25 @@ form button {
     border-radius: 10px;
     cursor: pointer;
     transition: 0.3s ease-in-out;
-    display: block;         /* ✅ Hace que sea un bloque */
-    margin: 20px auto 0;    /* ✅ Centrado horizontal */
+    display: block;
+    margin: 20px auto 0;
 }
 
-form button:hover {
+#userForm button:hover {
     background: linear-gradient(90deg, #8a2ca0 0%, #c72e7c 100%);
     transform: translateY(-1px);
 }
 
+/* ====== RESPONSIVE ====== */
+@media (max-width: 900px) {
+    .nombre,
+    .contacto,
+    .direccion,
+    .acceso {
+        grid-template-columns: 1fr; /* ✅ 1 columna en móvil */
+    }
 
+    #userForm button {
+        width: 100%; /* Botón ancho completo */
+    }
+}

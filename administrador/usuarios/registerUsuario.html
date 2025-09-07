@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SALAV</title>
-    <link rel="stylesheet" href="../../plantilla.css">
     <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
+    <link rel="stylesheet" href="../../plantilla.css">
     <link rel="stylesheet" href="registerUsuario.css">
-      <link rel="stylesheet" href="../../plantilla.css">
 </head>
 
 <body>
@@ -52,24 +51,33 @@
                 <h1>Registo de Usuarios</h1>
 
                 <!-- Formulario -->
-                <form id="userForm">
+                 <form id="userForm">
                     <div class="row">
-                        <input type="text" id="nombre" placeholder="Nombre" required>
-                        <input type="text" id="apellidoPaterno" placeholder="Apellido Paterno" required>
-                        <input type="text" id="apellidoMaterno" placeholder="Apellido Materno" required>
-                        <input type="tel" id="telefono" placeholder="Teléfono" required>
-                        <input type="text" id="Estado" placeholder="Estado" required>
-                        <input type="text" id="Municipio" placeholder="Municipio" required>
-                        <input type="text" id="Colonia" placeholder="Colonia" required>
-                        <input type="text" id="Refencias" placeholder="Refencias" required>
-                        <input type="email" id="correo" placeholder="Correo electrónico" required>
-                        <input type="password" id="password" placeholder="Contraseña" required>
-                        <select id="rol" required>
-                            <option value="">Tipo de Rol</option>
-                            <option value="Administrador">Administrador</option>
-                            <option value="Freelance">Freelance</option>
-                            <option value="Empresa">Empresa</option>
-                        </select>
+                        <label for="nombre"> - Nombre del candidato</label>
+                        <div class="nombre">
+                            <input id="nombre" type="text" placeholder="Nombre del candidato">
+                            <input id="apellidoPaterno" type="text" placeholder="Apellido paterno">
+                            <input id="apellidoMaterno" type="text" placeholder="Apellido materno">
+                        </div>
+                        <label for="contacto"> - Contacto</label>
+                        <div class="contacto">
+                            <input type="tel" id="telefono" placeholder="Teléfono" required>
+                            <input type="text" id="Estado" placeholder="Estado" required>
+                            <input type="text" id="Municipio" placeholder="Municipio" required>
+                            <input type="text" id="Colonia" placeholder="Colonia" required>
+                            <input type="text" id="Refencias" placeholder="Refencias" required>
+                        </div>
+                        <label for="acceso"> - Acceso</label>
+                        <div class="acceso">
+                            <input type="email" id="correo" placeholder="Correo electrónico" required>
+                            <input type="password" id="password" placeholder="Contraseña" required>
+                            <select id="rol" required>
+                                <option value="">Tipo de Rol</option>
+                                <option value="Administrador">Administrador</option>
+                                <option value="Freelance">Freelance</option>
+                                <option value="Empresa">Empresa</option>
+                            </select>
+                        </div>
                     </div>
                     <button type="submit">Guardar</button>
                 </form>
