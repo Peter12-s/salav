@@ -78,19 +78,43 @@
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 6px;
-    background-color: #fff;
     font-size: 14px;
     transition: all 0.3s ease;
     cursor: pointer;
 }
 
-/* Hover y Focus del select (mismos colores que userForm) */
+
+#tablaSolicitudes button {
+    padding: 6px 12px;
+    background-color: #9F38B8;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+#tablaSolicitudes button:hover:enabled {
+    background-color: #D9358C;
+}
+
+#tablaSolicitudes button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
 #tablaSolicitudes select:hover {
+    border-color: #9F38B8!important;
+}
+
+#frelancer:hover {
     border-color: #9F38B8;
 }
 
-#tablaSolicitudes select:focus {
-    border-color: #D9358C;
-    box-shadow: 0 0 6px rgba(217, 53, 140, 0.4);
-    outline: none;
+#tablaSolicitudes select:active,#tablaSolicitudes select:focus
+{
+    border-color: #D9358C!important;
+    box-shadow: 0 0 6px rgba(217, 53, 140, 0.4)!important;
+    outline: none !important
 }
