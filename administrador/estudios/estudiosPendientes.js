@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("❌ Error al obtener freelancers");
         }
     }
-
+    
     async function fetchApplicants() {
         showPreloader();
         try {

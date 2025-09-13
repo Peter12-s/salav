@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 
-</body>
-
-</html>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nueva solicitud </title>
+    <title>SALAV </title>
     <link rel="stylesheet" href="nuevaSolicitud.css">
     <link rel="stylesheet" href="../../plantilla.css">
-    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
+   
     <link rel="stylesheet" href="estudiosList.css">
 </head>
 
@@ -61,51 +58,7 @@
         </div>
         <div class="container">
             <table>
-                <tr>
-                    <td class="bloque nombre">Juan Perez</td>
-                    <td class="bloque status-completado">Solicitud aceptada</td>
-                    <td class="bloque status-completado">Candidato contactado</td>
-                    <td class="bloque status-completado">Visita agendada</td>
-                    <td class="bloque status-proceso">Backgroun check</td>
-                    <td class="bloque status-completado">Visita realizada</td>
-                    <td class="bloque status-proceso">Documentando información</td>
-                    <td class="bloque status-proceso">Evaluación finalizada</td>
-                    <td class="bloque status-proceso descargar">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M5 20h14v-2H5v2zM12 2v12l4-4h-3V2h-2v8H8l4 4z" />
-                        </svg>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="bloque nombre">Manuel Garcia</td>
-                    <td class="bloque status-completado">Solicitud aceptada</td>
-                    <td class="bloque status-completado">Candidato contactado</td>
-                    <td class="bloque status-completado">Visita agendada</td>
-                    <td class="bloque status-proceso">Backgroun check</td>
-                    <td class="bloque status-completado">Visita realizada</td>
-                    <td class="bloque status-proceso">Documentando información</td>
-                    <td class="bloque status-proceso">Evaluación finalizada</td>
-                    <td class="bloque status-proceso descargar">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M5 20h14v-2H5v2zM12 2v12l4-4h-3V2h-2v8H8l4 4z" />
-                        </svg>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="bloque nombre">Maria Juana Guerra</td>
-                    <td class="bloque status-completado">Solicitud aceptada</td>
-                    <td class="bloque status-completado">Candidato contactado</td>
-                    <td class="bloque status-completado">Visita agendada</td>
-                    <td class="bloque status-proceso">Backgroun check</td>
-                    <td class="bloque status-completado">Visita realizada</td>
-                    <td class="bloque status-proceso">Documentando información</td>
-                    <td class="bloque status-proceso">Evaluación finalizada</td>
-                    <td class="bloque status-proceso descargar">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M5 20h14v-2H5v2zM12 2v12l4-4h-3V2h-2v8H8l4 4z" />
-                        </svg>
-                    </td>
-                </tr>
+               
             </table>
 
 
@@ -168,83 +121,7 @@
 
 
 </body>
-<script>
-    // Simulación de datos recibidos desde backend
-    const usuarios = [
-        {
-            user_id: "f47ac10b-58cc-4372-a567-0e02b2c3d479",
-            nombre: "Juan Perez",
-            application_accepted: true,
-            candidate_contacted: true,
-            visit_scheduled: true,
-            background_check: false,
-            visit_complete: true,
-            documenting_information: false,
-            evaluation_complete: false
-        },
-        {
-            user_id: "a12ac10b-1111-2222-3333-444444444444",
-            nombre: "Maria Juana",
-            application_accepted: true,
-            candidate_contacted: false,
-            visit_scheduled: true,
-            background_check: true,
-            visit_complete: true,
-            documenting_information: true,
-            evaluation_complete: true
-        }
-    ];
-
-    // Mapear claves de usuario -> texto que se muestra en la tabla
-    const etapas = [
-        { key: "application_accepted", label: "Solicitud aceptada" },
-        { key: "candidate_contacted", label: "Candidato contactado" },
-        { key: "visit_scheduled", label: "Visita agendada" },
-        { key: "background_check", label: "Background check" },
-        { key: "visit_complete", label: "Visita realizada" },
-        { key: "documenting_information", label: "Documentando información" },
-        { key: "evaluation_complete", label: "Evaluación finalizada" }
-    ];
-
-    function renderTabla() {
-        const tabla = document.querySelector("table");
-        tabla.innerHTML = ""; // limpiar
-
-        usuarios.forEach(usuario => {
-            const tr = document.createElement("tr");
-
-            // Columna nombre
-            const tdNombre = document.createElement("td");
-            tdNombre.className = "bloque nombre";
-            tdNombre.textContent = usuario.nombre;
-            tr.appendChild(tdNombre);
-
-            // Columna etapas
-            etapas.forEach(etapa => {
-                const td = document.createElement("td");
-                td.className = "bloque " + (usuario[etapa.key] ? "status-completado" : "status-proceso");
-                td.textContent = etapa.label;
-                tr.appendChild(td);
-            });
-
-            // Columna descarga
-            const tdDescargar = document.createElement("td");
-            tdDescargar.className = "bloque status-proceso descargar";
-            tdDescargar.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M5 20h14v-2H5v2zM12 2v12l4-4h-3V2h-2v8H8l4 4z"/>
-      </svg>`;
-            tr.appendChild(tdDescargar);
-
-            tabla.appendChild(tr);
-        });
-    }
-
-    // Llamar al render inicial
-    renderTabla();
-</script>
-
 
 <script src="../../config.js"></script>
-
+<script src="estudiosList.js"></script>
 </html>
