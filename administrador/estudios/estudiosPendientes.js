@@ -1,15 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const preloader = document.getElementById("preloader");
 
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJ1c2VyX3R5cGUiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzU3NzQxNTQ1LCJleHAiOjE3NTc4Mjc5NDV9.nXRqAyt-yeq7Eq0evnjxkeBzycXfmXr4VsPdQzX77c4";
-
-    function showPreloader() {
-        if (preloader) preloader.style.display = "flex";
-    }
-    function hidePreloader() {
-        if (preloader) preloader.style.display = "none";
-    }
-
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJ1c2VyX3R5cGUiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzU3ODA0NzIzLCJleHAiOjE3NTc4MDU2MjN9.IS_pjOCTwmX0ZRvg-YDLHi-iEDpBIBoS8FwEsgplfq0";
     // === ELEMENTOS DE LA TABLA Y CONTROLES ===
     const tbody = document.querySelector("#tablaSolicitudes tbody");
     const searchInput = document.getElementById("searchInput");
@@ -45,11 +37,11 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("❌ Error al obtener freelancers");
         }
     }
-    
+
     async function fetchApplicants() {
-        showPreloader();
+        // showPreloader();
         try {
-            const res = await axios.get("http://localhost:8080/api/applicant", {
+            const res = await axios.get("http://localhost:8080/api/form-request", {
                 headers: { Authorization: `Bearer ${token}` }
             });
             applicants = res.data;
@@ -59,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error(err);
             alert("❌ Error al obtener aplicantes");
         } finally {
-            hidePreloader();
+            // hidePreloader();
         }
     }
 
@@ -100,6 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
             optionDefault.selected = true;
             select.appendChild(optionDefault);
 
+
             freelancers.forEach(f => {
                 const opt = document.createElement("option");
                 opt.value = f._id;
@@ -124,8 +117,23 @@ document.addEventListener("DOMContentLoaded", () => {
             $(select).on("select2:clear", toggleButton);
 
             // ✅ Acción de prueba
-            btnAsignar.addEventListener("click", () => {
-                alert(`Freelancer seleccionado: ${select.options[select.selectedIndex].text}`);
+            btnAsignar.addEventListener("click", async () => {
+                const freelancerId = select.value;
+
+                if (!freelancerId) return;
+
+                try {
+                    const res = await axios.patch(`http://localhost:8080/api/user/${applicantId}`, {
+                        freelance_id: freelancerId
+                    }, {
+                        headers: { Authorization: `Bearer ${token}` }
+                    });
+                    alert(`✅ Freelancer asignado correctamente a ${select.options[select.selectedIndex].text}`);
+                } catch (err) {
+                    console.error(err);
+                    alert("❌ Error al asignar freelancer");
+                } finally {
+                }
             });
 
             tdSelect.appendChild(select);

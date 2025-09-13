@@ -44,3 +44,25 @@ document.getElementById('btnLogout').addEventListener('click', async () => {
   }
 });
 }
+   function showPreloader() {
+        if (preloader) preloader.style.display = "flex";
+    }
+    function hidePreloader() {
+        if (preloader) preloader.style.display = "none";
+    }
+  // === Configurar interceptor global de Axios ===
+    axios.interceptors.request.use(config => {
+        showPreloader();
+        return config;
+    }, error => {
+        hidePreloader();
+        return Promise.reject(error);
+    });
+
+    axios.interceptors.response.use(response => {
+        hidePreloader();
+        return response;
+    }, error => {
+        hidePreloader();
+        return Promise.reject(error);
+    });
