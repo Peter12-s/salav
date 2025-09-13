@@ -7,10 +7,11 @@
     <title>SALAV</title>
     <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
     <link rel="stylesheet" href="../../plantilla.css">
-    <link rel="stylesheet" href="estudiosPendientes.css">
+
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link rel="stylesheet" href="estudiosPendientes.css">
 
 </head>
 
@@ -56,17 +57,31 @@
         <div slot="main">
             <div class="container">
                 <h1>Solicitudes de candidatos</h1>
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Buscar...">
+                </div>
+
                 <table id="tablaSolicitudes">
                     <thead>
                         <tr>
                             <th>Nombre</th>
-                            <th>Asignar Freelancer</th>
+                            <th>Asignar</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <!-- Aquí se insertan las filas con JS -->
-                    </tbody>
+                    <tbody></tbody>
                 </table>
+
+                <div class="pagination">
+                    <button id="prevBtn" class="page-btn">«</button>
+                    <span id="pageInfo">Página 1</span>
+                    <button id="nextBtn" class="page-btn">»</button>
+
+                    <div class="page-jump">
+                        Ir a página: <input type="number" id="pageInput" min="1">
+                        <button id="goPage">Ir</button>
+                    </div>
+                </div>
+
             </div>
 
         </div>

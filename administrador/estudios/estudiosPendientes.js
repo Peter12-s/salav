@@ -1,8 +1,11 @@
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJ1c2VyX3R5cGUiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzU3NzQxNTQ1LCJleHAiOjE3NTc3NDI0NDV9.l4XJv0f1KWz5eo7g3pA026IcCr6oh-KBPKB5-SDQs40";
-
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJ1c2VyX3R5cGUiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzU3NzQxNzYxLCJleHAiOjE3NTc3NDI2NjF9.zo6rfP5rsGgkgOztv5KbFEbV7z8X9ufXI5Yq1bLJeQw";
 let users = [];
 let filteredUsers = [];
 let freelancers = [];
+
+let currentPage = 1;
+const usersPerPage = 5; // Cambia según cuántos registros mostrar
+
 
 const preloader = document.getElementById("preloader");
 
@@ -60,37 +63,149 @@ async function fetchApplicants() {
         console.error("Error en la petición:", err);
     }
 }
+// function renderSolicitudes(data) {
+//     const tbody = document.querySelector("#tablaSolicitudes tbody");
+//     tbody.innerHTML = "";
 
-/**
- * Renderizar solicitudes
- */
-function renderSolicitudes(data) {
+//     data.forEach((solicitud) => {
+//         const persona = solicitud.person;
+//         const nombreCompleto = `${persona.name} ${persona.f_surname} ${persona.s_surname}`;
+//         const direccion = `${persona.state}, ${persona.town}, ${persona.settlement}\n${persona.address_references}`;
+
+//         const tr = document.createElement("tr");
+
+//         // === Columna nombre + tooltip ===
+//         const tdNombre = document.createElement("td");
+
+//         // Contenedor interno para nombre + tooltip
+//         const divTooltip = document.createElement("div");
+//         divTooltip.classList.add("tooltip-inner");
+
+//         divTooltip.textContent = nombreCompleto;
+
+//         // Tooltip
+//         const tooltip = document.createElement("span");
+//         tooltip.classList.add("tooltip-text");
+//         tooltip.textContent = `📍 ${direccion}\n📞 ${persona.phone}`;
+
+//         // Agregamos tooltip al contenedor
+//         divTooltip.appendChild(tooltip);
+//         tdNombre.appendChild(divTooltip);
+
+
+
+//         // === Columna select + botones ===
+//         const tdSelect = document.createElement("td");
+
+//         const select = document.createElement("select");
+//         select.classList.add("freelancer-select");
+//         select.dataset.applicantId = solicitud._id;
+
+//         const optionDefault = document.createElement("option");
+//         optionDefault.textContent = "Seleccionar freelancer";
+//         optionDefault.disabled = true;
+//         optionDefault.selected = true;
+//         select.appendChild(optionDefault);
+
+//         freelancers.forEach(f => {
+//             const opt = document.createElement("option");
+//             opt.value = f.id;
+//             opt.textContent = `${f.name} ${f.f_surname || ""} ${f.s_surname || ""}`;
+//             select.appendChild(opt);
+//         });
+
+//         // Botón Asignar
+//         const btnAsignar = document.createElement("button");
+//         btnAsignar.textContent = "Asignar";
+//         btnAsignar.classList.add("btn-asignar");
+//         btnAsignar.disabled = true;
+//         btnAsignar.style.marginLeft = "8px";
+
+//         // Acción de Asignar
+//         btnAsignar.addEventListener("click", async () => {
+//             const freelancerId = select.value;
+//             const applicantId = select.dataset.applicantId;
+//             if (!freelancerId) return;
+
+//             try {
+//                 preloader.style.display = "flex";
+//                 await axios.put(
+//                     `http://localhost:8080/api/applicant/${applicantId}/assign`,
+//                     { freelancerId },
+//                     {
+//                         headers: {
+//                             Authorization: `Bearer ${token}`,
+//                             "Content-Type": "application/json"
+//                         }
+//                     }
+//                 );
+//                 alert(`✅ Freelancer asignado a ${nombreCompleto}`);
+//             } catch (err) {
+//                 console.error("Error asignando freelancer:", err);
+//                 alert("❌ No se pudo asignar el freelancer.");
+//             } finally {
+//                 preloader.style.display = "none";
+//             }
+//         });
+
+
+//         // Agregar a la fila
+//         tdSelect.appendChild(select);
+//         tdSelect.appendChild(btnAsignar);
+
+//         tr.appendChild(tdNombre);
+//         tr.appendChild(tdSelect);
+//         tbody.appendChild(tr);
+
+//         // Inicializar Select2
+//         $(select).select2({
+//             placeholder: "Selecciona Freelancer",
+//             allowClear: true,
+//             minimumResultsForSearch: 0
+//         });
+//     });
+// }
+
+function renderSolicitudes() {
+    const searchQuery = document.getElementById("searchInput").value.toLowerCase();
+    let filteredData = freelancers; // O el array de solicitudes según tu contexto
+
+    // Filtrar por búsqueda
+    filteredData = filteredData.filter(u => 
+        (`${u.name} ${u.f_surname || ""} ${u.s_surname || ""}`).toLowerCase().includes(searchQuery)
+    );
+
+    const totalPages = Math.ceil(filteredData.length / usersPerPage);
+    const start = (currentPage - 1) * usersPerPage;
+    const end = start + usersPerPage;
+    const pageData = filteredData.slice(start, end);
+
     const tbody = document.querySelector("#tablaSolicitudes tbody");
     tbody.innerHTML = "";
 
-    data.forEach((solicitud, index) => {
-        const persona = solicitud.person;
-        const nombreCompleto = `${persona.name} ${persona.f_surname} ${persona.s_surname}`;
-        const direccion = `${persona.state}, ${persona.town}, ${persona.settlement}\n${persona.address_references}`;
+    pageData.forEach((solicitud) => {
+        const persona = solicitud.person || solicitud; // según tu estructura
+        const nombreCompleto = `${persona.name} ${persona.f_surname || ""} ${persona.s_surname || ""}`;
+        const direccion = `${persona.state}, ${persona.town}, ${persona.settlement}\n${persona.address_references || ""}`;
 
         const tr = document.createElement("tr");
 
-        // === Columna nombre + tooltip ===
         const tdNombre = document.createElement("td");
-        tdNombre.classList.add("tooltip");
-        tdNombre.textContent = nombreCompleto;
+        const divTooltip = document.createElement("div");
+        divTooltip.classList.add("tooltip-inner");
+        divTooltip.textContent = nombreCompleto;
 
         const tooltip = document.createElement("span");
         tooltip.classList.add("tooltip-text");
-        tooltip.textContent = `📍 ${direccion}\n📞 ${persona.phone}`;
-        tdNombre.appendChild(tooltip);
+        tooltip.textContent = `📍 ${direccion}\n📞 ${persona.phone || ""}`;
 
-        // === Columna select + botón ===
+        divTooltip.appendChild(tooltip);
+        tdNombre.appendChild(divTooltip);
+
         const tdSelect = document.createElement("td");
-
         const select = document.createElement("select");
-        const selectId = `freelancerSelect-${index}`;
-        select.id = "freelancer";
+        select.classList.add("freelancer-select");
+        select.dataset.applicantId = solicitud._id;
 
         const optionDefault = document.createElement("option");
         optionDefault.textContent = "Seleccionar freelancer";
@@ -105,43 +220,32 @@ function renderSolicitudes(data) {
             select.appendChild(opt);
         });
 
-        // Botón para asignar
         const btnAsignar = document.createElement("button");
         btnAsignar.textContent = "Asignar";
-        btnAsignar.disabled = true; // inicialmente deshabilitado
+        btnAsignar.classList.add("btn-asignar");
+        btnAsignar.disabled = true;
         btnAsignar.style.marginLeft = "8px";
 
-        // Habilitar botón solo si hay selección
-        select.addEventListener("change", () => {
-            btnAsignar.disabled = (select.value === "");
-        });
-
-        // Acción del botón
         btnAsignar.addEventListener("click", async () => {
             const freelancerId = select.value;
+            const applicantId = select.dataset.applicantId;
             if (!freelancerId) return;
 
             try {
                 preloader.style.display = "flex";
-                await axios.put(`http://localhost:8080/api/applicant/${solicitud._id}/assign`, {
-                    freelancerId
-                }, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        "Content-Type": "application/json"
-                    }
-                });
-
+                await axios.put(
+                    `http://localhost:8080/api/applicant/${applicantId}/assign`,
+                    { freelancerId },
+                    { headers: { Authorization: `Bearer ${token}` } }
+                );
                 alert(`✅ Freelancer asignado a ${nombreCompleto}`);
             } catch (err) {
-                console.error("Error asignando freelancer:", err);
                 alert("❌ No se pudo asignar el freelancer.");
             } finally {
                 preloader.style.display = "none";
             }
         });
 
-        // Agregar elementos
         tdSelect.appendChild(select);
         tdSelect.appendChild(btnAsignar);
 
@@ -149,22 +253,117 @@ function renderSolicitudes(data) {
         tr.appendChild(tdSelect);
         tbody.appendChild(tr);
 
-        // Inicializar Select2 con tu estilo
-        $(`#${selectId}`).select2({
-            placeholder: "Seleccionar freelancer",
-            width: "200px"
+        $(select).select2({
+            placeholder: "Selecciona Freelancer",
+            allowClear: true,
+            minimumResultsForSearch: 0
         });
     });
+
+    document.getElementById("pageInfo").textContent = `Página ${currentPage} de ${totalPages}`;
+    document.getElementById("prevBtn").disabled = currentPage === 1;
+    document.getElementById("nextBtn").disabled = currentPage === totalPages;
 }
 
-// Detectar cambio en el select y habilitar botón
-$('#freelancer').on('change', function () {
+
+// Acción de Eliminar
+// Detectar cambios en cualquier select2 de la tabla
+$(document).on("change", ".freelancer-select", function () {
+    const td = $(this).closest("td");
+    const botonAsignar = td.find(".btn-asignar");
+    const clearBtn = $(this).siblings(".select2").find(".select2-selection__clear");
+
     if ($(this).val()) {
-        $('#btnAsignar').prop('disabled', false);
+        botonAsignar.prop("disabled", false);
+        clearBtn.show();   // ✅ Mostrar "×" solo si hay selección
     } else {
-        $('#btnAsignar').prop('disabled', true);
+        botonAsignar.prop("disabled", true);
+        clearBtn.hide();   // ✅ Ocultar "×" si no hay selección
     }
 });
 
 
+// Mostrar/ocultar el "×" dinámicamente cuando cambia el select
+$(document).on("change", ".freelancer-select", function () {
+    const clearBtn = $(this).siblings(".select2").find(".select2-selection__clear");
 
+    if ($(this).val()) {
+        clearBtn.show();   // ✅ Mostrar si hay selección
+    } else {
+        clearBtn.hide();   // ✅ Ocultar si no hay selección
+    }
+});
+document.querySelectorAll(".tooltip").forEach(td => {
+    const tooltip = td.querySelector(".tooltip-text");
+
+    td.addEventListener("mouseenter", (e) => {
+        // Necesario forzar que el tooltip tenga display block temporal para medir
+        tooltip.style.display = "block";
+        tooltip.style.visibility = "hidden";
+        tooltip.style.opacity = 0;
+
+        const rect = td.getBoundingClientRect();
+        const tooltipRect = tooltip.getBoundingClientRect();
+
+        let top = rect.top + window.scrollY + rect.height / 2 - tooltipRect.height / 2;
+        let left = rect.right + 10;
+
+        // Ajuste si se sale del viewport a la derecha
+        if (left + tooltipRect.width > window.innerWidth) {
+            left = rect.left - tooltipRect.width - 10;
+        }
+
+        // Ajuste si se sale del viewport arriba/abajo
+        if (top < 5) top = 5;
+        if (top + tooltipRect.height > window.innerHeight) top = window.innerHeight - tooltipRect.height - 5;
+
+        tooltip.style.top = `${top}px`;
+        tooltip.style.left = `${left}px`;
+        tooltip.style.visibility = "visible";
+        tooltip.style.opacity = 1;
+    });
+
+    td.addEventListener("mouseleave", () => {
+        tooltip.style.visibility = "hidden";
+        tooltip.style.opacity = 0;
+        tooltip.style.display = "none";
+    });
+});
+
+
+
+
+    // Navegación
+    prevBtn.addEventListener("click", () => {
+        if (currentPage > 1) {
+            currentPage--;
+            renderUsersPage();
+        }
+    });
+
+    nextBtn.addEventListener("click", () => {
+        const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderUsersPage();
+        }
+    });
+
+    goPageBtn.addEventListener("click", () => {
+        const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
+        let page = parseInt(pageInput.value);
+        if (page >= 1 && page <= totalPages) {
+            currentPage = page;
+            renderUsersPage();
+        }
+    });
+
+    // Filtrar usuarios
+    searchInput.addEventListener("input", () => {
+        const query = searchInput.value.toLowerCase();
+        filteredUsers = users.filter(user =>
+            (`${user.name} ${user.f_surname || ""} ${user.s_surname || ""}`).toLowerCase().includes(query)
+        );
+        currentPage = 1;
+        renderUsersPage();
+    });
