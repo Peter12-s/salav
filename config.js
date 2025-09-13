@@ -34,9 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
 if (document.getElementById('btnLogout')) {
 document.getElementById('btnLogout').addEventListener('click', async () => {
   try {
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("user_type");
-    localStorage.removeItem("user_name");
+    //limpiar todo el localStorage
+    localStorage.clear();
     // Si guardaste más datos, elimínalos también
     window.location.href = "/login.html";
   } catch (e) {
