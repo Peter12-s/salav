@@ -282,12 +282,6 @@ $(document).on("change", ".freelancer-select", function () {
     }
 });
 
-// Al inicializar el select2
-$(select).select2({
-    placeholder: "Selecciona Freelancer",
-    allowClear: true,
-    minimumResultsForSearch: 0
-});
 
 // Mostrar/ocultar el "×" dinámicamente cuando cambia el select
 $(document).on("change", ".freelancer-select", function () {
@@ -336,3 +330,40 @@ document.querySelectorAll(".tooltip").forEach(td => {
     });
 });
 
+
+
+
+    // Navegación
+    prevBtn.addEventListener("click", () => {
+        if (currentPage > 1) {
+            currentPage--;
+            renderUsersPage();
+        }
+    });
+
+    nextBtn.addEventListener("click", () => {
+        const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderUsersPage();
+        }
+    });
+
+    goPageBtn.addEventListener("click", () => {
+        const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
+        let page = parseInt(pageInput.value);
+        if (page >= 1 && page <= totalPages) {
+            currentPage = page;
+            renderUsersPage();
+        }
+    });
+
+    // Filtrar usuarios
+    searchInput.addEventListener("input", () => {
+        const query = searchInput.value.toLowerCase();
+        filteredUsers = users.filter(user =>
+            (`${user.name} ${user.f_surname || ""} ${user.s_surname || ""}`).toLowerCase().includes(query)
+        );
+        currentPage = 1;
+        renderUsersPage();
+    });
