@@ -11,7 +11,6 @@
 </head>
 
 <body>
-
     <plantilla-salav>
         <div class="slot-header" slot="header">
             <img style="width: 150px;" src="../../img/Silueta Clara.png" alt="">
@@ -27,14 +26,11 @@
                 <a href="../estudios/estudiosFinalizados.html">Estudios finalizados</a>
                 <!-- Botón Logout con SVG -->
                 <button class="logout-btn" id="btnLogout" aria-label="Cerrar sesión" title="Cerrar sesión">
-                    <!-- SVG de logout (salir) -->
                     <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-                        <!-- Flecha de salida -->
                         <path d="M16 17l5-5-5-5" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round" />
                         <path d="M21 12H9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round" />
-                        <!-- Marco/puerta -->
                         <path d="M13 21H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" />
                     </svg>
@@ -46,12 +42,25 @@
                 <span></span>
             </div>
         </div>
+
         <div slot="main">
             <div class="container">
-                <h1>Registo de Usuarios</h1>
+                <h1>Registro de Usuarios</h1>
 
                 <!-- Formulario -->
-                 <form id="userForm">
+                <form id="userForm">
+                    
+                    <!-- Tipo de Rol: ahora lo primero -->
+                    <label for="rol"> - Tipo de usuario</label>
+                    <select id="rol" required>
+                        <option value="" disabled selected>Selecciona un tipo</option>
+                        <option value="ADMINISTRADOR">Administrador</option>
+                        <option value="FREELANCER">Freelance</option>
+                        <option value="EMPRESA">Empresa</option>
+                    </select>
+                    <!-- Campo visible solo si el rol es EMPRESA -->
+                    <input type="text" id="companyName" placeholder="Nombre de la empresa" style="display: none;">
+
                     <div class="row">
                         <label for="nombre"> - Nombre del candidato</label>
                         <div class="nombre">
@@ -59,36 +68,49 @@
                             <input id="apellidoPaterno" type="text" placeholder="Apellido paterno">
                             <input id="apellidoMaterno" type="text" placeholder="Apellido materno">
                         </div>
+
                         <label for="contacto"> - Contacto</label>
                         <div class="contacto">
                             <input type="tel" id="telefono" placeholder="Teléfono" required>
                             <input type="text" id="Estado" placeholder="Estado" required>
                             <input type="text" id="Municipio" placeholder="Municipio" required>
                             <input type="text" id="Colonia" placeholder="Colonia" required>
-                            <input type="text" id="Refencias" placeholder="Refencias" required>
+                            <input type="text" id="Refencias" placeholder="Referencias" required>
                         </div>
+
                         <label for="acceso"> - Acceso</label>
                         <div class="acceso">
                             <input type="email" id="correo" placeholder="Correo electrónico" required>
                             <input type="password" id="password" placeholder="Contraseña" required>
-                            <select id="rol" required>
-                              <option value="" disabled selected>Tipo de Rol</option>
-                                <option value="ADMINISTRADOR">Administrador</option>
-                                <option value="FREELANCER">Freelance</option>
-                                <option value="EMPRESA">Empresa</option>
-                            </select>
                         </div>
                     </div>
                     <button type="submit">Guardar</button>
                 </form>
-                <div class="search-container">
-
-                </div>
+                <div class="search-container"></div>
             </div>
-
+        </div>
     </plantilla-salav>
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../../config.js"></script>
     <script src="registerUsuario.js"></script>
     <script src="../../plantilla.js"></script>
+
+    <script>
+        // Mostrar/ocultar campos dependiendo el rol
+        const rolSelect = document.getElementById("rol");
+        const companyField = document.getElementById("companyName");
+        const nombreFields = document.querySelector(".nombre");
+
+        rolSelect.addEventListener("change", function () {
+            if (this.value === "EMPRESA") {
+                companyField.style.display = "block";
+                nombreFields.style.display = "none";
+            } else {
+                companyField.style.display = "none";
+                nombreFields.style.display = "flex";
+            }
+        });
+    </script>
 </body>
+</html>

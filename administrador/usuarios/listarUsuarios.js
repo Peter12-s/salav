@@ -1,16 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
-
     // ======= PRELOADER =======
-    const preloader = document.getElementById("preloader"); // 👈 asegúrate que exista en tu HTML
-
+    const preloader = document.getElementById("preloader");
     function showPreloader() {
         if (preloader) preloader.style.display = "flex";
     }
-
     function hidePreloader() {
         if (preloader) preloader.style.display = "none";
     }
-
 
     // ======== TABLA DE USUARIOS ========
     const userTable = document.getElementById("userTable");
@@ -21,10 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const pageInput = document.getElementById("pageInput");
     const totalPagesSpan = document.getElementById("totalPages");
     const goPageBtn = document.getElementById("goPage");
-    
+
     // 👇 Token desde localStorage
     //const token = localStorage.getItem("access_token");
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJ1c2VyX3R5cGUiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzU3MjE2OTI1LCJleHAiOjE3NTczMDMzMjV9.ac_Hkoap_rFZCBd7hVT8__O4jUR1v6PepYmgwVMCUBo";
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJ1c2VyX3R5cGUiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzU3Nzg1MTQ2LCJleHAiOjE3NTc4NzE1NDZ9.eF7OlZKmF5eo2bxT1WAMlBnqrpsIyOkASR7AJX5lygo";
 
     if (!token) {
         alert("No hay sesión activa. Por favor, inicia sesión.");
@@ -106,15 +102,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
         pageUsers.forEach(user => {
             const row = document.createElement("tr");
+
+            // 👇 Si es empresa muestra company_name, si no muestra nombre completo
+            const displayName = user.user_type === "EMPRESA"
+                ? user.company_name || "(Sin nombre de empresa)"
+                : `${user.name || ""} ${user.f_surname || ""} ${user.s_surname || ""}`.trim();
+
             row.innerHTML = `
-                <td>${user.name} ${user.f_surname || ""} ${user.s_surname || ""}</td>
+                <td>${displayName}</td>
                 <td>${user.phone || ""}</td>
                 <td>${user.state || ""}, ${user.town || ""}, ${user.settlement || ""}</td>
                 <td>${user.email || ""}</td>
                 <td>${user.user_type || ""}</td>
                 <td class="actions">
                     <button title="Editar" onclick="editarUsuario('${user._id}')">✏️</button>
-                    <button title="Eliminar" onclick="eliminarUsuario('${user._id}', '${user.name}')">🗑️</button>
+                    <button title="Eliminar" onclick="eliminarUsuario('${user._id}', '${displayName}')">🗑️</button>
                 </td>
             `;
             userTable.appendChild(row);
@@ -154,12 +156,15 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Filtrar usuarios
+    // Filtrar usuarios (incluye company_name si es EMPRESA)
     searchInput.addEventListener("input", () => {
         const query = searchInput.value.toLowerCase();
-        filteredUsers = users.filter(user =>
-            (`${user.name} ${user.f_surname || ""} ${user.s_surname || ""}`).toLowerCase().includes(query)
-        );
+        filteredUsers = users.filter(user => {
+            const displayName = user.user_type === "EMPRESA"
+                ? user.company_name || ""
+                : `${user.name || ""} ${user.f_surname || ""} ${user.s_surname || ""}`;
+            return displayName.toLowerCase().includes(query);
+        });
         currentPage = 1;
         renderUsersPage();
     });
