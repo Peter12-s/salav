@@ -1,5 +1,4 @@
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJ1c2VyX3R5cGUiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzU3MjE2OTI1LCJleHAiOjE3NTczMDMzMjV9.ac_Hkoap_rFZCBd7hVT8__O4jUR1v6PepYmgwVMCUBo";
-
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJ1c2VyX3R5cGUiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzU3NzQxNzYxLCJleHAiOjE3NTc3NDI2NjF9.zo6rfP5rsGgkgOztv5KbFEbV7z8X9ufXI5Yq1bLJeQw";
 let users = [];
 let filteredUsers = [];
 let freelancers = [];
@@ -60,15 +59,11 @@ async function fetchApplicants() {
         console.error("Error en la petición:", err);
     }
 }
-
-/**
- * Renderizar solicitudes
- */
 function renderSolicitudes(data) {
     const tbody = document.querySelector("#tablaSolicitudes tbody");
     tbody.innerHTML = "";
 
-    data.forEach((solicitud, index) => {
+    data.forEach((solicitud) => {
         const persona = solicitud.person;
         const nombreCompleto = `${persona.name} ${persona.f_surname} ${persona.s_surname}`;
         const direccion = `${persona.state}, ${persona.town}, ${persona.settlement}\n${persona.address_references}`;
@@ -77,20 +72,30 @@ function renderSolicitudes(data) {
 
         // === Columna nombre + tooltip ===
         const tdNombre = document.createElement("td");
-        tdNombre.classList.add("tooltip");
-        tdNombre.textContent = nombreCompleto;
 
+        // Contenedor interno para nombre + tooltip
+        const divTooltip = document.createElement("div");
+        divTooltip.classList.add("tooltip-inner");
+
+        divTooltip.textContent = nombreCompleto;
+
+        // Tooltip
         const tooltip = document.createElement("span");
         tooltip.classList.add("tooltip-text");
         tooltip.textContent = `📍 ${direccion}\n📞 ${persona.phone}`;
-        tdNombre.appendChild(tooltip);
 
-        // === Columna select + botón ===
+        // Agregamos tooltip al contenedor
+        divTooltip.appendChild(tooltip);
+        tdNombre.appendChild(divTooltip);
+
+
+
+        // === Columna select + botones ===
         const tdSelect = document.createElement("td");
 
         const select = document.createElement("select");
-        const selectId = `freelancerSelect-${index}`;
-        select.id = "freelancer";
+        select.classList.add("freelancer-select");
+        select.dataset.applicantId = solicitud._id;
 
         const optionDefault = document.createElement("option");
         optionDefault.textContent = "Seleccionar freelancer";
@@ -105,33 +110,31 @@ function renderSolicitudes(data) {
             select.appendChild(opt);
         });
 
-        // Botón para asignar
+        // Botón Asignar
         const btnAsignar = document.createElement("button");
         btnAsignar.textContent = "Asignar";
-        btnAsignar.disabled = true; // inicialmente deshabilitado
+        btnAsignar.classList.add("btn-asignar");
+        btnAsignar.disabled = true;
         btnAsignar.style.marginLeft = "8px";
 
-        // Habilitar botón solo si hay selección
-        select.addEventListener("change", () => {
-            btnAsignar.disabled = (select.value === "");
-        });
-
-        // Acción del botón
+        // Acción de Asignar
         btnAsignar.addEventListener("click", async () => {
             const freelancerId = select.value;
+            const applicantId = select.dataset.applicantId;
             if (!freelancerId) return;
 
             try {
                 preloader.style.display = "flex";
-                await axios.put(`http://localhost:8080/api/applicant/${solicitud._id}/assign`, {
-                    freelancerId
-                }, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        "Content-Type": "application/json"
+                await axios.put(
+                    `http://localhost:8080/api/applicant/${applicantId}/assign`,
+                    { freelancerId },
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            "Content-Type": "application/json"
+                        }
                     }
-                });
-
+                );
                 alert(`✅ Freelancer asignado a ${nombreCompleto}`);
             } catch (err) {
                 console.error("Error asignando freelancer:", err);
@@ -141,7 +144,8 @@ function renderSolicitudes(data) {
             }
         });
 
-        // Agregar elementos
+
+        // Agregar a la fila
         tdSelect.appendChild(select);
         tdSelect.appendChild(btnAsignar);
 
@@ -149,22 +153,82 @@ function renderSolicitudes(data) {
         tr.appendChild(tdSelect);
         tbody.appendChild(tr);
 
-        // Inicializar Select2 con tu estilo
-        $(`#${selectId}`).select2({
-            placeholder: "Seleccionar freelancer",
-            width: "200px"
+        // Inicializar Select2
+        $(select).select2({
+            placeholder: "Selecciona Freelancer",
+            allowClear: true,
+            minimumResultsForSearch: 0
         });
     });
 }
 
-// Detectar cambio en el select y habilitar botón
-$('#freelancer').on('change', function () {
+// Acción de Eliminar
+// Detectar cambios en cualquier select2 de la tabla
+$(document).on("change", ".freelancer-select", function () {
+    const td = $(this).closest("td");
+    const botonAsignar = td.find(".btn-asignar");
+    const clearBtn = $(this).siblings(".select2").find(".select2-selection__clear");
+
     if ($(this).val()) {
-        $('#btnAsignar').prop('disabled', false);
+        botonAsignar.prop("disabled", false);
+        clearBtn.show();   // ✅ Mostrar "×" solo si hay selección
     } else {
-        $('#btnAsignar').prop('disabled', true);
+        botonAsignar.prop("disabled", true);
+        clearBtn.hide();   // ✅ Ocultar "×" si no hay selección
     }
 });
 
+// Al inicializar el select2
+$(select).select2({
+    placeholder: "Selecciona Freelancer",
+    allowClear: true,
+    minimumResultsForSearch: 0
+});
 
+// Mostrar/ocultar el "×" dinámicamente cuando cambia el select
+$(document).on("change", ".freelancer-select", function () {
+    const clearBtn = $(this).siblings(".select2").find(".select2-selection__clear");
+
+    if ($(this).val()) {
+        clearBtn.show();   // ✅ Mostrar si hay selección
+    } else {
+        clearBtn.hide();   // ✅ Ocultar si no hay selección
+    }
+});
+document.querySelectorAll(".tooltip").forEach(td => {
+    const tooltip = td.querySelector(".tooltip-text");
+
+    td.addEventListener("mouseenter", (e) => {
+        // Necesario forzar que el tooltip tenga display block temporal para medir
+        tooltip.style.display = "block";
+        tooltip.style.visibility = "hidden";
+        tooltip.style.opacity = 0;
+
+        const rect = td.getBoundingClientRect();
+        const tooltipRect = tooltip.getBoundingClientRect();
+
+        let top = rect.top + window.scrollY + rect.height / 2 - tooltipRect.height / 2;
+        let left = rect.right + 10;
+
+        // Ajuste si se sale del viewport a la derecha
+        if (left + tooltipRect.width > window.innerWidth) {
+            left = rect.left - tooltipRect.width - 10;
+        }
+
+        // Ajuste si se sale del viewport arriba/abajo
+        if (top < 5) top = 5;
+        if (top + tooltipRect.height > window.innerHeight) top = window.innerHeight - tooltipRect.height - 5;
+
+        tooltip.style.top = `${top}px`;
+        tooltip.style.left = `${left}px`;
+        tooltip.style.visibility = "visible";
+        tooltip.style.opacity = 1;
+    });
+
+    td.addEventListener("mouseleave", () => {
+        tooltip.style.visibility = "hidden";
+        tooltip.style.opacity = 0;
+        tooltip.style.display = "none";
+    });
+});
 
