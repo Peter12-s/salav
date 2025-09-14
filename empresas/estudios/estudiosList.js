@@ -33,61 +33,61 @@
             documenting_information: false,
             evaluation_complete: false
         },
-        {
-            user_id: "c34cd30d-58cc-4372-a567-0e02b2c3d479",
-            nombre: "Ana Gomez",
-            application_accepted: true,
-            candidate_contacted: true,
-            visit_scheduled: true,
-            background_check: true,
-            visit_complete: true,
-            documenting_information: false,
-            evaluation_complete: false
-        },
-        {
-            user_id: "d45de40e-58cc-4372-a567-0e02b2c3d479",
-            nombre: "Luis Martinez",
-            application_accepted: true,                 
-            candidate_contacted: true,
-            visit_scheduled: true,
-            background_check: true,
-            visit_complete: true,
-            documenting_information: true,
-            evaluation_complete: false
-        },
-        {
-            user_id: "e56ef50f-58cc-4372-a567-0e02b2c3d479",
-            nombre: "Sofia Rodriguez",
-            application_accepted: true,
-            candidate_contacted: false,
-            visit_scheduled: false,
-            background_check: false,
-            visit_complete: false,
-            documenting_information: false,
-            evaluation_complete: false
-        },
-        {
-            user_id: "f67fg60g-58cc-4372-a567-0e02b2c3d479",
-            nombre: "Miguel Torres",
-            application_accepted: true,
-            candidate_contacted: true,
-            visit_scheduled: true,
-            background_check: true,
-            visit_complete: true,
-            documenting_information: true,
-            evaluation_complete: true
-        },
-        {
-            user_id: "g78gh70h-58cc-4372-a567-0e02b2c3d479",
-            nombre: "Laura Fernandez",
-            application_accepted: true,
-            candidate_contacted: true,
-            visit_scheduled: false,
-            background_check: false,   
-            visit_complete: false,
-            documenting_information: false,
-            evaluation_complete: false
-        },
+        // {
+        //     user_id: "c34cd30d-58cc-4372-a567-0e02b2c3d479",
+        //     nombre: "Ana Gomez",
+        //     application_accepted: true,
+        //     candidate_contacted: true,
+        //     visit_scheduled: true,
+        //     background_check: true,
+        //     visit_complete: true,
+        //     documenting_information: false,
+        //     evaluation_complete: false
+        // },
+        // {
+        //     user_id: "d45de40e-58cc-4372-a567-0e02b2c3d479",
+        //     nombre: "Luis Martinez",
+        //     application_accepted: true,                 
+        //     candidate_contacted: true,
+        //     visit_scheduled: true,
+        //     background_check: true,
+        //     visit_complete: true,
+        //     documenting_information: true,
+        //     evaluation_complete: false
+        // },
+        // {
+        //     user_id: "e56ef50f-58cc-4372-a567-0e02b2c3d479",
+        //     nombre: "Sofia Rodriguez",
+        //     application_accepted: true,
+        //     candidate_contacted: false,
+        //     visit_scheduled: false,
+        //     background_check: false,
+        //     visit_complete: false,
+        //     documenting_information: false,
+        //     evaluation_complete: false
+        // },
+        // {
+        //     user_id: "f67fg60g-58cc-4372-a567-0e02b2c3d479",
+        //     nombre: "Miguel Torres",
+        //     application_accepted: true,
+        //     candidate_contacted: true,
+        //     visit_scheduled: true,
+        //     background_check: true,
+        //     visit_complete: true,
+        //     documenting_information: true,
+        //     evaluation_complete: true
+        // },
+        // {
+        //     user_id: "g78gh70h-58cc-4372-a567-0e02b2c3d479",
+        //     nombre: "Laura Fernandez",
+        //     application_accepted: true,
+        //     candidate_contacted: true,
+        //     visit_scheduled: false,
+        //     background_check: false,   
+        //     visit_complete: false,
+        //     documenting_information: false,
+        //     evaluation_complete: false
+        // },
         {
             user_id: "h89hi80i-58cc-4372-a567-0e02b2c3d479",
             nombre: "Diego Ramirez",
