@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const preloader = document.getElementById("preloader");
 
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJ1c2VyX3R5cGUiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzU3ODA0NzIzLCJleHAiOjE3NTc4MDU2MjN9.IS_pjOCTwmX0ZRvg-YDLHi-iEDpBIBoS8FwEsgplfq0";
-    // === ELEMENTOS DE LA TABLA Y CONTROLES ===
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJuYW1lIjoiT1NNQVIgREFWSUQiLCJmX3N1cm5hbWUiOiJBUkVMTEFOTyIsInNfc3VybmFtZSI6Ik1BR0RBTEVOTyIsImNvbXBhbnlfbmFtZSI6bnVsbCwidXNlcl90eXBlIjoiQURNSU5JU1RSQURPUiIsImlhdCI6MTc1NzgxMjUwNSwiZXhwIjoxNzU3ODEzNDA1fQ.Z0ucivN-yELl_S13kG4lewxw364xKT-lKk7oIzRKgE4";   // === ELEMENTOS DE LA TABLA Y CONTROLES ===
     const tbody = document.querySelector("#tablaSolicitudes tbody");
     const searchInput = document.getElementById("searchInput");
     const prevBtn = document.getElementById("prevBtn");
@@ -12,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const goPageBtn = document.getElementById("goPage");
 
     let applicants = [];
-    let filteredApplicants = [];
+
     let freelancers = [];
     let currentPage = 1;
     let usersPerPage = window.innerWidth <= 768 ? 3 : 5;
@@ -29,9 +28,12 @@ document.addEventListener("DOMContentLoaded", () => {
     async function fetchFreelancers() {
         try {
             const res = await axios.get("http://localhost:8080/api/user", {
-                headers: { Authorization: `Bearer ${token}` }
+                headers: { Authorization: `Bearer ${token}` },
+                params: { user_type: "FREELANCER" } // lo pasamos como query param
             });
-            freelancers = res.data.filter(u => u.user_type === "FREELANCER");
+
+            freelancers = res.data; // ya viene filtrado del backend
+            console.log(freelancers);
         } catch (err) {
             console.error(err);
             alert("❌ Error al obtener freelancers");
@@ -39,19 +41,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     async function fetchApplicants() {
-        // showPreloader();
         try {
             const res = await axios.get("http://localhost:8080/api/form-request", {
-                headers: { Authorization: `Bearer ${token}` }
+                headers: {
+                    Authorization: `Bearer ${token}` // si tu API lo requiere
+                },
+                params: {
+                    applicant_id: null // null para traer todas
+                }
             });
-            applicants = res.data;
-            filteredApplicants = [...applicants];
-            renderSolicitudes();
-        } catch (err) {
-            console.error(err);
-            alert("❌ Error al obtener aplicantes");
-        } finally {
-            // hidePreloader();
+            applicants = res.data; // opcional si quieres usar los datos afuera
+            console.log(applicants[0]);
+
+        } catch (error) {
+            console.error("❌ Error al obtener solicitudes:", error);
+            alert("❌ Error al obtener solicitudes");
         }
     }
 
