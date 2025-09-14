@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
     const preloader = document.getElementById("preloader");
 
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJuYW1lIjoiT1NNQVIgREFWSUQiLCJmX3N1cm5hbWUiOiJBUkVMTEFOTyIsInNfc3VybmFtZSI6Ik1BR0RBTEVOTyIsImNvbXBhbnlfbmFtZSI6bnVsbCwidXNlcl90eXBlIjoiQURNSU5JU1RSQURPUiIsImlhdCI6MTc1NzgxOTQ0OSwiZXhwIjoxNzU3ODIwMzQ5fQ.ReK68taDrztqlM1iMFi0Eh2hMuXmJxxV5nOawZq-U5o"; // 🔑
-    const searchInput = document.getElementById("searchInput");
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJuYW1lIjoiT1NNQVIgREFWSUQiLCJmX3N1cm5hbWUiOiJBUkVMTEFOTyIsInNfc3VybmFtZSI6Ik1BR0RBTEVOTyIsImNvbXBhbnlfbmFtZSI6bnVsbCwidXNlcl90eXBlIjoiQURNSU5JU1RSQURPUiIsImlhdCI6MTc1NzgyMDQzNywiZXhwIjoxNzU3ODIxMzM3fQ.1Z-SxO3AmYL3clFcGXwaA1hBfNralfexq6fcfHV6l_Y";
+        const searchInput = document.getElementById("searchInput");
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
     const pageInfo = document.getElementById("pageInfo");
@@ -33,9 +33,9 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             freelancers = res.data;
-            console.log("Freelancers:", freelancers);
+            // console.log("Freelancers:", freelancers);
         } catch (err) {
-            console.error(err);
+            // console.error(err);
             alert("❌ Error al obtener freelancers");
         }
     }
@@ -49,11 +49,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             applicants = res.data;
             filteredApplicants = [...applicants];
-            console.log("Solicitudes:", filteredApplicants);
+            // console.log("Solicitudes:", filteredApplicants);
 
             renderSolicitudes(); // ✅ renderizamos después de cargar
         } catch (error) {
-            console.error("❌ Error al obtener solicitudes:", error);
+            // console.error("❌ Error al obtener solicitudes:", error);
             alert("❌ Error al obtener solicitudes");
         }
     }
@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     alert(`✅ Freelancer asignado correctamente a ${select.options[select.selectedIndex].text}`);
                 } catch (err) {
-                    console.error(err);
+                    // console.error(err);
                     alert("❌ Error al asignar freelancer");
                 }
             });
