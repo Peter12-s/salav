@@ -208,6 +208,7 @@ th, td {
     z-index: 1;
 }
 .descargar:hover {
+    background-color: #659fe6 !important;
     animation: pulse 0.3s ease-in-out infinite;
     cursor: pointer;
 }
