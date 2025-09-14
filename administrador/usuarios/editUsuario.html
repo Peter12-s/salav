@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SALAV</title>
+    <title>Edición de Usuario - SALAV</title>
     <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
     <link rel="stylesheet" href="../../plantilla.css">
     <link rel="stylesheet" href="registerUsuario.css">
 </head>
-
 <body>
     <div id="preloader">
         <img width="150px" src="../../img/Logo.png" alt="Cargando..." />
@@ -22,74 +20,93 @@
                 <div class="menu-item">
                     <a href="#">Usuarios ▾</a>
                     <div class="submenu">
-                        <a href="usuarios/listarUsuarios.html">Listar usuarios</a>
-                        <a href="usuarios/registerUsuario.html">Registrar usuario</a>
+                        <a href="listarUsuarios.html">Listar usuarios</a>
+                        <a href="registerUsuario.html">Registrar usuario</a>
                     </div>
                 </div>
                 <a href="../estudios/estudiosPendientes.html">Estudios pendientes</a>
                 <a href="../estudios/estudiosFinalizados.html">Estudios finalizados</a>
-                <!-- Botón Logout con SVG -->
                 <button class="logout-btn" id="btnLogout" aria-label="Cerrar sesión" title="Cerrar sesión">
-                    <!-- SVG de logout (salir) -->
                     <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-                        <!-- Flecha de salida -->
-                        <path d="M16 17l5-5-5-5" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M21 12H9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                        <!-- Marco/puerta -->
-                        <path d="M13 21H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" />
+                        <path d="M16 17l5-5-5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M21 12H9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M13 21H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                     </svg>
                 </button>
             </nav>
             <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </div>
         </div>
+
         <div slot="main">
             <div class="container">
-                <h1>Edición de Usuarios</h1>
+                <h1>Edición de Usuario</h1>
 
-                <!-- Formulario -->
                 <form id="userForm">
+
+                    <!-- Rol primero -->
+                    <label for="rol">Tipo de usuario</label>
+                    <select id="rol" required>
+                        <option value="" disabled selected>Selecciona un tipo</option>
+                        <option value="ADMINISTRADOR">Administrador</option>
+                        <option value="FREELANCER">Freelance</option>
+                        <option value="EMPRESA">Empresa</option>
+                    </select>
+
+                    <!-- Campo visible solo si es empresa -->
+                    <input type="text" id="companyName" placeholder="Nombre de la empresa" style="display:none; margin-top: 10px;">
+
                     <div class="row">
-                        <label for="nombre"> - Nombre del candidato</label>
+                        <label for="nombre">Nombre del candidato</label>
                         <div class="nombre">
                             <input id="nombre" type="text" placeholder="Nombre del candidato">
                             <input id="apellidoPaterno" type="text" placeholder="Apellido paterno">
                             <input id="apellidoMaterno" type="text" placeholder="Apellido materno">
                         </div>
-                        <label for="contacto"> - Contacto</label>
+
+                        <label for="contacto">Contacto</label>
                         <div class="contacto">
                             <input type="tel" id="telefono" placeholder="Teléfono" required>
                             <input type="text" id="Estado" placeholder="Estado" required>
                             <input type="text" id="Municipio" placeholder="Municipio" required>
                             <input type="text" id="Colonia" placeholder="Colonia" required>
-                            <input type="text" id="Refencias" placeholder="Refencias" required>
+                            <input type="text" id="Refencias" placeholder="Referencias" required>
                         </div>
-                        <label for="acceso"> - Acceso</label>
+
+                        <label for="acceso">Acceso</label>
                         <div class="acceso">
                             <input type="email" id="correo" placeholder="Correo electrónico" required>
-                            <input type="password" id="password" placeholder="Contraseña" required>
-                            <select id="rol" required>
-                               <option value="" disabled selected>Tipo de Rol</option>
-                                 <option value="ADMINISTRADOR">Administrador</option>
-                                <option value="FREELANCER">Freelance</option>
-                                <option value="EMPRESA">Empresa</option>
-                            </select>
+                            <input type="password" id="password" placeholder="Contraseña">
                         </div>
                     </div>
-                    <button type="submit">Editar</button>
+
+                    <button type="submit">Guardar</button>
                 </form>
-                <div class="search-container"></div>
             </div>
         </div>
     </plantilla-salav>
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../../config.js"></script>
     <script src="editUsuario.js"></script>
     <script src="../../plantilla.js"></script>
+
+    <script>
+        // Mostrar/ocultar campos dependiendo del rol
+        const rolSelect = document.getElementById("rol");
+        const companyField = document.getElementById("companyName");
+        const nombreFields = document.querySelector(".nombre");
+
+        rolSelect.addEventListener("change", function () {
+            if (this.value === "EMPRESA") {
+                companyField.style.display = "block";
+                nombreFields.style.display = "none";
+            } else {
+                companyField.style.display = "none";
+                nombreFields.style.display = "flex";
+            }
+        });
+    </script>
 </body>
+</html>

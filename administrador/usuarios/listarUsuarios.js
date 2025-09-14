@@ -1,13 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // ======= PRELOADER =======
-    const preloader = document.getElementById("preloader");
-    function showPreloader() {
-        if (preloader) preloader.style.display = "flex";
-    }
-    function hidePreloader() {
-        if (preloader) preloader.style.display = "none";
-    }
-
     // ======== TABLA DE USUARIOS ========
     const userTable = document.getElementById("userTable");
     const searchInput = document.getElementById("searchInput");
@@ -19,9 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const goPageBtn = document.getElementById("goPage");
 
     // 👇 Token desde localStorage
-    //const token = localStorage.getItem("access_token");
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJ1c2VyX3R5cGUiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzU3Nzg1MTQ2LCJleHAiOjE3NTc4NzE1NDZ9.eF7OlZKmF5eo2bxT1WAMlBnqrpsIyOkASR7AJX5lygo";
-
+    const token = localStorage.getItem("access_token");
     if (!token) {
         alert("No hay sesión activa. Por favor, inicia sesión.");
         return;
@@ -44,17 +33,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ======= FUNCIONES =======
     async function fetchUsers() {
-        showPreloader();
         try {
-            const res = await axios.get("http://localhost:8080/api/user", {
+            const res = await axios.get(`${API_URL}user`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json"
                 }
             });
 
+            // 🚨 Aquí la API devuelve un array plano
             users = res.data;
             filteredUsers = [...users];
+
             renderUsersPage();
         } catch (err) {
             if (err.response) {
@@ -62,8 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 alert("⚠️ No se pudo conectar con el servidor");
             }
-        } finally {
-            hidePreloader();
         }
     }
 
@@ -72,9 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        showPreloader();
         try {
-            await axios.delete(`http://localhost:8080/api/user/${userId}`, {
+            await axios.delete(`${API_URL}user/${userId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json"
@@ -89,8 +76,6 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 alert("⚠️ No se pudo conectar con el servidor");
             }
-        } finally {
-            hidePreloader();
         }
     }
 
@@ -122,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
             userTable.appendChild(row);
         });
 
-        const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
+        const totalPages = Math.ceil(filteredUsers.length / usersPerPage) || 1;
         totalPagesSpan.textContent = totalPages;
         pageInfo.textContent = `Página ${currentPage} de ${totalPages}`;
         pageInput.value = currentPage;
