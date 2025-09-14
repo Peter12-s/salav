@@ -42,9 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function fetchApplicants() {
         try {
-            const res = await axios.get("http://localhost:8080/api/form-request", {
+            const res = await axios.get("http://localhost:8080/api/form-request?freelance_id=null", {
                 headers: { Authorization: `Bearer ${token}` },
-                params: { freelance_id: null }
             });
 
             applicants = res.data;
