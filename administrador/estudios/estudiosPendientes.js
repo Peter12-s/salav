@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
     const preloader = document.getElementById("preloader");
 
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJuYW1lIjoiT1NNQVIgREFWSUQiLCJmX3N1cm5hbWUiOiJBUkVMTEFOTyIsInNfc3VybmFtZSI6Ik1BR0RBTEVOTyIsImNvbXBhbnlfbmFtZSI6bnVsbCwidXNlcl90eXBlIjoiQURNSU5JU1RSQURPUiIsImlhdCI6MTc1NzgyMDQzNywiZXhwIjoxNzU3ODIxMzM3fQ.1Z-SxO3AmYL3clFcGXwaA1hBfNralfexq6fcfHV6l_Y";
-    const searchInput = document.getElementById("searchInput");
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJuYW1lIjoiT1NNQVIgREFWSUQiLCJmX3N1cm5hbWUiOiJBUkVMTEFOTyIsInNfc3VybmFtZSI6Ik1BR0RBTEVOTyIsImNvbXBhbnlfbmFtZSI6bnVsbCwidXNlcl90eXBlIjoiQURNSU5JU1RSQURPUiIsImlhdCI6MTc1NzgyMTcxMiwiZXhwIjoxNzU3ODIyNjEyfQ.Sy01bo4IQ4GNBlHv3dfbuPEDDxCBtG3jINso5H1MFJI";
+     const searchInput = document.getElementById("searchInput");
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
     const pageInfo = document.getElementById("pageInfo");
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             const res = await axios.get("http://localhost:8080/api/form-request", {
                 headers: { Authorization: `Bearer ${token}` },
-                params: { applicant_id: null }
+                params: { freelance_id: null }
             });
 
             applicants = res.data;

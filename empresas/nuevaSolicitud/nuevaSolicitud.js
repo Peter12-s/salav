@@ -20,9 +20,14 @@ document.addEventListener("DOMContentLoaded", () => {
             address_references: document.getElementById("direccionCompleta").value.trim()
         };
 
-        // Validación mínima
-        if (!data.name || !data.f_surname || !data.phone) {
-            alert("Por favor, completa los campos obligatorios.");
+
+        // Validación de todos los campos
+        const missingFields = Object.entries(data)
+            .filter(([key, value]) => !value) // filtra los que estén vacíos
+            .map(([key]) => key); // solo nombres de los campos
+
+        if (missingFields.length > 0) {
+            alert(`Por favor, completa los campos obligatorios: ${missingFields.join(", ")}`);
             return;
         }
 
@@ -33,13 +38,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 "Content-Type": "application/json"
             }
         })
-        .then(res => {
-            alert("Solicitud enviada correctamente");
-            form.reset();
-        })
-        .catch(err => {
-            alert("Error al enviar la solicitud");
-            console.error(err.response ? err.response.data : err);
-        });
+            .then(res => {
+                alert("Solicitud enviada correctamente");
+                form.reset();
+            })
+            .catch(err => {
+                alert("Error al enviar la solicitud");
+                console.error(err.response ? err.response.data : err);
+            });
     });
 });
