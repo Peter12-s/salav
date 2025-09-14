@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJ1c2VyX3R5cGUiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzU3Mjc4NDU1LCJleHAiOjE3NTczNjQ4NTV9.kPCfxpcvzOW8ft9aVC3OCFzRrv5tEQfVc_CkaeM-gS4"; // Tu token válido
-    const API_URL = "http://localhost:8080/api/"; // URL de tu API
+    const API_URL = "http://localhost:8080/api/form-request/from-enterprise"; // URL de tu API
     const form = document.querySelector(".form");
 
     form.addEventListener("submit", function (e) {

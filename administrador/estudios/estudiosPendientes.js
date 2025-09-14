@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const preloader = document.getElementById("preloader");
 
     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJuYW1lIjoiT1NNQVIgREFWSUQiLCJmX3N1cm5hbWUiOiJBUkVMTEFOTyIsInNfc3VybmFtZSI6Ik1BR0RBTEVOTyIsImNvbXBhbnlfbmFtZSI6bnVsbCwidXNlcl90eXBlIjoiQURNSU5JU1RSQURPUiIsImlhdCI6MTc1NzgyMDQzNywiZXhwIjoxNzU3ODIxMzM3fQ.1Z-SxO3AmYL3clFcGXwaA1hBfNralfexq6fcfHV6l_Y";
-        const searchInput = document.getElementById("searchInput");
+    const searchInput = document.getElementById("searchInput");
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
     const pageInfo = document.getElementById("pageInfo");
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             freelancers = res.data;
-            // console.log("Freelancers:", freelancers);
+            console.log("Freelancers:", freelancers);
         } catch (err) {
             // console.error(err);
             alert("❌ Error al obtener freelancers");
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             applicants = res.data;
             filteredApplicants = [...applicants];
-            // console.log("Solicitudes:", filteredApplicants);
+            console.log("Solicitudes:", filteredApplicants);
 
             renderSolicitudes(); // ✅ renderizamos después de cargar
         } catch (error) {
@@ -124,22 +124,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
             btnAsignar.addEventListener("click", async () => {
                 const freelancerId = select.value;
+                console.log();
+
                 if (!freelancerId) return;
 
                 try {
-                    await axios.patch(`http://localhost:8080/api/form-request/${solicitud._id}`, {
-                        freelance_id: freelancerId
-                    }, {
-                        headers: { Authorization: `Bearer ${token}` }
-                    });
+                    await axios.patch(`http://localhost:8080/api/form-request/${solicitud._id}`,
+                        {
+                            freelance_id: freelancerId,
+                        },
+                        {
+                            headers: { Authorization: `Bearer ${token}` }
+                        });
 
                     alert(`✅ Freelancer asignado correctamente a ${select.options[select.selectedIndex].text}`);
+                    // 🔹 Eliminar fila de la tabla
+                    tr.remove();
+
+                    // 🔹 Opcional: también actualizar el array filteredApplicants
+                    filteredApplicants = filteredApplicants.filter(a => a._id !== solicitud._id);
+
+                    // 🔹 Recalcular paginación si quieres actualizar info de página
+                    renderSolicitudes(); // Solo si quieres refrescar la paginación
                 } catch (err) {
-                    // console.error(err);
+                    console.error(err);
                     alert("❌ Error al asignar freelancer");
                 }
             });
-
             tdSelect.appendChild(select);
             tdSelect.appendChild(btnAsignar);
 
