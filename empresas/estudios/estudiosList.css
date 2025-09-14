@@ -38,7 +38,7 @@
 
     /* Estado completado */
     .status-completado {
-        background-color: #c5a0d8; /* Morado claro */
+        background-color: #F44336; /* Morado claro */
         color: #4a2f5a;
     }
 
@@ -48,7 +48,7 @@
     }
 
 .descargar{
-       background-color: #4c8dd3 !important;
+       background-color: #2196F3 !important;
 }
       /* Icono descarga centrado */
     .descargar svg {
@@ -191,7 +191,7 @@ th, td {
 
 /* Estado completado */
 .status-completado {
-    background-color: #96A78D !important; /* Morado claro */
+    background-color: #4CAF50 !important; /* Morado claro */
 
 }
 
