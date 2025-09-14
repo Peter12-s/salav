@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJ1c2VyX3R5cGUiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzU3Mjc4NDU1LCJleHAiOjE3NTczNjQ4NTV9.kPCfxpcvzOW8ft9aVC3OCFzRrv5tEQfVc_CkaeM-gS4"; // Tu token válido
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJuYW1lIjoiT1NNQVIgREFWSUQiLCJmX3N1cm5hbWUiOiJBUkVMTEFOTyIsInNfc3VybmFtZSI6Ik1BR0RBTEVOTyIsImNvbXBhbnlfbmFtZSI6bnVsbCwidXNlcl90eXBlIjoiQURNSU5JU1RSQURPUiIsImlhdCI6MTc1NzgyNTQzNywiZXhwIjoxNzU3ODI2MzM3fQ.IongztvdyJHA0QiAH9joub1bDmGsMhrO_OtiLdL5irY";
     const API_URL = "http://localhost:8080/api/form-request/from-enterprise"; // URL de tu API
     const form = document.querySelector(".form");
 
@@ -32,10 +32,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // Enviar solicitud con Axios
-        axios.post(`${API_URL}applicant`, data, {
+        axios.post(`${API_URL}`, data, {
             headers: {
                 Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json"
             }
         })
             .then(res => {

@@ -66,3 +66,6 @@ document.getElementById('btnLogout').addEventListener('click', async () => {
         hidePreloader();
         return Promise.reject(error);
     });
+
+       // Ocultar al inicio
+    hidePreloader();

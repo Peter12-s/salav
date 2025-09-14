@@ -6,7 +6,8 @@
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    font-size: 15px; /* tamaño base un poco más grande */
+    font-size: 15px;
+    /* tamaño base un poco más grande */
 }
 
 /* Scroll horizontal para pantallas pequeñas */
@@ -18,18 +19,21 @@
 /* Encabezados y celdas */
 #tablaSolicitudes th,
 #tablaSolicitudes td {
-    padding: 14px 16px; /* más espacio para legibilidad */
+    padding: 14px 16px;
+    /* más espacio para legibilidad */
     border-bottom: 1px solid #eee;
     vertical-align: middle;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    min-width: 150px; /* ✅ evita que se aplasten las columnas */
+    min-width: 150px;
+    /* ✅ evita que se aplasten las columnas */
 }
 
 /* Encabezado */
 #tablaSolicitudes th {
-    background-color: #9F38B8; /* Morado */
+    background-color: #9F38B8;
+    /* Morado */
     color: white;
     text-align: left;
     font-weight: bold;
@@ -44,19 +48,23 @@
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
     #tablaSolicitudes {
-        font-size: 14px; /* más pequeño en móvil */
+        font-size: 14px;
+        /* más pequeño en móvil */
     }
+
     #tablaSolicitudes th,
     #tablaSolicitudes td {
         padding: 10px 12px;
-        min-width: 120px; /* reduce ancho en móvil */
+        min-width: 120px;
+        /* reduce ancho en móvil */
     }
 }
 
 /* ===== Tooltip ===== */
 .tooltip-inner .tooltip-text {
     font-size: 13px;
-    max-width: 200px; /* más compacto en móvil */
+    max-width: 200px;
+    /* más compacto en móvil */
 }
 
 /* ===== Select2 ===== */
@@ -76,13 +84,15 @@
     display: inline-block;
     font-weight: 500;
     cursor: pointer;
-    position: relative; /* Necesario para posicionar el tooltip absoluto */
+    position: relative;
+    /* Necesario para posicionar el tooltip absoluto */
 }
 
 /* Contenedor interno para tooltip */
 .tooltip-inner {
     display: inline-block;
-    position: relative; /* Solo el div tiene relative */
+    position: relative;
+    /* Solo el div tiene relative */
     cursor: pointer;
     font-weight: 500;
 }
@@ -91,7 +101,7 @@
 .tooltip-inner .tooltip-text {
     position: absolute;
     top: 50%;
-    left: 105%; 
+    left: 105%;
     transform: translateY(-50%);
     visibility: hidden;
     opacity: 0;
@@ -102,7 +112,7 @@
     font-size: 14px;
     line-height: 1.4;
     white-space: pre-line;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     transition: opacity 0.2s ease;
     z-index: 1000;
     width: max-content;
@@ -130,64 +140,62 @@
 
 
 
-    /* ===== Select2 ===== */
-    .select2-container--default .select2-selection--single {
-        padding: 4px 8px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        font-size: 14px;
-        transition: all 0.3s ease;
-        cursor: pointer;
-        height: auto;
-    }
-
-    .select2-container--default .select2-selection--single:focus,
-    .select2-container--default .select2-selection--single:hover {
-        border-color: #9F38B8 !important;
-    }
-
-    .select2-container--default.select2-container--open .select2-selection--single {
-        border-color: #D9358C !important;
-        box-shadow: 0 0 6px rgba(217, 53, 140, 0.4)!important;
-        outline: none !important;
-    }
-
-    /* Dropdown con scroll */
-    .select2-results__options {
-        max-height: 120px !important; /* ✅ Scroll */
-        overflow-y: auto !important;
-    }
-
-    /* ===== Botones ===== */
-    #tablaSolicitudes button {
-        padding: 6px 12px;
-        background-color: #9F38B8;
-        color: white;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        font-size: 14px;
-    }
-
-    #tablaSolicitudes button:hover:enabled {
-        background-color: #D9358C;
-    }
-
-    #tablaSolicitudes button:disabled {
-        background-color: #ccc;
-        cursor: not-allowed;
-    }
-
-    .btn-eliminar {
-        margin-left: 10px;
-        display: none; /* Oculto al inicio */
-    }
-
-    /* Ocultar el botón "×" por defecto */
-.select2-selection__clear {
-    display: none ;
+/* ===== Select2 ===== */
+.select2-container--default .select2-selection--single {
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    height: auto;
 }
+
+.select2-container--default .select2-selection--single:focus,
+.select2-container--default .select2-selection--single:hover {
+    border-color: #9F38B8 !important;
+}
+
+.select2-container--default.select2-container--open .select2-selection--single {
+    border-color: #D9358C !important;
+    box-shadow: 0 0 6px rgba(217, 53, 140, 0.4) !important;
+    outline: none !important;
+}
+
+/* Dropdown con scroll */
+.select2-results__options {
+    max-height: 120px !important;
+    /* ✅ Scroll */
+    overflow-y: auto !important;
+}
+
+/* ===== Botones ===== */
+#tablaSolicitudes button {
+    padding: 6px 12px;
+    background-color: #9F38B8;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+#tablaSolicitudes button:hover:enabled {
+    background-color: #D9358C;
+}
+
+#tablaSolicitudes button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.btn-eliminar {
+    margin-left: 10px;
+    display: none;
+    /* Oculto al inicio */
+}
+
 
 /* ===== PAGINACIÓN ===== */
 .pagination {
@@ -214,9 +222,10 @@
     opacity: 0.5;
     cursor: not-allowed;
 }
-#goPage{
-     border: 1px solid #8a2ca0; 
-      background-color: white;
+
+#goPage {
+    border: 1px solid #8a2ca0;
+    background-color: white;
 }
 
 .pagination button.active {
@@ -260,21 +269,22 @@
     }
 }
 
-        .search-container {
-            margin-bottom: 10px;
-            text-align: right;
-            /* Para alinear a la derecha */
-        }
+.search-container {
+    margin-bottom: 10px;
+    text-align: right;
+    /* Para alinear a la derecha */
+}
 
-        #searchInput {
-            padding: 8px;
-            width: 250px;
-            max-width: 100%;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            margin-right: 15px;
-        }
-#searchInput:hover{
-     border: 1px solid #8a2ca0; 
-      background-color: white;
+#searchInput {
+    padding: 8px;
+    width: 250px;
+    max-width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 15px;
+}
+
+#searchInput:hover {
+    border: 1px solid #8a2ca0;
+    background-color: white;
 }
