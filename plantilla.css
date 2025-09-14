@@ -378,3 +378,7 @@ main p {
   color: #761bdf;          /* Color al pasar el mouse */
   transform: scale(1.2);
 }
+#searchInput:hover{
+     border: 1px solid #8a2ca0; 
+      background-color: white;
+}

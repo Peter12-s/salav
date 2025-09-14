@@ -47,7 +47,9 @@
         background-color: #9d77b3; /* Morado medio */
     }
 
-
+.descargar{
+       background-color: #4c8dd3 !important;
+}
       /* Icono descarga centrado */
     .descargar svg {
         width: 20px;
@@ -56,7 +58,7 @@
         z-index: 1;
     }
     .descargar:hover {
-        background-color: #693d7d;
+        background-color: #2068b5!important ;
         animation: pulse 0.3s ease-in-out infinite;
         cursor: pointer;
 
@@ -143,6 +145,8 @@
 .container {
     width: 100%;
     overflow-x: auto; /* Permite scroll horizontal */
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
 }
 
 table {
@@ -161,10 +165,11 @@ th, td {
     position: relative;
     border-radius: 10px;
     padding: 10px 15px;
-    color: white;
+    color: rgb(15, 15, 15);
     font-weight: bold;
     font-size: 14px;
     overflow: hidden;
+    border: 4px solid rgba(57, 57, 57, 0.2);
 }
 
 /* Capa superpuesta en un costado */
@@ -181,18 +186,18 @@ th, td {
 
 /* Nombre */
 .nombre {
-    background-color: #8b5ea2; /* Morado oscuro */
+    background-color: #c14dd6 !important; /* Morado oscuro */
 }
 
 /* Estado completado */
 .status-completado {
-    background-color: #c5a0d8; /* Morado claro */
-    color: #4a2f5a;
+    background-color: #96A78D !important; /* Morado claro */
+
 }
 
 /* Estado en proceso */
 .status-proceso {
-    background-color: #9d77b3; /* Morado medio */
+    background-color: #C84361; /* Morado medio */
 }
 
 /* Icono descarga centrado */
@@ -203,7 +208,6 @@ th, td {
     z-index: 1;
 }
 .descargar:hover {
-    background-color: #693d7d;
     animation: pulse 0.3s ease-in-out infinite;
     cursor: pointer;
 }
