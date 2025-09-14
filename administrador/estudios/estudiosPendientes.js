@@ -1,17 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
     const preloader = document.getElementById("preloader");
 
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJuYW1lIjoiT1NNQVIgREFWSUQiLCJmX3N1cm5hbWUiOiJBUkVMTEFOTyIsInNfc3VybmFtZSI6Ik1BR0RBTEVOTyIsImNvbXBhbnlfbmFtZSI6bnVsbCwidXNlcl90eXBlIjoiQURNSU5JU1RSQURPUiIsImlhdCI6MTc1NzgxMjUwNSwiZXhwIjoxNzU3ODEzNDA1fQ.Z0ucivN-yELl_S13kG4lewxw364xKT-lKk7oIzRKgE4";   // === ELEMENTOS DE LA TABLA Y CONTROLES ===
-    const tbody = document.querySelector("#tablaSolicitudes tbody");
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJuYW1lIjoiT1NNQVIgREFWSUQiLCJmX3N1cm5hbWUiOiJBUkVMTEFOTyIsInNfc3VybmFtZSI6Ik1BR0RBTEVOTyIsImNvbXBhbnlfbmFtZSI6bnVsbCwidXNlcl90eXBlIjoiQURNSU5JU1RSQURPUiIsImlhdCI6MTc1NzgxOTQ0OSwiZXhwIjoxNzU3ODIwMzQ5fQ.ReK68taDrztqlM1iMFi0Eh2hMuXmJxxV5nOawZq-U5o"; // 🔑
     const searchInput = document.getElementById("searchInput");
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
     const pageInfo = document.getElementById("pageInfo");
     const pageInput = document.getElementById("pageInput");
     const goPageBtn = document.getElementById("goPage");
+    const tbody = document.querySelector("#tablaSolicitudes tbody"); // ✅ definido aquí
 
     let applicants = [];
-
+    let filteredApplicants = [];
     let freelancers = [];
     let currentPage = 1;
     let usersPerPage = window.innerWidth <= 768 ? 3 : 5;
@@ -29,11 +29,11 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             const res = await axios.get("http://localhost:8080/api/user", {
                 headers: { Authorization: `Bearer ${token}` },
-                params: { user_type: "FREELANCER" } // lo pasamos como query param
+                params: { user_type: "FREELANCER" }
             });
 
-            freelancers = res.data; // ya viene filtrado del backend
-            console.log(freelancers);
+            freelancers = res.data;
+            console.log("Freelancers:", freelancers);
         } catch (err) {
             console.error(err);
             alert("❌ Error al obtener freelancers");
@@ -43,16 +43,15 @@ document.addEventListener("DOMContentLoaded", () => {
     async function fetchApplicants() {
         try {
             const res = await axios.get("http://localhost:8080/api/form-request", {
-                headers: {
-                    Authorization: `Bearer ${token}` // si tu API lo requiere
-                },
-                params: {
-                    applicant_id: null // null para traer todas
-                }
+                headers: { Authorization: `Bearer ${token}` },
+                params: { applicant_id: null }
             });
-            applicants = res.data; // opcional si quieres usar los datos afuera
-            console.log(applicants[0]);
 
+            applicants = res.data;
+            filteredApplicants = [...applicants];
+            console.log("Solicitudes:", filteredApplicants);
+
+            renderSolicitudes(); // ✅ renderizamos después de cargar
         } catch (error) {
             console.error("❌ Error al obtener solicitudes:", error);
             alert("❌ Error al obtener solicitudes");
@@ -65,15 +64,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const totalPages = Math.ceil(filteredApplicants.length / usersPerPage) || 1;
         const start = (currentPage - 1) * usersPerPage;
         const end = start + usersPerPage;
-        const pageData = filteredApplicants.slice(start, end);
+        const pageData = filteredApplicants.slice(start, end); // ✅ ahora existe
 
         pageData.forEach((solicitud) => {
-            const persona = solicitud.person || solicitud;
+            const persona = solicitud.applicant?.person;
+            if (!persona) return;
+
             const nombreCompleto = `${persona.name} ${persona.f_surname || ""} ${persona.s_surname || ""}`;
             const direccion = `${persona.state || ""}, ${persona.town || ""}, ${persona.settlement || ""}\n${persona.address_references || ""}`;
 
             const tr = document.createElement("tr");
 
+            // 📌 Columna nombre con tooltip
             const tdNombre = document.createElement("td");
             const divTooltip = document.createElement("div");
             divTooltip.classList.add("tooltip-inner");
@@ -85,10 +87,11 @@ document.addEventListener("DOMContentLoaded", () => {
             divTooltip.appendChild(tooltip);
             tdNombre.appendChild(divTooltip);
 
+            // 📌 Columna select freelancer
             const tdSelect = document.createElement("td");
             const select = document.createElement("select");
             select.classList.add("freelancer-select");
-            select.dataset.applicantId = solicitud._id;
+            select.dataset.applicantId = solicitud._id; // ✅ id de la solicitud
 
             const optionDefault = document.createElement("option");
             optionDefault.textContent = "Seleccionar freelancer";
@@ -96,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
             optionDefault.selected = true;
             select.appendChild(optionDefault);
 
-
+            // Agregamos freelancers como opciones
             freelancers.forEach(f => {
                 const opt = document.createElement("option");
                 opt.value = f._id;
@@ -104,39 +107,36 @@ document.addEventListener("DOMContentLoaded", () => {
                 select.appendChild(opt);
             });
 
+            // 📌 Botón asignar
             const btnAsignar = document.createElement("button");
             btnAsignar.textContent = "Asignar";
             btnAsignar.classList.add("btn-asignar");
             btnAsignar.disabled = true;
             btnAsignar.style.marginLeft = "8px";
 
-            // ✅ Función para habilitar/deshabilitar
             function toggleButton() {
                 btnAsignar.disabled = !select.value;
             }
 
-            // ✅ Eventos: change nativo y de Select2
             select.addEventListener("change", toggleButton);
             $(select).on("select2:select", toggleButton);
             $(select).on("select2:clear", toggleButton);
 
-            // ✅ Acción de prueba
             btnAsignar.addEventListener("click", async () => {
                 const freelancerId = select.value;
-
                 if (!freelancerId) return;
 
                 try {
-                    const res = await axios.patch(`http://localhost:8080/api/user/${applicantId}`, {
+                    await axios.patch(`http://localhost:8080/api/form-request/${solicitud._id}`, {
                         freelance_id: freelancerId
                     }, {
                         headers: { Authorization: `Bearer ${token}` }
                     });
+
                     alert(`✅ Freelancer asignado correctamente a ${select.options[select.selectedIndex].text}`);
                 } catch (err) {
                     console.error(err);
                     alert("❌ Error al asignar freelancer");
-                } finally {
                 }
             });
 
@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
             tr.appendChild(tdSelect);
             tbody.appendChild(tr);
 
-            // Inicializa select2
+            // Iniciar select2
             $(select).select2({
                 placeholder: "Selecciona Freelancer",
                 allowClear: true,
@@ -155,10 +155,8 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-        // ✅ Actualizar texto de paginación
+        // 📌 Actualizar paginación
         pageInfo.textContent = `Página ${currentPage} de ${totalPages}`;
-
-        // ✅ Limitar input de "Ir a página"
         pageInput.min = 1;
         pageInput.max = totalPages;
         pageInput.value = currentPage;
@@ -196,8 +194,8 @@ document.addEventListener("DOMContentLoaded", () => {
     searchInput.addEventListener("input", () => {
         const query = searchInput.value.toLowerCase();
         filteredApplicants = applicants.filter(a => {
-            const persona = a.person || a;
-            return (`${persona.name} ${persona.f_surname || ""} ${persona.s_surname || ""}`)
+            const persona = a.applicant?.person;
+            return (`${persona?.name || ""} ${persona?.f_surname || ""} ${persona?.s_surname || ""}`)
                 .toLowerCase()
                 .includes(query);
         });
