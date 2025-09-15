@@ -40,9 +40,8 @@ form.addEventListener("submit", function (e) {
     axios.post(`${API_URL}auth/login`, { username, password })
         .then(response => {
             // console.log(response);
-        
             // Guardar el id del usuario en localStorage
-            localStorage.setItem("user_id", response.data.user_id);
+            localStorage.setItem("user_id", response.data._id);
             // Guardar el access_token en localStorage
             localStorage.setItem("access_token", response.data.access_token);
             // localStorage.setItem("access_token", response.data.);
