@@ -76,7 +76,7 @@ form.addEventListener("submit", function (e) {
                 const userType = response.data.user_type;
                 if (userType === "ADMINISTRADOR") {
                     window.location.href = "administrador/inicioAdmin.html";
-                } else if (userType === "FREELANCE") {
+                } else if (userType === "FREELANCER") {
                     window.location.href = "freelancers/inicioFreelancer.html";
                 } else if (userType === "EMPRESA") {
                     window.location.href = "empresas/inicioEmpresa.html";
