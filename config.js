@@ -13,8 +13,8 @@ function showPreloader() {
 function hidePreloader() {
   if (preloader) preloader.style.display = "none";
 }
-
-// === Configurar interceptor global de Axios ===
+document.addEventListener("DOMContentLoaded", () => {
+   // === Configurar interceptor global de Axios ===
 axios.interceptors.request.use(
   (config) => {
     showPreloader();
@@ -36,6 +36,8 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+});
+
 
 // Ocultar al inicio
 hidePreloader();
