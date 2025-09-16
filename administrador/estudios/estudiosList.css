@@ -1,141 +1,312 @@
  table {
-        border-collapse: separate;
-        border-spacing: 10px;
-        width: 100%;
-    }
+     border-collapse: separate;
+     border-spacing: 10px;
+     width: 100%;
+ }
 
-    th, td {
-        text-align: center;
-    }
+ th,
+ td {
+     text-align: center;
+ }
 
-    /* Estilo base para todos los bloques */
-    .bloque {
-        position: relative;
-        border-radius: 10px;
-        padding: 10px 15px;
-        color: white;
-        font-weight: bold;
-        font-size: 14px;
-        overflow: hidden;
-    }
+ /* Estilo base para todos los bloques */
+ .bloque {
+     position: relative;
+     border-radius: 10px;
+     padding: 10px 15px;
+     color: white;
+     font-weight: bold;
+     font-size: 14px;
+     overflow: hidden;
+ }
 
-    /* Capa superpuesta en un costado */
-    .bloque::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 20%;
-        height: 100%;
-        background-color: rgba(63, 40, 121, 0.15);
-        border-radius: 8px 0 0 8px;
-    }
+ /* Capa superpuesta en un costado */
+ .bloque::before {
+     content: "";
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 20%;
+     height: 100%;
+     background-color: rgba(63, 40, 121, 0.15);
+     border-radius: 8px 0 0 8px;
+ }
 
-    /* Nombre */
-    .nombre {
-        background-color: #8b5ea2; /* Morado oscuro */
-    }
+ /* Nombre */
+ .nombre {
+     background-color: #8b5ea2;
+     /* Morado oscuro */
+ }
 
-    /* Estado completado */
-    .status-completado {
-        background-color: #c5a0d8; /* Morado claro */
-        color: #4a2f5a;
-    }
+ /* Estado completado */
+ .status-completado {
+     background-color: #F44336;
+     /* Morado claro */
+     color: #4a2f5a;
+ }
 
-    /* Estado en proceso */
-    .status-proceso {
-        background-color: #9d77b3; /* Morado medio */
-    }
+ /* Estado en proceso */
+ .status-proceso {
+     background-color: #9d77b3;
+     /* Morado medio */
+ }
 
+ .descargar {
+     background-color: #2196F3 !important;
+ }
 
-      /* Icono descarga centrado */
-    .descargar svg {
-        width: 20px;
-        height: 20px;
-        fill: white;
-        z-index: 1;
-    }
-    .descargar:hover {
-        background-color: #693d7d;
-        animation: pulse 0.3s ease-in-out infinite;
-        cursor: pointer;
+ /* Icono descarga centrado */
+ .descargar svg {
+     width: 20px;
+     height: 20px;
+     fill: white;
+     z-index: 1;
+ }
 
-    }
-.descargar svg:hover {
-          transform: scale(1.2);
-          cursor: pointer;
-    }
+ .descargar:hover {
+     background-color: #2068b5 !important;
+     animation: pulse 0.3s ease-in-out infinite;
+     cursor: pointer;
 
+ }
 
-
-
-        .search-container {
-            margin-bottom: 10px;
-            text-align: right;
-            /* Para alinear a la derecha */
-        }
-
-        #searchInput {
-            padding: 8px;
-            width: 250px;
-            max-width: 100%;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            margin-right: 15px;
-        }
+ .descargar svg:hover {
+     transform: scale(1.2);
+     cursor: pointer;
+ }
 
 
-        /* ===== PAGINACIÓN ===== */
-.pagination {
-    display: block;
-    text-align: center;
-    gap: 0.5rem;
-    align-items: center;
-    font-family: sans-serif;
-}
 
-.page-btn {
-    padding: 6px 12px;
-    border: 1px solid #ccc;
-    background: #f9f9f9;
-    cursor: pointer;
-    background: white;
-    color: #c72e7c;
-    border: 1px solid #8a2ca0;
-    width: 40px;
-    margin: 3px;
-}
 
-.page-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-#goPage{
-     border: 1px solid #8a2ca0; 
-      background-color: white;
-}
+ .search-container {
+     margin-bottom: 10px;
+     text-align: right;
+     /* Para alinear a la derecha */
+ }
 
-.pagination button.active {
-    background: #2575fc;
-    color: white;
-}
+ #searchInput {
+     padding: 8px;
+     width: 250px;
+     max-width: 100%;
+     border: 1px solid #ccc;
+     border-radius: 4px;
+     margin-right: 15px;
+ }
 
-.page-jump input {
-    width: 50px;
-    padding: 4px;
-}
 
-.page-info {
-    display: none;
-}
+ /* ===== PAGINACIÓN ===== */
+ .pagination {
+     display: block;
+     text-align: center;
+     gap: 0.5rem;
+     align-items: center;
+     font-family: sans-serif;
+ }
 
-/* 📱 Celular y tablet */
-@media (max-width: 1024px) {
-    .page-jump {
-        display: none;
-    }
+ .page-btn {
+     padding: 6px 12px;
+     border: 1px solid #ccc;
+     background: #f9f9f9;
+     cursor: pointer;
+     background: white;
+     color: #c72e7c;
+     border: 1px solid #8a2ca0;
+     width: 40px;
+     margin: 3px;
+ }
 
-    .page-info {
-        display: inline;
-    }
-}
+ .page-btn:disabled {
+     opacity: 0.5;
+     cursor: not-allowed;
+ }
+
+ #goPage {
+     border: 1px solid #8a2ca0;
+     background-color: white;
+ }
+
+ .pagination button.active {
+     background: #2575fc;
+     color: white;
+ }
+
+ .page-jump input {
+     width: 50px;
+     padding: 4px;
+ }
+
+ .page-info {
+     display: none;
+ }
+
+ /* 📱 Celular y tablet */
+ @media (max-width: 1024px) {
+     .page-jump {
+         display: none;
+     }
+
+     .page-info {
+         display: inline;
+     }
+ }
+
+ .container {
+     width: 100%;
+     overflow-x: auto;
+     /* Permite scroll horizontal */
+     background-color: rgb(255, 255, 255);
+     border-radius: 10px;
+ }
+
+ table {
+     border-collapse: separate;
+     border-spacing: 10px;
+     width: 100%;
+     min-width: 800px;
+     /* ancho mínimo para no romper diseño */
+ }
+
+ th,
+ td {
+     text-align: center;
+ }
+
+ /* Estilo base para todos los bloques */
+ .bloque {
+     position: relative;
+     border-radius: 10px;
+     padding: 10px 15px;
+     color: rgb(15, 15, 15);
+     font-weight: bold;
+     font-size: 14px;
+     overflow: hidden;
+     border: 4px solid rgba(57, 57, 57, 0.2);
+ }
+
+ /* Capa superpuesta en un costado */
+ .bloque::before {
+     content: "";
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 20%;
+     height: 100%;
+     background-color: rgba(63, 40, 121, 0.15);
+     border-radius: 8px 0 0 8px;
+ }
+
+ /* Nombre */
+ .nombre {
+     background-color: #c14dd6 !important;
+     /* Morado oscuro */
+ }
+
+ /* Estado completado */
+ .status-completado {
+     background-color: #4CAF50 !important;
+     /* Morado claro */
+
+ }
+
+ /* Estado en proceso */
+ .status-proceso {
+     background-color: #C84361;
+     /* Morado medio */
+ }
+
+ /* Icono descarga centrado */
+ .descargar svg {
+     width: 20px;
+     height: 20px;
+     fill: white;
+     z-index: 1;
+ }
+
+ .descargar:hover {
+     background-color: #659fe6 !important;
+     animation: pulse 0.3s ease-in-out infinite;
+     cursor: pointer;
+ }
+
+ .descargar svg:hover {
+     transform: scale(1.2);
+     cursor: pointer;
+ }
+
+ /* Buscador */
+ .search-container {
+     margin-bottom: 10px;
+     text-align: right;
+ }
+
+ #searchInput {
+     padding: 8px;
+     width: 250px;
+     max-width: 100%;
+     border: 1px solid #ccc;
+     border-radius: 4px;
+     margin-right: 15px;
+ }
+
+ /* PAGINACIÓN */
+ .pagination {
+     display: block;
+     text-align: center;
+     gap: 0.5rem;
+     align-items: center;
+     font-family: sans-serif;
+ }
+
+ .page-btn {
+     padding: 6px 12px;
+     border: 1px solid #ccc;
+     background: white;
+     color: #c72e7c;
+     border: 1px solid #8a2ca0;
+     width: 40px;
+     margin: 3px;
+ }
+
+ .page-btn:disabled {
+     opacity: 0.5;
+     cursor: not-allowed;
+ }
+
+ #goPage {
+     border: 1px solid #8a2ca0;
+     background-color: white;
+ }
+
+ .pagination button.active {
+     background: #2575fc;
+     color: white;
+ }
+
+ .page-jump input {
+     width: 50px;
+     padding: 4px;
+ }
+
+ .page-info {
+     display: none;
+ }
+
+ /* 📱 Celular y tablet */
+ @media (max-width: 1024px) {
+     .page-jump {
+         display: none;
+     }
+
+     .page-info {
+         display: inline;
+     }
+
+     table {
+         width: 100%;
+     }
+
+     .bloque {
+         white-space: nowrap;
+         /* No romper texto */
+     }
+ }

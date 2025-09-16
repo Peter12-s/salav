@@ -8,9 +8,7 @@
     <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
     <link rel="stylesheet" href="../../plantilla.css">
 
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link rel="stylesheet" href="estudiosList.css">
     <!-- <link rel="stylesheet" href="es.css"> -->
 
 </head>
@@ -55,33 +53,31 @@
             </div>
         </div>
         <div slot="main">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Buscar por nombre...">
+            </div>
             <div class="container">
-                <h1>Solicitudes de candidatos</h1>
-                <div class="search-container">
-                    <input type="text" id="searchInput" placeholder="Buscar...">
-                </div>
+                <table>
 
-                <table id="tablaSolicitudes">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Asignar</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
                 </table>
 
-                <div class="pagination">
-                    <button id="prevBtn" class="page-btn">«</button>
-                    <span id="pageInfo">Página 1</span>
-                    <button id="nextBtn" class="page-btn">»</button>
 
-                    <div class="page-jump">
-                        Ir a página: <input type="number" id="pageInput" min="1">
-                        <button id="goPage">Ir</button>
-                    </div>
+            </div>
+
+            <!-- Paginación -->
+            <div class="pagination">
+                <button id="prevPage" class="page-btn">«</button>
+
+                <!-- Se mostrará solo en escritorio -->
+                <div id="pageJump" class="page-jump">
+                    Página <input type="number" id="pageInput" min="1"> de <span id="totalPages">1</span>
+                    <button id="goPage">Ir</button>
                 </div>
 
+                <!-- Se mostrará en todos los dispositivos -->
+                <span id="pageInfo" class="page-info">Página 1 de 1</span>
+
+                <button id="nextPage" class="page-btn">»</button>
             </div>
 
         </div>
