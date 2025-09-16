@@ -1,106 +1,295 @@
-  h1 {
-    color: #4b2363;
+ table {
+        border-collapse: separate;
+        border-spacing: 10px;
+        width: 100%;
+    }
+a
+    th, td {
+        text-align: center;
+    }
+
+    /* Estilo base para todos los bloques */
+    .bloque {
+        position: relative;
+        border-radius: 10px;
+        padding: 10px 15px;
+        color: white;
+        font-weight: bold;
+        font-size: 14px;
+        overflow: hidden;
+    }
+
+    /* Capa superpuesta en un costado */
+    .bloque::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20%;
+        height: 100%;
+        background-color: rgba(63, 40, 121, 0.15);
+        border-radius: 8px 0 0 8px;
+    }
+
+    /* Nombre */
+    .nombre {
+        background-color: #8b5ea2; /* Morado oscuro */
+    }
+
+    /* Estado completado */
+    .status-completado {
+        background-color: #F44336; /* Morado claro */
+        color: #4a2f5a;
+    }
+
+    /* Estado en proceso */
+    .status-proceso {
+        background-color: #9d77b3; /* Morado medio */
+    }
+
+.descargar{
+       background-color: #2196F3 !important;
+}
+      /* Icono descarga centrado */
+    .descargar svg {
+        width: 20px;
+        height: 20px;
+        fill: white;
+        z-index: 1;
+    }
+    .descargar:hover {
+        background-color: #2068b5!important ;
+        animation: pulse 0.3s ease-in-out infinite;
+        cursor: pointer;
+
+    }
+.descargar svg:hover {
+          transform: scale(1.2);
+          cursor: pointer;
+    }
+
+
+
+
+        .search-container {
+            margin-bottom: 10px;
+            text-align: right;
+            /* Para alinear a la derecha */
+        }
+
+        #searchInput {
+            padding: 8px;
+            width: 250px;
+            max-width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 15px;
+        }
+
+
+        /* ===== PAGINACIÓN ===== */
+.pagination {
+    display: block;
     text-align: center;
-  }
+    gap: 0.5rem;
+    align-items: center;
+    font-family: sans-serif;
+}
 
-  h4 {
-    color: #4b2363;
-    text-align: start;
-    margin-bottom: 20px;
-  }
-
-
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-  }
-
-  .caja-candidatos {
-    border: 2px solid #a261decd;
-    background-color: #ffffff;
-    border-radius: 12px;
-    padding: 10px;
-    max-height: 200px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #a261decd transparent;
-    margin: 0 auto;
-    width: 80%;
-    color: aliceblue;
-    margin-bottom: 10px;
-  }
-
-  .candidato {
-    padding: 10px;
-    border: 2px solid #a261decd;
-    background-color: #a261decd;
-    border-radius: 8px;
-    margin-bottom: 10px;
+.page-btn {
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
     cursor: pointer;
-    transition: background 0.3s;
-  }
+    background: white;
+    color: #c72e7c;
+    border: 1px solid #8a2ca0;
+    width: 40px;
+    margin: 3px;
+}
 
-  .candidato:hover {
-    background: #b35ee5;
-  }
+.page-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+#goPage{
+     border: 1px solid #8a2ca0; 
+      background-color: white;
+}
 
-  .candidato.seleccionado {
-    background: #8e20ce;
+.pagination button.active {
+    background: #2575fc;
     color: white;
-  }
+}
 
+.page-jump input {
+    width: 50px;
+    padding: 4px;
+}
 
-  .acciones {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 15px;
-  }
+.page-info {
+    display: none;
+}
 
-  .acciones button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-  }
+/* 📱 Celular y tablet */
+@media (max-width: 1024px) {
+    .page-jump {
+        display: none;
+    }
 
-  .acciones button:hover {
-    transform: scale(1.05);
-    background-color: #4b2363;
-  }
+    .page-info {
+        display: inline;
+    }
+}
 
-  .btn-aceptar {
-    background: #a542d7;
-    color: white;
-  }
-
-  .btn-rechazar {
-    background: #a542d7;
-    color: white;
-  }
-
-  .nota {
-    font-size: 0.9rem;
-    margin: 0 auto;
-    width: 80%;
-    color: #36065a;
-    margin-top: 10px;
-    text-align: justify;
-    background-color: rgba(235, 225, 237, 0.689);
+.container {
+    width: 100%;
+    overflow-x: auto; /* Permite scroll horizontal */
+    background-color: rgb(255, 255, 255);
     border-radius: 10px;
-    padding: 6px;
-  }
+}
 
-  @media (max-width: 600px) {
-    .acciones {
-      flex-direction: column;
+table {
+    border-collapse: separate;
+    border-spacing: 10px;
+    width: 100%;
+    min-width: 800px; /* ancho mínimo para no romper diseño */
+}
+
+th, td {
+    text-align: center;
+}
+
+/* Estilo base para todos los bloques */
+.bloque {
+    position: relative;
+    border-radius: 10px;
+    padding: 10px 15px;
+    color: rgb(15, 15, 15);
+    font-weight: bold;
+    font-size: 14px;
+    overflow: hidden;
+    border: 4px solid rgba(57, 57, 57, 0.2);
+}
+
+/* Capa superpuesta en un costado */
+.bloque::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20%;
+    height: 100%;
+    background-color: rgba(63, 40, 121, 0.15);
+    border-radius: 8px 0 0 8px;
+}
+
+/* Nombre */
+.nombre {
+    background-color: #c14dd6 !important; /* Morado oscuro */
+}
+
+/* Estado completado */
+.status-completado {
+    background-color: #4CAF50 !important; /* Morado claro */
+
+}
+
+/* Estado en proceso */
+.status-proceso {
+    background-color: #C84361; /* Morado medio */
+}
+
+/* Icono descarga centrado */
+.descargar svg {
+    width: 20px;
+    height: 20px;
+    fill: white;
+    z-index: 1;
+}
+.descargar:hover {
+    background-color: #659fe6 !important;
+    animation: pulse 0.3s ease-in-out infinite;
+    cursor: pointer;
+}
+.descargar svg:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+/* Buscador */
+.search-container {
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+#searchInput {
+    padding: 8px;
+    width: 250px;
+    max-width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 15px;
+}
+
+/* PAGINACIÓN */
+.pagination {
+    display: block;
+    text-align: center;
+    gap: 0.5rem;
+    align-items: center;
+    font-family: sans-serif;
+}
+
+.page-btn {
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    background: white;
+    color: #c72e7c;
+    border: 1px solid #8a2ca0;
+    width: 40px;
+    margin: 3px;
+}
+
+.page-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#goPage {
+    border: 1px solid #8a2ca0; 
+    background-color: white;
+}
+
+.pagination button.active {
+    background: #2575fc;
+    color: white;
+}
+
+.page-jump input {
+    width: 50px;
+    padding: 4px;
+}
+
+.page-info {
+    display: none;
+}
+
+/* 📱 Celular y tablet */
+@media (max-width: 1024px) {
+    .page-jump {
+        display: none;
     }
 
-    .acciones button {
-      width: 40%;
-      margin: 0 auto;
+    .page-info {
+        display: inline;
     }
-  }
+
+    table {
+        width: 100%;
+    }
+
+    .bloque {
+        white-space: nowrap; /* No romper texto */
+    }
+}

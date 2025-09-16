@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SALAV</title>
   <link rel="stylesheet" href="../../plantilla.css">
-  <link rel="stylesheet" href="estudiosProceso.css">
   <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
+  <link rel="stylesheet" href="estudiosProceso.css">
 
 </head>
 
@@ -49,7 +49,32 @@
       <h4>Candidatos</h4>
       status pintar la misma tabla que para salav aqui el freelanacer va. a ir viendo los candidatos que tiene en proceso y los que ha finalizado asi como
       ir avanzando los status de los candidatos
+<div class="search-container">
+            <input type="text" id="searchInput" placeholder="Buscar por nombre...">
+        </div>
+        <div class="container">
+            <table>
+               
+            </table>
 
+
+        </div>
+
+        <!-- Paginación -->
+        <div class="pagination">
+            <button id="prevPage" class="page-btn">«</button>
+
+            <!-- Se mostrará solo en escritorio -->
+            <div id="pageJump" class="page-jump">
+                Página <input type="number" id="pageInput" min="1"> de <span id="totalPages">1</span>
+                <button id="goPage">Ir</button>
+            </div>
+
+            <!-- Se mostrará en todos los dispositivos -->
+            <span id="pageInfo" class="page-info">Página 1 de 1</span>
+
+            <button id="nextPage" class="page-btn">»</button>
+        </div>
     </div>
 
   </plantilla-salav>
