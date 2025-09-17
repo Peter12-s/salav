@@ -4,7 +4,7 @@ const API_URL = "http://localhost:8080/api/";
 const numeroLlamada = "521234567890"; // Formato internacional
 const numeroWhatsApp = "521234567890";
 
-// Preloader
+// ===================== PRELOADER =====================
 const preloader = document.getElementById("preloader");
 
 function showPreloader() {
@@ -13,35 +13,39 @@ function showPreloader() {
 function hidePreloader() {
   if (preloader) preloader.style.display = "none";
 }
-document.addEventListener("DOMContentLoaded", () => {
-   // === Configurar interceptor global de Axios ===
-axios.interceptors.request.use(
-  (config) => {
-    showPreloader();
-    return config;
-  },
-  (error) => {
-    hidePreloader();
-    return Promise.reject(error);
-  }
-);
 
-axios.interceptors.response.use(
-  (response) => {
-    hidePreloader();
-    return response;
-  },
-  (error) => {
-    hidePreloader();
-    return Promise.reject(error);
-  }
-);
+// Configuración global de Axios con preloader
+document.addEventListener("DOMContentLoaded", () => {
+  axios.interceptors.request.use(
+    (config) => {
+      showPreloader();
+      return config;
+    },
+    (error) => {
+      hidePreloader();
+      return Promise.reject(error);
+    }
+  );
+
+  axios.interceptors.response.use(
+    (response) => {
+      hidePreloader();
+      return response;
+    },
+    (error) => {
+      hidePreloader();
+      return Promise.reject(error);
+    }
+  );
 });
 
-
-// Ocultar al inicio
+// Ocultar preloader al inicio
 hidePreloader();
 
+// ===================== FUNCIÓN GLOBAL PAGINACIÓN =====================
+function getUsersPerPage() {
+  return window.innerWidth <= 768 ? 3 : 5;
+}
 
 // ===================== MENÚ Y LOGOUT =====================
 document.addEventListener("DOMContentLoaded", () => {

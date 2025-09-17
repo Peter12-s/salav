@@ -1,22 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const preloader = document.getElementById("preloader");
+    const token = localStorage.getItem("access_token"); // ✅ Token desde localStorage
 
-    // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJuYW1lIjoiT1NNQVIgREFWSUQiLCJmX3N1cm5hbWUiOiJBUkVMTEFOTyIsInNfc3VybmFtZSI6Ik1BR0RBTEVOTyIsImNvbXBhbnlfbmFtZSI6bnVsbCwidXNlcl90eXBlIjoiQURNSU5JU1RSQURPUiIsImlhdCI6MTc1NzgyNDg5OCwiZXhwIjoxNzU3ODI1Nzk4fQ.A2FmtxJSoAUakXPHrC8ZHlIuBHjzfnUUMgfgbx4lLY8"; const prevBtn = document.getElementById("prevBtn");
-    const token = localStorage.getItem("access_token"); // Obtener el token del localStorage
+    const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
     const pageInfo = document.getElementById("pageInfo");
     const pageInput = document.getElementById("pageInput");
     const goPageBtn = document.getElementById("goPage");
-    const tbody = document.querySelector("#tablaSolicitudes tbody"); // ✅ definido aquí
+    const tbody = document.querySelector("#tablaSolicitudes tbody");
 
     let applicants = [];
     let filteredApplicants = [];
     let freelancers = [];
     let currentPage = 1;
-    let usersPerPage = window.innerWidth <= 768 ? 3 : 5;
+    let usersPerPage = getUsersPerPage(); // ✅ ahora viene del config.js
 
+    // 📌 Ajustar usuarios por página al cambiar tamaño de pantalla
     window.addEventListener("resize", () => {
-        const newLimit = window.innerWidth <= 768 ? 3 : 5;
+        const newLimit = getUsersPerPage();
         if (newLimit !== usersPerPage) {
             usersPerPage = newLimit;
             currentPage = 1;
@@ -26,32 +26,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function fetchFreelancers() {
         try {
-            const res = await axios.get("http://localhost:8080/api/user", {
+            const res = await axios.get(`${API_URL}user`, {
                 headers: { Authorization: `Bearer ${token}` },
                 params: { user_type: "FREELANCER" }
             });
-
             freelancers = res.data;
-            // console.log("Freelancers:", freelancers);
         } catch (err) {
-            // console.error(err);
             alert("❌ Error al obtener freelancers");
         }
     }
 
     async function fetchApplicants() {
         try {
-            const res = await axios.get("http://localhost:8080/api/form-request?freelance_id=null", {
+            const res = await axios.get(`${API_URL}form-request?freelance_id=null`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
-
             applicants = res.data;
             filteredApplicants = [...applicants];
-            // console.log("Solicitudes:", filteredApplicants);
-
-            renderSolicitudes(); // ✅ renderizamos después de cargar
+            renderSolicitudes();
         } catch (error) {
-            // console.error("❌ Error al obtener solicitudes:", error);
             alert("❌ Error al obtener solicitudes");
         }
     }
@@ -62,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const totalPages = Math.ceil(filteredApplicants.length / usersPerPage) || 1;
         const start = (currentPage - 1) * usersPerPage;
         const end = start + usersPerPage;
-        const pageData = filteredApplicants.slice(start, end); // ✅ ahora existe
+        const pageData = filteredApplicants.slice(start, end);
 
         pageData.forEach((solicitud) => {
             const persona = solicitud.applicant?.person;
@@ -89,18 +82,15 @@ document.addEventListener("DOMContentLoaded", () => {
             const tdSelect = document.createElement("td");
             const select = document.createElement("select");
             select.classList.add("freelancer-select");
-            select.dataset.applicantId = solicitud._id; // ✅ id de la solicitud
+            select.dataset.applicantId = solicitud._id;
 
             const optionDefault = document.createElement("option");
             optionDefault.textContent = "Seleccionar freelancer";
-            optionDefault.value = ""; // ✅ importantísimo para que allowClear funcione
+            optionDefault.value = "";
             optionDefault.selected = true;
-
-
-
             select.appendChild(optionDefault);
 
-            // Agregamos freelancers como opciones
+            // Opciones de freelancers
             freelancers.forEach(f => {
                 const opt = document.createElement("option");
                 opt.value = f._id;
@@ -125,44 +115,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
             btnAsignar.addEventListener("click", async () => {
                 const freelancerId = select.value;
-                // console.log();
-
                 if (!freelancerId) return;
-                // alert(`✅ Freelancer ${select.options[select.selectedIndex].text} asignado correctamente `);
 
                 try {
-                    await axios.patch(`http://localhost:8080/api/form-request/${solicitud._id}`,
-                        {
-                            freelance_id: freelancerId,
-                        },
-                        {
-                            headers: { Authorization: `Bearer ${token}` }
-                        });
+                    await axios.patch(`${API_URL}form-request/${solicitud._id}`,
+                        { freelance_id: freelancerId },
+                        { headers: { Authorization: `Bearer ${token}` } }
+                    );
 
                     alert(`✅ Freelancer asignado correctamente a ${select.options[select.selectedIndex].text}`);
-                    // 🔹 Eliminar fila de la tabla
                     tr.remove();
-
-                    // 🔹 Opcional: también actualizar el array filteredApplicants
                     filteredApplicants = filteredApplicants.filter(a => a._id !== solicitud._id);
-
-                    // 🔹 Recalcular paginación si quieres actualizar info de página
-                    renderSolicitudes(); // Solo si quieres refrescar la paginación
+                    renderSolicitudes();
                 } catch (err) {
                     console.error(err);
                     alert("❌ Error al asignar freelancer");
                 }
             });
+
             tdSelect.appendChild(select);
             tdSelect.appendChild(btnAsignar);
-
             tr.appendChild(tdNombre);
             tr.appendChild(tdSelect);
             tbody.appendChild(tr);
 
             // Iniciar select2
             $(select).select2({
-                placeholder: "Seleccionar freelancer", // el placeholder debe coincidir
+                placeholder: "Seleccionar freelancer",
                 allowClear: true,
                 minimumResultsForSearch: 0
             });
@@ -178,6 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
         nextBtn.disabled = currentPage === totalPages;
     }
 
+    // 📌 Eventos de paginación
     prevBtn.addEventListener("click", () => {
         if (currentPage > 1) {
             currentPage--;
@@ -204,6 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // 📌 Filtro de búsqueda
     searchInput.addEventListener("input", () => {
         const query = searchInput.value.toLowerCase();
         filteredApplicants = applicants.filter(a => {
@@ -222,6 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // 📌 Inicializar
     (async () => {
         await fetchFreelancers();
         await fetchApplicants();
