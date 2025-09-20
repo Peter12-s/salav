@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const token = localStorage.getItem("access_token");
-    const userId = localStorage.getItem("user_id");
+    const userId = localStorage.getItem("_id");
 
     const prevBtn = document.getElementById("prevPage");
     const nextBtn = document.getElementById("nextPage");

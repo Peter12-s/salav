@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SALAV </title>
     <link rel="stylesheet" href="../../plantilla.css">
-    <link rel="stylesheet" href="estudiosList.css">
+    <link rel="stylesheet" href="background.css">
     <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
 
 </head>
@@ -54,34 +54,54 @@
 
     <!-- ======== CONTENIDO PRINCIPAL ======== -->
     <main>
-        <!-- <h1>Bienvenido Administrador</h1>
-    <p>Este es tu panel de control.</p> -->
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Buscar por nombre...">
-        </div>
-        <div class="container">
-            <table id="progressTable">
-               
-            </table>
+   <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Listado de Candidatos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
+  <!-- 🔍 Buscadores -->
+  <div class="filtros">
+    <input type="text" placeholder="Buscar Candidato">
+    <input type="text" placeholder="Filtrar por usuario solicitante">
+  </div>
 
-        </div>
+  <!-- 📚 Título -->
+  <h2 class="titulo">Estudios</h2>
 
-        <!-- Paginación -->
-        <div class="pagination">
-            <button id="prevPage" class="page-btn">«</button>
+  <!-- 📋 Lista de candidatos -->
+  <div class="lista">
+    <div class="fila">
+      <div class="nombre">Juan Perez</div>
+      <button class="adjuntar">
+        Botón para adjuntar archivo
+        <span class="icono">⬇️</span>
+      </button>
+    </div>
 
-            <!-- Se mostrará solo en escritorio -->
-            <div id="pageJump" class="page-jump">
-                Página <input type="number" id="pageInput" min="1"> de <span id="totalPages">1</span>
-                <button id="goPage">Ir</button>
-            </div>
+    <div class="fila">
+      <div class="nombre">Manuel Garcia</div>
+      <button class="adjuntar">
+        Botón para adjuntar archivo
+        <span class="icono">⬇️</span>
+      </button>
+    </div>
 
-            <!-- Se mostrará en todos los dispositivos -->
-            <span id="pageInfo" class="page-info">Página 1 de 1</span>
+    <div class="fila">
+      <div class="nombre">Maria Juana Guerra</div>
+      <button class="adjuntar">
+        Botón para adjuntar archivo
+        <span class="icono">⬇️</span>
+      </button>
+    </div>
+  </div>
 
-            <button id="nextPage" class="page-btn">»</button>
-        </div>
+</body>
+</html>
+
     </main>
     <div class="footer">
         <p>© 2024 SALAV soluciones empresariales. Derechos reservados.</p>

@@ -2,7 +2,7 @@ const API_URL = "http://localhost:8080/api/";
 
 // Número de teléfono para llamar
 const numeroLlamada = "521234567890"; // Formato internacional
-const numeroWhatsApp = "521234567890";
+const numeroWhatsApp = "7226371602";
 
 // ===================== PRELOADER =====================
 const preloader = document.getElementById("preloader");
