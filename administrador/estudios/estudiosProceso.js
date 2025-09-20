@@ -1,3 +1,5 @@
+    let usuarios = [];
+    let filteredUsuarios = [];
 document.addEventListener("DOMContentLoaded", () => {
     const token = localStorage.getItem("access_token");
     const userId = localStorage.getItem("_id");
@@ -11,8 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const tabla = document.querySelector("table");
     const searchInput = document.getElementById("searchInput");
 
-    let usuarios = [];
-    let filteredUsuarios = [];
+
     let currentPage = 1;
     let usersPerPage = getUsersPerPage(); // ✅ viene del config.js
 
@@ -191,23 +192,51 @@ btnAceptar.onclick = () => {
   modalResolve(true);
 };
 
-// 🔹 Función para confirmar y mandar petición de actualización
-async function finalizarTarea(userId, etapaKey) {
-  const confirmar = await mostrarModal("¿Deseas finalizar la tarea?");
-  if (!confirmar) return;
 
-  try {
-    await axios.put(
-      `http://localhost:8080/api/user-progress/${userId}`,
-      { status: etapaKey },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
 
-    // Mensaje de éxito en modal
-    await mostrarModal("✅ Tarea finalizada con éxito");
-    fetchUserProgress();
-  } catch (error) {
-    console.error("Error al actualizar tarea:", error.response?.data || error);
-    await mostrarModal("❌ Ocurrió un error al finalizar la tarea");
-  }
+
+// Variables modal
+const modalAdjuntar = document.getElementById("modalAdjuntar");
+const modalNombre = document.getElementById("modalNombre");
+const btnGuardar = document.getElementById("btnGuardar");
+const btnCerrar = document.getElementById("btnCerrar");
+
+// Abrir modal con nombre candidato
+function finalizarTarea(userId, etapaKey) {
+  // buscar el usuario en el array
+  const candidato = usuarios.find(u => u._id === userId);
+  if (!candidato) return;
+
+  // poner el nombre en el modal
+  modalNombre.textContent = candidato.applicant_fullname;
+
+  // mostrar modal
+  modalAdjuntar.style.display = "flex";
 }
+
+// Cerrar modal
+btnCerrar.onclick = () => {
+  modalAdjuntar.style.display = "none";
+};
+
+// Guardar archivos
+btnGuardar.onclick = () => {
+  const archivos = document.getElementById("archivoInput").files;
+  if (archivos.length === 0) {
+    alert("⚠️ Selecciona al menos un archivo.");
+    return;
+  }
+
+  // Aquí va la lógica para enviar archivos al backend (ejemplo con FormData)
+  const formData = new FormData();
+  for (let file of archivos) {
+    formData.append("files", file);
+  }
+
+  console.log("📂 Archivos listos para enviar:", archivos);
+
+  // TODO: axios.post(`${API_URL}upload/${userId}`, formData, { headers... })
+
+  alert("✅ Archivos guardados correctamente");
+  modalAdjuntar.style.display = "none";
+};
