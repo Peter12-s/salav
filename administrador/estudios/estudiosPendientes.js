@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             freelancers = res.data;
         } catch (err) {
-            alert("❌ Error al obtener freelancers");
+
         }
     }
 
@@ -45,7 +45,13 @@ document.addEventListener("DOMContentLoaded", () => {
             filteredApplicants = [...applicants];
             renderSolicitudes();
         } catch (error) {
-            alert("❌ Error al obtener solicitudes");
+            if (error.response && error.response.status === 401) {
+                alert("❌ Sesión expirada. Inicia sesión de nuevo.");
+                errorServer();
+            } else {
+                alert("❌ Error al obtener el progreso de usuarios.");
+                recarcarPagina();
+            }
         }
     }
 
@@ -122,14 +128,18 @@ document.addEventListener("DOMContentLoaded", () => {
                         { freelance_id: freelancerId },
                         { headers: { Authorization: `Bearer ${token}` } }
                     );
-
                     alert(`✅ Freelancer asignado correctamente a ${select.options[select.selectedIndex].text}`);
                     tr.remove();
                     filteredApplicants = filteredApplicants.filter(a => a._id !== solicitud._id);
                     renderSolicitudes();
                 } catch (err) {
-                    console.error(err);
-                    alert("❌ Error al asignar freelancer");
+                    if (err.response && err.response.status === 401) {
+                        alert("❌ Sesión expirada. Inicia sesión de nuevo.");
+                        errorServer();
+                    } else {
+                        alert("❌ Error al obtener el progreso de usuarios.");
+                        recarcarPagina();
+                    }
                 }
             });
 
@@ -200,6 +210,9 @@ document.addEventListener("DOMContentLoaded", () => {
             tbody.innerHTML = `<tr><td colspan="2" style="text-align:center; color:#888;">
                 No se encontraron resultados
             </td></tr>`;
+            document.getElementsByClassName("pagination")[0].style.display = "none";
+        } else {
+            document.getElementsByClassName("pagination")[0].style.display = "block";
         }
     });
 

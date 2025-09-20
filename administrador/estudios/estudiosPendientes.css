@@ -272,6 +272,7 @@
 .search-container {
     margin-bottom: 10px;
     text-align: right;
+ 
     /* Para alinear a la derecha */
 }
 
@@ -282,9 +283,23 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-right: 15px;
+     outline: none;
 }
 
 #searchInput:hover {
     border: 1px solid #8a2ca0;
     background-color: white;
+}
+
+/* Hover y Focus */
+ .search-container:hover {
+    border-color: #9F38B8;
+}
+
+/* Resalta el input activo */
+.search-container:focus {
+    border: 2px solid #D9358C;
+    box-shadow: 0 0 8px rgba(217, 53, 140, 0.3);
+    /* background-color: #f7eafd; */
+    outline: none !important; 
 }

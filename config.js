@@ -81,3 +81,17 @@ if (document.getElementById("btnLogout")) {
     }
   });
 }
+
+
+function errorServer() {
+  setTimeout(() => {
+    localStorage.clear();
+     window.location.href = "/login.html";
+  }, 2000);
+}
+
+function recarcarPagina() {
+  setTimeout(() => {
+    window.location.reload();
+  }, 1000);
+}

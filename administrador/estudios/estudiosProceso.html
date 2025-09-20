@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <a href="estudiosPendientes.html">Estudios pendientes</a>
-                <a href="estudiosFinalizados.html">Estudios en proceso</a>
+                <a href="estudiosProceso.html">Estudios en proceso</a>
                 <!-- Botón Logout con SVG -->
                 <button class="logout-btn" id="btnLogout" aria-label="Cerrar sesión" title="Cerrar sesión">
                     <!-- SVG de logout (salir) -->
@@ -54,7 +54,7 @@
         </div>
         <div slot="main">
             <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Buscar por nombre...">
+                <input type="text" id="searchInput" autocomplete="off" placeholder="Buscar por nombre...">
             </div>
             <div class="container">
                 <table>
@@ -70,7 +70,7 @@
 
                 <!-- Se mostrará solo en escritorio -->
                 <div id="pageJump" class="page-jump">
-                    Página <input type="number" id="pageInput" min="1"> de <span id="totalPages">1</span>
+                    Página <input type="number" id="pageInput" autocomplete="off" min="1"> de <span id="totalPages">1</span>
                     <button id="goPage">Ir</button>
                 </div>
 

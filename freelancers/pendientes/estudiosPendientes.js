@@ -12,7 +12,7 @@ async function fetchFormRequest() {
             },
             params: {
                 freelance_id: freelanceId, // ✅ enviamos parámetro
-                // accepted:false // ✅ solo pendientes
+                accepted:null // ✅ solo pendientes
             }
         });
 

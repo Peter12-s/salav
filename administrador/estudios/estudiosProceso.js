@@ -1,5 +1,5 @@
-    let usuarios = [];
-    let filteredUsuarios = [];
+let usuarios = [];
+let filteredUsuarios = [];
 document.addEventListener("DOMContentLoaded", () => {
     const token = localStorage.getItem("access_token");
     const userId = localStorage.getItem("_id");
@@ -35,13 +35,20 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             usuarios = res.data;
             filteredUsuarios = [...usuarios];
-            console.log("✅ user-progress:", usuarios);
-            
+            // console.log("✅ user-progress:", usuarios);
+
             renderTabla();
         } catch (error) {
-            console.error("❌ Error al obtener user-progress:", error.response?.data || error);
+            if (error.response && error.response.status === 401) {
+             alert("❌ Sesión expirada. Inicia sesión de nuevo.");
+             errorServer();
+         } else {
+             alert("❌ Error al obtener el progreso de usuarios.");
+             recarcarPagina();
+         }
         }
     }
+  
 
     const etapas = [
         { key: "application_accepted", label: "Solicitud aceptada" },
@@ -58,6 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const etapasConAccion = [
         "background_check"
     ];
+
     function renderTabla() {
         tabla.innerHTML = "";
 
@@ -71,11 +79,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const td = document.createElement("td");
             td.colSpan = etapas.length + 2;
             td.textContent = "No se encontraron resultados";
-            td.style.textAlign = "center";
+            td.style.textAlign = "start";
             td.style.color = "#888";
             tr.appendChild(td);
             tabla.appendChild(tr);
+            document.getElementsByClassName("pagination")[0].style.display = "none";
             return;
+        }else{
+            document.getElementsByClassName("pagination")[0].style.display = "block";
         }
 
         const start = (currentPage - 1) * usersPerPage;
@@ -88,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // 📌 Columna nombre
             const tdNombre = document.createElement("td");
             tdNombre.className = "bloque nombre";
-            tdNombre.textContent = usuarios.applicant_fullname.split(" ")[0] || "Sin nombre";
+            tdNombre.textContent = usuarios.applicant_fullname || "Sin nombre";
             tr.appendChild(tdNombre);
 
             // 📌 Columna etapas
@@ -101,6 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 // ✅ Si la etapa está en etapasConAccion, agregamos evento de clic
                 if (etapasConAccion.includes(etapa.key)) {
                     td.style.cursor = "pointer"; // indicar que es clickeable
+                    td.classList.add("clickable"); // ✅ añade clase extra
                     td.addEventListener("click", () => {
                         finalizarTarea(usuarios._id, etapa.key);
                     });
@@ -156,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
     searchInput.addEventListener("input", () => {
         const query = searchInput.value.toLowerCase();
         filteredUsuarios = usuarios.filter(u =>
-            (u.nombre || "").toLowerCase().includes(query)
+            (u.applicant_fullname || "").toLowerCase().includes(query)
         );
         currentPage = 1;
         renderTabla();
@@ -175,21 +187,21 @@ let modalResolve; // para manejar promesa
 
 // Mostrar modal como promesa
 function mostrarModal(mensaje) {
-  return new Promise(resolve => {
-    document.getElementById("modalMessage").textContent = mensaje;
-    modal.style.display = "flex";
-    modalResolve = resolve;
-  });
+    return new Promise(resolve => {
+        document.getElementById("modalMessage").textContent = mensaje;
+        modal.style.display = "flex";
+        modalResolve = resolve;
+    });
 }
 
 // Eventos de botones
 btnCancelar.onclick = () => {
-  modal.style.display = "none";
-  modalResolve(false);
+    modal.style.display = "none";
+    modalResolve(false);
 };
 btnAceptar.onclick = () => {
-  modal.style.display = "none";
-  modalResolve(true);
+    modal.style.display = "none";
+    modalResolve(true);
 };
 
 
@@ -203,40 +215,40 @@ const btnCerrar = document.getElementById("btnCerrar");
 
 // Abrir modal con nombre candidato
 function finalizarTarea(userId, etapaKey) {
-  // buscar el usuario en el array
-  const candidato = usuarios.find(u => u._id === userId);
-  if (!candidato) return;
+    // buscar el usuario en el array
+    const candidato = usuarios.find(u => u._id === userId);
+    if (!candidato) return;
 
-  // poner el nombre en el modal
-  modalNombre.textContent = candidato.applicant_fullname;
+    // poner el nombre en el modal
+    modalNombre.textContent = candidato.applicant_fullname;
 
-  // mostrar modal
-  modalAdjuntar.style.display = "flex";
+    // mostrar modal
+    modalAdjuntar.style.display = "flex";
 }
 
 // Cerrar modal
 btnCerrar.onclick = () => {
-  modalAdjuntar.style.display = "none";
+    modalAdjuntar.style.display = "none";
 };
 
 // Guardar archivos
 btnGuardar.onclick = () => {
-  const archivos = document.getElementById("archivoInput").files;
-  if (archivos.length === 0) {
-    alert("⚠️ Selecciona al menos un archivo.");
-    return;
-  }
+    const archivos = document.getElementById("archivoInput").files;
+    if (archivos.length === 0) {
+        alert("⚠️ Selecciona un archivo.");
+        return;
+    }
 
-  // Aquí va la lógica para enviar archivos al backend (ejemplo con FormData)
-  const formData = new FormData();
-  for (let file of archivos) {
-    formData.append("files", file);
-  }
+    // Aquí va la lógica para enviar archivos al backend (ejemplo con FormData)
+    const formData = new FormData();
+    for (let file of archivos) {
+        formData.append("files", file);
+    }
 
-  console.log("📂 Archivos listos para enviar:", archivos);
+    console.log("📂 Archivo listo para enviar:", archivos);
 
-  // TODO: axios.post(`${API_URL}upload/${userId}`, formData, { headers... })
+    // TODO: axios.post(`${API_URL}upload/${userId}`, formData, { headers... })
 
-  alert("✅ Archivos guardados correctamente");
-  modalAdjuntar.style.display = "none";
+    alert("✅ Archivo guardado correctamente");
+    modalAdjuntar.style.display = "none";
 };
