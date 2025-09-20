@@ -12,11 +12,11 @@ async function fetchFormRequest() {
             },
             params: {
                 freelance_id: freelanceId, // ✅ enviamos parámetro
-                accepted:false // ✅ solo pendientes
+                // accepted:false // ✅ solo pendientes
             }
         });
 
-        // console.log("Solicitudes:", res.data);
+        console.log("Solicitudes:", res.data);
         candidatosData = res.data; // Guardar los datos obtenidos
         renderCandidatos();
         return res.data;

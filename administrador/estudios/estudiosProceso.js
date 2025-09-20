@@ -34,6 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             usuarios = res.data;
             filteredUsuarios = [...usuarios];
+            // console.log("✅ user-progress:", usuarios);
+            
             renderTabla();
         } catch (error) {
             console.error("❌ Error al obtener user-progress:", error.response?.data || error);
@@ -50,6 +52,11 @@ document.addEventListener("DOMContentLoaded", () => {
         { key: "evaluation_complete", label: "Evaluación finalizada" }
     ];
 
+
+
+    const etapasConAccion = [
+        "background_check"
+    ];
     function renderTabla() {
         tabla.innerHTML = "";
 
@@ -74,20 +81,29 @@ document.addEventListener("DOMContentLoaded", () => {
         const end = start + usersPerPage;
         const pageData = filteredUsuarios.slice(start, end);
 
-        pageData.forEach(usuario => {
+        pageData.forEach(usuarios => {
             const tr = document.createElement("tr");
 
             // 📌 Columna nombre
             const tdNombre = document.createElement("td");
             tdNombre.className = "bloque nombre";
-            tdNombre.textContent = usuario.nombre;
+            tdNombre.textContent = usuarios.applicant_fullname.split(" ")[0] || "Sin nombre";
             tr.appendChild(tdNombre);
 
             // 📌 Columna etapas
             etapas.forEach(etapa => {
                 const td = document.createElement("td");
-                td.className = "bloque " + (usuario[etapa.key] ? "status-completado" : "status-proceso");
+                td.className = "bloque " + (usuarios[etapa.key] ? "status-completado" : "status-proceso");
                 td.textContent = etapa.label;
+
+
+                // ✅ Si la etapa está en etapasConAccion, agregamos evento de clic
+                if (etapasConAccion.includes(etapa.key)) {
+                    td.style.cursor = "pointer"; // indicar que es clickeable
+                    td.addEventListener("click", () => {
+                        finalizarTarea(usuarios._id, etapa.key);
+                    });
+                }
                 tr.appendChild(td);
             });
 
@@ -148,3 +164,50 @@ document.addEventListener("DOMContentLoaded", () => {
     // 📌 Inicializar
     fetchUserProgress();
 });
+
+// Variables del modal
+const modal = document.getElementById("modalConfirm");
+const btnCancelar = document.getElementById("btnCancelar");
+const btnAceptar = document.getElementById("btnAceptar");
+
+let modalResolve; // para manejar promesa
+
+// Mostrar modal como promesa
+function mostrarModal(mensaje) {
+  return new Promise(resolve => {
+    document.getElementById("modalMessage").textContent = mensaje;
+    modal.style.display = "flex";
+    modalResolve = resolve;
+  });
+}
+
+// Eventos de botones
+btnCancelar.onclick = () => {
+  modal.style.display = "none";
+  modalResolve(false);
+};
+btnAceptar.onclick = () => {
+  modal.style.display = "none";
+  modalResolve(true);
+};
+
+// 🔹 Función para confirmar y mandar petición de actualización
+async function finalizarTarea(userId, etapaKey) {
+  const confirmar = await mostrarModal("¿Deseas finalizar la tarea?");
+  if (!confirmar) return;
+
+  try {
+    await axios.put(
+      `http://localhost:8080/api/user-progress/${userId}`,
+      { status: etapaKey },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    // Mensaje de éxito en modal
+    await mostrarModal("✅ Tarea finalizada con éxito");
+    fetchUserProgress();
+  } catch (error) {
+    console.error("Error al actualizar tarea:", error.response?.data || error);
+    await mostrarModal("❌ Ocurrió un error al finalizar la tarea");
+  }
+}
