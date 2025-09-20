@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             usuarios = res.data;
             filteredUsuarios = [...usuarios];
-            // console.log("✅ user-progress:", usuarios);
+            console.log("✅ user-progress:", usuarios);
             
             renderTabla();
         } catch (error) {
