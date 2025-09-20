@@ -1,3 +1,4 @@
+ const token = localStorage.getItem("access_token");
 document.addEventListener("DOMContentLoaded", () => {
     // ======== TABLA DE USUARIOS ========
     const userTable = document.getElementById("userTable");
@@ -10,9 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const goPageBtn = document.getElementById("goPage");
 
     // 👇 Token desde localStorage
-    const token = localStorage.getItem("access_token");
+   
     if (!token) {
         alert("No hay sesión activa. Por favor, inicia sesión.");
+            errorServer();
         return;
     }
 

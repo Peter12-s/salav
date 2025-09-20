@@ -1,8 +1,11 @@
 let usuarios = [];
 let filteredUsuarios = [];
+let usuarioSeleccionado = null; // ✅ usuario en el que se hizo clic para adjuntar
+const token = localStorage.getItem("access_token");
+const userId = localStorage.getItem("_id");
 document.addEventListener("DOMContentLoaded", () => {
-    const token = localStorage.getItem("access_token");
-    const userId = localStorage.getItem("_id");
+
+
 
     const prevBtn = document.getElementById("prevPage");
     const nextBtn = document.getElementById("nextPage");
@@ -40,15 +43,15 @@ document.addEventListener("DOMContentLoaded", () => {
             renderTabla();
         } catch (error) {
             if (error.response && error.response.status === 401) {
-             alert("❌ Sesión expirada. Inicia sesión de nuevo.");
-             errorServer();
-         } else {
-             alert("❌ Error al obtener el progreso de usuarios.");
-             recarcarPagina();
-         }
+                alert("❌ Sesión expirada. Inicia sesión de nuevo.");
+                errorServer();
+            } else {
+                alert("❌ Error al obtener el progreso de usuarios.");
+                recarcarPagina();
+            }
         }
     }
-  
+
 
     const etapas = [
         { key: "application_accepted", label: "Solicitud aceptada" },
@@ -85,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
             tabla.appendChild(tr);
             document.getElementsByClassName("pagination")[0].style.display = "none";
             return;
-        }else{
+        } else {
             document.getElementsByClassName("pagination")[0].style.display = "block";
         }
 
@@ -111,8 +114,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 // ✅ Si la etapa está en etapasConAccion, agregamos evento de clic
                 if (etapasConAccion.includes(etapa.key)) {
-                    td.style.cursor = "pointer"; // indicar que es clickeable
-                    td.classList.add("clickable"); // ✅ añade clase extra
+                    if (usuarios[etapa.key] == false) {
+                        td.classList.add("clickable");
+                        td.style.cursor = "pointer"; // indicar que es clickeable
+                    }
                     td.addEventListener("click", () => {
                         finalizarTarea(usuarios._id, etapa.key);
                     });
@@ -217,6 +222,7 @@ const btnCerrar = document.getElementById("btnCerrar");
 function finalizarTarea(userId, etapaKey) {
     // buscar el usuario en el array
     const candidato = usuarios.find(u => u._id === userId);
+    usuarioSeleccionado = candidato;
     if (!candidato) return;
 
     // poner el nombre en el modal
@@ -231,24 +237,46 @@ btnCerrar.onclick = () => {
     modalAdjuntar.style.display = "none";
 };
 
-// Guardar archivos
-btnGuardar.onclick = () => {
-    const archivos = document.getElementById("archivoInput").files;
-    if (archivos.length === 0) {
-        alert("⚠️ Selecciona un archivo.");
-        return;
+// 📌 Guardar archivos y actualizar progreso
+btnGuardar.onclick = async () => {
+    try {
+        // const archivos = document.getElementById("archivoInput").files;
+        // if (archivos.length === 0) {
+        //     alert("⚠️ Debes seleccionar un archivo");
+        //     return;
+        // }
+
+        // // ✅ Subir archivo
+        // const formData = new FormData();
+        // for (let file of archivos) {
+        //     formData.append("files", file);
+        // }
+
+        // await axios.post(`${API_URL}upload/${usuarioSeleccionado._id}`, formData, {
+        //     headers: {
+        //         Authorization: `Bearer ${token}`,
+        //         "Content-Type": "multipart/form-data"
+        //     }
+        // });
+
+        // ✅ Actualizar progreso (PATCH)
+        await axios.patch(`${API_URL}user-progress/${usuarioSeleccionado._id}`,
+            { background_check: true },
+            { headers: { Authorization: `Bearer ${token}` } }
+        );
+
+        // alert("✅ Archivo guardado y progreso actualizado correctamente");
+       
+    } catch (error) {
+        if (error.response && error.response.status === 401) {
+            alert("❌ Sesión expirada. Inicia sesión de nuevo.");
+            errorServer();
+        } else {
+            alert("❌ Error al obtener el progreso de usuarios.");
+            recarcarPagina();
+        }
+    } finally {
+        modalAdjuntar.style.display = "none";
+        window.location.reload();
     }
-
-    // Aquí va la lógica para enviar archivos al backend (ejemplo con FormData)
-    const formData = new FormData();
-    for (let file of archivos) {
-        formData.append("files", file);
-    }
-
-    console.log("📂 Archivo listo para enviar:", archivos);
-
-    // TODO: axios.post(`${API_URL}upload/${userId}`, formData, { headers... })
-
-    alert("✅ Archivo guardado correctamente");
-    modalAdjuntar.style.display = "none";
 };

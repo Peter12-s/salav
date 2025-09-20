@@ -1,18 +1,15 @@
+ const token = localStorage.getItem("access_token");
+
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("userForm");
-
+   if (!token) {
+        alert("No tienes sesión activa. Inicia sesión primero.");
+        errorServer();
+      }
+      
   if (form) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-
-      const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJ1c2VyX3R5cGUiOiJBRE1JTklTVFJBRE9SIiwiaWF0IjoxNzU3Nzc2OTQwLCJleHAiOjE3NTc4NjMzNDB9.4ztJReYUnE7d_aKCm3kkciDdQZVxRFMdP-NO74An7fw";
-
-      if (!token) {
-        alert("No tienes sesión activa. Inicia sesión primero.");
-        window.location.href = "../../login/login.html";
-        return;
-      }
-
       const userData = {
         name: document.getElementById("nombre").value.trim(),
         f_surname: document.getElementById("apellidoPaterno").value.trim(),

@@ -1,11 +1,12 @@
+  const userId = params.get("id");
+  const token = localStorage.getItem("access_token");
+
 document.addEventListener("DOMContentLoaded", async () => {
   // ===================== FORMULARIO =====================
   const form = document.getElementById("userForm");
   if (!form) return;
 
   const params = new URLSearchParams(window.location.search);
-  const userId = params.get("id");
-  const token = localStorage.getItem("access_token");
 
   const nombre = document.getElementById("nombre");
   const apellidoPaterno = document.getElementById("apellidoPaterno");
@@ -23,8 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (!userId) {
     alert("❌ No se especificó un usuario para editar");
-    hidePreloader();
-    return;
+    errorServer();
   }
 
   // ===================== FUNCION PARA CARGAR USUARIO =====================
