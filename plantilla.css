@@ -382,3 +382,11 @@ main p {
      border: 1px solid #8a2ca0; 
       background-color: white;
 }
+
+.pagination {
+    display: block;
+    text-align: center;
+    gap: 0.5rem;
+    align-items: center;
+    font-family: sans-serif;
+}

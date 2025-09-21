@@ -1,7 +1,7 @@
 const API_URL = "http://localhost:8080/api/";
 
-// Número de teléfono para llamar
-const numeroLlamada = "521234567890"; // Formato internacional
+// Número de teléfono para llamar y conseguir cuenta 
+const numeroLlamada = "7226371602"; 
 const numeroWhatsApp = "7226371602";
 
 // ===================== PRELOADER =====================

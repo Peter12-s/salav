@@ -382,6 +382,7 @@
 
 
 
+
  /* 🔲 Fondo del modal */
  .modal {
      display: none;
@@ -402,12 +403,13 @@
      background: #fff;
      padding: 20px;
      border-radius: 12px;
-     width: 500px;
+     width: 50%;
      max-width: 90%;
      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
      display: flex;
      flex-direction: column;
      gap: 20px;
+     text-align: center;
  }
 
  /* Acciones */

@@ -7,9 +7,7 @@
     <title>SALAV</title>
     <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
     <link rel="stylesheet" href="../../plantilla.css">
-
     <link rel="stylesheet" href="estudiosList.css">
-    <!-- <link rel="stylesheet" href="es.css"> -->
 
 </head>
 
@@ -57,29 +55,28 @@
                 <input type="text" id="searchInput" autocomplete="off" placeholder="Buscar por nombre...">
             </div>
             <div class="container">
-                <table>
-
+                <table id="tablaUsuarios">
+                    <tbody></tbody>
                 </table>
 
 
             </div>
 
-            <!-- Paginación -->
-            <div class="pagination">
-                <button id="prevPage" class="page-btn">«</button>
+                <!-- Paginación -->
+                <div class="pagination">
+                    <button id="prevBtn" class="page-btn">«</button>
 
-                <!-- Se mostrará solo en escritorio -->
-                <div id="pageJump" class="page-jump">
-                    Página <input type="number" id="pageInput" autocomplete="off" min="1"> de <span id="totalPages">1</span>
-                    <button id="goPage">Ir</button>
+                    <!-- Se mostrará solo en escritorio -->
+                    <div id="pageJump" class="page-jump">
+                        Página <input type="number" id="pageInput" min="1"> de <span id="totalPages">1</span>
+                        <button id="goPage">Ir</button>
+                    </div>
+
+                    <!-- Se mostrará en todos los dispositivos -->
+                    <span id="pageInfo" class="page-info">Página 1 de 1</span>
+
+                    <button id="nextBtn" class="page-btn">»</button>
                 </div>
-
-                <!-- Se mostrará en todos los dispositivos -->
-                <span id="pageInfo" class="page-info">Página 1 de 1</span>
-
-                <button id="nextPage" class="page-btn">»</button>
-            </div>
-
         </div>
         </div>
 
@@ -102,10 +99,17 @@
             </div>
         </div>
     </div>
-
+    <!-- Modal personalizado -->
+    <div id="modalAlert" class="modal">
+        <div class="modal-contenido" id="modal-contenido">
+        </div>
+    </div>
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../../config.js"></script>
+    <script src="../../utilities.js"></script>
     <script src="estudiosProceso.js"></script>
     <script src="../../plantilla.js"></script>
 </body>
+
+</html>

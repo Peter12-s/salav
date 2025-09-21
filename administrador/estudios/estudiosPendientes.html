@@ -59,7 +59,7 @@
             <div class="container">
                 <h1>Solicitudes de candidatos</h1>
                 <div class="search-container">
-                    <input  autocomplete="off" type="text" id="searchInput" placeholder="Buscar...">
+                    <input autocomplete="off" type="text" id="searchInput" placeholder="Buscar...">
                 </div>
                 <div class="table-wrapper">
                     <table id="tablaSolicitudes">
@@ -72,25 +72,39 @@
                         <tbody></tbody>
                     </table>
                 </div>
+
+                     <!-- Paginación -->
                 <div class="pagination">
                     <button id="prevBtn" class="page-btn">«</button>
-                    <span id="pageInfo">Página 1</span>
-                    <button id="nextBtn" class="page-btn">»</button>
 
-                    <div class="page-jump">
-                        Ir a página: <input  autocomplete="off" type="number" id="pageInput" min="1">
+                    <!-- Se mostrará solo en escritorio -->
+                    <div id="pageJump" class="page-jump">
+                        Página <input type="number" id="pageInput" min="1"> de <span id="totalPages">1</span>
                         <button id="goPage">Ir</button>
                     </div>
+
+                    <!-- Se mostrará en todos los dispositivos -->
+                    <span id="pageInfo" class="page-info">Página 1 de 1</span>
+
+                    <button id="nextBtn" class="page-btn">»</button>
                 </div>
+              
 
             </div>
 
         </div>
-        </div>
+
     </plantilla-salav>
+    <!-- Modal personalizado -->
+    <div id="modalAlert" class="modal">
+        <div class="modal-contenido" id="modal-contenido">
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../../config.js"></script>
+    <script src="../../utilities.js"></script>
     <script src="estudiosPendientes.js"></script>
     <script src="../../plantilla.js"></script>
 </body>
+
 </html>
