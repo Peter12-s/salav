@@ -1,10 +1,10 @@
 var candidatosData = [];
+const token = localStorage.getItem("access_token"); // o de donde lo estés guardando
+const freelanceId = localStorage.getItem("user_id"); // 👈 el id del freelancer
 
-  const token = localStorage.getItem("access_token"); // o de donde lo estés guardando
 async function fetchFormRequest() {
     try {
-      
-        const freelanceId = localStorage.getItem("user_id"); // 👈 el id del freelancer
+
 
         const res = await axios.get("http://localhost:8080/api/form-request", {
             headers: {
@@ -12,7 +12,7 @@ async function fetchFormRequest() {
             },
             params: {
                 freelance_id: freelanceId, // ✅ enviamos parámetro
-                accepted:null // ✅ solo pendientes
+                accepted: null // ✅ solo pendientes
             }
         });
 

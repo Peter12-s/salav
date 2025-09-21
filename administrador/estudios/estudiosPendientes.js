@@ -125,7 +125,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 try {
                     await axios.patch(`${API_URL}form-request/${solicitud._id}`,
-                        { freelance_id: freelancerId },
                         { headers: { Authorization: `Bearer ${token}` } }
                     );
                     alert(`✅ Freelancer asignado correctamente a ${select.options[select.selectedIndex].text}`);

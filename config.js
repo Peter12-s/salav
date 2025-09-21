@@ -84,8 +84,8 @@ if (document.getElementById("btnLogout")) {
 
 
 function errorServer() {
-    localStorage.clear();
-     window.location.href = "/login.html";
+  localStorage.clear();
+  window.location.href = "/login.html";
 }
 
 function recarcarPagina() {
