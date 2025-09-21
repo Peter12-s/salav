@@ -33,7 +33,8 @@ form.addEventListener("submit", function (e) {
     const password = form.querySelector("input[type='password']").value.trim();
 
     if (!username || !password) {
-        alert("Por favor, completa todos los campos");
+        
+        mostrarModalMensaje("Por favor, completa todos los campos");
         return;
     }
 
@@ -80,11 +81,11 @@ form.addEventListener("submit", function (e) {
                 } else if (userType === "EMPRESA") {
                     window.location.href = "empresas/inicioEmpresa.html";
                 } else {
-                    alert("Tipo de usuario no reconocido");
+                    mostrarModalMensaje("Tipo de usuario no reconocido");
                 }
             }, 650);
         })
         .catch(error => {
-            alert("Error al iniciar sesión");
+            mostrarModalMensaje("Error al iniciar sesión");
         });
 });

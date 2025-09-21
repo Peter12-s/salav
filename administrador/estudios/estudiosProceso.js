@@ -117,7 +117,7 @@ btnGuardar.onclick = async () => {
             errorServer();
         } else {
             mostrarModalMensaje("Error al obtener el progreso de usuarios. ❌");
-            recarcarPagina();
+            recargarPagina();
         }
     } finally {
         modalAdjuntar.style.display = "none";

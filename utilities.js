@@ -80,7 +80,7 @@ function eventosPaginacion() {
             currentPage = page;
             renderSolicitudes();
         } else {
-            alert(`⚠️ Ingresa un número entre 1 y ${totalPages}`);
+            mostrarModalMensaje(`⚠️ Ingresa un número entre 1 y ${totalPages}`);
         }
     });
 }

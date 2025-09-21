@@ -159,7 +159,7 @@ function renderSolicitudes() {
                     if (token) {
                         console.log(token);
                         mostrarModalMensaje("Error al obtener el progreso de usuarios. ❌");
-                        recarcarPagina();
+                        recargarPagina();
                     }
                 }
             }

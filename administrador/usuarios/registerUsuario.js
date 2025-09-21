@@ -3,7 +3,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("userForm");
    if (!token) {
-        alert("No tienes sesión activa. Inicia sesión primero.");
+        mostrarModalMensaje("No tienes sesión activa. Inicia sesión primero.");
         errorServer();
       }
       
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (userData.user_type === "EMPRESA") {
         const companyName = document.getElementById("companyName").value.trim();
         if (!companyName) {
-          alert("Por favor, ingresa el nombre de la empresa.");
+          mostrarModalMensaje("Por favor, ingresa el nombre de la empresa.");
           return;
         }
         userData.company_name = companyName;
@@ -41,11 +41,11 @@ document.addEventListener("DOMContentLoaded", () => {
           },
         });
 
-        alert("✅ Usuario registrado con éxito!");
+        mostrarModalMensaje("✅ Usuario registrado con éxito!");
         form.reset();
         document.getElementById("companyName").style.display = "none";
       } catch (err) {
-        alert(
+        mostrarModalMensaje(
           "❌ Error al registrar usuario: " +
             (err.response?.data?.message || err.message)
         );

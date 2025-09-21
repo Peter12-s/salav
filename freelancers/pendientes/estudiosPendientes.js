@@ -105,7 +105,7 @@ function elimiarCandidato() {
 
 window.aceptar = async function () {
     if (!seleccionado) {
-        alert("⚠️ Selecciona un candidato primero");
+        mostrarModalMensaje("⚠️ Selecciona un candidato primero");
         return;
     }
 
@@ -116,7 +116,7 @@ window.aceptar = async function () {
             { headers: { Authorization: `Bearer ${token}` } }
         );
 
-        alert("✅ Solicitud aceptada correctamente");
+        mostrarModalMensaje("✅ Solicitud aceptada correctamente");
 
         // Animación + eliminación
         animacion();
@@ -125,13 +125,13 @@ window.aceptar = async function () {
 
     } catch (err) {
         console.error(err);
-        alert("❌ Error al aceptar la solicitud");
+        mostrarModalMensaje("❌ Error al aceptar la solicitud");
     }
 };
 
 window.rechazar = async function () {
     if (!seleccionado) {
-        alert("⚠️ Selecciona un candidato primero");
+        mostrarModalMensaje("⚠️ Selecciona un candidato primero");
         return;
     }
 
@@ -149,7 +149,7 @@ window.rechazar = async function () {
             }
         );
 
-        alert("❌ Solicitud rechazada, regresó a la caja de SALAV");
+        mostrarModalMensaje("❌ Solicitud rechazada, regresó a la caja de SALAV");
 
         // 🔹 Animaciones y eliminación en UI
         animacion();
@@ -158,6 +158,6 @@ window.rechazar = async function () {
 
     } catch (err) {
         console.error(err);
-        alert("⚠️ Error al rechazar la solicitud");
+        mostrarModalMensaje("⚠️ Error al rechazar la solicitud");
     }
 };

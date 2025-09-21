@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .map(([key]) => key); // solo nombres de los campos
 
         if (missingFields.length > 0) {
-            alert(`Por favor, completa los campos obligatorios: ${missingFields.join(", ")}`);
+            mostrarModalMensaje(`Por favor, completa los campos obligatorios: ${missingFields.join(", ")}`);
             return;
         }
 
@@ -38,11 +38,11 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         })
             .then(res => {
-                alert("Solicitud enviada correctamente");
+                mostrarModalMensaje("Solicitud enviada correctamente");
                 form.reset();
             })
             .catch(err => {
-                alert("Error al enviar la solicitud");
+                mostrarModalMensaje("Error al enviar la solicitud");
                 console.error(err.response ? err.response.data : err);
             });
     });

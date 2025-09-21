@@ -43,11 +43,11 @@ document.addEventListener("DOMContentLoaded", () => {
       return res.data;
     } catch (error) {
       if (error.response && error.response.status === 401) {
-        alert("❌ Sesión expirada. Inicia sesión de nuevo.");
+        mostrarModalMensaje("❌ Sesión expirada. Inicia sesión de nuevo.");
         errorServer();
       } else {
-        alert("❌ Error al obtener el progreso de usuarios.");
-        recarcarPagina();
+        mostrarModalMensaje("❌ Error al obtener el progreso de usuarios.");
+        recargarPagina();
       }
     }
   }
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
       currentPage = page;
       renderTabla();
     } else {
-      alert(`⚠️ Ingresa un número entre 1 y ${totalPages}`);
+      mostrarModalMensaje(`⚠️ Ingresa un número entre 1 y ${totalPages}`);
     }
   });
   // 📌 Filtro de búsqueda
@@ -188,11 +188,11 @@ async function finalizarTarea(userId, etapaKey) {
       { headers: { Authorization: `Bearer ${token}` } }
     );
 
-    alert("Tarea finalizada con éxito ✅");
+    mostrarModalMensaje("Tarea finalizada con éxito ✅");
     fetchUserProgress(); // recargar la tabla
   } catch (error) {
     console.error("Error al actualizar tarea:", error.response?.data || error);
-    alert("❌ Ocurrió un error al finalizar la tarea");
+    mostrarModalMensaje("❌ Ocurrió un error al finalizar la tarea");
   }
 }
 

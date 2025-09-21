@@ -1,3 +1,4 @@
+import { mostrarModalMensaje } from "utlities.js";
 const API_URL = "http://localhost:8080/api/";
 
 // Número de teléfono para llamar y conseguir cuenta 
@@ -76,8 +77,8 @@ if (document.getElementById("btnLogout")) {
     try {
       localStorage.clear();
       window.location.href = "/login.html";
-    } catch (e) {
-      alert("No se pudo cerrar la sesión. Intenta de nuevo.");
+    } catch (e) {      
+      mostrarModalMensaje("No se pudo cerrar la sesión. Intenta de nuevo.");
     }
   });
 }
@@ -88,7 +89,7 @@ function errorServer() {
   window.location.href = "/login.html";
 }
 
-function recarcarPagina() {
+function recargarPagina() {
   setTimeout(() => {
     window.location.reload();
   }, 1000);
