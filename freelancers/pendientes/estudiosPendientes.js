@@ -1,5 +1,7 @@
 var candidatosData = [];
-obtenerLocalStorage();
+document.addEventListener("DOMContentLoaded", () => {
+    obtenerLocalStorage();
+
 async function fetchFormRequest() {
     try {
 
@@ -13,7 +15,6 @@ async function fetchFormRequest() {
             }
         });
 
-        // console.log("Solicitudes:", res.data);
         candidatosData = res.data; // Guardar los datos obtenidos
         renderSolicitudes();
         return res.data;
@@ -22,7 +23,13 @@ async function fetchFormRequest() {
         // console.error("Error al obtener solicitudes:", error.response?.data || error);
     }
 }
-fetchFormRequest();
+
+    // 📌 Inicializar
+    (async () => {
+        await fetchFormRequest();
+    })();
+});
+
 
 
 const listaCandidatos = document.getElementById("listaCandidatos");
@@ -139,7 +146,7 @@ window.rechazar = async function () {
         await axios.patch(`${API_URL}form-request/${solicitudId}`,
             {
                 freelance_id: null, // 👈 liberamos al freelancer
-                accepted: false     // 👈 lo pasamos a pendiente
+                accepted: null     // 👈 lo pasamos a pendiente
             },
             {
                 headers: { Authorization: `Bearer ${token}` }
