@@ -1,4 +1,4 @@
-import { mostrarModalMensaje } from "utlities.js";
+import { mostrarModalMensaje } from "utilities.js";
 const API_URL = "http://localhost:8080/api/";
 
 // Número de teléfono para llamar y conseguir cuenta 
