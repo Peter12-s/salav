@@ -42,8 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     "Content-Type": "application/json"
                 }
             });
-
-            // 🚨 Aquí la API devuelve un array plano
             users = res.data;
             filteredUsers = [...users];
 

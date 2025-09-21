@@ -1,12 +1,12 @@
 var candidatosData = [];
+
 const token = localStorage.getItem("access_token"); // o de donde lo estés guardando
 const freelanceId = localStorage.getItem("user_id"); // 👈 el id del freelancer
 
 async function fetchFormRequest() {
     try {
 
-
-        const res = await axios.get("http://localhost:8080/api/form-request", {
+        const res = axios.post(`${API_URL}form-request`, {
             headers: {
                 Authorization: `Bearer ${token}` // ✅ enviamos token
             },
@@ -111,8 +111,7 @@ window.aceptar = async function () {
 
     const solicitudId = seleccionado.getAttribute("data-id"); // 👈 id de la solicitud
     try {
-        await axios.patch(
-            `http://localhost:8080/api/form-request/${solicitudId}`,
+        await axios.patch(`${API_URL}form-request/${solicitudId}`,
             { accepted: true },
             { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -140,8 +139,7 @@ window.rechazar = async function () {
 
     try {
         // 🔹 Hacemos el PATCH al backend
-        await axios.patch(
-            `http://localhost:8080/api/form-request/${solicitudId}`,
+        await axios.patch(`${API_URL}form-request/${solicitudId}`,
             {
                 freelance_id: null, // 👈 liberamos al freelancer
                 accepted: false     // 👈 lo pasamos a pendiente

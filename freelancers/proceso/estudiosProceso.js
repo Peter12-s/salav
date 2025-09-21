@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function fetchUserProgress() {
     try {
-      const res = await axios.get("http://localhost:8080/api/user-progress", {
+      const res = axios.get(`${API_URL}user-progresst`, {
         headers: {
           Authorization: `Bearer ${token}`,
           params: { userId: userId },
@@ -183,8 +183,7 @@ async function finalizarTarea(userId, etapaKey) {
   mostrarModal();
 
   try {
-    const res = await axios.put(
-      `http://localhost:8080/api/user-progress/${userId}`,
+    const res =  await axios.put(`${API_URL}user-progress/${userId}`, 
       { status: etapaKey },
       { headers: { Authorization: `Bearer ${token}` } }
     );
@@ -211,21 +210,21 @@ let modalResolve; // para manejar promesa
 
 // Mostrar modal como promesa
 function mostrarModal(mensaje) {
-    return new Promise(resolve => {
-        document.getElementById("modalMessage").textContent = mensaje;
-        modal.style.display = "flex";
-        modalResolve = resolve;
-    });
+  return new Promise(resolve => {
+    document.getElementById("modalMessage").textContent = mensaje;
+    modal.style.display = "flex";
+    modalResolve = resolve;
+  });
 }
 
 // Eventos de botones
 btnCancelar.onclick = () => {
-    modal.style.display = "none";
-    modalResolve(false);
+  modal.style.display = "none";
+  modalResolve(false);
 };
 btnAceptar.onclick = () => {
-    modal.style.display = "none";
-    modalResolve(true);
+  modal.style.display = "none";
+  modalResolve(true);
 };
 
 

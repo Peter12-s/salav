@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmOGE4Y2RjNi1mMGI3LTRiODMtYWIyZC01ZGQxODY2MjQxMTciLCJuYW1lIjoiT1NNQVIgREFWSUQiLCJmX3N1cm5hbWUiOiJBUkVMTEFOTyIsInNfc3VybmFtZSI6Ik1BR0RBTEVOTyIsImNvbXBhbnlfbmFtZSI6bnVsbCwidXNlcl90eXBlIjoiQURNSU5JU1RSQURPUiIsImlhdCI6MTc1NzgyNTQzNywiZXhwIjoxNzU3ODI2MzM3fQ.IongztvdyJHA0QiAH9joub1bDmGsMhrO_OtiLdL5irY";
     const token = localStorage.getItem("access_token"); // Obtener el token del localStorage
-    const API_URL = "http://localhost:8080/api/form-request/from-enterprise"; // URL de tu API
     const form = document.querySelector(".form");
 
     form.addEventListener("submit", function (e) {
@@ -33,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // Enviar solicitud con Axios
-        axios.post(`${API_URL}`, data, {
+        axios.post(`${API_URL}form-request/from-enterprise`, data, {
             headers: {
                 Authorization: `Bearer ${token}`,
             }

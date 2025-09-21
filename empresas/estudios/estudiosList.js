@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     try {
-      const res = await axios.get("http://localhost:8080/api/user-progress", {
+      const res =  axios.get(`${API_URL}user-progresst`, {
         headers: {
           Authorization: `Bearer ${token}` // ✅ enviamos token
         },
