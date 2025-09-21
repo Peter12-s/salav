@@ -1,5 +1,5 @@
-const token = localStorage.getItem("access_token");
 document.addEventListener("DOMContentLoaded", () => {
+    obtenerLocalStorage();
     // ======== TABLA DE USUARIOS ========
     const userTable = document.getElementById("userTable");
     const searchInput = document.getElementById("searchInput");
@@ -44,7 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             users = res.data;
             filteredUsers = [...users];
-
             renderUsersPage();
         } catch (err) {
             if (err.response) {

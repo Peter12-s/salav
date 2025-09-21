@@ -191,7 +191,7 @@ async function finalizarTarea(userId, etapaKey) {
     mostrarModalMensaje("Tarea finalizada con éxito ✅");
     fetchUserProgress(); // recargar la tabla
   } catch (error) {
-    console.error("Error al actualizar tarea:", error.response?.data || error);
+    // console.error("Error al actualizar tarea:", error.response?.data || error);
     mostrarModalMensaje("❌ Ocurrió un error al finalizar la tarea");
   }
 }

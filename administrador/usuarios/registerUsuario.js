@@ -1,6 +1,7 @@
- const token = localStorage.getItem("access_token");
 
 document.addEventListener("DOMContentLoaded", () => {
+ obtenerLocalStorage();
+
   const form = document.getElementById("userForm");
    if (!token) {
         mostrarModalMensaje("No tienes sesión activa. Inicia sesión primero.");
@@ -49,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
           "❌ Error al registrar usuario: " +
             (err.response?.data?.message || err.message)
         );
-        console.error("Error detalle:", err.response?.data || err.message);
+        // console.error("Error detalle:", err.response?.data || err.message);
       }
     });
   }

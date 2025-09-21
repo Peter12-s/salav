@@ -244,7 +244,7 @@ main p {
       </main>
 
     <div class="footer">
-        <p>© 2024 SALAV soluciones empresariales. Derechos reservados.</p>
+        <p>© 2025 SALAV soluciones empresariales. Derechos reservados.</p>
     </div>
 
     <div class="olas">

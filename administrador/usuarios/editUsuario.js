@@ -1,12 +1,13 @@
-const userId = params.get("id");
-const token = localStorage.getItem("access_token");
+const params = new URLSearchParams(window.location.search);
+const userEdit = params.get("id");
 
 document.addEventListener("DOMContentLoaded", async () => {
+    obtenerLocalStorage();
   // ===================== FORMULARIO =====================
   const form = document.getElementById("userForm");
   if (!form) return;
 
-  const params = new URLSearchParams(window.location.search);
+
 
   const nombre = document.getElementById("nombre");
   const apellidoPaterno = document.getElementById("apellidoPaterno");
@@ -22,7 +23,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const companyName = document.getElementById("companyName");
   const nombreFields = document.querySelector(".nombre");
 
-  if (!userId) {
+  if (!userEdit) {
     mostrarModalMensaje("No se especificó un usuario para editar ❌");
     errorServer();
   }
@@ -30,7 +31,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // ===================== FUNCION PARA CARGAR USUARIO =====================
   async function cargarUsuario() {
     try {
-      const res = await axios.get(`${API_URL}user/${userId}`, {
+      const res = await axios.get(`${API_URL}user/${userEdit}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const user = res.data.user || res.data;
@@ -59,7 +60,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       correo.value = user.email || "";
 
     } catch (err) {
-      console.error(err);
+      // console.error(err);
       mostrarModalMensaje(" No se pudo cargar el usuario ⚠️");
     } finally {
       hidePreloader();
@@ -107,7 +108,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     try {
-      await axios.patch(`${API_URL}user/${userId}`, payload, {
+      await axios.patch(`${API_URL}user/${userEdit}`, payload, {
         headers: { Authorization: `Bearer ${token}` }
       });
       mostrarModalMensaje("Usuario actualizado correctamente ✅");

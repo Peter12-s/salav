@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelector(".login-container").style.display = "block";
         }, 500);
     }, 800);
-});
 
 
 const mensajeWhatsApp = encodeURIComponent("Hola, quisiera más información");
@@ -88,4 +87,6 @@ form.addEventListener("submit", function (e) {
         .catch(error => {
             mostrarModalMensaje("Error al iniciar sesión");
         });
+});
+
 });

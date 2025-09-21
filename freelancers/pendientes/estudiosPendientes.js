@@ -16,13 +16,13 @@ async function fetchFormRequest() {
             }
         });
 
-        console.log("Solicitudes:", res.data);
+        // console.log("Solicitudes:", res.data);
         candidatosData = res.data; // Guardar los datos obtenidos
         renderCandidatos();
         return res.data;
 
     } catch (error) {
-        console.error("Error al obtener solicitudes:", error.response?.data || error);
+        // console.error("Error al obtener solicitudes:", error.response?.data || error);
     }
 }
 fetchFormRequest();
@@ -157,7 +157,7 @@ window.rechazar = async function () {
         validarCandidatos();
 
     } catch (err) {
-        console.error(err);
+        // console.error(err);
         mostrarModalMensaje("⚠️ Error al rechazar la solicitud");
     }
 };

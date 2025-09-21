@@ -32,18 +32,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // Enviar solicitud con Axios
-        axios.post(`${API_URL}form-request/from-enterprise`, data, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            }
-        })
-            .then(res => {
-                mostrarModalMensaje("Solicitud enviada correctamente");
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault(); // evitar recarga del form
+
+            try {
+                const res = await axios.post(`${API_URL}form-request/from-enterprise`, data, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                mostrarModalMensaje("Solicitud enviada correctamente ✅");
                 form.reset();
-            })
-            .catch(err => {
+            } catch (err) {
                 mostrarModalMensaje("Error al enviar la solicitud");
-                console.error(err.response ? err.response.data : err);
-            });
+                // console.error(err.response ? err.response.data : err);
+            }
+        });
     });
 });

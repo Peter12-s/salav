@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             applicants = res.data;
             filteredUsuarios = [...applicants];
-            mostrarModalMensaje("Petición realizada. ✅");
+            // mostrarModalMensaje("Petición realizada. ✅");
             renderSolicitudes();
         } catch (error) {
             if (error.response && error.response.status === 401) {
@@ -157,7 +157,7 @@ function renderSolicitudes() {
                     errorServer();
                 } else {
                     if (token) {
-                        console.log(token);
+                        // console.log(token);
                         mostrarModalMensaje("Error al obtener el progreso de usuarios. ❌");
                         recargarPagina();
                     }
