@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const nombreFields = document.querySelector(".nombre");
 
   if (!userId) {
-    alert("❌ No se especificó un usuario para editar");
+    mostrarModalMensaje("No se especificó un usuario para editar ❌");
     errorServer();
   }
 
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     } catch (err) {
       console.error(err);
-      alert("⚠️ No se pudo cargar el usuario");
+      mostrarModalMensaje(" No se pudo cargar el usuario ⚠️");
     } finally {
       hidePreloader();
     }
@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       await axios.patch(`${API_URL}user/${userId}`, payload, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      alert("✅ Usuario actualizado correctamente");
+      mostrarModalMensaje("Usuario actualizado correctamente ✅");
       window.location.href = "listarUsuarios.html";
 
     } catch (err) {
