@@ -1,18 +1,18 @@
- const etapas = [
-        { key: "application_accepted", label: "Solicitud aceptada" },
-        { key: "candidate_contacted", label: "Candidato contactado" },
-        { key: "visit_scheduled", label: "Visita agendada" },
-        { key: "background_check", label: "Background check" },
-        { key: "visit_complete", label: "Visita realizada" },
-        { key: "documenting_information", label: "Documentando información" },
-        { key: "evaluation_complete", label: "Evaluación finalizada" }
-    ];
+const etapas = [
+    { key: "application_accepted", label: "Solicitud aceptada" },
+    { key: "candidate_contacted", label: "Candidato contactado" },
+    { key: "visit_scheduled", label: "Visita agendada" },
+    { key: "background_check", label: "Background check" },
+    { key: "visit_complete", label: "Visita realizada" },
+    { key: "documenting_information", label: "Documentando información" },
+    { key: "evaluation_complete", label: "Evaluación finalizada" }
+];
 
 
 
-    const etapasConAccion = [
-        "background_check"
-    ];
+const etapasConAccion = [
+    "background_check"
+];
 
 document.addEventListener("DOMContentLoaded", () => {
     obtenerLocalStorage();
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-   
+
     prevBtn = document.getElementById("prevBtn");
     nextBtn = document.getElementById("nextBtn");
     pageInfo = document.getElementById("pageInfo");
@@ -108,15 +108,15 @@ btnGuardar.onclick = async () => {
             { background_check: true },
             { headers: { Authorization: `Bearer ${token}` } }
         );
+        mostrarModalMensaje("Archivo guardado y progreso actualizado correctamente ✅");
 
-        // alert("✅ Archivo guardado y progreso actualizado correctamente");
 
     } catch (error) {
         if (error.response && error.response.status === 401) {
-            alert("❌ Sesión expirada. Inicia sesión de nuevo.");
+            mostrarModalMensaje("Sesión expirada. Inicia sesión de nuevo. ❌");
             errorServer();
         } else {
-            alert("❌ Error al obtener el progreso de usuarios.");
+            mostrarModalMensaje("Error al obtener el progreso de usuarios. ❌");
             recarcarPagina();
         }
     } finally {

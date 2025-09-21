@@ -1,5 +1,5 @@
-  const userId = params.get("id");
-  const token = localStorage.getItem("access_token");
+const userId = params.get("id");
+const token = localStorage.getItem("access_token");
 
 document.addEventListener("DOMContentLoaded", async () => {
   // ===================== FORMULARIO =====================
@@ -114,8 +114,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       window.location.href = "listarUsuarios.html";
 
     } catch (err) {
-      console.error(err);
-      alert("❌ No se pudo actualizar el usuario");
+      mostrarModalMensaje(" No se pudo actualizar el usuario ❌");
     } finally {
       hidePreloader();
     }

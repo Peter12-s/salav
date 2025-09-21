@@ -1,4 +1,4 @@
- const token = localStorage.getItem("access_token");
+const token = localStorage.getItem("access_token");
 document.addEventListener("DOMContentLoaded", () => {
     // ======== TABLA DE USUARIOS ========
     const userTable = document.getElementById("userTable");
@@ -11,10 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const goPageBtn = document.getElementById("goPage");
 
     // 👇 Token desde localStorage
-   
+
     if (!token) {
-        alert("No hay sesión activa. Por favor, inicia sesión.");
-            errorServer();
+        mostrarModalMensaje("No hay sesión activa. Por favor, inicia sesión ❌");
+        errorServer();
         return;
     }
 
@@ -50,9 +50,9 @@ document.addEventListener("DOMContentLoaded", () => {
             renderUsersPage();
         } catch (err) {
             if (err.response) {
-                alert("❌ Error al obtener usuarios: " + err.response.data.message);
+                mostrarModalMensaje("Error al obtener usuarios ❌");
             } else {
-                alert("⚠️ No se pudo conectar con el servidor");
+                mostrarModalMensaje("No se pudo conectar con el servidor ⚠️");
             }
         }
     }
@@ -69,14 +69,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     "Content-Type": "application/json"
                 }
             });
-
-            alert("✅ Usuario eliminado correctamente");
+            mostrarModalMensaje("Usuario eliminado correctamente ✅");
             await fetchUsers(); // refrescar tabla
         } catch (err) {
             if (err.response) {
-                alert("❌ No se pudo eliminar: " + err.response.data.message);
+                mostrarModalMensaje("No se pudo eliminar ❌");
             } else {
-                alert("⚠️ No se pudo conectar con el servidor");
+                mostrarModalMensaje("No se pudo conectar con el servidor ⚠️");
             }
         }
     }
