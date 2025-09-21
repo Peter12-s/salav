@@ -1,8 +1,5 @@
 var candidatosData = [];
-
-const token = localStorage.getItem("access_token"); // o de donde lo estés guardando
-const freelanceId = localStorage.getItem("user_id"); // 👈 el id del freelancer
-
+obtenerLocalStorage();
 async function fetchFormRequest() {
     try {
 
@@ -11,14 +8,14 @@ async function fetchFormRequest() {
                 Authorization: `Bearer ${token}` // ✅ enviamos token
             },
             params: {
-                freelance_id: freelanceId, // ✅ enviamos parámetro
+                freelance_id: userId, // ✅ enviamos parámetro
                 accepted: null // ✅ solo pendientes
             }
         });
 
         // console.log("Solicitudes:", res.data);
         candidatosData = res.data; // Guardar los datos obtenidos
-        renderCandidatos();
+        renderSolicitudes();
         return res.data;
 
     } catch (error) {
@@ -38,7 +35,7 @@ let tooltipTimeout;
 
 
 // Renderizar candidatos
-function renderCandidatos() {
+function renderSolicitudes() {
     if (candidatosData.length > 0) {
         candidatosData.forEach(c => {
             const div = document.createElement("div");

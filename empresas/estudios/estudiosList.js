@@ -3,8 +3,8 @@ const tabla = document.getElementById("progressTable");
 const idEnterprise = localStorage.getItem("user_id"); // 👈 el id del freelancer
 
 // Variables globales
-let usuarios = [];
-let filteredUsuarios = [];
+let usuarios=[] ;
+let filteredUsuarios=[] ;
 let currentPage = 1;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (newLimit !== usersPerPage) {
       usersPerPage = newLimit;
       currentPage = 1;
-      renderTabla();
+      renderSolicitudes();
     }
   });
 
@@ -45,28 +45,28 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   // === Fetch candidatos ===
-  async function fetchUserProgress() {
+async function fetchUserProgress() {
+  try {
+    const res = await axios.get(`${API_URL}user-progress`, {
+      headers: {
+        Authorization: `Bearer ${token}` // ✅ enviamos token
+      },
+      params: {
+        enterprise_id: idEnterprise, // ✅ enviamos parámetro
+      }
+    });
 
-
-    try {
-      const res =  axios.get(`${API_URL}user-progresst`, {
-        headers: {
-          Authorization: `Bearer ${token}` // ✅ enviamos token
-        },
-        params: {
-          enterprise_id: idEnterprise, // ✅ enviamos parámetro
-        }
-      });
-      usuarios = res.data;
-      filteredUsuarios = [...usuarios];
-      renderTabla();
-    } catch (error) {
-      console.error("Error al obtener user-progress:", error.response?.data || error);
-    }
+    usuarios = res.data;
+    filteredUsuarios = [...usuarios];
+    renderSolicitudes();
+  } catch (error) {
+    console.error("Error al obtener user-progress:", error.response?.data || error);
   }
+}
+
 
   // === Render de tabla con paginación ===
-  function renderTabla() {
+  function renderSolicitudes() {
     tabla.innerHTML = "";
 
     if (filteredUsuarios.length === 0) {
@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("prevPage").addEventListener("click", () => {
     if (currentPage > 1) {
       currentPage--;
-      renderTabla();
+      renderSolicitudes();
     }
   });
 
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalPages = Math.ceil(filteredUsuarios.length / usersPerPage);
     if (currentPage < totalPages) {
       currentPage++;
-      renderTabla();
+      renderSolicitudes();
     }
   });
 
@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let page = parseInt(document.getElementById("pageInput").value);
     if (page >= 1 && page <= totalPages) {
       currentPage = page;
-      renderTabla();
+      renderSolicitudes();
     }
   });
 
@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
             (u.applicant_fullname || "").toLowerCase().includes(query)
         );
     currentPage = 1;
-    renderTabla();
+    renderSolicitudes();
   });
 
   // === Llamada inicial ===

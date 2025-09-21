@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (newLimit !== usersPerPage) {
             usersPerPage = newLimit;
             currentPage = 1;
-            renderUsersPage();
+            renderSolicitudes();
         }
     });
 
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             users = res.data;
             filteredUsers = [...users];
-            renderUsersPage();
+            renderSolicitudes();
         } catch (err) {
             if (err.response) {
                 mostrarModalMensaje("Error al obtener usuarios ❌");
@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
     prevBtn.addEventListener("click", () => {
         if (currentPage > 1) {
             currentPage--;
-            renderUsersPage();
+            renderSolicitudes();
         }
     });
 
@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
         if (currentPage < totalPages) {
             currentPage++;
-            renderUsersPage();
+            renderSolicitudes();
         }
     });
 
@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let page = parseInt(pageInput.value);
         if (page >= 1 && page <= totalPages) {
             currentPage = page;
-            renderUsersPage();
+            renderSolicitudes();
         }
     });
 
@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return displayName.toLowerCase().includes(query);
         });
         currentPage = 1;
-        renderUsersPage();
+        renderSolicitudes();
     });
 
     // Llamada inicial

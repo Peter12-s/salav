@@ -1,10 +1,8 @@
 let usuarios = [];
-let filteredUsuarios = [];
 let usuarioSeleccionado = null; // ✅ usuario en el que se hizo clic para adjuntar
-const token = localStorage.getItem("access_token");
-const userId = localStorage.getItem("_id");
 
 document.addEventListener("DOMContentLoaded", () => {
+  obtenerLocalStorage();
   const prevBtn = document.getElementById("prevPage");
   const nextBtn = document.getElementById("nextPage");
   const pageInfo = document.getElementById("pageInfo");
@@ -23,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (newLimit !== usersPerPage) {
       usersPerPage = newLimit;
       currentPage = 1;
-      renderTabla();
+      renderSolicitudes();
     }
   });
 
@@ -39,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
       usuarios = res.data; // Actualiza la variable global con los datos recibidos
       // console.log("User Progress:", usuarios);
       filteredUsuarios = [...usuarios];
-      renderTabla(); // Llama a la función para renderizar la tabla con los nuevos datos
+      renderSolicitudes(); // Llama a la función para renderizar la tabla con los nuevos datos
       return res.data;
     } catch (error) {
       if (error.response && error.response.status === 401) {
@@ -47,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
         errorServer();
       } else {
         mostrarModalMensaje("❌ Error al obtener el progreso de usuarios.");
-        recargarPagina();
+        errorServer();
       }
     }
   }
@@ -56,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
   prevBtn.addEventListener("click", () => {
     if (currentPage > 1) {
       currentPage--;
-      renderTabla();
+      renderSolicitudes();
     }
   });
 
@@ -64,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalPages = Math.ceil(filteredUsuarios.length / usersPerPage);
     if (currentPage < totalPages) {
       currentPage++;
-      renderTabla();
+      renderSolicitudes();
     }
   });
 
@@ -73,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let page = parseInt(pageInput.value);
     if (page >= 1 && page <= totalPages) {
       currentPage = page;
-      renderTabla();
+      renderSolicitudes();
     } else {
       mostrarModalMensaje(`⚠️ Ingresa un número entre 1 y ${totalPages}`);
     }
@@ -85,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
       (u.applicant_fullname).toLowerCase().includes(query)
     );
     currentPage = 1;
-    renderTabla();
+    renderSolicitudes();
   });
 
 
@@ -110,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { key: "evaluation_complete", label: "Evaluación finalizada" }
   ];
 
-  function renderTabla() {
+  function renderSolicitudes() {
     tabla.innerHTML = ""; // limpiar
     const totalPages = Math.ceil(filteredUsuarios.length / usersPerPage) || 1;
     totalPagesSpan.textContent = totalPages;
