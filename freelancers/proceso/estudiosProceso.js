@@ -1,5 +1,5 @@
 const token = localStorage.getItem("access_token");
-    const userId = localStorage.getItem("_id");
+const userId = localStorage.getItem("_id");
 
 var usuarios = []; // Variable global para almacenar los usuarios
 async function fetchUserProgress() {
@@ -12,12 +12,12 @@ async function fetchUserProgress() {
     });
 
     usuarios = res.data; // Actualiza la variable global con los datos recibidos
-    console.log("User Progress:", usuarios);
-    
+    // console.log("User Progress:", usuarios);
+
     renderTabla(); // Llama a la función para renderizar la tabla con los nuevos datos
     return res.data;
   } catch (error) {
-    console.error("Error al obtener user-progress:", error.response?.data || error);
+    // console.error("Error al obtener user-progress:", error.response?.data || error);
   }
 }
 
@@ -102,8 +102,7 @@ function renderTabla() {
 
 // 🔹 Función para confirmar y mandar petición de actualización
 async function finalizarTarea(userId, etapaKey) {
-  const confirmar = confirm("¿Deseas finalizar la tarea?");
-  if (!confirmar) return;
+  mostrarModal()
 
   try {
     const res = await axios.put(
@@ -119,3 +118,28 @@ async function finalizarTarea(userId, etapaKey) {
     alert("❌ Ocurrió un error al finalizar la tarea");
   }
 }
+
+
+
+// Variables del modal
+const btnCancelar = document.getElementById("btnCancelar");
+const btnAceptar = document.getElementById("btnAceptar");
+const modal = document.getElementById("modalConfirm");
+
+let modalResolve; // para manejar promesa
+
+// Mostrar modal como promesa
+function mostrarModal() {
+  modal.style.display = "flex";
+  modalResolve = resolve;
+}
+
+// Eventos de botones
+btnCancelar.onclick = () => {
+  modal.style.display = "none";
+
+};
+btnAceptar.onclick = () => {
+  modal.style.display = "none";
+
+};

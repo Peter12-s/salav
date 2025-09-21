@@ -12,14 +12,14 @@
 </head>
 
 <body>
- <div id="preloader">
-        <img width="150px" src="../../img/Logo.png" alt="Cargando..." />
-    </div>
+  <div id="preloader">
+    <img width="150px" src="../../img/Logo.png" alt="Cargando..." />
+  </div>
   <plantilla-salav>
     <div class="slot-header" slot="header">
       <img style="width: 150px;" src="../../img/Silueta Clara.png" alt="">
       <nav id="menu">
-       <a href="../pendientes/estudiosPendientes.html">Estudios pendientes</a>
+        <a href="../pendientes/estudiosPendientes.html">Estudios pendientes</a>
         <a href="estudiosProceso.html">Estudios en proceso</a>
         <!-- Botón Logout con SVG -->
         <button class="logout-btn" id="btnLogout" aria-label="Cerrar sesión" title="Cerrar sesión">
@@ -47,37 +47,48 @@
       <h1>Caja de candidatos</h1>
 
       <h4>Candidatos</h4>
-<div class="search-container">
-            <input type="text" id="searchInput" placeholder="Buscar por nombre...">
+      <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Buscar por nombre...">
+      </div>
+      <div class="container">
+        <table>
+
+        </table>
+
+
+      </div>
+
+      <!-- Paginación -->
+      <div class="pagination">
+        <button id="prevPage" class="page-btn">«</button>
+
+        <!-- Se mostrará solo en escritorio -->
+        <div id="pageJump" class="page-jump">
+          Página <input type="number" id="pageInput" min="1"> de <span id="totalPages">1</span>
+          <button id="goPage">Ir</button>
         </div>
-        <div class="container">
-            <table>
-               
-            </table>
 
+        <!-- Se mostrará en todos los dispositivos -->
+        <span id="pageInfo" class="page-info">Página 1 de 1</span>
 
-        </div>
-
-        <!-- Paginación -->
-        <div class="pagination">
-            <button id="prevPage" class="page-btn">«</button>
-
-            <!-- Se mostrará solo en escritorio -->
-            <div id="pageJump" class="page-jump">
-                Página <input type="number" id="pageInput" min="1"> de <span id="totalPages">1</span>
-                <button id="goPage">Ir</button>
-            </div>
-
-            <!-- Se mostrará en todos los dispositivos -->
-            <span id="pageInfo" class="page-info">Página 1 de 1</span>
-
-            <button id="nextPage" class="page-btn">»</button>
-        </div>
+        <button id="nextPage" class="page-btn">»</button>
+      </div>
     </div>
 
   </plantilla-salav>
 
+   <!-- Modal personalizado -->
+    <div id="modalConfirm" class="modal-overlay" style="display:none;">
+        <div class="modal-box">
+            <p id="modalMessage">¿Deseas finalizar la tarea?</p>
+            <div class="modal-actions">
+                <button id="btnCancelar" class="btn cancelar">Cancelar</button>
+                <button id="btnAceptar" class="btn aceptar">Finalizar</button>
+            </div>
+        </div>
+    </div>
 
+    
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="estudiosProceso.js"></script>
   <script src="../../config.js"></script>
