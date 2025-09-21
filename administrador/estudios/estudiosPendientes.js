@@ -180,10 +180,16 @@ function renderSolicitudes() {
     });
 
     // 📌 Actualizar paginación
-    pageInfo.textContent = `Página ${currentPage} de ${totalPages}`;
     pageInput.min = 1;
     pageInput.max = totalPages;
+     // 🔹 Calcula total de páginas
+    const totalPagesCalc = Math.ceil(filteredUsuarios.length / usersPerPage) || 1;
+
+    // 🔹 Actualiza info en ambos lugares
+    pageInfo.textContent = `Página ${currentPage} de ${totalPagesCalc}`;
+    document.getElementById("totalPages").textContent = totalPagesCalc;
     pageInput.value = currentPage;
+
 
     prevBtn.disabled = currentPage === 1;
     nextBtn.disabled = currentPage === totalPages;

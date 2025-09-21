@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             usuarios = res.data;
             filteredUsuarios = [...usuarios];
-            mostrarModalMensaje("Petición realizada. ✅");
+            // mostrarModalMensaje("Petición realizada. ✅");
             renderSolicitudes();
         } catch (error) {
             if (error.response && error.response.status === 401) {
@@ -129,8 +129,15 @@ btnGuardar.onclick = async () => {
 function renderSolicitudes() {
     tablaUsuarios.innerHTML = "";
 
-    const totalPages = Math.ceil(filteredUsuarios.length / usersPerPage) || 1;
-    pageInfo.textContent = `Página ${currentPage} de ${totalPages}`;
+  // 📌 Actualizar paginación
+    pageInput.min = 1;
+    pageInput.max = totalPages;
+     // 🔹 Calcula total de páginas
+    const totalPagesCalc = Math.ceil(filteredUsuarios.length / usersPerPage) || 1;
+
+    // 🔹 Actualiza info en ambos lugares
+    pageInfo.textContent = `Página ${currentPage} de ${totalPagesCalc}`;
+    document.getElementById("totalPages").textContent = totalPagesCalc;
     pageInput.value = currentPage;
 
     if (filteredUsuarios.length === 0) {

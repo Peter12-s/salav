@@ -51,6 +51,8 @@ let pageInput;
 let goPageBtn;
 let tbody;
 let tablaUsuarios;
+let userTable;
+
 
 
 

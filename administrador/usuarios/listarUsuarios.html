@@ -82,7 +82,7 @@
                     </div>
 
                     <!-- Se mostrará en todos los dispositivos -->
-                    <span id="pageInfo" class="page-info">Página 1 de 1</span>
+                    <span id="pageInfo" class="page-info">Página 1 de</span>
 
                     <button id="nextPage" class="page-btn">»</button>
                 </div>
@@ -95,7 +95,16 @@
         <div class="modal-contenido" id="modal-contenido">
         </div>
     </div>
-
+  <!-- Modal de confirmación -->
+    <div id="modalConfirmar" class="modal">
+        <div class="modal-contenido">
+            <h3 id="modalMensaje"></h3>
+            <div class="acciones">
+                <button id="btnCancelar">Cancelar</button>
+                <button id="btnEliminar">Eliminar</button>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../../config.js"></script>
     <script src="../../utilities.js"></script>
