@@ -3,10 +3,8 @@ let filteredUsuarios = [];
 let usuarioSeleccionado = null; // ✅ usuario en el que se hizo clic para adjuntar
 const token = localStorage.getItem("access_token");
 const userId = localStorage.getItem("_id");
+
 document.addEventListener("DOMContentLoaded", () => {
-
-
-
     const prevBtn = document.getElementById("prevPage");
     const nextBtn = document.getElementById("nextPage");
     const pageInfo = document.getElementById("pageInfo");
@@ -15,7 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalPagesSpan = document.getElementById("totalPages");
     const tabla = document.querySelector("table");
     const searchInput = document.getElementById("searchInput");
-
 
     let currentPage = 1;
     let usersPerPage = getUsersPerPage(); // ✅ viene del config.js
@@ -266,7 +263,7 @@ btnGuardar.onclick = async () => {
         );
 
         // alert("✅ Archivo guardado y progreso actualizado correctamente");
-       
+
     } catch (error) {
         if (error.response && error.response.status === 401) {
             alert("❌ Sesión expirada. Inicia sesión de nuevo.");
