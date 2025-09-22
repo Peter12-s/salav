@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     goPageBtn = document.getElementById("goPage");
     tbody = document.querySelector("#tablaSolicitudes tbody");
     usersPerPage = getUsersPerPage();
+    searchInput=document.querySelector("#searchInput");
 
     eventosPaginacion();
     // 📌 Filtro de búsqueda

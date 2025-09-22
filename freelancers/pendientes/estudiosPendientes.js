@@ -2,27 +2,26 @@ var candidatosData = [];
 document.addEventListener("DOMContentLoaded", () => {
     obtenerLocalStorage();
 
-async function fetchFormRequest() {
-    try {
+    async function fetchFormRequest() {
+        try {
+            const res = await axios.get(`${API_URL}form-request`, {
+                headers: {
+                    Authorization: `Bearer ${token}` // ✅ enviamos token
+                },
+                params: {
+                    freelance_id: userId, 
+                    accepted: false 
+                }
+            });
 
-        const res = axios.post(`${API_URL}form-request`, {
-            headers: {
-                Authorization: `Bearer ${token}` // ✅ enviamos token
-            },
-            params: {
-                freelance_id: userId, // ✅ enviamos parámetro
-                accepted: null // ✅ solo pendientes
-            }
-        });
+            candidatosData = res.data; // Guardar los datos obtenidos
+            renderSolicitudes();
+            return res.data;
 
-        candidatosData = res.data; // Guardar los datos obtenidos
-        renderSolicitudes();
-        return res.data;
-
-    } catch (error) {
-        // console.error("Error al obtener solicitudes:", error.response?.data || error);
+        } catch (error) {
+            console.error("Error al obtener solicitudes:", error.response?.data || error);
+        }
     }
-}
 
     // 📌 Inicializar
     (async () => {

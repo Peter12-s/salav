@@ -53,6 +53,9 @@ let tbody;
 let tablaUsuarios;
 let userTable;
 
+let totalPagesSpan ;
+let tabla;
+let searchInput;
 
 
 
