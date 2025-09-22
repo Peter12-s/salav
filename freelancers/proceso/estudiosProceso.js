@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         params: {
           freelance_id: userId, // 👈 este es el query param
+          accepted : true
         },
       });
 

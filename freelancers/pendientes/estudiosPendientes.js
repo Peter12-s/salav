@@ -145,7 +145,7 @@ window.rechazar = async function () {
         await axios.patch(`${API_URL}form-request/${solicitudId}`,
             {
                 freelance_id: null, // 👈 liberamos al freelancer
-                accepted: null     // 👈 lo pasamos a pendiente
+                accepted: false     // 👈 lo pasamos a pendiente
             },
             {
                 headers: { Authorization: `Bearer ${token}` }
