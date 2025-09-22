@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
           Authorization: `Bearer ${token}`,
         },
         params: {
-          freelance_id: userId, // 👈 este es el query param
+          freelance_id: userId,
           accepted : true
         },
       });

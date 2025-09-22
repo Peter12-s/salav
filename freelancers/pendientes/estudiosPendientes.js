@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 params: {
                     freelance_id: userId, 
-                    accepted: false 
+                    accepted: null 
                 }
             });
 
