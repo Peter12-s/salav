@@ -126,9 +126,18 @@ function renderSolicitudes() {
       // ✅ Si la etapa está en etapasConAccion, agregamos evento de clic
       if (etapasConAccion.includes(etapa.key)) {
         td.style.cursor = "pointer"; // indicar que es clickeable
-        td.addEventListener("click", () => {
-          finalizarTarea(usuario._id, etapa.key);
-        });
+
+        if(etapa.key == "documenting_information"){
+          td.addEventListener("click", () => {
+            console.log("se abre el fomulario ", usuario._id);
+            window.location.href = `estudiosFormulario.html?user=${encodeURIComponent(usuario._id)}`;
+          });
+        }else{
+          td.addEventListener("click", () => {
+            finalizarTarea(usuario._id, etapa.key);
+          });
+        }
+        
       }
       tr.appendChild(td);
 
