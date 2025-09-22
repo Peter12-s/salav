@@ -9,8 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     Authorization: `Bearer ${token}` // ✅ enviamos token
                 },
                 params: {
-                    freelance_id: userId, 
-                    accepted: null 
+                   
+                    accepted: null
                 }
             });
 
@@ -115,7 +115,10 @@ window.aceptar = async function () {
     const solicitudId = seleccionado.getAttribute("data-id"); // 👈 id de la solicitud
     try {
         await axios.patch(`${API_URL}form-request/${solicitudId}`,
-            { accepted: true },
+            {
+                accepted: true,
+                freelance_id: userId,
+            },
             { headers: { Authorization: `Bearer ${token}` } }
         );
 
