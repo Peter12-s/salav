@@ -5,12 +5,12 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             const res = await axios.get(`${API_URL}user`, {
                 headers: { Authorization: `Bearer ${token}` },
-                params: { user_type: user_type }
+                params: { user_type: "FREELANCER" }
             });
             freelancers = res.data;
         } catch (err) {
-             mostrarModalMensaje("Error en peticion. Inicia sesión de nuevo. ❌");
-             errorServer();
+            mostrarModalMensaje("Error en peticion. Inicia sesión de nuevo. ❌");
+            errorServer();
         }
     }
 
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     goPageBtn = document.getElementById("goPage");
     tbody = document.querySelector("#tablaSolicitudes tbody");
     usersPerPage = getUsersPerPage();
-    searchInput=document.querySelector("#searchInput");
+    searchInput = document.querySelector("#searchInput");
 
     eventosPaginacion();
     // 📌 Filtro de búsqueda
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </td></tr>`;
             document.getElementsByClassName("pagination")[0].style.display = "none";
         } else {
-            document.getElementsByClassName("pagination")[0].style.display = "block";
+            document.getElementsByClassName("pagination")[0].style.display = "flex";
         }
     });
 
@@ -140,31 +140,43 @@ function renderSolicitudes() {
         $(select).on("select2:select", toggleButton);
         $(select).on("select2:clear", toggleButton);
 
-        btnAsignar.addEventListener("click", async () => {
-            const freelancerId = select.value;
-            if (!freelancerId) return;
-
-            try {
-                await axios.patch(`${API_URL}form-request/${solicitud._id}`,
-                    { headers: { Authorization: `Bearer ${token}` } }
-                );
-                mostrarModalMensaje("Freelancer asignado correctamente a ${select.options[select.selectedIndex].text}` ✅");
-                tr.remove();
-                filteredUsuarios = filteredUsuarios.filter(a => a._id !== solicitud._id);
-                renderSolicitudes();
-            } catch (err) {
-                if (err.response && err.response.status === 401) {
-                    mostrarModalMensaje("Sesión expirada. Inicia sesión de nuevo. ❌");
-                    errorServer();
-                } else {
-                    if (token) {
-                        // console.log(token);
-                        mostrarModalMensaje("Error al obtener el progreso de usuarios. ❌");
-                        recargarPagina();
-                    }
+   btnAsignar.addEventListener("click", async () => {
+    const freelancerId = select.value;
+// console.log({
+//   solicitud: solicitud._id,
+//   freelance_id: freelancerId,
+//   accepted: true
+// });
+    try {
+        await axios.patch(
+            `${API_URL}form-request/${solicitud._id}`, 
+            {
+                freelance_id: freelancerId,
+                accepted: false                       
+            },
+            {
+                headers: { 
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
                 }
             }
-        });
+        );
+
+        mostrarModalMensaje(
+            `Freelancer asignado correctamente a ${select.options[select.selectedIndex].text} ✅`
+        );
+
+        // Si quieres quitar la fila de la tabla:
+         tr.remove();
+         filteredUsuarios = filteredUsuarios.filter(a => a._id !== solicitud._id);
+         renderSolicitudes();
+    } catch (err) {
+        console.error("Error al asignar freelancer ❌", err);
+        mostrarModalMensaje("Error al asignar freelancer ❌");
+    }
+});
+
+
 
         tdSelect.appendChild(select);
         tdSelect.appendChild(btnAsignar);
@@ -183,7 +195,7 @@ function renderSolicitudes() {
     // 📌 Actualizar paginación
     pageInput.min = 1;
     pageInput.max = totalPages;
-     // 🔹 Calcula total de páginas
+    // 🔹 Calcula total de páginas
     const totalPagesCalc = Math.ceil(filteredUsuarios.length / usersPerPage) || 1;
 
     // 🔹 Actualiza info en ambos lugares

@@ -99,7 +99,7 @@ function renderSolicitudes() {
     document.getElementsByClassName("pagination")[0].style.display = "none";
     return;
   } else {
-    document.getElementsByClassName("pagination")[0].style.display = "block";
+    document.getElementsByClassName("pagination")[0].style.display = "flex";
   }
 
   const start = (currentPage - 1) * usersPerPage;

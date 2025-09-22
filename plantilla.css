@@ -384,11 +384,10 @@ main p {
 }
 
 .pagination {
-    display: block;
-    text-align: center;
-    gap: 0.5rem;
-    align-items: center;
-    font-family: sans-serif;
+  display: flex;        /* ya lo tienes en inline-flex, cámbialo a flex */
+  justify-content: center;
+  align-items: center;  /* opcional, para alineación vertical */
+  width: 100%;          /* asegura que ocupe todo el ancho disponible */
 }
 /* 🔲 Fondo del modal */
 .modal {

@@ -82,7 +82,7 @@ async function fetchUserProgress() {
       actualizarPaginacion();
       return;
     } else {
-      document.getElementsByClassName("pagination")[0].style.display = "block";
+      document.getElementsByClassName("pagination")[0].style.display = "flex";
 
     }
 
