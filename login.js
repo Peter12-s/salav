@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 800);
 
 
-const mensajeWhatsApp = encodeURIComponent("Hola, quisiera más información");
 
 // Evento para llamar
 document.getElementById("btnLlamar").addEventListener("click", () => {

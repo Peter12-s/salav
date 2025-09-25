@@ -1,67 +1,63 @@
 var candidatosData = [];
+let seleccionado = null;
+let tooltipTimeout;
+
 document.addEventListener("DOMContentLoaded", () => {
+
     obtenerLocalStorage();
+    var listaCandidatos = document.getElementById("listaCandidatos");
+    var acciones = document.querySelector(".acciones");
+    var notaCandidatos = document.getElementById("listaCandidatos");
+    var tooltip = document.getElementById("tooltip");
+  var btnAceptar = document.querySelector(".btn-aceptar");
+var btnRechazar = document.querySelector(".btn-rechazar");
 
     async function fetchFormRequest() {
         try {
             const res = await axios.get(`${API_URL}form-request`, {
-                headers: {
-                    Authorization: `Bearer ${token}` // ✅ enviamos token
-                },
-                params: {
-                   
-                    accepted: null
-                }
+                headers: { Authorization: `Bearer ${token}` },
+                params: { accepted: false }
             });
 
-            candidatosData = res.data; // Guardar los datos obtenidos
+            candidatosData = res.data;
             renderSolicitudes();
             return res.data;
-
         } catch (error) {
             console.error("Error al obtener solicitudes:", error.response?.data || error);
         }
     }
 
-    // 📌 Inicializar
     (async () => {
         await fetchFormRequest();
     })();
-});
 
+    // 👇 renderSolicitudes necesita acceso a botones → muévela aquí
+    function renderSolicitudes() {
+        listaCandidatos.innerHTML = "";
 
+        if (candidatosData.length > 0) {
+            candidatosData.forEach(c => {
+                const div = document.createElement("div");
+                div.className = "candidato";
+                div.setAttribute("data-id", c._id);
+                div.setAttribute("data-info", `• ${c.applicant.person.town}\n• ${c.applicant.person.state}\n• ${c.applicant.person.settlement}`);
+                div.textContent = c.applicant.person.name;
+                listaCandidatos.appendChild(div);
+            });
 
-const listaCandidatos = document.getElementById("listaCandidatos");
-const acciones = document.querySelector(".acciones");
-const notaCandidatos = document.querySelector(".notaCandidatos");
-const tooltip = document.getElementById("tooltip");
-
-let seleccionado = null;
-let tooltipTimeout;
-
-
-// Renderizar candidatos
-function renderSolicitudes() {
-    if (candidatosData.length > 0) {
-        candidatosData.forEach(c => {
-            const div = document.createElement("div");
-            div.className = "candidato";
-            div.setAttribute("data-id", c._id); // 👈 guardamos el id de la solicitud
-            div.setAttribute(
-                "data-info",
-                `• ${c.applicant.person.town}\n• ${c.applicant.person.state}\n• ${c.applicant.person.settlement}`
-            ); div.textContent = c.applicant.person.name;
-            listaCandidatos.appendChild(div);
-        });
-        acciones.hidden = false; // Muestra el elemento
-        notaCandidatos.textContent = "";
-    } else {
-        acciones.hidden = true; // Oculta el elemento
-        notaCandidatos.textContent = "No hay solicitudes de candidatos";
+            acciones.hidden = false;
+            btnAceptar.disabled = true;
+            btnRechazar.disabled = true;
+            notaCandidatos.textContent = "";
+        } else {
+            acciones.hidden = false;
+            btnAceptar.disabled = true;
+            btnRechazar.disabled = true;
+            notaCandidatos.textContent = "No hay solicitudes de candidatos";
+        }
+        addCandidatoListeners();
     }
-    addCandidatoListeners();
-}
-// Añadir listeners a los candidatos
+    // Añadir listeners a los candidatos
 function addCandidatoListeners() {
     const candidatos = document.querySelectorAll(".candidato");
     candidatos.forEach(candidato => {
@@ -73,12 +69,21 @@ function addCandidatoListeners() {
             candidatos.forEach(c => c.classList.remove("seleccionado"));
             candidato.classList.add("seleccionado");
             seleccionado = candidato;
+
+            // ✅ Habilitar botones al seleccionar un candidato
+            btnAceptar.disabled = false;
+            btnRechazar.disabled = false;
+
             tooltipTimeout = setTimeout(() => {
                 tooltip.classList.remove("visible");
             }, 1200);
         });
     });
 }
+});
+
+
+
 // Animación y eliminación de candidato
 function animacion() {
     if (!seleccionado) return;
@@ -93,17 +98,18 @@ function animacion() {
 // Validar si hay candidatos después de eliminar
 function validarCandidatos() {
     if (candidatosData.length === 0) {
-        // Para ocultarlo
+        acciones.hidden = true;
         notaCandidatos.textContent = "No hay solicitudes de candidatos";
+    } else {
+        renderSolicitudes(); // 👈 vuelve a pintar lista actualizada
     }
 }
-function elimiarCandidato() {
+function eliminarCandidato() {
     if (seleccionado) {
-        const nombreCandidato = seleccionado.textContent.trim();
-        candidatosData = candidatosData.filter(c => c.nombre !== nombreCandidato);
+        const idCandidato = seleccionado.getAttribute("data-id");
+        candidatosData = candidatosData.filter(c => c._id !== idCandidato);
     }
 }
-
 
 
 window.aceptar = async function () {
@@ -159,7 +165,7 @@ window.rechazar = async function () {
 
         // 🔹 Animaciones y eliminación en UI
         animacion();
-        elimiarCandidato();
+        eliminarCandidato();
         validarCandidatos();
 
     } catch (err) {

@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         params: {
           freelance_id: userId,
-          accepted : true
+          application_accepted: true, 
         },
       });
 
@@ -157,23 +157,28 @@ function renderSolicitudes() {
 }
 
 
-// 🔹 Función para confirmar y mandar petición de actualización
 async function finalizarTarea(userId, etapaKey) {
-  mostrarModal();
+  // Esperar confirmación del usuario
+  const confirmado = await mostrarModal("¿Deseas finalizar la tarea?");
+  if (!confirmado) return; // si el usuario cancela, no hacemos nada
 
   try {
-    const res = await axios.put(`${API_URL}user-progress/${userId}`,
-      { status: etapaKey },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
+    // Crear un objeto dinámico con la clave de la etapa a actualizar
+    const body = { [etapaKey]: true };
+
+    const res = await axios.patch(`${API_URL}user-progress/${userId}`, body, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
 
     mostrarModalMensaje("Tarea finalizada con éxito ✅");
-    fetchUserProgress(); // recargar la tabla
+
+    // Recargar los datos y refrescar la tabla
+    await fetchUserProgress();
   } catch (error) {
-    // console.error("Error al actualizar tarea:", error.response?.data || error);
     mostrarModalMensaje("❌ Ocurrió un error al finalizar la tarea");
   }
 }
+
 
 
 

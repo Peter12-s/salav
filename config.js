@@ -1,5 +1,7 @@
 
 const API_URL = "http://localhost:8080/api/";
+const mensajeWhatsApp = encodeURIComponent("Hola, quisiera solicitar una cuenta");
+
 
 // Número de teléfono para llamar y conseguir cuenta 
 const numeroLlamada = "7226371602"; 
