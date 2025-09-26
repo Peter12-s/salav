@@ -101,6 +101,7 @@ btnCerrar.onclick = () => {
 };
 
 // 📌 Guardar archivos y actualizar progreso
+// 📌 Guardar archivos y actualizar progreso
 btnGuardar.onclick = async () => {
   const fileInput = document.getElementById("archivoInput");
   const file = fileInput.files[0];
@@ -121,7 +122,13 @@ btnGuardar.onclick = async () => {
     mostrarModalMensaje("El archivo supera el límite de 3 MB. ❌");
     return;
   }
+// Obtener primer nombre y primer apellido
+const nombres = usuarioSeleccionado.applicant_fullname.split(" ");
+const nombre = nombres[0] || "";
+const apellido = nombres[1] || "";
 
+// Construir carpeta: primeras 3 letras del nombre + primeras 2 del apellido
+const carpeta = nombre.slice(0, 3) + apellido.slice(0, 2); // ej: "PedEs"
   try {
     // 📌 Inicializar en Drive vía backend
     const initRes = await axios.post(
@@ -129,7 +136,7 @@ btnGuardar.onclick = async () => {
       {
         name: file.name,
         mimetype: file.type || "application/pdf", // fallback
-        path: "CV" // 👈 Aquí debe ser un valor que tu backend reconozca
+        path: carpeta+"/Background" // 👈 Aquí debe ser un valor que tu backend reconozca
       },
       {
         headers: {
@@ -139,25 +146,39 @@ btnGuardar.onclick = async () => {
       }
     );
 
-    console.log("✅ Respuesta backend:", initRes.data);
-
+    // console.log("✅ Respuesta backend:", initRes.data);
     const { uploadUrl } = initRes.data;
-    console.log("📌 URL de subida:", uploadUrl);
+    // console.log("📌 URL de subida:", uploadUrl);
+
+    // 📌 Subir archivo a la URL proporcionada
+    await axios.put(uploadUrl, file, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": file.type,
+        "Content-Length": file.size
+      }
+    });
+
+    mostrarModalMensaje("Archivo subido correctamente. ✅");
 
   } catch (error) {
     if (error.response) {
-      console.error("⚠️ Error en la petición:");
-      console.error("Status:", error.response.status);
-      console.error("Headers:", error.response.headers);
-      console.error("Data:", error.response.data); // 📌 Mensaje del backend
+      // console.error("⚠️ Error en la petición:");
+      // console.error("Status:", error.response.status);
+      // console.error("Headers:", error.response.headers);
+      // console.error("Data:", error.response.data); // 📌 Mensaje del backend
+      mostrarModalMensaje(`Error al subir el archivo: ${error.response.data?.message || "Desconocido"} ❌`);
     } else if (error.request) {
-      console.error("⚠️ No hubo respuesta del servidor:");
-      console.error(error.request);
+      // console.error("⚠️ No hubo respuesta del servidor:");
+      // console.error(error.request);
+      mostrarModalMensaje("No hubo respuesta del servidor. ❌");
     } else {
-      console.error("⚠️ Error al configurar la petición:", error.message);
+      // console.error("⚠️ Error al configurar la petición:", error.message);
+      mostrarModalMensaje(`Error al configurar la petición: ${error.message} ❌`);
     }
   }
 };
+
 
 
 
