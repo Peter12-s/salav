@@ -5,14 +5,14 @@ document.addEventListener("DOMContentLoaded", () => {
   obtenerLocalStorage();
 
   // 📌 Variables DOM
-   prevBtn = document.getElementById("prevPage");
-   nextBtn = document.getElementById("nextPage");
-   pageInfo = document.getElementById("pageInfo");
-   pageInput = document.getElementById("pageInput");
-   goPageBtn = document.getElementById("goPage");
-   totalPagesSpan = document.getElementById("totalPages");
-   tabla = document.querySelector("table");
-   searchInput = document.getElementById("searchInput");
+  prevBtn = document.getElementById("prevPage");
+  nextBtn = document.getElementById("nextPage");
+  pageInfo = document.getElementById("pageInfo");
+  pageInput = document.getElementById("pageInput");
+  goPageBtn = document.getElementById("goPage");
+  totalPagesSpan = document.getElementById("totalPages");
+  tabla = document.querySelector("table");
+  searchInput = document.getElementById("searchInput");
 
   eventosPaginacion();
 
@@ -110,8 +110,12 @@ function renderSolicitudes() {
     etapas.forEach(etapa => {
       const td = document.createElement("td");
       const completado = usuario[etapa.key];
-      td.className = "bloque " + (completado ? "status-completado" : "status-proceso");
-      td.textContent = etapa.label;
+      // ✅ Estilos según estado
+      if (etapa.key === "documenting_information" && completado) {
+        td.className = "bloque status-evaluation"; // naranja
+      } else {
+        td.className = "bloque " + (completado ? "status-completado" : "status-proceso");
+      } td.textContent = etapa.label;
 
       // ✅ Solo agregar acción si la etapa está en etapasConAccion y NO está completada
       if (etapasConAccion.includes(etapa.key) && !completado) {

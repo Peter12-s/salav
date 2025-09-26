@@ -45,6 +45,10 @@
      color: #4a2f5a;
  }
 
+
+    .status-evaluation {
+  background-color: rgb(245, 127, 42);
+}
  /* Estado en proceso */
  .status-proceso {
      background-color: #9d77b3;
