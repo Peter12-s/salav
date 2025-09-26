@@ -4,56 +4,27 @@ let usuarioSeleccionado = null; // ✅ usuario en el que se hizo clic para adjun
 document.addEventListener("DOMContentLoaded", () => {
   obtenerLocalStorage();
 
+  // 📌 Variables DOM
+   prevBtn = document.getElementById("prevPage");
+   nextBtn = document.getElementById("nextPage");
+   pageInfo = document.getElementById("pageInfo");
+   pageInput = document.getElementById("pageInput");
+   goPageBtn = document.getElementById("goPage");
+   totalPagesSpan = document.getElementById("totalPages");
+   tabla = document.querySelector("table");
+   searchInput = document.getElementById("searchInput");
 
-  async function fetchUserProgress() {
-    try {
-      const res = await axios.get(`${API_URL}user-progress`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        params: {
-          freelance_id: userId,
-          application_accepted: true,
-        },
-      });
-
-      usuarios = res.data; // Actualiza la variable global con los datos recibidos
-      // console.log("User Progress:", usuarios);
-      filteredUsuarios = [...usuarios];
-      renderSolicitudes(); // Llama a la función para renderizar la tabla con los nuevos datos
-      return res.data;
-    } catch (error) {
-      if (error.response && error.response.status === 401) {
-        // mostrarModalMensaje("❌ Sesión expirada. Inicia sesión de nuevo.");
-        // errorServer();
-      } else {
-        // mostrarModalMensaje("❌ Error al obtener el progreso de usuarios.");
-        // errorServer();
-      }
-    }
-  }
-  prevBtn = document.getElementById("prevPage");
-  nextBtn = document.getElementById("nextPage");
-  pageInfo = document.getElementById("pageInfo");
-  pageInput = document.getElementById("pageInput");
-  goPageBtn = document.getElementById("goPage");
-  totalPagesSpan = document.getElementById("totalPages");
-  tabla = document.querySelector("table");
-  searchInput = document.getElementById("searchInput");
   eventosPaginacion();
 
   // 📌 Filtro de búsqueda
   searchInput.addEventListener("input", () => {
     const query = searchInput.value.toLowerCase();
     filteredUsuarios = usuarios.filter(u =>
-      (u.applicant_fullname).toLowerCase().includes(query)
+      u.applicant_fullname.toLowerCase().includes(query)
     );
     currentPage = 1;
     renderSolicitudes();
   });
-
-
-
 
   // 📌 Inicializar
   (async () => {
@@ -61,14 +32,13 @@ document.addEventListener("DOMContentLoaded", () => {
   })();
 });
 
-
-
 const etapasConAccion = [
   "candidate_contacted",
   "visit_scheduled",
   "visit_complete",
   "documenting_information"
 ];
+
 // Mapear claves de usuario -> texto que se muestra en la tabla
 const etapas = [
   { key: "application_accepted", label: "Solicitud aceptada" },
@@ -80,18 +50,38 @@ const etapas = [
   { key: "evaluation_complete", label: "Evaluación finalizada" }
 ];
 
+async function fetchUserProgress() {
+  try {
+    const res = await axios.get(`${API_URL}user-progress`, {
+      headers: { Authorization: `Bearer ${token}` },
+      params: {
+        freelance_id: userId,
+        application_accepted: true
+      },
+    });
+
+    usuarios = res.data;
+    filteredUsuarios = [...usuarios];
+    renderSolicitudes();
+    return res.data;
+  } catch (error) {
+    console.error("Error fetchUserProgress:", error);
+    // manejar error según tu lógica
+  }
+}
+
 function renderSolicitudes() {
   tabla.innerHTML = ""; // limpiar
+
   const totalPages = Math.ceil(filteredUsuarios.length / usersPerPage) || 1;
   totalPagesSpan.textContent = totalPages;
   pageInfo.textContent = `Página ${currentPage} de ${totalPages}`;
   pageInput.value = currentPage;
 
   if (filteredUsuarios.length === 0) {
-    // Mensaje cuando no hay usuarios
     const tr = document.createElement("tr");
     const td = document.createElement("td");
-    td.colSpan = etapas.length + 2; // +2 por columna nombre y descarga
+    td.colSpan = etapas.length + 2;
     td.textContent = "No hay candidatos en proceso";
     td.style.textAlign = "start";
     td.style.fontStyle = "italic";
@@ -110,31 +100,25 @@ function renderSolicitudes() {
   pageData.forEach(usuario => {
     const tr = document.createElement("tr");
 
-    console.log(usuario);
-    console.log(usuario.applicant_id);
     // 📌 Columna nombre
     const tdNombre = document.createElement("td");
     tdNombre.className = "bloque nombre";
     tdNombre.textContent = usuario.applicant_fullname || "Sin nombre";
     tr.appendChild(tdNombre);
 
-
-    // Columna etapas
-    // Columna etapas
+    // 📌 Columnas etapas
     etapas.forEach(etapa => {
       const td = document.createElement("td");
-
-      const completado = usuario[etapa.key]; // true si ya completado
+      const completado = usuario[etapa.key];
       td.className = "bloque " + (completado ? "status-completado" : "status-proceso");
       td.textContent = etapa.label;
 
       // ✅ Solo agregar acción si la etapa está en etapasConAccion y NO está completada
       if (etapasConAccion.includes(etapa.key) && !completado) {
-        td.style.cursor = "pointer"; // indicar que es clickeable
+        td.style.cursor = "pointer";
 
-        if (etapa.key == "documenting_information") {
+        if (etapa.key === "documenting_information") {
           td.addEventListener("click", () => {
-            console.log("se abre el formulario ", usuario.applicant_id);
             window.location.href = `estudiosFormulario.html?user=${encodeURIComponent(usuario.applicant_id)}&userprogress=${encodeURIComponent(usuario._id)}`;
           });
         } else {
@@ -147,8 +131,7 @@ function renderSolicitudes() {
       tr.appendChild(td);
     });
 
-
-    // Columna descarga
+    // 📌 Columna descarga
     const tdDescargar = document.createElement("td");
     tdDescargar.className = "bloque status-proceso descargar";
     tdDescargar.innerHTML = `
@@ -161,42 +144,31 @@ function renderSolicitudes() {
   });
 }
 
-
 async function finalizarTarea(userId, etapaKey) {
-  // Esperar confirmación del usuario
   const confirmado = await mostrarModal("¿Deseas finalizar la tarea?");
-  if (!confirmado) return; // si el usuario cancela, no hacemos nada
+  if (!confirmado) return;
 
-  console.log(etapaKey, userId);
   try {
-    // Crear un objeto dinámico con la clave de la etapa a actualizar
     const body = { [etapaKey]: true };
 
-    const res = await axios.patch(`${API_URL}user-progress/${userId}`, body, {
+    // Actualizamos la tabla **antes** de mostrar mensaje
+    await axios.patch(`${API_URL}user-progress/${userId}`, body, {
       headers: { Authorization: `Bearer ${token}` }
     });
 
-    mostrarModalMensaje("Tarea finalizada con éxito ✅");
-
-    // Recargar los datos y refrescar la tabla
     await fetchUserProgress();
+    mostrarModalMensaje("Tarea finalizada con éxito ✅");
   } catch (error) {
+    console.error("Error finalizarTarea:", error);
     mostrarModalMensaje("❌ Ocurrió un error al finalizar la tarea");
   }
 }
-
-
-
 
 // Variables del modal
 const modal = document.getElementById("modalConfirm");
 const btnCancelar = document.getElementById("btnCancelar");
 const btnAceptar = document.getElementById("btnAceptar");
-
-let modalResolve; // para manejar promesa
-
-
-
+let modalResolve;
 
 // Mostrar modal como promesa
 function mostrarModal(mensaje) {
@@ -207,7 +179,7 @@ function mostrarModal(mensaje) {
   });
 }
 
-// Eventos de botones
+// Eventos de botones modal
 btnCancelar.onclick = () => {
   modal.style.display = "none";
   modalResolve(false);
@@ -216,6 +188,3 @@ btnAceptar.onclick = () => {
   modal.style.display = "none";
   modalResolve(true);
 };
-
-
-
