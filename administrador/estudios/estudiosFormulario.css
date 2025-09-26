@@ -1,0 +1,154 @@
+  :root {
+    --primary: #9F38B8;
+    --secondary: #14BAED;
+    --accent: #D9358C;
+    --light: #f8f9fa;
+    --dark: #212529;
+    --gray: #6c757d;
+    --success: #28a745;
+    --danger: #dc3545;
+    --border: #dee2e6;
+    --shadow: 0 4px 12px rgba(0,0,0,0.1);
+    --section-bg: #f9f9f9;
+    /* mantener compatibilidad con tus variables salav */
+    --salav-p1: var(--primary);
+    --salav-p2: var(--secondary);
+    --salav-p3: var(--accent);
+    --salav-bg: #ffffff;
+    --salav-text: var(--dark);
+  }
+
+  /* reset pequeño */
+  *{box-sizing:border-box;margin:0;padding:0}
+
+
+  .salav-carousel{
+    max-width:1100px;margin:0 auto;background:white;border-radius:12px;box-shadow:var(--shadow);overflow:hidden;
+  }
+
+  /* header */
+  .salav-header{
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    color:#fff;padding:22px 24px;display:flex;gap:16px;align-items:center;
+  }
+  .salav-logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--secondary));display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff}
+  .salav-title{font-size:1.2rem;font-weight:700}
+  .salav-sub{opacity:0.95;margin-top:4px}
+
+  /* progress area (se muestra sticky sobre el form) */
+  .progress-container{padding:14px 20px;background:var(--light);border-bottom:1px solid var(--border)}
+  .progress-bar{height:8px;background:#eee;border-radius:6px;overflow:hidden;margin-bottom:8px}
+  .progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--secondary),var(--primary));transition:width .3s ease}
+  .progress-text{display:flex;justify-content:space-between;font-size:13px;color:var(--gray)}
+
+  /* form area */
+  .form-container{padding:22px;min-height:420px;max-height:70vh;overflow:auto;position:relative}
+  /* treat each salav-card as a form section */
+  .salav-card{display:none;animation:fadeIn .45s ease;background:var(--salav-bg);padding:18px;border-radius:10px;border:1px solid rgba(0,0,0,0.04);box-shadow:0 2px 8px rgba(0,0,0,0.03)}
+  .salav-card.active{display:block}
+
+.section-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary);
+            color: var(--primary);
+            background-color: var(--section-bg);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+  .form-group{margin-bottom:14px;padding:12px;background:white;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,0.03)}
+
+  .salav-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .salav-field{display:flex;flex-direction:column; margin-bottom: 20px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);}
+  .salav-field label{display: block;
+            margin-bottom: 8px;
+            font-weight: 500;}
+  .salav-field input[type="text"], .salav-field input[type="email"], .salav-field input[type="date"], .salav-field input[type="number"], .salav-field select, .salav-field textarea{ width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;}
+
+.salav-field input[type="text"]:hover, .salav-field input[type="email"]:hover, .salav-field input[type="date"]:hover, .salav-field input[type="number"]:hover, .salav-field select:hover, .salav-field textarea:hover{
+     border-color: #9F38B8;
+}
+
+.salav-field input[type="text"]:focus, .salav-field input[type="email"]:focus, .salav-field input[type="date"]:focus, .salav-field input[type="number"]:focus, .salav-field select:focus, .salav-field textarea:focus{
+    border: 2px solid #D9358C;
+    box-shadow: 0 0 8px rgba(217, 53, 140, 0.3);
+    /* background-color: #f7eafd; */
+    outline: none;
+}
+  .salav-full{grid-column:1 / -1}
+
+  .required::after {
+    content: " *";
+    color: var(--danger);
+}
+
+  .navigation{display:flex;justify-content:space-between;padding:18px;border-top:1px solid var(--border);background:var(--light);gap:10px}
+  .btn{padding:10px 16px;border-radius:8px;border:0;font-weight:700;cursor:pointer}
+  .btn-prev{background:white;border:1px solid var(--border);color:var(--dark)}
+  .btn-next{background:linear-gradient(90deg,var(--primary),var(--accent));color:white}
+   .salav-small-btn{background:linear-gradient(90deg,var(--primary),var(--accent));color:white}
+
+  .btn-submit{background:linear-gradient(90deg,var(--secondary),var(--primary));color:white}
+
+  .section-indicator {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .section-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #dee2e6;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .section-dot.active {
+            background-color: var(--primary);
+        }
+
+        .section-dot.completed {
+            background-color: var(--success);
+        }
+
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  @media (max-width:900px){.salav-grid{grid-template-columns:1fr}.salav-header{flex-direction:column;align-items:flex-start}.salav-logo{width:48px;height:48px}}
+
+  
+        .file-upload {
+            border: 2px dashed var(--border);
+            padding: 20px;
+            text-align: center;
+            border-radius: 6px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary);
+        }
+
+        .file-upload input {
+            display: none;
+        }
+
+        .file-name {
+            margin-top: 10px;
+            font-size: 14px;
+            color: var(--gray);
+        }

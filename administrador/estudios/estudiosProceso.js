@@ -236,6 +236,10 @@ function renderSolicitudes() {
         td.classList.add("clickable");
         td.style.cursor = "pointer"; // indicar que es clickeable
 
+        td.addEventListener("click", () => {
+          window.location.href = `estudiosFormulario.html?user=${encodeURIComponent(usuarios.applicant_id)}&userprogress=${encodeURIComponent(usuarios._id)}`;
+        });
+
       } else {
         td.className = "bloque " + (completado ? "status-completado" : "status-proceso");
       } td.textContent = etapa.label;
