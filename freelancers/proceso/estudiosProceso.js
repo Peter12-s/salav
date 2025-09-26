@@ -110,6 +110,8 @@ function renderSolicitudes() {
   pageData.forEach(usuario => {
     const tr = document.createElement("tr");
 
+    console.log(usuario);
+    console.log(usuario.applicant_id);
     // 📌 Columna nombre
     const tdNombre = document.createElement("td");
     tdNombre.className = "bloque nombre";
@@ -129,8 +131,8 @@ function renderSolicitudes() {
 
         if(etapa.key == "documenting_information"){
           td.addEventListener("click", () => {
-            console.log("se abre el fomulario ", usuario._id);
-            window.location.href = `estudiosFormulario.html?user=${encodeURIComponent(usuario._id)}`;
+            console.log("se abre el fomulario ", usuario.applicant_id);
+            window.location.href = `estudiosFormulario.html?user=${encodeURIComponent(usuario.applicant_id)}&userprogress=${encodeURIComponent(usuario._id)}`;
           });
         }else{
           td.addEventListener("click", () => {
@@ -162,6 +164,7 @@ async function finalizarTarea(userId, etapaKey) {
   const confirmado = await mostrarModal("¿Deseas finalizar la tarea?");
   if (!confirmado) return; // si el usuario cancela, no hacemos nada
 
+  console.log(etapaKey, userId);
   try {
     // Crear un objeto dinámico con la clave de la etapa a actualizar
     const body = { [etapaKey]: true };

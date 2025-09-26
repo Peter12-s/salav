@@ -16,6 +16,15 @@ function mostrarModalMensaje(mensaje, duracion = 1000) {
     }, duracion);
 }
 
+function mostrarModalMensajeForm(mensaje, duracion = 3000) {
+    modalMensaje.innerHTML = mensaje;
+    modalAlert.style.display = "flex";
+
+    setTimeout(() => {
+        modalAlert.style.display = "none";
+    }, duracion);
+}
+
 
 // 📌 Ajustar usuarios por página al cambiar tamaño de pantalla
 window.addEventListener("resize", () => {
