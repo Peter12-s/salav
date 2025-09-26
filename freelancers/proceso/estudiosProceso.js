@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         params: {
           freelance_id: userId,
-          application_accepted: true, 
+          application_accepted: true,
         },
       });
 
@@ -63,22 +63,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-  const etapasConAccion = [
-    "candidate_contacted",
-    "visit_scheduled",
-    "visit_complete",
-    "documenting_information"
-  ];
-  // Mapear claves de usuario -> texto que se muestra en la tabla
-  const etapas = [
-    { key: "application_accepted", label: "Solicitud aceptada" },
-    { key: "candidate_contacted", label: "Candidato contactado" },
-    { key: "visit_scheduled", label: "Visita agendada" },
-    { key: "background_check", label: "Background check" },
-    { key: "visit_complete", label: "Visita realizada" },
-    { key: "documenting_information", label: "Documentando información" },
-    { key: "evaluation_complete", label: "Evaluación finalizada" }
-  ];
+const etapasConAccion = [
+  "candidate_contacted",
+  "visit_scheduled",
+  "visit_complete",
+  "documenting_information"
+];
+// Mapear claves de usuario -> texto que se muestra en la tabla
+const etapas = [
+  { key: "application_accepted", label: "Solicitud aceptada" },
+  { key: "candidate_contacted", label: "Candidato contactado" },
+  { key: "visit_scheduled", label: "Visita agendada" },
+  { key: "background_check", label: "Background check" },
+  { key: "visit_complete", label: "Visita realizada" },
+  { key: "documenting_information", label: "Documentando información" },
+  { key: "evaluation_complete", label: "Evaluación finalizada" }
+];
 
 function renderSolicitudes() {
   tabla.innerHTML = ""; // limpiar
@@ -120,30 +120,33 @@ function renderSolicitudes() {
 
 
     // Columna etapas
+    // Columna etapas
     etapas.forEach(etapa => {
       const td = document.createElement("td");
-      td.className = "bloque " + (usuario[etapa.key] ? "status-completado" : "status-proceso");
+
+      const completado = usuario[etapa.key]; // true si ya completado
+      td.className = "bloque " + (completado ? "status-completado" : "status-proceso");
       td.textContent = etapa.label;
 
-      // ✅ Si la etapa está en etapasConAccion, agregamos evento de clic
-      if (etapasConAccion.includes(etapa.key)) {
+      // ✅ Solo agregar acción si la etapa está en etapasConAccion y NO está completada
+      if (etapasConAccion.includes(etapa.key) && !completado) {
         td.style.cursor = "pointer"; // indicar que es clickeable
 
-        if(etapa.key == "documenting_information"){
+        if (etapa.key == "documenting_information") {
           td.addEventListener("click", () => {
-            console.log("se abre el fomulario ", usuario.applicant_id);
+            console.log("se abre el formulario ", usuario.applicant_id);
             window.location.href = `estudiosFormulario.html?user=${encodeURIComponent(usuario.applicant_id)}&userprogress=${encodeURIComponent(usuario._id)}`;
           });
-        }else{
+        } else {
           td.addEventListener("click", () => {
             finalizarTarea(usuario._id, etapa.key);
           });
         }
-        
       }
-      tr.appendChild(td);
 
+      tr.appendChild(td);
     });
+
 
     // Columna descarga
     const tdDescargar = document.createElement("td");
