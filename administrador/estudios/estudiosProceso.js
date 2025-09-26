@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
     goPageBtn = document.getElementById("goPage");
     usersPerPage = getUsersPerPage();
     tablaUsuarios = document.querySelector("#tablaUsuarios tbody");
-    searchInput=document.querySelector("#searchInput");
+    searchInput = document.querySelector("#searchInput");
     eventosPaginacion();
 
     // 📌 Filtro de búsqueda
@@ -102,36 +102,73 @@ btnCerrar.onclick = () => {
 
 // 📌 Guardar archivos y actualizar progreso
 btnGuardar.onclick = async () => {
-    try {
-        await axios.patch(`${API_URL}user-progress/${usuarioSeleccionado._id}`,
-            { background_check: true },
-            { headers: { Authorization: `Bearer ${token}` } }
-        );
-        mostrarModalMensaje("Archivo guardado y progreso actualizado correctamente ✅");
+  const fileInput = document.getElementById("archivoInput");
+  const file = fileInput.files[0];
 
+  if (!file) {
+    mostrarModalMensaje("Selecciona un archivo. ❌");
+    return;
+  }
 
-    } catch (error) {
-        if (error.response && error.response.status === 401) {
-            mostrarModalMensaje("Sesión expirada. Inicia sesión de nuevo. ❌");
-            errorServer();
-        } else {
-            mostrarModalMensaje("Error al obtener el progreso de usuarios. ❌");
-            recargarPagina();
+  // 📌 Validar que sea PDF
+  if (file.type !== "application/pdf") {
+    mostrarModalMensaje("Solo se permiten archivos PDF. ❌");
+    return;
+  }
+
+  // 📌 Validar tamaño (máx. 3 MB)
+  if (file.size > 3 * 1024 * 1024) {
+    mostrarModalMensaje("El archivo supera el límite de 3 MB. ❌");
+    return;
+  }
+
+  try {
+    // 📌 Inicializar en Drive vía backend
+    const initRes = await axios.post(
+      `${API_URL}google/init`,
+      {
+        name: file.name,
+        mimetype: file.type || "application/pdf", // fallback
+        path: "CV" // 👈 Aquí debe ser un valor que tu backend reconozca
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
         }
-    } finally {
-        modalAdjuntar.style.display = "none";
-        window.location.reload();
+      }
+    );
+
+    console.log("✅ Respuesta backend:", initRes.data);
+
+    const { uploadUrl } = initRes.data;
+    console.log("📌 URL de subida:", uploadUrl);
+
+  } catch (error) {
+    if (error.response) {
+      console.error("⚠️ Error en la petición:");
+      console.error("Status:", error.response.status);
+      console.error("Headers:", error.response.headers);
+      console.error("Data:", error.response.data); // 📌 Mensaje del backend
+    } else if (error.request) {
+      console.error("⚠️ No hubo respuesta del servidor:");
+      console.error(error.request);
+    } else {
+      console.error("⚠️ Error al configurar la petición:", error.message);
     }
+  }
 };
+
+
 
 
 function renderSolicitudes() {
     tablaUsuarios.innerHTML = "";
 
-  // 📌 Actualizar paginación
+    // 📌 Actualizar paginación
     pageInput.min = 1;
     pageInput.max = totalPages;
-     // 🔹 Calcula total de páginas
+    // 🔹 Calcula total de páginas
     const totalPagesCalc = Math.ceil(filteredUsuarios.length / usersPerPage) || 1;
 
     // 🔹 Actualiza info en ambos lugares
