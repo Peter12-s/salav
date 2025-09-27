@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function renderSolicitudes() {
 
     tbody.innerHTML = "";
-
+    searchInput.value = ""; // ✅ limpiar el input
     const totalPages = Math.ceil(filteredUsuarios.length / usersPerPage) || 1;
     const start = (currentPage - 1) * usersPerPage;
     const end = start + usersPerPage;
@@ -165,7 +165,7 @@ function renderSolicitudes() {
                 );
 
                 mostrarModalMensaje(
-                    `Freelancer asignado correctamente a ${select.options[select.selectedIndex].text} ✅`
+                    `Candidato asignado correctamente a ${select.options[select.selectedIndex].text} ✅`
                 );
 
                 // Si quieres quitar la fila de la tabla:

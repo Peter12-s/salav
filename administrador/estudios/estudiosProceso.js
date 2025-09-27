@@ -192,6 +192,7 @@ btnGuardar.onclick = async () => {
 
 function renderSolicitudes() {
   tablaUsuarios.innerHTML = "";
+  searchInput.value = ""; // ✅ limpiar el input
 
   // 📌 Actualizar paginación
   pageInput.min = 1;

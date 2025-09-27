@@ -82,6 +82,7 @@ async function fetchUserProgress() {
 
 function renderSolicitudes() {
   tabla.innerHTML = ""; // limpiar
+  searchInput.value = ""; // ✅ limpiar el input
 
   const totalPages = Math.ceil(filteredUsuarios.length / usersPerPage) || 1;
   totalPagesSpan.textContent = totalPages;

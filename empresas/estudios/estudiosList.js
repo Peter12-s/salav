@@ -87,6 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 function renderSolicitudes() {
   tablaB.innerHTML = ""; // ✅ limpiamos solo el tbody, no toda la tabla
+  searchInput.value = ""; // ✅ limpiar el input
 
   if (filteredUsuarios.length === 0) {
     const tr = document.createElement("tr");
