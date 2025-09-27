@@ -8,6 +8,7 @@ const etapas = [
   { key: "evaluation_complete", label: "Evaluación finalizada" }
 ];
 
+  let lastUploadResponse = null; // Variable para guardar respuesta de subida
 
 
 const etapasConAccion = [
@@ -109,7 +110,6 @@ btnCerrar.onclick = () => {
 };
 
 // 📌 Guardar archivos y actualizar progreso
-// 📌 Guardar archivos y actualizar progreso
 btnGuardar.onclick = async () => {
   const fileInput = document.getElementById("archivoInput");
   const file = fileInput.files[0];
@@ -130,58 +130,44 @@ btnGuardar.onclick = async () => {
     mostrarModalMensaje("El archivo supera el límite de 3 MB. ❌");
     return;
   }
-// Obtener primer nombre y primer apellido
-const nombres = usuarioSeleccionado.applicant_fullname.split(" ");
-const nombre = nombres[0] || "";
-const apellido = nombres[1] || "";
 
-// Construir carpeta: primeras 3 letras del nombre + primeras 2 del apellido
-const carpeta = nombre.slice(0, 3) + apellido.slice(0, 2); // ej: "PedEs"
+  // 📌 Construir carpeta dinámica
+  const nombres = usuarioSeleccionado.applicant_fullname.split(" ");
+  const nombre = nombres[0] || "";
+  const apellido = nombres[1] || "";
+  const carpeta = nombre.slice(0, 3) + apellido.slice(0, 2); // ej: "PedEs"
+
   try {
-    // 📌 Inicializar en Drive vía backend
-    const initRes = await axios.post(
-      `${API_URL}google/init`,
-      {
-        name: file.name,
-        mimetype: file.type || "application/pdf", // fallback
-        path: carpeta+"/Background" // 👈 Aquí debe ser un valor que tu backend reconozca
-      },
+    // 📌 Crear FormData con file y path
+    const formData = new FormData();
+    formData.append("file", file);               // 👈 campo que espera Multer
+    formData.append("path", carpeta + "/Background");
+
+    // 📌 Enviar al backend (NestJS)
+    const res = await axios.post(
+      `${API_URL}google/upload`,
+      formData,
       {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json"
+          "Content-Type": "multipart/form-data"
         }
       }
     );
-
-    // console.log("✅ Respuesta backend:", initRes.data);
-    const { uploadUrl } = initRes.data;
-    // console.log("📌 URL de subida:", uploadUrl);
-
-    // 📌 Subir archivo a la URL proporcionada
-    await axios.put(uploadUrl, file, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": file.type,
-        "Content-Length": file.size
-      }
-    });
-
+    lastUploadResponse=res.data;
+    modalAdjuntar.style.display = "none";
     mostrarModalMensaje("Archivo subido correctamente. ✅");
+
 
   } catch (error) {
     if (error.response) {
-      // console.error("⚠️ Error en la petición:");
-      // console.error("Status:", error.response.status);
-      // console.error("Headers:", error.response.headers);
-      // console.error("Data:", error.response.data); // 📌 Mensaje del backend
+          modalAdjuntar.style.display = "none";
       mostrarModalMensaje(`Error al subir el archivo: ${error.response.data?.message || "Desconocido"} ❌`);
     } else if (error.request) {
-      // console.error("⚠️ No hubo respuesta del servidor:");
-      // console.error(error.request);
+          modalAdjuntar.style.display = "none";
       mostrarModalMensaje("No hubo respuesta del servidor. ❌");
     } else {
-      // console.error("⚠️ Error al configurar la petición:", error.message);
+          modalAdjuntar.style.display = "none";
       mostrarModalMensaje(`Error al configurar la petición: ${error.message} ❌`);
     }
   }
