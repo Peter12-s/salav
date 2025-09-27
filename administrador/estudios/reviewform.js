@@ -5,6 +5,7 @@ const USER_PROGRESS = urlParams.get('userprogress') || sessionStorage.getItem('s
 const formEl = document.getElementById('salav-form');
 const FORM_SLUG = (formEl && formEl.getAttribute('data-form')) ? formEl.getAttribute('data-form') : 'estudio_socioeconomico';
 var token_a = localStorage.getItem("access_token");
+var id_form = null;
 
 // Variables para secciones dinámicas
 const familiaresWrap = document.getElementById('familiares-wrap');
@@ -82,6 +83,7 @@ async function prefillForm() {
 
     const formObject = formData.form_object;
     console.log('Datos del formulario a prellenar:', formObject);
+    id_form =  formData._id;
     
     // Prellenar secciones en orden
     prefillGeneralData(formObject);
@@ -99,7 +101,7 @@ async function prefillForm() {
         activateConditionalSections();
     }, 400);
 
-    
+
     // Prellenar secciones dinámicas (después de un breve delay para asegurar que el DOM esté listo)
     setTimeout(() => {
         prefillDynamicSections(formObject);
@@ -1431,32 +1433,32 @@ async function handleFormSubmit() {
 
 
     console.log('formJSON:', JSON.stringify(formJSON, null, 2));
+    console.log("form data ",id_form);
 
-
-    /*
+    
+    
     const body = {
         applicant_id: USER_ID,
         form_object: formJSON
     };
 
     try {
-        const response = await axios.post(`${API_URL}form`, body, {
+        const response = await axios.patch(`${API_URL}form/${id_form}`, body, {
             headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
+                Authorization: `Bearer ${token_a}`
             },
         });
 
         mostrarModalMensajeForm("✅ Formulario guardado");
-        await finalizarTarea(USER_PROGRESS, "documenting_information", token);
-        
+        //await finalizarTarea(USER_PROGRESS, "documenting_information", token);
+        /*
         setTimeout(() => {
             window.location.replace("estudiosProceso.html");
-        }, 5000);
+        }, 5000);*/
     } catch (err) {
         mostrarModalMensajeForm(
             "❌ Error al guardar el form: " +
             (err.response?.data?.message || err.message)
         );
-    }*/
+    }
 }
