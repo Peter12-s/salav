@@ -8,7 +8,7 @@ const etapas = [
   { key: "evaluation_complete", label: "Evaluación finalizada" }
 ];
 
-  let lastUploadResponse = null; // Variable para guardar respuesta de subida
+let lastUploadResponse = null; // Variable para guardar respuesta de subida
 
 
 const etapasConAccion = [
@@ -58,17 +58,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const query = searchInput.value.toLowerCase();
     filteredUsuarios = usuarios.filter(u =>
       (u.applicant_fullname || "").toLowerCase().includes(query)
-    );if (filteredUsuarios.length === 0) {
-            tablaUsuarios.innerHTML = `<tr><td colspan="2" style="text-align:start; color:#888;">
+    ); if (filteredUsuarios.length === 0) {
+      tablaUsuarios.innerHTML = `<tr><td colspan="2" style="text-align:start; color:#888;">
                 No se encontraron resultados
             </td></tr>`;
-            document.getElementsByClassName("pagination")[0].style.display = "none";
-        } else {
-            document.getElementsByClassName("pagination")[0].style.display = "flex";
-             currentPage = 1;
-    renderSolicitudes();
-        }
-  
+      document.getElementsByClassName("pagination")[0].style.display = "none";
+    } else {
+      document.getElementsByClassName("pagination")[0].style.display = "flex";
+      currentPage = 1;
+      renderSolicitudes();
+    }
+
   });
 
   (async () => {
@@ -137,6 +137,7 @@ btnGuardar.onclick = async () => {
   const apellido = nombres[1] || "";
   const carpeta = nombre.slice(0, 3) + apellido.slice(0, 2); // ej: "PedEs"
 
+
   try {
     // 📌 Crear FormData con file y path
     const formData = new FormData();
@@ -144,35 +145,47 @@ btnGuardar.onclick = async () => {
     formData.append("path", carpeta + "/Background");
 
     // 📌 Enviar al backend (NestJS)
-    const res = await axios.post(
-      `${API_URL}google/upload`,
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data"
-        }
+    const res = await axios.post(`${API_URL}google/upload`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`
       }
-    );
-    lastUploadResponse=res.data;
-    modalAdjuntar.style.display = "none";
+    });
+
+    lastUploadResponse = res.data;
     mostrarModalMensaje("Archivo subido correctamente. ✅");
 
+    // 📌 Refrescar progreso del usuario
+    try {
+      const resProgress = await axios.get(`${API_URL}user-progress`, {
+        headers: { Authorization: `Bearer ${token}` },
+        params: {
+          freelance_id: userId,
+          application_accepted: true
+        },
+      });
+
+      usuarios = resProgress.data;
+      filteredUsuarios = [...usuarios];
+      renderSolicitudes();
+      return resProgress.data;
+
+    } catch (error) {
+      console.error("Error fetchUserProgress:", error);
+      mostrarModalMensaje("Error al obtener progreso del usuario ❌");
+    }
 
   } catch (error) {
     if (error.response) {
-          modalAdjuntar.style.display = "none";
       mostrarModalMensaje(`Error al subir el archivo: ${error.response.data?.message || "Desconocido"} ❌`);
     } else if (error.request) {
-          modalAdjuntar.style.display = "none";
       mostrarModalMensaje("No hubo respuesta del servidor. ❌");
     } else {
-          modalAdjuntar.style.display = "none";
       mostrarModalMensaje(`Error al configurar la petición: ${error.message} ❌`);
     }
+  } finally {
+    modalAdjuntar.style.display = "none";
   }
-};
-
+}
 
 
 
