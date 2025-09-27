@@ -12,12 +12,14 @@
 </head>
 
 <body>
- <div id="preloader">
-        <img width="150px" src="../../img/Logo.png" alt="Cargando..." />
-    </div>
+  <div id="preloader">
+    <img width="150px" src="../../img/Logo.png" alt="Cargando..." />
+  </div>
   <plantilla-salav>
     <div class="slot-header" slot="header">
-      <img style="width: 150px;" src="../../img/Silueta Clara.png" alt="">
+      <a href="../inicioFreelancer.html">
+        <img style="width: 150px;" src="../../img/Silueta Clara.png" alt="">
+      </a>
       <nav id="menu">
         <a href="estudiosPendientes.html">Estudios pendientes</a>
         <a href="../proceso/estudiosProceso.html">Estudios en proceso</a>
@@ -48,7 +50,7 @@
 
       <h4>Solicitudes pendientes</h4>
       <div class="caja-candidatos" id="listaCandidatos">
-          <div class="notaCandidatos"></div>
+        <div class="notaCandidatos"></div>
       </div>
       <!-- Tooltip -->
       <div id="tooltip" class="tooltip"></div>
@@ -56,10 +58,10 @@
         <button class="btn-aceptar" onclick="aceptar()">Aceptar Solicitud</button>
         <button class="btn-rechazar" onclick="rechazar()">Rechazar Solicitud</button>
       </div>
-    
+
       <div class="nota">
         <p><b>NOTA:</b> Cuando seleccionas un candidato se muestra la información general del mismo para que
-           tomes la decisión de aceptar o rechazar.</p>
+          tomes la decisión de aceptar o rechazar.</p>
         <p>Cuando rechaces la solicitud, esta vuelve a la caja de SALAV para que se asigne a otro freelancer.
         </p>
       </div>
@@ -67,14 +69,14 @@
 
   </plantilla-salav>
   <div id="modalAlert" class="modal">
-        <div class="modal-contenido" id="modal-contenido">
-        </div>
+    <div class="modal-contenido" id="modal-contenido">
     </div>
+  </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="../../config.js"></script> 
-    <script src="../../utilities.js"></script>
-    <script src="estudiosPendientes.js"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="../../config.js"></script>
+  <script src="../../utilities.js"></script>
+  <script src="estudiosPendientes.js"></script>
   <script src="../../plantilla.js"></script>
 </body>
 

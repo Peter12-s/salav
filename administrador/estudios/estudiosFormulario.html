@@ -2,1189 +2,1468 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SALAV</title>
-    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
-    <link rel="stylesheet" href="../../plantilla.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SALAV</title>
+  <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
+  <link rel="stylesheet" href="../../plantilla.css">
 
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <link rel="stylesheet" href="estudiosFormulario.css">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <link rel="stylesheet" href="estudiosFormulario.css">
 
 </head>
 
 <body>
-    <div id="preloader">
-        <img width="150px" src="../../img/Logo.png" alt="Cargando..." />
-    </div>
-
-    <plantilla-salav>
-        <div class="slot-header" slot="header">
-            <img style="width: 150px;" src="../../img/Silueta Clara.png" alt="">
-            <nav id="menu">
-                <div class="menu-item">
-                    <a href="#">Usuarios ▾</a>
-                    <div class="submenu">
-                        <a href="../usuarios/listarUsuarios.html">Listar usuarios</a>
-                        <a href="../usuarios/registerUsuario.html">Registrar usuario</a>
-                    </div>
-                </div>
-                <a href="estudiosPendientes.html">Estudios pendientes</a>
-                <!-- <a href="estudiosFinalizados.html">Estudios en proceso</a> -->
-                <a href="estudiosProceso.html">Estudios en proceso</a>
-                <!-- Botón Logout con SVG -->
-                <button class="logout-btn" id="btnLogout" aria-label="Cerrar sesión" title="Cerrar sesión">
-                    <!-- SVG de logout (salir) -->
-                    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-                        <!-- Flecha de salida -->
-                        <path d="M16 17l5-5-5-5" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M21 12H9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                        <!-- Marco/puerta -->
-                        <path d="M13 21H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" />
-                    </svg>
-                </button>
-            </nav>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-        <div slot="main">
-      <section class="salav-carousel" aria-label="Formulario Estudio Socioeconómico SALAV - versión extendida">
-  <div class="salav-header">
-    <div class="salav-logo">SALAV</div>
-    <div class="salav-title-area">
-      <h1 class="salav-title">Estudio Socioeconómico SALAV</h1>
-      <p class="salav-sub">Un estudio socioeconómico tiene como objetivo conocer la situación económica y social de una persona o familia.</p>
-    </div>
+  <div id="preloader">
+    <img width="150px" src="../../img/Logo.png" alt="Cargando..." />
   </div>
 
-  <!-- Progress + dots: insertar justo después de .salav-header, antes del form -->
-    <div class="progress-container">
-    <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
-    <div class="progress-text">
-        <div id="progressLabel">Sección 1 / N</div>
-        <div id="progressPercent">0%</div>
+  <plantilla-salav>
+    <div class="slot-header" slot="header">
+      <a href="../inicioAdmin.html">
+        <img style="width: 150px;" src="../../img/Silueta Clara.png" alt="">
+      </a>
+      <nav id="menu">
+        <div class="menu-item">
+          <a href="#">Usuarios ▾</a>
+          <div class="submenu">
+            <a href="../usuarios/listarUsuarios.html">Listar usuarios</a>
+            <a href="../usuarios/registerUsuario.html">Registrar usuario</a>
+          </div>
+        </div>
+        <a href="estudiosPendientes.html">Estudios pendientes</a>
+        <!-- <a href="estudiosFinalizados.html">Estudios en proceso</a> -->
+        <a href="estudiosProceso.html">Estudios en proceso</a>
+        <!-- Botón Logout con SVG -->
+        <button class="logout-btn" id="btnLogout" aria-label="Cerrar sesión" title="Cerrar sesión">
+          <!-- SVG de logout (salir) -->
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+            <!-- Flecha de salida -->
+            <path d="M16 17l5-5-5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M21 12H9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <!-- Marco/puerta -->
+            <path d="M13 21H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" />
+          </svg>
+        </button>
+      </nav>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
-    <div class="section-indicator" id="sectionDots" aria-hidden="false" style="margin-top:8px"></div>
-    </div>
+    <div slot="main">
+      <section class="salav-carousel" aria-label="Formulario Estudio Socioeconómico SALAV - versión extendida">
+        <div class="salav-header">
+          <div class="salav-logo">SALAV</div>
+          <div class="salav-title-area">
+            <h1 class="salav-title">Estudio Socioeconómico SALAV</h1>
+            <p class="salav-sub">Un estudio socioeconómico tiene como objetivo conocer la situación económica y social
+              de una persona o familia.</p>
+          </div>
+        </div>
+
+        <!-- Progress + dots: insertar justo después de .salav-header, antes del form -->
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div id="progressFill" class="progress-fill"></div>
+          </div>
+          <div class="progress-text">
+            <div id="progressLabel">Sección 1 / N</div>
+            <div id="progressPercent">0%</div>
+          </div>
+          <div class="section-indicator" id="sectionDots" aria-hidden="false" style="margin-top:8px"></div>
+        </div>
 
 
-  <form id="salav-form" class="salav-slider" autocomplete="off" enctype="multipart/form-data">
-    <!-- DATOS GENERALES -->
-    <div class="salav-card">
-      <h2 class="section-title">Datos generales</h2>
-      <div class="salav-grid">
-        
-        <div class="salav-field">
-          <label for="folio" class="required">Folio</label>
-          <input id="folio" name="folio" type="text" required />
-        </div>
-        <div class="salav-field">
-          <label for="fecha_solicitud">Fecha de solicitud</label>
-          <input id="fecha_solicitud" name="fecha_solicitud" type="date" required />
-        </div>
-        <div class="salav-field">
-          <label for="fecha_visita">Fecha de visita</label>
-          <input id="fecha_visita" name="fecha_visita" type="date" />
-        </div>
-        <div class="salav-field">
-          <label for="puesto">Puesto para el que postula</label>
-          <input id="puesto" name="puesto" type="text" />
-        </div>
-        <div class="salav-field">
-            <label for="fotografia">Fotografía (archivo)</label>
-            <div class="file-upload" id="fotografia-upload">
-                <span>Haga clic para subir una fotografía</span>
-                <input id="fotografia" name="fotografia" type="file" accept="image/*" />
+        <form id="salav-form" class="salav-slider" autocomplete="off" enctype="multipart/form-data">
+          <!-- DATOS GENERALES -->
+          <div class="salav-card">
+            <h2 class="section-title">Datos generales</h2>
+            <div class="salav-grid">
+
+              <div class="salav-field">
+                <label for="folio" class="required">Folio</label>
+                <input id="folio" name="folio" type="text" required />
+              </div>
+              <div class="salav-field">
+                <label for="fecha_solicitud">Fecha de solicitud</label>
+                <input id="fecha_solicitud" name="fecha_solicitud" type="date" required />
+              </div>
+              <div class="salav-field">
+                <label for="fecha_visita">Fecha de visita</label>
+                <input id="fecha_visita" name="fecha_visita" type="date" />
+              </div>
+              <div class="salav-field">
+                <label for="puesto">Puesto para el que postula</label>
+                <input id="puesto" name="puesto" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="fotografia">Fotografía (archivo)</label>
+                <div class="file-upload" id="fotografia-upload">
+                  <span>Haga clic para subir una fotografía</span>
+                  <input id="fotografia" name="fotografia" type="file" accept="image/*" />
+                </div>
+                <div class="file-name" id="fotografia-name"></div>
+              </div>
+
+
             </div>
-            <div class="file-name" id="fotografia-name"></div>
-        </div>
-
-       
-      </div>
-    </div>
-
-    <!-- DATOS DE LA EMPRESA VALUADORA -->
-    <div class="salav-card">
-      <h2 class="section-title">Datos de la empresa valuadora</h2>
-      <div class="salav-grid">
-        <div class="salav-field">
-          <label for="valuador_nombre">Nombre del evaluador</label>
-          <input id="valuador_nombre" name="valuador_nombre" type="text" />
-        </div>
-      </div>
-    </div>
-
-    <!-- DATOS DE LA EMPRESA SOLICITANTE -->
-    <div class="salav-card">
-      <h2 class="section-title">Datos de la empresa solicitante</h2>
-      <div class="salav-grid">
-        <div class="salav-field">
-          <label for="solicitante_razon2">Razón social (empresa solicitante)</label>
-          <input id="solicitante_razon2" name="solicitante_razon2" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="solicitante_contacto">Contacto</label>
-          <input id="solicitante_contacto" name="solicitante_contacto" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="solicitante_email">E-Mail</label>
-          <input id="solicitante_email" name="solicitante_email" type="email" />
-        </div>
-      </div>
-    </div>
-
-    <!-- DATOS DEL CANDIDATO -->
-    <div class="salav-card">
-      <h2 class="section-title">Datos del candidato</h2>
-      <div class="salav-grid">
-        <div class="salav-field salav-full">
-          <label for="candidato_nombre">Nombre completo del candidato</label>
-          <input id="candidato_nombre" name="candidato_nombre" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="fecha_nacimiento">Fecha de nacimiento</label>
-          <input id="fecha_nacimiento" name="fecha_nacimiento" type="date" />
-        </div>
-
-        <div class="salav-field">
-          <label for="lugar_nacimiento">Lugar de nacimiento</label>
-          <input id="lugar_nacimiento" name="lugar_nacimiento" type="text" />
-        </div>
-
-        <div class="salav-field">
-          <label for="edad">Edad</label>
-          <input id="edad" name="edad" type="number" min="0" />
-        </div>
-
-        
-
-        <div class="salav-field">
-          <label for="rfc">RFC</label>
-          <input id="rfc" name="rfc" type="text" />
-        </div>
-        
-        <div class="salav-field">
-          <label for="estado_civil">Estado civil</label>
-          <select id="estado_civil" name="estado_civil">
-            <option value="">-- selecciona --</option>
-            <option>Soltero</option>
-            <option>Casado</option>
-            <option>Viudo</option>
-            <option>Divorciado</option>
-            <option>Unión libre</option>
-          </select>
-        </div>
-
-        <div class="salav-field">
-          <label for="num_hijos">Número de hijos</label>
-          <input id="num_hijos" name="num_hijos" type="number" min="0" />
-        </div>
-
-
-        <div class="salav-field">
-          <label for="telefono">Celular</label>
-          <input id="telefono" name="telefono" type="text" />
-        </div>
-
-        <div class="salav-field salav-full">
-          <label for="correo">Correo</label>
-          <input id="correo" name="correo" type="email" required />
-        </div>
-
-        <div class="salav-field">
-          <label for="telefono_recados">Teléfono de recados</label>
-          <input id="telefono_recados" name="telefono_recados" type="text" />
-        </div>
-
-        
-        <div class="salav-field salav-full">
-          <label for="direccion">Dirección completa</label>
-          <input id="direccion" name="direccion" type="text" />
-        </div>
-
-        <div class="salav-field">
-          <label for="colonia">Colonia</label>
-          <input id="colonia" name="colonia" type="text" />
-        </div>
-
-        <div class="salav-field">
-          <label for="ciudad">Delegación / Ciudad / Municipio</label>
-          <input id="ciudad" name="ciudad" type="text" />
-        </div>
-
-        <div class="salav-field">
-          <label for="estado">Estado</label>
-          <input id="estado" name="estado" type="text" />
-        </div>
-
-        <div class="salav-field">
-          <label for="pais">País</label>
-          <input id="pais" name="pais" type="text" />
-        </div>
-
-        <div class="salav-field">
-          <label for="codigo_postal">Código postal</label>
-          <input id="codigo_postal" name="codigo_postal" type="text" />
-        </div>
-
-        <div class="salav-field salav-full">
-          <label>¿Tiene familiares o conocidos trabajando en esta empresa?</label>
-          <div>
-            <label><input type="radio" name="familia_empresa" value="Sí"> Sí</label>
-            <label style="margin-left:8px;"><input type="radio" name="familia_empresa" value="No" checked> No</label>
           </div>
-        </div>
 
-        <div class="salav-field">
-          <label for="nombre_familiar">Nombre del familiar o conocido</label>
-          <input id="nombre_familiar" name="nombre_familiar" type="text" />
-        </div>
-      </div>
-    </div>
-
-    <!-- CROQUIS DE UBICACIÓN -->
-    <div class="salav-card">
-      <h2 class="section-title">Croquis de ubicación</h2>
-      <div class="salav-grid">
-        <div class="salav-field salav-full">
-          <label for="croquis">Carga el croquis o mapa; para este punto puedes realizar un screenshot de google maps</label>
-           <div class="file-upload" id="croquis-upload">
-                <span>Haga clic para subir</span>
-                <input id="croquis" name="croquis" type="file" accept="image/*,application/pdf" />
+          <!-- DATOS DE LA EMPRESA VALUADORA -->
+          <div class="salav-card">
+            <h2 class="section-title">Datos de la empresa valuadora</h2>
+            <div class="salav-grid">
+              <div class="salav-field">
+                <label for="valuador_nombre">Nombre del evaluador</label>
+                <input id="valuador_nombre" name="valuador_nombre" type="text" />
+              </div>
             </div>
-            <div class="file-name" id="croquis-name"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- FOTOGRAFÍAS DEL DOMICILIO -->
-    <div class="salav-card">
-      <h2 class="section-title">Fotografías del domicilio</h2>
-      <div class="salav-grid">
-        <div class="salav-field">
-          <label for="foto_fachada_exterior">Fotografía del candidato con la fachada exterior a su domicilio desde la calle</label>
-          <div class="file-upload" id="ext-upload">
-                <span>Haga clic para subir</span>
-                <input id="foto_fachada_exterior" name="foto_fachada_exterior" type="file" accept="image/*" />
           </div>
-            <div class="file-name" id="ext-name"></div>
-        </div>
-        <div class="salav-field">
-          <label for="foto_fachada_interior">Fotografía del candidato con la fachada Interior de su domicilio</label>
-          <div class="file-upload" id="int-upload">
-                <span>Haga clic para subir</span>
-                <input id="foto_fachada_interior" name="foto_fachada_interior" type="file" accept="image/*" />
+
+          <!-- DATOS DE LA EMPRESA SOLICITANTE -->
+          <div class="salav-card">
+            <h2 class="section-title">Datos de la empresa solicitante</h2>
+            <div class="salav-grid">
+              <div class="salav-field">
+                <label for="solicitante_razon2">Razón social (empresa solicitante)</label>
+                <input id="solicitante_razon2" name="solicitante_razon2" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="solicitante_contacto">Contacto</label>
+                <input id="solicitante_contacto" name="solicitante_contacto" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="solicitante_email">E-Mail</label>
+                <input id="solicitante_email" name="solicitante_email" type="email" />
+              </div>
+            </div>
           </div>
-            <div class="file-name" id="int-name"></div>
-        </div>
-        <div class="salav-field">
-          <label for="foto_sala">Fotografía del candidato en sala / comedor </label>
-          <div class="file-upload" id="sala-upload">
-                <span>Haga clic para subir</span>
-                <input id="foto_sala" name="foto_sala" type="file" accept="image/*" />
+
+          <!-- DATOS DEL CANDIDATO -->
+          <div class="salav-card">
+            <h2 class="section-title">Datos del candidato</h2>
+            <div class="salav-grid">
+              <div class="salav-field salav-full">
+                <label for="candidato_nombre">Nombre completo del candidato</label>
+                <input id="candidato_nombre" name="candidato_nombre" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="fecha_nacimiento">Fecha de nacimiento</label>
+                <input id="fecha_nacimiento" name="fecha_nacimiento" type="date" />
+              </div>
+
+              <div class="salav-field">
+                <label for="lugar_nacimiento">Lugar de nacimiento</label>
+                <input id="lugar_nacimiento" name="lugar_nacimiento" type="text" />
+              </div>
+
+              <div class="salav-field">
+                <label for="edad">Edad</label>
+                <input id="edad" name="edad" type="number" min="0" />
+              </div>
+
+
+
+              <div class="salav-field">
+                <label for="rfc">RFC</label>
+                <input id="rfc" name="rfc" type="text" />
+              </div>
+
+              <div class="salav-field">
+                <label for="estado_civil">Estado civil</label>
+                <select id="estado_civil" name="estado_civil">
+                  <option value="">-- selecciona --</option>
+                  <option>Soltero</option>
+                  <option>Casado</option>
+                  <option>Viudo</option>
+                  <option>Divorciado</option>
+                  <option>Unión libre</option>
+                </select>
+              </div>
+
+              <div class="salav-field">
+                <label for="num_hijos">Número de hijos</label>
+                <input id="num_hijos" name="num_hijos" type="number" min="0" />
+              </div>
+
+
+              <div class="salav-field">
+                <label for="telefono">Celular</label>
+                <input id="telefono" name="telefono" type="text" />
+              </div>
+
+              <div class="salav-field salav-full">
+                <label for="correo">Correo</label>
+                <input id="correo" name="correo" type="email" required />
+              </div>
+
+              <div class="salav-field">
+                <label for="telefono_recados">Teléfono de recados</label>
+                <input id="telefono_recados" name="telefono_recados" type="text" />
+              </div>
+
+
+              <div class="salav-field salav-full">
+                <label for="direccion">Dirección completa</label>
+                <input id="direccion" name="direccion" type="text" />
+              </div>
+
+              <div class="salav-field">
+                <label for="colonia">Colonia</label>
+                <input id="colonia" name="colonia" type="text" />
+              </div>
+
+              <div class="salav-field">
+                <label for="ciudad">Delegación / Ciudad / Municipio</label>
+                <input id="ciudad" name="ciudad" type="text" />
+              </div>
+
+              <div class="salav-field">
+                <label for="estado">Estado</label>
+                <input id="estado" name="estado" type="text" />
+              </div>
+
+              <div class="salav-field">
+                <label for="pais">País</label>
+                <input id="pais" name="pais" type="text" />
+              </div>
+
+              <div class="salav-field">
+                <label for="codigo_postal">Código postal</label>
+                <input id="codigo_postal" name="codigo_postal" type="text" />
+              </div>
+
+              <div class="salav-field salav-full">
+                <label>¿Tiene familiares o conocidos trabajando en esta empresa?</label>
+                <div>
+                  <label><input type="radio" name="familia_empresa" value="Sí"> Sí</label>
+                  <label style="margin-left:8px;"><input type="radio" name="familia_empresa" value="No" checked>
+                    No</label>
+                </div>
+              </div>
+
+              <div class="salav-field">
+                <label for="nombre_familiar">Nombre del familiar o conocido</label>
+                <input id="nombre_familiar" name="nombre_familiar" type="text" />
+              </div>
+            </div>
           </div>
-            <div class="file-name" id="sala-name"></div>
-        </div>
-        <div class="salav-field">
-          <label for="foto_entregando_documentos">Fotografía del candidato entregando documentos </label>
-          <div class="file-upload" id="docs-upload">
-                <span>Haga clic para subir</span>
-                <input id="foto_entregando_documentos" name="foto_entregando_documentos" type="file" accept="image/*" />
+
+          <!-- CROQUIS DE UBICACIÓN -->
+          <div class="salav-card">
+            <h2 class="section-title">Croquis de ubicación</h2>
+            <div class="salav-grid">
+              <div class="salav-field salav-full">
+                <label for="croquis">Carga el croquis o mapa; para este punto puedes realizar un screenshot de google
+                  maps</label>
+                <div class="file-upload" id="croquis-upload">
+                  <span>Haga clic para subir</span>
+                  <input id="croquis" name="croquis" type="file" accept="image/*,application/pdf" />
+                </div>
+                <div class="file-name" id="croquis-name"></div>
+              </div>
+            </div>
           </div>
-            <div class="file-name" id="docs-name"></div>
-        </div>
-      </div>
-    </div>
 
-    <!-- NÚCLEO FAMILIAR (dinámico e ilimitado) -->
-    <div class="salav-card">
-      <h2 class="section-title">Núcleo familiar</h2>
-      <p class="salav-meta">Rellena los datos de cada familiar. Si no aplica, deja vacío. Puedes agregar cuántos familiares necesites.</p>
-
-      <div id="familiares-wrap" class="salav-grid">
-        <!-- plantilla inicial vacía; se usarán entradas dinámicas -->
-      </div>
-
-      <div style="margin-top:10px">
-        <button type="button" id="add-familiar-btn" class="btn salav-small-btn">+ Agregar familiar</button>
-      </div>
-    </div>
-
-    <!-- SITUACIÓN ECONÓMICA — ESTILO DE VIDA (termina en 'otros ingresos') -->
-    <div class="salav-card">
-      <h2 class="section-title">Situación económica - Estilo de vida/h2>
-      <div class="salav-grid">
-        <div class="salav-field salav-full">
-          <label for="sueldo_actual">Sueldo actual del candidato</label>
-          <input id="sueldo_actual" name="sueldo_actual" type="text" />
-        </div>
-
-        <div class="salav-field">
-          <label for="ingresos_negocio">Ingresos por negocio</label>
-          <input id="ingresos_negocio" name="ingresos_negocio" type="text" />
-        </div>
-
-        <div class="salav-field">
-          <label for="ingresos_oficio">Ingresos por oficio</label>
-          <input id="ingresos_oficio" name="ingresos_oficio" type="text" />
-        </div>
-
-        <div class="salav-field salav-full">
-          <label for="otros_ingresos">Otros ingresos (especificar)</label>
-          <input id="otros_ingresos" name="otros_ingresos" type="text" placeholder="Especifique de dónde provienen sus otros ingresos" />
-        </div>
-      </div>
-    </div>
-
-    <!-- SITUACIÓN ECONÓMICA — INGRESOS FAMILIARES -->
-    <div class="salav-card">
-      <h2 class="section-title">Situación económica - Ingresos familiares</h2>
-      <div class="salav-grid">
-        <div class="salav-field">
-          <label for="ingresos_conyuge">Ingresos del cónyuge</label>
-          <input id="ingresos_conyuge" name="ingresos_conyuge" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="ingresos_padres">Ingresos de los padres</label>
-          <input id="ingresos_padres" name="ingresos_padres" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="ingresos_hijos">Ingresos de los hijos</label>
-          <input id="ingresos_hijos" name="ingresos_hijos" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="ingresos_hermanos">Ingresos de los hermanos</label>
-          <input id="ingresos_hermanos" name="ingresos_hermanos" type="text" />
-        </div>
-        <div class="salav-field salav-full">
-          <label for="otros_ingresos_familiares">Otros ingresos familiares (especificar)</label>
-          <input id="otros_ingresos_familiares" name="otros_ingresos_familiares" type="text" />
-        </div>
-      </div>
-    </div>
-
-    <!-- SITUACIÓN ECONÓMICA — GASTOS DE TRASLADO -->
-    <div class="salav-card">
-      <h2 class="section-title">Situación económica - Gastos de traslado</h2>
-      <div class="salav-grid">
-        <div class="salav-field">
-          <label for="gasto_pasajes">Pasajes</label>
-          <input id="gasto_pasajes" name="gasto_pasajes" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="gasto_taxi">Taxi / Uber</label>
-          <input id="gasto_taxi" name="gasto_taxi" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="gasto_gasolina">Gasolina</label>
-          <input id="gasto_gasolina" name="gasto_gasolina" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="gasto_casetas">Casetas</label>
-          <input id="gasto_casetas" name="gasto_casetas" type="text" />
-        </div>
-      </div>
-    </div>
-
-    <!-- SITUACIÓN ECONÓMICA — EGRESOS MENSUALES DEL CANDIDATO -->
-    <div class="salav-card">
-      <h2 class="section-title">Situación económica - Egresos mensuales del candidato</h2>
-      <div class="salav-grid">
-        <div class="salav-field">
-          <label for="gasto_alimentacion">¿Cuánto gasta en alimentación?</label>
-          <input id="gasto_alimentacion" name="gasto_alimentacion" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="gasto_agua_potable">¿Cuanto gasta en Servicio de agua potable?</label>
-          <input id="gasto_agua_potable" name="gasto_agua_potable" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="gasto_luz">¿Cuanto gasta en servicio de luz?</label>
-          <input id="gasto_luz" name="gasto_luz" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="gasto_internet">¿Cuanto gasta en servicio de internet?</label>
-          <input id="gasto_internet" name="gasto_internet" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="gasto_telefonia">¿Cuánto gasta en telefonía?</label>
-          <input id="gasto_telefonia" name="gasto_telefonia" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="gasto_streaming">¿Cuánto gasta en servicios de streaming?</label>
-          <input id="gasto_streaming" name="gasto_streaming" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="gasto_mantenimiento_hogar">¿Cuánto gasta en mantenimiento del hogar?</label>
-          <input id="gasto_mantenimiento_hogar" name="gasto_mantenimiento_hogar" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="gasto_mantenimiento_vehicular">¿Cuánto gasta en mantenimiento vehicular?</label>
-          <input id="gasto_mantenimiento_vehicular" name="gasto_mantenimiento_vehicular" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="gasto_pension_alimenticia">¿Cuánto gasta en pensión alimenticia?</label>
-          <input id="gasto_pension_alimenticia" name="gasto_pension_alimenticia" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="gasto_salidas_recreativas">¿Cuánto gasta en salidas recreativas?</label>
-          <input id="gasto_salidas_recreativas" name="gasto_salidas_recreativas" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="gasto_membresias">¿Cuánto gasta en membresías y club social?</label>
-          <input id="gasto_membresias" name="gasto_membresias" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="gasto_seguros_vida">¿Cuánto gasta en seguros de vida?</label>
-          <input id="gasto_seguros_vida" name="gasto_seguros_vida" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="gasto_seguro_vehiculo">¿Cuánto gasta en seguro de vehículo?</label>
-          <input id="gasto_seguro_vehiculo" name="gasto_seguro_vehiculo" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="gasto_credito_vivienda">¿Cuánto gasta en crédito de vivienda?</label>
-          <input id="gasto_credito_vivienda" name="gasto_credito_vivienda" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="gasto_credito_vehicular">¿Cuánto gasta en crédito vehicular?</label>
-          <input id="gasto_credito_vehicular" name="gasto_credito_vehicular" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="gasto_hipoteca">¿Cuánto gasta en hipoteca?</label>
-          <input id="gasto_hipoteca" name="gasto_hipoteca" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="gasto_mascotas">¿Cuánto gasta en mascotas?</label>
-          <input id="gasto_mascotas" name="gasto_mascotas" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="gasto_consultas_medicas">¿Cuánto gasta en consultas médicas?</label>
-          <input id="gasto_consultas_medicas" name="gasto_consultas_medicas" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="gasto_educacion">¿Cuánto gasta en educación?</label>
-          <input id="gasto_educacion" name="gasto_educacion" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="gasto_ropa_calzado">¿Cuánto gasta en ropa y calzado?</label>
-          <input id="gasto_ropa_calzado" name="gasto_ropa_calzado" type="text" />
-        </div>
-      </div>
-    </div>
-
-    <!-- ESTILO DE VIDA - VEHÍCULO -->
-    <div class="salav-card">
-      <h2 class="section-title">Estilo de vida — Comodidades (vehículo)</h2>
-      <div class="salav-grid">
-        <div class="salav-field salav-full">
-          <label>¿Cuenta con vehículo?</label>
-          <div>
-            <label><input type="radio" name="tiene_vehiculo" value="Sí" id="tiene_vehiculo_si"> Sí</label>
-            <label style="margin-left:8px;"><input type="radio" name="tiene_vehiculo" value="No" id="tiene_vehiculo_no" checked> No</label>
+          <!-- FOTOGRAFÍAS DEL DOMICILIO -->
+          <div class="salav-card">
+            <h2 class="section-title">Fotografías del domicilio</h2>
+            <div class="salav-grid">
+              <div class="salav-field">
+                <label for="foto_fachada_exterior">Fotografía del candidato con la fachada exterior a su domicilio desde
+                  la calle</label>
+                <div class="file-upload" id="ext-upload">
+                  <span>Haga clic para subir</span>
+                  <input id="foto_fachada_exterior" name="foto_fachada_exterior" type="file" accept="image/*" />
+                </div>
+                <div class="file-name" id="ext-name"></div>
+              </div>
+              <div class="salav-field">
+                <label for="foto_fachada_interior">Fotografía del candidato con la fachada Interior de su
+                  domicilio</label>
+                <div class="file-upload" id="int-upload">
+                  <span>Haga clic para subir</span>
+                  <input id="foto_fachada_interior" name="foto_fachada_interior" type="file" accept="image/*" />
+                </div>
+                <div class="file-name" id="int-name"></div>
+              </div>
+              <div class="salav-field">
+                <label for="foto_sala">Fotografía del candidato en sala / comedor </label>
+                <div class="file-upload" id="sala-upload">
+                  <span>Haga clic para subir</span>
+                  <input id="foto_sala" name="foto_sala" type="file" accept="image/*" />
+                </div>
+                <div class="file-name" id="sala-name"></div>
+              </div>
+              <div class="salav-field">
+                <label for="foto_entregando_documentos">Fotografía del candidato entregando documentos </label>
+                <div class="file-upload" id="docs-upload">
+                  <span>Haga clic para subir</span>
+                  <input id="foto_entregando_documentos" name="foto_entregando_documentos" type="file"
+                    accept="image/*" />
+                </div>
+                <div class="file-name" id="docs-name"></div>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div id="vehiculo-block" class="salav-field salav-full" style="display:none">
-          <label for="veh_marca">Marca</label>
-          <input id="veh_marca" name="veh_marca" type="text" />
-          <label for="veh_modelo" style="margin-top:8px">Modelo</label>
-          <input id="veh_modelo" name="veh_modelo" type="text" />
-          <label for="veh_ano" style="margin-top:8px">Año</label>
-          <input id="veh_ano" name="veh_ano" type="text" />
-           <label for="veh_color" style="margin-top:8px">Color</label>
-          <input id="veh_color" name="veh_color" type="text" />
-        </div>
-      </div>
-    </div>
+          <!-- NÚCLEO FAMILIAR (dinámico e ilimitado) -->
+          <div class="salav-card">
+            <h2 class="section-title">Núcleo familiar</h2>
+            <p class="salav-meta">Rellena los datos de cada familiar. Si no aplica, deja vacío. Puedes agregar cuántos
+              familiares necesites.</p>
 
-    <!-- ESTILO DE VIDA COMODIDADES 2 -->
-    <div class="salav-card">
-      <h2 class="section-title">Estilo de vida - Comodidades 2</h2>
-      <div class="salav-grid">
-        <div class="salav-field">
-          <label for="cuenta_computadora">¿Cuenta con computadora?</label>
-          <select id="cuenta_computadora" name="cuenta_computadora"><option value="No">No</option><option value="Sí">Sí</option></select>
-        </div>
-        <div class="salav-field">
-          <label for="cuenta_bicicleta">¿Cuenta con bicicleta?</label>
-          <select id="cuenta_bicicleta" name="cuenta_bicicleta"><option value="No">No</option><option value="Sí">Sí</option></select>
-        </div>
-        <div class="salav-field">
-          <label for="cuenta_tablet">¿Cuenta con tablet?</label>
-          <select id="cuenta_tablet" name="cuenta_tablet"><option value="No">No</option><option value="Sí">Sí</option></select>
-        </div>
-        <div class="salav-field">
-          <label for="cuenta_refri">¿Cuenta con refigerador?</label>
-          <select id="cuenta_refri" name="cuenta_refri"><option value="No">No</option><option value="Sí">Sí</option></select>
-        </div>
-        <div class="salav-field">
-          <label for="cuenta_tv">¿Cuenta con televisión / pantalla?</label>
-          <select id="cuenta_tv" name="cuenta_tv"><option value="No">No</option><option value="Sí">Sí</option></select>
-        </div>
-        <div class="salav-field">
-          <label for="cuenta_microondas">¿Cuenta con microondas?</label>
-          <select id="cuenta_microondas" name="cuenta_microondas"><option value="No">No</option><option value="Sí">Sí</option></select>
-        </div>
-        <div class="salav-field">
-          <label for="cuenta_estufa">¿Cuenta con estufa?</label>
-          <select id="cuenta_estufa" name="cuenta_estufa"><option value="No">No</option><option value="Sí">Sí</option></select>
-        </div>
-        <div class="salav-field">
-          <label for="cuenta_lavadora">¿Cuenta con lavadora?</label>
-          <select id="cuenta_lavadora" name="cuenta_lavadora"><option value="No">No</option><option value="Sí">Sí</option></select>
-        </div>
-        <div class="salav-field">
-          <label for="cuenta_motocicleta">¿Cuenta con motocicleta?</label>
-          <select id="cuenta_motocicleta" name="cuenta_motocicleta"><option value="No">No</option><option value="Sí">Sí</option></select>
-        </div>
-      </div>
-    </div>
+            <div id="familiares-wrap" class="salav-grid">
+              <!-- plantilla inicial vacía; se usarán entradas dinámicas -->
+            </div>
 
-    <!-- MOTOCICLETA (condicional) -->
-    <div id="motocicleta-block" class="salav-card" style="display:none">
-      <h2 class="section-title">Estilo de vida — Comodidades (motocicleta)</h2>
-      <div class="salav-grid">
-        <div class="salav-field">
-          <label for="moto_marca">Marca</label>
-          <input id="moto_marca" name="moto_marca" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="moto_modelo">Modelo</label>
-          <input id="moto_modelo" name="moto_modelo" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="moto_ano">Año</label>
-          <input id="moto_ano" name="moto_ano" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="moto_color">Color</label>
-          <input id="moto_color" name="moto_color" type="text" />
-        </div>
-      </div>
-    </div>
-
-    <!-- ESTILO DE VIDA COMODIDADES 3 -->
-    <div class="salav-card">
-      <h2 class="section-title">Estilo de vida - Comodidades - 3</h2>
-      <div class="salav-grid">
-        <div class="salav-field">
-          <label for="cuenta_camara">¿Cuenta con cámara fotográfica?</label>
-          <select id="cuenta_camara" name="cuenta_camara"><option value="No">No</option><option value="Sí">Sí</option></select>
-        </div>
-        <div class="salav-field">
-          <label for="cuenta_freidora">¿Cuenta con freidora de aire?</label>
-          <select id="cuenta_freidora" name="cuenta_freidora"><option value="No">No</option><option value="Sí">Sí</option></select>
-        </div>
-        <div class="salav-field">
-          <label for="cuenta_horno_electrico">¿Cuenta con horno eléctrico?</label>
-          <select id="cuenta_horno_electrico" name="cuenta_horno_electrico"><option value="No">No</option><option value="Sí">Sí</option></select>
-        </div>
-        <div class="salav-field">
-          <label for="cuenta_batidora">¿Cuenta con batidora?</label>
-          <select id="cuenta_batidora" name="cuenta_batidora"><option value="No">No</option><option value="Sí">Sí</option></select>
-        </div>
-        <div class="salav-field">
-          <label for="cuenta_tostador">¿Cuenta con tostador?</label>
-          <select id="cuenta_tostador" name="cuenta_tostador"><option value="No">No</option><option value="Sí">Sí</option></select>
-        </div>
-        <div class="salav-field">
-          <label for="cuenta_dispensador">¿Cuenta con dispensador de agua?</label>
-          <select id="cuenta_dispensador" name="cuenta_dispensador"><option value="No">No</option><option value="Sí">Sí</option></select>
-        </div>
-        <div class="salav-field">
-          <label for="cuenta_licuadora">¿Cuenta con licuadora?</label>
-          <select id="cuenta_licuadora" name="cuenta_licuadora"><option value="No">No</option><option value="Sí">Sí</option></select>
-        </div>
-        <div class="salav-field">
-          <label for="cuenta_tanque_gas">¿Cuenta con tanque de gas?</label>
-          <select id="cuenta_tanque_gas" name="cuenta_tanque_gas"><option value="No">No</option><option value="Sí">Sí</option></select>
-        </div>
-        <div class="salav-field">
-          <label for="cuenta_celular">¿Cuenta con celular?</label>
-          <select id="cuenta_celular" name="cuenta_celular"><option value="No">No</option><option value="Sí">Sí</option></select>
-        </div>
-      </div>
-    </div>
-
-    <!-- COMODIDADES - CELULAR (condicional) -->
-    <div id="celular-block" class="salav-card" style="display:none">
-      <h2 class="section-title">Comodidades — Celular</h2>
-      <div class="salav-grid">
-        <div class="salav-field">
-          <label for="cel_marca">Marca</label>
-          <input id="cel_marca" name="cel_marca" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="cel_modelo">Modelo</label>
-          <input id="cel_modelo" name="cel_modelo" type="text" />
-        </div>
-      </div>
-    </div>
-
-    <!-- ESTILO DE VIDA COMODIDADES 4 -->
-    <div class="salav-card">
-      <h2 class="section-title">Estilo de vida — Comodidades 4</h2>
-      <div class="salav-grid">
-        <div class="salav-field">
-          <label for="cuenta_cama">¿Cuenta con cama?</label>
-          <select id="cuenta_cama" name="cuenta_cama"><option value="No">No</option><option value="Sí">Sí</option></select>
-        </div>
-        <div class="salav-field">
-          <label for="cuenta_sala">¿Cuenta con sala?</label>
-          <select id="cuenta_sala" name="cuenta_sala"><option value="No">No</option><option value="Sí">Sí</option></select>
-        </div>
-        <div class="salav-field">
-          <label for="cuenta_cocina_integral">¿Cuenta con cocina integral?</label>
-          <select id="cuenta_cocina_integral" name="cuenta_cocina_integral"><option value="No">No</option><option value="Sí">Sí</option></select>
-        </div>
-        <div class="salav-field">
-          <label for="cuenta_closet">¿Cuenta con closet?</label>
-          <select id="cuenta_closet" name="cuenta_closet"><option value="No">No</option><option value="Sí">Sí</option></select>
-        </div>
-        <div class="salav-field">
-          <label for="cuenta_banio">¿Cuenta con baño?</label>
-          <select id="cuenta_banio" name="cuenta_banio"><option value="No">No</option><option value="Sí">Sí</option></select>
-        </div>
-        <div class="salav-field">
-          <label for="cuenta_calentador_solar">¿Cuenta con calentador solar?</label>
-          <select id="cuenta_calentador_solar" name="cuenta_calentador_solar"><option value="No">No</option><option value="Sí">Sí</option></select>
-        </div>
-        <div class="salav-field">
-          <label for="cuenta_calentador_boiler">¿Cuenta con calentador de paso o boiler?</label>
-          <select id="cuenta_calentador_boiler" name="cuenta_calentador_boiler"><option value="No">No</option><option value="Sí">Sí</option></select>
-        </div>
-        <div class="salav-field">
-          <label for="cuenta_panel_solar">¿Cuenta con panel solar?</label>
-          <select id="cuenta_panel_solar" name="cuenta_panel_solar"><option value="No">No</option><option value="Sí">Sí</option></select>
-        </div>
-      </div>
-    </div>
-
-    <!-- SERVICIOS DE LA ZONA DOMICILIARIA -->
-    <div class="salav-card">
-      <h2 class="section-title">Servicios de la zona domiciliaria</h2>
-      <div class="salav-grid">
-        <div class="salav-field"><label for="agua_potable">¿Cuentan con agua potable?</label><select id="agua_potable" name="agua_potable"><option>Sí</option><option>No</option></select></div>
-        <div class="salav-field"><label for="energia_electrica">¿Cuentan con energía eléctrica?</label><select id="energia_electrica" name="energia_electrica"><option>Sí</option><option>No</option></select></div>
-        <div class="salav-field"><label for="drenaje">¿Cuentan con drenaje?</label><select id="drenaje" name="drenaje"><option>Sí</option><option>No</option></select></div>
-        <div class="salav-field"><label for="pavimentacion">¿Cuentan con pavimentación?</label><select id="pavimentacion" name="pavimentacion"><option>Sí</option><option>No</option></select></div>
-
-        <div class="salav-field"><label for="alumbrado_publico">¿Cuentan con alumbrado público?</label><select id="alumbrado_publico" name="alumbrado_publico"><option>Sí</option><option>No</option></select></div>
-        <div class="salav-field"><label for="lineas_telefonicas">¿Cuentan con líneas telefónicas?</label><select id="lineas_telefonicas" name="lineas_telefonicas"><option>Sí</option><option>No</option></select></div>
-        <div class="salav-field"><label for="lineas_internet">¿Cuentan con líneas de internet?</label><select id="lineas_internet" name="lineas_internet"><option>Sí</option><option>No</option></select></div>
-        <div class="salav-field"><label for="lineas_gas">¿Cuentan con líneas de gas natural?</label><select id="lineas_gas" name="lineas_gas"><option>Sí</option><option>No</option></select></div>
-
-        <div class="salav-field"><label for="lineas_cable">¿Cuentan con líneas de cable?</label><select id="lineas_cable" name="lineas_cable"><option>Sí</option><option>No</option></select></div>
-        <div class="salav-field"><label for="escuelas">¿Cuentan con escuelas en la colonia?</label><select id="escuelas" name="escuelas"><option>Sí</option><option>No</option></select></div>
-        <div class="salav-field"><label for="hospitales">¿Cuentan con hospitales en la colonia?</label><select id="hospitales" name="hospitales"><option>Sí</option><option>No</option></select></div>
-        <div class="salav-field"><label for="centros_comerciales">¿Cuentan con centros comerciales en la colonia?</label><select id="centros_comerciales" name="centros_comerciales"><option>Sí</option><option>No</option></select></div>
-        <div class="salav-field"><label for="club_social_colonia">¿Cuentan con club social o deportivo en la colonia?</label><select id="club_social_colonia" name="club_social_colonia"><option>Sí</option><option>No</option></select></div>
-        <div class="salav-field"><label for="parques_recreativos">¿Cuentan con parques recreativos en la colonia?</label><select id="parques_recreativos" name="parques_recreativos"><option>Sí</option><option>No</option></select></div>
-
-        <div class="salav-field"><label for="recoleccion_residuos">¿Cuentan con recolección de residuos?</label><select id="recoleccion_residuos" name="recoleccion_residuos"><option>Sí</option><option>No</option></select></div>
-        <div class="salav-field"><label for="transporte_publico">¿Cuentan con transporte público?</label><select id="transporte_publico" name="transporte_publico"><option>Sí</option><option>No</option></select></div>
-        <div class="salav-field"><label for="cuenta_metro">¿Cuentan con metro?</label><select id="cuenta_metro" name="cuenta_metro"><option>Sí</option><option>No</option></select></div>
-        <div class="salav-field"><label for="cuenta_teleferico">¿Cuentan con teleférico / maxicable?</label><select id="cuenta_teleferico" name="cuenta_teleferico"><option>Sí</option><option>No</option></select></div>
-      </div>
-    </div>
-
-    <!-- DATOS ACADÉMICOS: BASE Y agregado dinamico -->
-    <div class="salav-card">
-      <h2 class="section-title">Datos académicos</h2>
-      <div class="salav-grid">
-        <div class="salav-field">
-          <label for="ultimo_nivel">Último nivel académico</label>
-          <select id="ultimo_nivel" name="ultimo_nivel">
-            <option value="">--</option>
-            <option>Primaria</option><option>Secundaria</option><option>Preparatoria</option>
-            <option>Carrera técnica</option><option>Licenciatura</option><option>Maestría</option><option>Doctorado</option>
-          </select>
-        </div>
-
-        <div class="salav-field">
-          <label for="institucion">Institución</label>
-          <input id="institucion" name="institucion" type="text" />
-        </div>
-
-        <div class="salav-field">
-          <label for="entidad_federativa">Entidad federativa</label>
-          <input id="entidad_federativa" name="entidad_federativa" type="text" />
-        </div>
-
-        <div class="salav-field salav-full">
-          <label for="documento_recibido">Documento recibido</label>
-          <input id="documento_recibido" name="documento_recibido" type="text" placeholder="Ej: certificado, constancia, etc." />
-        </div>
-      </div>
-
-      <div id="niveles-wrap" class="salav-grid" style="gap:8px;margin-top:8px"></div>
-
-        <div style="margin-top:10px">
-        <button type="button" id="add-nivel-btn" class="btn salav-small-btn">+ Agregar otro nivel académico</button>
-        </div>
-    </div>
-
-    <!-- DATOS ACADEMICOS ACTUALES -->
-    <div class="salav-card">
-      <h2 class="section-title">Datos academicos — Actuales</h2>
-      <div class="salav-grid">
-        <div class="salav-field salav-full">
-          <label>¿Estudia actualmente?</label>
-          <div>
-            <label><input type="radio" name="estudia_actualmente" value="Sí"> Sí</label>
-            <label style="margin-left:8px"><input type="radio" name="estudia_actualmente" value="No" checked> No</label>
+            <div style="margin-top:10px">
+              <button type="button" id="add-familiar-btn" class="btn salav-small-btn">+ Agregar familiar</button>
+            </div>
           </div>
-        </div>
-        <div class="salav-field" id="que_estudia_field" style="display:none">
-          <label for="que_estudia">¿Qué estudia?</label>
-          <input id="que_estudia" name="que_estudia" type="text" />
-        </div>
-      </div>
-    </div>
 
-    <!-- CURSOS Y CERTIFICADOS -->
-    <div class="salav-card">
-      <h2 class="section-title">Datos academicos  — Cursos y certificados</h2>
-      <div id="cursos-wrap" class="salav-grid"></div>
-      <div style="margin-top:10px">
-        <button type="button" id="add-curso-btn" class="btn salav-small-btn">+ Agregar curso o certificación</button>
-      </div>
-    </div>
+          <!-- SITUACIÓN ECONÓMICA — ESTILO DE VIDA (termina en 'otros ingresos') -->
+          <div class="salav-card">
+            <h2 class="section-title">Situación económica - Estilo de vida/h2>
+              <div class="salav-grid">
+                <div class="salav-field salav-full">
+                  <label for="sueldo_actual">Sueldo actual del candidato</label>
+                  <input id="sueldo_actual" name="sueldo_actual" type="text" />
+                </div>
 
-    <!-- INVESTIGACIÓN LABORAL (dinámica) -->
-    <div class="salav-card">
-      <h2 class="section-title">Investigación laboral (últimas empresas)</h2>
-      <div id="empresas-wrap" class="salav-grid"></div>
-      <div style="margin-top:10px">
-        <button type="button" id="add-empresa-btn" class="btn salav-small-btn">+ Agregar empresa</button>
-      </div>
-    </div>
+                <div class="salav-field">
+                  <label for="ingresos_negocio">Ingresos por negocio</label>
+                  <input id="ingresos_negocio" name="ingresos_negocio" type="text" />
+                </div>
 
-    <!-- REFERENCIAS (4 tipos) -->
-    <div class="salav-card">
-      <h2 class="section-title">Referencias</h2>
-      <p class="salav-meta">Agrega referencias personales, laborales, vecinales y familiares. Cada referencia incluye pregunta "Tiempo de conocerse".</p>
+                <div class="salav-field">
+                  <label for="ingresos_oficio">Ingresos por oficio</label>
+                  <input id="ingresos_oficio" name="ingresos_oficio" type="text" />
+                </div>
 
-      <h3 style="margin-top:12px">Personales</h3>
-      <div id="refs-personales-wrap" class="salav-grid"></div>
-      <button type="button" id="add-ref-personal" class="btn salav-small-btn" style="margin-top:8px">+ Agregar referencia personal</button>
-
-      <h3 style="margin-top:12px">Laborales</h3>
-      <div id="refs-laborales-wrap" class="salav-grid"></div>
-      <button type="button" id="add-ref-laboral" class="btn salav-small-btn" style="margin-top:8px">+ Agregar referencia laboral</button>
-
-      <h3 style="margin-top:12px">Vecinal</h3>
-      <div id="refs-vecinal-wrap" class="salav-grid"></div>
-      <button type="button" id="add-ref-vecinal" class="btn salav-small-btn" style="margin-top:8px">+ Agregar referencia vecinal</button>
-
-      <h3 style="margin-top:12px">Familiar</h3>
-      <div id="refs-familiar-wrap" class="salav-grid"></div>
-      <button type="button" id="add-ref-familiar" class="btn salav-small-btn" style="margin-top:8px">+ Agregar referencia familiar</button>
-    </div>
-
-    <!-- CUESTIONARIO - ESTADO DE SALUD (extenso con condicionales) -->
-    <div class="salav-card">
-      <h2 class="section-title">Cuestionario — Estado de salud</h2>
-      <div class="salav-grid">
-        <div class="salav-field"><label for="nss">Número de Seguridad Social (NSS)</label><input id="nss" name="nss" type="text" /></div>
-        <div class="salav-field"><label for="tipo_sangre">Tipo de sangre y RH</label><input id="tipo_sangre" name="tipo_sangre" type="text" /></div>
-        <div class="salav-field"><label for="estatura">Estatura</label><input id="estatura" name="estatura" type="text" /></div>
-        <div class="salav-field"><label for="peso">Peso</label><input id="peso" name="peso" type="text" /></div>
-
-        <div class="salav-field salav-full">
-          <label>¿Utiliza lentes actualmente?</label>
-          <div><label><input type="radio" name="utiliza_lentes" value="Sí"> Sí</label><label style="margin-left:8px"><input type="radio" name="utiliza_lentes" value="No" checked> No</label></div>
-        </div>
-        <div class="salav-field salav-full"><label for="justificacion_lentes">Justificación (si aplica)</label><input id="justificacion_lentes" name="justificacion_lentes" type="text" /></div>
-
-        <!-- a partir de aquí varias preguntas con condicionales: si "Sí" → aparece campo detalle/justificación -->
-        <div class="salav-field salav-full">
-          <label>¿Ha consultado algún médico últimamente?</label>
-          <div><label><input type="radio" name="ha_consultado_medico" value="Sí"> Sí</label><label style="margin-left:8px"><input type="radio" name="ha_consultado_medico" value="No" checked> No</label></div>
-          <input id="ha_consultado_medico_just" name="ha_consultado_medico_just" type="text" placeholder="¿Por qué razón? (justificación)" style="margin-top:6px;display:none" />
-        </div>
-
-        <div class="salav-field salav-full">
-          <label>¿Ha sufrido alguna intervención quirúrgica (operación)?</label>
-          <div><label><input type="radio" name="ha_sufrido_cirugia" value="Sí"> Sí</label><label style="margin-left:8px"><input type="radio" name="ha_sufrido_cirugia" value="No" checked> No</label></div>
-          <input id="ha_sufrido_cirugia_just" name="ha_sufrido_cirugia_just" type="text" placeholder="¿Por qué razón? (justificación)" style="margin-top:6px;display:none" />
-        </div>
-
-        <div class="salav-field salav-full">
-          <label>¿Tiene alguna discapacidad?</label>
-          <div><label><input type="radio" name="tiene_discapacidad" value="Sí"> Sí</label><label style="margin-left:8px"><input type="radio" name="tiene_discapacidad" value="No" checked> No</label></div>
-          <input id="tiene_discapacidad_just" name="tiene_discapacidad_just" type="text" placeholder="¿Cuál? (justificación)" style="margin-top:6px;display:none" />
-        </div>
-
-        <div class="salav-field salav-full">
-          <label>¿Le han practicado estudios especiales para diagnosticar alguna enfermedad?</label>
-          <div><label><input type="radio" name="practicado_estudios" value="Sí"> Sí</label><label style="margin-left:8px"><input type="radio" name="practicado_estudios" value="No" checked> No</label></div>
-          <input id="practicado_estudios_just" name="practicado_estudios_just" type="text" placeholder="¿Cuáles? (justificación)" style="margin-top:6px;display:none" />
-        </div>
-
-        <div class="salav-field salav-full">
-          <label>¿Actualmente está bajo algún tratamiento (toma algún medicamento)?</label>
-          <div><label><input type="radio" name="bajo_tratamiento" value="Sí"> Sí</label><label style="margin-left:8px"><input type="radio" name="bajo_tratamiento" value="No" checked> No</label></div>
-          <input id="bajo_tratamiento_just" name="bajo_tratamiento_just" type="text" placeholder="¿Cuáles? (justificación)" style="margin-top:6px;display:none" />
-        </div>
-
-        <div class="salav-field salav-full">
-          <label>¿Ha tenido transfusiones sanguíneas en los últimos 2 años?</label>
-          <div><label><input type="radio" name="transfusiones" value="Sí"> Sí</label><label style="margin-left:8px"><input type="radio" name="transfusiones" value="No" checked> No</label></div>
-          <input id="transfusiones_just" name="transfusiones_just" type="text" placeholder="¿Por qué razón? (justificación)" style="margin-top:6px;display:none" />
-        </div>
-
-        <div class="salav-field salav-full">
-          <label>¿Utiliza drogas (medicamentos) por prescripción médica?</label>
-          <div><label><input type="radio" name="usa_drogas_prescripcion" value="Sí"> Sí</label><label style="margin-left:8px"><input type="radio" name="usa_drogas_prescripcion" value="No" checked> No</label></div>
-          <input id="usa_drogas_prescripcion_just" name="usa_drogas_prescripcion_just" type="text" placeholder="¿Cuál y por qué razón? (justificación)" style="margin-top:6px;display:none" />
-        </div>
-
-        <!-- Enfermedades: piel/sangre -->
-        <div class="salav-field salav-full">
-          <label>¿Padece/ha padecido enfermedades de la piel o de la sangre (ej.: leucemia, lupus, cáncer de piel, alergia)?</label>
-          <div><label><input type="radio" name="enf_piel_sangre" value="Sí"> Sí</label><label style="margin-left:8px"><input type="radio" name="enf_piel_sangre" value="No" checked> No</label></div>
-          <input id="enf_piel_sangre_just" name="enf_piel_sangre_just" type="text" placeholder="¿Cuáles? (justificación)" style="margin-top:6px;display:none" />
-        </div>
-
-        <!-- Ojos / oídos -->
-        <div class="salav-field salav-full">
-          <label>¿Padece/ha padecido enfermedades de los ojos u oídos (ej.: conjuntivitis, infecciones, etc.)?</label>
-          <div><label><input type="radio" name="enf_ojo_oido" value="Sí"> Sí</label><label style="margin-left:8px"><input type="radio" name="enf_ojo_oido" value="No" checked> No</label></div>
-          <input id="enf_ojo_oido_just" name="enf_ojo_oido_just" type="text" placeholder="¿Cuáles? (justificación)" style="margin-top:6px;display:none" />
-        </div>
-
-        <!-- Corazón -->
-        <div class="salav-field salav-full">
-          <label>¿Padece/ha padecido infarto al miocardio, insuficiencia cardiaca u otro padecimiento del corazón?</label>
-          <div><label><input type="radio" name="enf_corazon" value="Sí"> Sí</label><label style="margin-left:8px"><input type="radio" name="enf_corazon" value="No" checked> No</label></div>
-          <input id="enf_corazon_just" name="enf_corazon_just" type="text" placeholder="Justificación" style="margin-top:6px;display:none" />
-        </div>
-
-        <!-- Pulmones -->
-        <div class="salav-field salav-full">
-          <label>¿Padece asma, tuberculosis o cualquier otra enfermedad de bronquios o pulmones?</label>
-          <div><label><input type="radio" name="enf_pulmones" value="Sí"> Sí</label><label style="margin-left:8px"><input type="radio" name="enf_pulmones" value="No" checked> No</label></div>
-          <input id="enf_pulmones_just" name="enf_pulmones_just" type="text" placeholder="¿Cuáles? (justificación)" style="margin-top:6px;display:none" />
-        </div>
-
-        <!-- Sistema nervioso -->
-        <div class="salav-field salav-full">
-          <label>¿Padece epilepsia o cualquier otro padecimiento del sistema nervioso?</label>
-          <div><label><input type="radio" name="enf_sistema_nervioso" value="Sí"> Sí</label><label style="margin-left:8px"><input type="radio" name="enf_sistema_nervioso" value="No" checked> No</label></div>
-          <input id="enf_sistema_nervioso_just" name="enf_sistema_nervioso_just" type="text" placeholder="¿Cuál? (justificación)" style="margin-top:6px;display:none" />
-        </div>
-
-        <!-- Diabetes / glandular -->
-        <div class="salav-field salav-full">
-          <label>¿Padece diabetes o cualquier otro padecimiento del sistema glandular?</label>
-          <div><label><input type="radio" name="enf_glandular" value="Sí"> Sí</label><label style="margin-left:8px"><input type="radio" name="enf_glandular" value="No" checked> No</label></div>
-          <input id="enf_glandular_just" name="enf_glandular_just" type="text" placeholder="¿Cuál? (justificación)" style="margin-top:6px;display:none" />
-        </div>
-
-        <!-- Digestivo -->
-        <div class="salav-field salav-full">
-          <label>¿Padece úlcera del estómago, intestinos u otro padecimiento del aparato digestivo?</label>
-          <div><label><input type="radio" name="enf_digestivo" value="Sí"> Sí</label><label style="margin-left:8px"><input type="radio" name="enf_digestivo" value="No" checked> No</label></div>
-          <input id="enf_digestivo_just" name="enf_digestivo_just" type="text" placeholder="¿Cuál? (justificación)" style="margin-top:6px;display:none" />
-        </div>
-
-        <!-- Músculo-esquelético -->
-        <div class="salav-field salav-full">
-          <label>¿Padece artritis, trastornos de la columna u otro padecimiento del sistema músculo-esquelético?</label>
-          <div><label><input type="radio" name="enf_musculo_esqueletico" value="Sí"> Sí</label><label style="margin-left:8px"><input type="radio" name="enf_musculo_esqueletico" value="No" checked> No</label></div>
-          <input id="enf_musculo_esqueletico_just" name="enf_musculo_esqueletico_just" type="text" placeholder="¿Cuál? (justificación)" style="margin-top:6px;display:none" />
-        </div>
-
-        <!-- Hernias -->
-        <div class="salav-field salav-full">
-          <label>¿Padece hernias?</label>
-          <div><label><input type="radio" name="enf_hernias" value="Sí"> Sí</label><label style="margin-left:8px"><input type="radio" name="enf_hernias" value="No" checked> No</label></div>
-          <input id="enf_hernias_just" name="enf_hernias_just" type="text" placeholder="¿Cuáles? (justificación)" style="margin-top:6px;display:none" />
-        </div>
-
-        <!-- Alergias medicamentos -->
-        <div class="salav-field salav-full">
-          <label>¿Es alérgico a algún medicamento (ej.: penicilina…)?</label>
-          <div><label><input type="radio" name="alergico_medicamento" value="Sí"> Sí</label><label style="margin-left:8px"><input type="radio" name="alergico_medicamento" value="No" checked> No</label></div>
-          <input id="alergico_medicamento_just" name="alergico_medicamento_just" type="text" placeholder="¿Cuáles? (justificación)" style="margin-top:6px;display:none" />
-        </div>
-
-        <div class="salav-field salav-full">
-          <label>¿Ha padecido cualquier otra enfermedad o lesión distinta a las mencionadas?</label>
-          <div><label><input type="radio" name="otras_enfermedades" value="Sí"> Sí</label><label style="margin-left:8px"><input type="radio" name="otras_enfermedades" value="No" checked> No</label></div>
-          <input id="otras_enfermedades_just" name="otras_enfermedades_just" type="text" placeholder="¿Cuáles? (justificación)" style="margin-top:6px;display:none" />
-        </div>
-
-        <div class="salav-field salav-full">
-          <label>¿Algún familiar cercano padece/ha padecido de diabetes, cáncer, problemas del corazón, tuberculosis?</label>
-          <div><label><input type="radio" name="familiar_enfermedad" value="Sí"> Sí</label><label style="margin-left:8px"><input type="radio" name="familiar_enfermedad" value="No" checked> No</label></div>
-          <input id="familiar_enfermedad_just" name="familiar_enfermedad_just" type="text" placeholder="¿Cuáles? (justificación)" style="margin-top:6px;display:none" />
-        </div>
-
-        <div class="salav-field salav-full">
-          <label>¿Padece ansiedad u otra enfermedad relacionada?</label>
-          <div><label><input type="radio" name="padece_ansiedad" value="Sí"> Sí</label><label style="margin-left:8px"><input type="radio" name="padece_ansiedad" value="No" checked> No</label></div>
-          <input id="padece_ansiedad_just" name="padece_ansiedad_just" type="text" placeholder="¿Cuál? (justificación)" style="margin-top:6px;display:none" />
-        </div>
-      </div>
-    </div>
-
-    <!-- CONTACTOS DE EMERGENCIA -->
-    <div class="salav-card">
-      <h2 class="section-title">Contactos de emergencia</h2>
-      <div class="salav-grid">
-        <div class="salav-field">
-          <label for="emergencia1_nombre">En caso de emergencia avisar a (persona 1)</label>
-          <input id="emergencia1_nombre" name="emergencia1_nombre" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="emergencia1_parentesco">Parentesco</label>
-          <input id="emergencia1_parentesco" name="emergencia1_parentesco" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="emergencia1_telefono">Teléfono</label>
-          <input id="emergencia1_telefono" name="emergencia1_telefono" type="text" />
-        </div>
-
-        <div class="salav-field">
-          <label for="emergencia2_nombre">En caso de emergencia avisar a (persona 2)</label>
-          <input id="emergencia2_nombre" name="emergencia2_nombre" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="emergencia2_parentesco">Parentesco</label>
-          <input id="emergencia2_parentesco" name="emergencia2_parentesco" type="text" />
-        </div>
-        <div class="salav-field">
-          <label for="emergencia2_telefono">Teléfono</label>
-          <input id="emergencia2_telefono" name="emergencia2_telefono" type="text" />
-        </div>
-      </div>
-    </div>
-
-    <!-- DOCUMENTACIÓN -->
-    <div class="salav-card">
-      <h2 class="section-title">Documentación (sube archivos relevantes)</h2>
-      <div class="salav-grid">
-        <div class="salav-field">
-          <label for="cv">CV o solicitud de empleo</label>
-          <div class="file-upload" id="cv-upload">
-                <span>Haga clic para subir</span>
-          <input id="cv" name="cv" type="file" accept="application/pdf,image/*" />
+                <div class="salav-field salav-full">
+                  <label for="otros_ingresos">Otros ingresos (especificar)</label>
+                  <input id="otros_ingresos" name="otros_ingresos" type="text"
+                    placeholder="Especifique de dónde provienen sus otros ingresos" />
+                </div>
+              </div>
           </div>
-            <div class="file-name" id="cv-name"></div>
-        </div>
-        <div class="salav-field">
-          <label for="comprobante_estudios">Último comprobante de estudios</label>
-          <div class="file-upload" id="comprobante-upload">
-                <span>Haga clic para subir</span>
-          <input id="comprobante_estudios" name="comprobante_estudios" type="file" accept="application/pdf,image/*" />
-          </div>
-            <div class="file-name" id="comprobante-name"></div>
-        </div>
-        <div class="salav-field">
-          <label for="identificacion_oficial">Identificación oficial (INE, etc.)</label>
-          <div class="file-upload" id="ine-upload">
-                <span>Haga clic para subir</span>
-          <input id="identificacion_oficial" name="identificacion_oficial" type="file" accept="image/*,application/pdf" />
-          </div>
-            <div class="file-name" id="ine-name"></div>
-        </div>
 
-        <div class="salav-field">
-          <label for="cedula_profesional">Cédula profesional</label>
-          <div class="file-upload" id="cedula-upload">
-                <span>Haga clic para subir</span>
-          <input id="cedula_profesional" name="cedula_profesional" type="file" accept="application/pdf,image/*" />
+          <!-- SITUACIÓN ECONÓMICA — INGRESOS FAMILIARES -->
+          <div class="salav-card">
+            <h2 class="section-title">Situación económica - Ingresos familiares</h2>
+            <div class="salav-grid">
+              <div class="salav-field">
+                <label for="ingresos_conyuge">Ingresos del cónyuge</label>
+                <input id="ingresos_conyuge" name="ingresos_conyuge" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="ingresos_padres">Ingresos de los padres</label>
+                <input id="ingresos_padres" name="ingresos_padres" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="ingresos_hijos">Ingresos de los hijos</label>
+                <input id="ingresos_hijos" name="ingresos_hijos" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="ingresos_hermanos">Ingresos de los hermanos</label>
+                <input id="ingresos_hermanos" name="ingresos_hermanos" type="text" />
+              </div>
+              <div class="salav-field salav-full">
+                <label for="otros_ingresos_familiares">Otros ingresos familiares (especificar)</label>
+                <input id="otros_ingresos_familiares" name="otros_ingresos_familiares" type="text" />
+              </div>
+            </div>
           </div>
-            <div class="file-name" id="cedula-name"></div>
-        </div>
-        <div class="salav-field">
-          <label for="constancia_laboral">Constancia laboral (2)</label>
-          <div class="file-upload" id="constancia-upload">
-                <span>Haga clic para subir</span>
-          <input id="constancia_laboral" name="constancia_laboral" type="file" accept="application/pdf,image/*" multiple />
+
+          <!-- SITUACIÓN ECONÓMICA — GASTOS DE TRASLADO -->
+          <div class="salav-card">
+            <h2 class="section-title">Situación económica - Gastos de traslado</h2>
+            <div class="salav-grid">
+              <div class="salav-field">
+                <label for="gasto_pasajes">Pasajes</label>
+                <input id="gasto_pasajes" name="gasto_pasajes" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="gasto_taxi">Taxi / Uber</label>
+                <input id="gasto_taxi" name="gasto_taxi" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="gasto_gasolina">Gasolina</label>
+                <input id="gasto_gasolina" name="gasto_gasolina" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="gasto_casetas">Casetas</label>
+                <input id="gasto_casetas" name="gasto_casetas" type="text" />
+              </div>
+            </div>
           </div>
-            <div class="file-name" id="constancia-name"></div>
-        </div>
-        <div class="salav-field">
-          <label for="cartas_recomendacion">Cartas de recomendación personales (2)</label>
-          <div class="file-upload" id="cartas-upload">
-                <span>Haga clic para subir</span>
-          <input id="cartas_recomendacion" name="cartas_recomendacion" type="file" accept="application/pdf,image/*" multiple />
+
+          <!-- SITUACIÓN ECONÓMICA — EGRESOS MENSUALES DEL CANDIDATO -->
+          <div class="salav-card">
+            <h2 class="section-title">Situación económica - Egresos mensuales del candidato</h2>
+            <div class="salav-grid">
+              <div class="salav-field">
+                <label for="gasto_alimentacion">¿Cuánto gasta en alimentación?</label>
+                <input id="gasto_alimentacion" name="gasto_alimentacion" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="gasto_agua_potable">¿Cuanto gasta en Servicio de agua potable?</label>
+                <input id="gasto_agua_potable" name="gasto_agua_potable" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="gasto_luz">¿Cuanto gasta en servicio de luz?</label>
+                <input id="gasto_luz" name="gasto_luz" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="gasto_internet">¿Cuanto gasta en servicio de internet?</label>
+                <input id="gasto_internet" name="gasto_internet" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="gasto_telefonia">¿Cuánto gasta en telefonía?</label>
+                <input id="gasto_telefonia" name="gasto_telefonia" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="gasto_streaming">¿Cuánto gasta en servicios de streaming?</label>
+                <input id="gasto_streaming" name="gasto_streaming" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="gasto_mantenimiento_hogar">¿Cuánto gasta en mantenimiento del hogar?</label>
+                <input id="gasto_mantenimiento_hogar" name="gasto_mantenimiento_hogar" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="gasto_mantenimiento_vehicular">¿Cuánto gasta en mantenimiento vehicular?</label>
+                <input id="gasto_mantenimiento_vehicular" name="gasto_mantenimiento_vehicular" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="gasto_pension_alimenticia">¿Cuánto gasta en pensión alimenticia?</label>
+                <input id="gasto_pension_alimenticia" name="gasto_pension_alimenticia" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="gasto_salidas_recreativas">¿Cuánto gasta en salidas recreativas?</label>
+                <input id="gasto_salidas_recreativas" name="gasto_salidas_recreativas" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="gasto_membresias">¿Cuánto gasta en membresías y club social?</label>
+                <input id="gasto_membresias" name="gasto_membresias" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="gasto_seguros_vida">¿Cuánto gasta en seguros de vida?</label>
+                <input id="gasto_seguros_vida" name="gasto_seguros_vida" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="gasto_seguro_vehiculo">¿Cuánto gasta en seguro de vehículo?</label>
+                <input id="gasto_seguro_vehiculo" name="gasto_seguro_vehiculo" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="gasto_credito_vivienda">¿Cuánto gasta en crédito de vivienda?</label>
+                <input id="gasto_credito_vivienda" name="gasto_credito_vivienda" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="gasto_credito_vehicular">¿Cuánto gasta en crédito vehicular?</label>
+                <input id="gasto_credito_vehicular" name="gasto_credito_vehicular" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="gasto_hipoteca">¿Cuánto gasta en hipoteca?</label>
+                <input id="gasto_hipoteca" name="gasto_hipoteca" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="gasto_mascotas">¿Cuánto gasta en mascotas?</label>
+                <input id="gasto_mascotas" name="gasto_mascotas" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="gasto_consultas_medicas">¿Cuánto gasta en consultas médicas?</label>
+                <input id="gasto_consultas_medicas" name="gasto_consultas_medicas" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="gasto_educacion">¿Cuánto gasta en educación?</label>
+                <input id="gasto_educacion" name="gasto_educacion" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="gasto_ropa_calzado">¿Cuánto gasta en ropa y calzado?</label>
+                <input id="gasto_ropa_calzado" name="gasto_ropa_calzado" type="text" />
+              </div>
+            </div>
           </div>
-            <div class="file-name" id="cartas-name"></div>
-        </div>
 
-        <div class="salav-field">
-          <label for="curp">CURP actualizado</label>
-          <div class="file-upload" id="curp-upload">
-                <span>Haga clic para subir</span>
-          <input id="curp" name="curp" type="file" accept="application/pdf,image/*" />
+          <!-- ESTILO DE VIDA - VEHÍCULO -->
+          <div class="salav-card">
+            <h2 class="section-title">Estilo de vida — Comodidades (vehículo)</h2>
+            <div class="salav-grid">
+              <div class="salav-field salav-full">
+                <label>¿Cuenta con vehículo?</label>
+                <div>
+                  <label><input type="radio" name="tiene_vehiculo" value="Sí" id="tiene_vehiculo_si"> Sí</label>
+                  <label style="margin-left:8px;"><input type="radio" name="tiene_vehiculo" value="No"
+                      id="tiene_vehiculo_no" checked> No</label>
+                </div>
+              </div>
+
+              <div id="vehiculo-block" class="salav-field salav-full" style="display:none">
+                <label for="veh_marca">Marca</label>
+                <input id="veh_marca" name="veh_marca" type="text" />
+                <label for="veh_modelo" style="margin-top:8px">Modelo</label>
+                <input id="veh_modelo" name="veh_modelo" type="text" />
+                <label for="veh_ano" style="margin-top:8px">Año</label>
+                <input id="veh_ano" name="veh_ano" type="text" />
+                <label for="veh_color" style="margin-top:8px">Color</label>
+                <input id="veh_color" name="veh_color" type="text" />
+              </div>
+            </div>
           </div>
-            <div class="file-name" id="curp-name"></div>
-        </div>
-        <div class="salav-field">
-          <label for="afore">AFORE</label>
-          <div class="file-upload" id="afore-upload">
-                <span>Haga clic para subir</span>
-          <input id="afore" name="afore" type="file" accept="application/pdf,image/*" />
+
+          <!-- ESTILO DE VIDA COMODIDADES 2 -->
+          <div class="salav-card">
+            <h2 class="section-title">Estilo de vida - Comodidades 2</h2>
+            <div class="salav-grid">
+              <div class="salav-field">
+                <label for="cuenta_computadora">¿Cuenta con computadora?</label>
+                <select id="cuenta_computadora" name="cuenta_computadora">
+                  <option value="No">No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+              <div class="salav-field">
+                <label for="cuenta_bicicleta">¿Cuenta con bicicleta?</label>
+                <select id="cuenta_bicicleta" name="cuenta_bicicleta">
+                  <option value="No">No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+              <div class="salav-field">
+                <label for="cuenta_tablet">¿Cuenta con tablet?</label>
+                <select id="cuenta_tablet" name="cuenta_tablet">
+                  <option value="No">No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+              <div class="salav-field">
+                <label for="cuenta_refri">¿Cuenta con refigerador?</label>
+                <select id="cuenta_refri" name="cuenta_refri">
+                  <option value="No">No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+              <div class="salav-field">
+                <label for="cuenta_tv">¿Cuenta con televisión / pantalla?</label>
+                <select id="cuenta_tv" name="cuenta_tv">
+                  <option value="No">No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+              <div class="salav-field">
+                <label for="cuenta_microondas">¿Cuenta con microondas?</label>
+                <select id="cuenta_microondas" name="cuenta_microondas">
+                  <option value="No">No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+              <div class="salav-field">
+                <label for="cuenta_estufa">¿Cuenta con estufa?</label>
+                <select id="cuenta_estufa" name="cuenta_estufa">
+                  <option value="No">No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+              <div class="salav-field">
+                <label for="cuenta_lavadora">¿Cuenta con lavadora?</label>
+                <select id="cuenta_lavadora" name="cuenta_lavadora">
+                  <option value="No">No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+              <div class="salav-field">
+                <label for="cuenta_motocicleta">¿Cuenta con motocicleta?</label>
+                <select id="cuenta_motocicleta" name="cuenta_motocicleta">
+                  <option value="No">No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+            </div>
           </div>
-            <div class="file-name" id="afore-name"></div>
-        </div>
-        <div class="salav-field">
-          <label for="constancia_fiscal">Constancia de situación fiscal</label>
-          <div class="file-upload" id="fiscal-upload">
-                <span>Haga clic para subir</span>
-          <input id="constancia_fiscal" name="constancia_fiscal" type="file" accept="application/pdf,image/*" />
+
+          <!-- MOTOCICLETA (condicional) -->
+          <div id="motocicleta-block" class="salav-card" style="display:none">
+            <h2 class="section-title">Estilo de vida — Comodidades (motocicleta)</h2>
+            <div class="salav-grid">
+              <div class="salav-field">
+                <label for="moto_marca">Marca</label>
+                <input id="moto_marca" name="moto_marca" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="moto_modelo">Modelo</label>
+                <input id="moto_modelo" name="moto_modelo" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="moto_ano">Año</label>
+                <input id="moto_ano" name="moto_ano" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="moto_color">Color</label>
+                <input id="moto_color" name="moto_color" type="text" />
+              </div>
+            </div>
           </div>
-            <div class="file-name" id="fiscal-name"></div>
-        </div>
 
-        <div class="salav-field">
-          <label for="licencia_manejo">Licencia de manejo</label>
-          <div class="file-upload" id="licencia-upload">
-                <span>Haga clic para subir</span>
-          <input id="licencia_manejo" name="licencia_manejo" type="file" accept="application/pdf,image/*" />
+          <!-- ESTILO DE VIDA COMODIDADES 3 -->
+          <div class="salav-card">
+            <h2 class="section-title">Estilo de vida - Comodidades - 3</h2>
+            <div class="salav-grid">
+              <div class="salav-field">
+                <label for="cuenta_camara">¿Cuenta con cámara fotográfica?</label>
+                <select id="cuenta_camara" name="cuenta_camara">
+                  <option value="No">No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+              <div class="salav-field">
+                <label for="cuenta_freidora">¿Cuenta con freidora de aire?</label>
+                <select id="cuenta_freidora" name="cuenta_freidora">
+                  <option value="No">No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+              <div class="salav-field">
+                <label for="cuenta_horno_electrico">¿Cuenta con horno eléctrico?</label>
+                <select id="cuenta_horno_electrico" name="cuenta_horno_electrico">
+                  <option value="No">No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+              <div class="salav-field">
+                <label for="cuenta_batidora">¿Cuenta con batidora?</label>
+                <select id="cuenta_batidora" name="cuenta_batidora">
+                  <option value="No">No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+              <div class="salav-field">
+                <label for="cuenta_tostador">¿Cuenta con tostador?</label>
+                <select id="cuenta_tostador" name="cuenta_tostador">
+                  <option value="No">No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+              <div class="salav-field">
+                <label for="cuenta_dispensador">¿Cuenta con dispensador de agua?</label>
+                <select id="cuenta_dispensador" name="cuenta_dispensador">
+                  <option value="No">No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+              <div class="salav-field">
+                <label for="cuenta_licuadora">¿Cuenta con licuadora?</label>
+                <select id="cuenta_licuadora" name="cuenta_licuadora">
+                  <option value="No">No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+              <div class="salav-field">
+                <label for="cuenta_tanque_gas">¿Cuenta con tanque de gas?</label>
+                <select id="cuenta_tanque_gas" name="cuenta_tanque_gas">
+                  <option value="No">No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+              <div class="salav-field">
+                <label for="cuenta_celular">¿Cuenta con celular?</label>
+                <select id="cuenta_celular" name="cuenta_celular">
+                  <option value="No">No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+            </div>
           </div>
-            <div class="file-name" id="licencia-name"></div>
-        </div>
-        <div class="salav-field">
-          <label for="comprobante_domicilio">Comprobante de domicilio (no mayor a 3 meses)</label>
-          <div class="file-upload" id="domicilio-upload">
-                <span>Haga clic para subir</span>
-          <input id="comprobante_domicilio" name="comprobante_domicilio" type="file" accept="application/pdf,image/*" />
+
+          <!-- COMODIDADES - CELULAR (condicional) -->
+          <div id="celular-block" class="salav-card" style="display:none">
+            <h2 class="section-title">Comodidades — Celular</h2>
+            <div class="salav-grid">
+              <div class="salav-field">
+                <label for="cel_marca">Marca</label>
+                <input id="cel_marca" name="cel_marca" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="cel_modelo">Modelo</label>
+                <input id="cel_modelo" name="cel_modelo" type="text" />
+              </div>
+            </div>
           </div>
-            <div class="file-name" id="domicilio-name"></div>
-        </div>
-        <div class="salav-field">
-          <label for="constancia_nss">Constancia de localización del NSS</label>
-          <div class="file-upload" id="nss-upload">
-                <span>Haga clic para subir</span>
-          <input id="constancia_nss" name="constancia_nss" type="file" accept="application/pdf,image/*" />
+
+          <!-- ESTILO DE VIDA COMODIDADES 4 -->
+          <div class="salav-card">
+            <h2 class="section-title">Estilo de vida — Comodidades 4</h2>
+            <div class="salav-grid">
+              <div class="salav-field">
+                <label for="cuenta_cama">¿Cuenta con cama?</label>
+                <select id="cuenta_cama" name="cuenta_cama">
+                  <option value="No">No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+              <div class="salav-field">
+                <label for="cuenta_sala">¿Cuenta con sala?</label>
+                <select id="cuenta_sala" name="cuenta_sala">
+                  <option value="No">No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+              <div class="salav-field">
+                <label for="cuenta_cocina_integral">¿Cuenta con cocina integral?</label>
+                <select id="cuenta_cocina_integral" name="cuenta_cocina_integral">
+                  <option value="No">No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+              <div class="salav-field">
+                <label for="cuenta_closet">¿Cuenta con closet?</label>
+                <select id="cuenta_closet" name="cuenta_closet">
+                  <option value="No">No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+              <div class="salav-field">
+                <label for="cuenta_banio">¿Cuenta con baño?</label>
+                <select id="cuenta_banio" name="cuenta_banio">
+                  <option value="No">No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+              <div class="salav-field">
+                <label for="cuenta_calentador_solar">¿Cuenta con calentador solar?</label>
+                <select id="cuenta_calentador_solar" name="cuenta_calentador_solar">
+                  <option value="No">No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+              <div class="salav-field">
+                <label for="cuenta_calentador_boiler">¿Cuenta con calentador de paso o boiler?</label>
+                <select id="cuenta_calentador_boiler" name="cuenta_calentador_boiler">
+                  <option value="No">No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+              <div class="salav-field">
+                <label for="cuenta_panel_solar">¿Cuenta con panel solar?</label>
+                <select id="cuenta_panel_solar" name="cuenta_panel_solar">
+                  <option value="No">No</option>
+                  <option value="Sí">Sí</option>
+                </select>
+              </div>
+            </div>
           </div>
-            <div class="file-name" id="nss-name"></div>
-        </div>
 
-        <div class="salav-field">
-          <label for="acta_nacimiento_candidato">Acta de nacimiento del candidato</label>
-          <div class="file-upload" id="nacimiento-upload">
-                <span>Haga clic para subir</span>
-          <input id="acta_nacimiento_candidato" name="acta_nacimiento_candidato" type="file" accept="application/pdf,image/*" />
+          <!-- SERVICIOS DE LA ZONA DOMICILIARIA -->
+          <div class="salav-card">
+            <h2 class="section-title">Servicios de la zona domiciliaria</h2>
+            <div class="salav-grid">
+              <div class="salav-field"><label for="agua_potable">¿Cuentan con agua potable?</label><select
+                  id="agua_potable" name="agua_potable">
+                  <option>Sí</option>
+                  <option>No</option>
+                </select></div>
+              <div class="salav-field"><label for="energia_electrica">¿Cuentan con energía eléctrica?</label><select
+                  id="energia_electrica" name="energia_electrica">
+                  <option>Sí</option>
+                  <option>No</option>
+                </select></div>
+              <div class="salav-field"><label for="drenaje">¿Cuentan con drenaje?</label><select id="drenaje"
+                  name="drenaje">
+                  <option>Sí</option>
+                  <option>No</option>
+                </select></div>
+              <div class="salav-field"><label for="pavimentacion">¿Cuentan con pavimentación?</label><select
+                  id="pavimentacion" name="pavimentacion">
+                  <option>Sí</option>
+                  <option>No</option>
+                </select></div>
+
+              <div class="salav-field"><label for="alumbrado_publico">¿Cuentan con alumbrado público?</label><select
+                  id="alumbrado_publico" name="alumbrado_publico">
+                  <option>Sí</option>
+                  <option>No</option>
+                </select></div>
+              <div class="salav-field"><label for="lineas_telefonicas">¿Cuentan con líneas telefónicas?</label><select
+                  id="lineas_telefonicas" name="lineas_telefonicas">
+                  <option>Sí</option>
+                  <option>No</option>
+                </select></div>
+              <div class="salav-field"><label for="lineas_internet">¿Cuentan con líneas de internet?</label><select
+                  id="lineas_internet" name="lineas_internet">
+                  <option>Sí</option>
+                  <option>No</option>
+                </select></div>
+              <div class="salav-field"><label for="lineas_gas">¿Cuentan con líneas de gas natural?</label><select
+                  id="lineas_gas" name="lineas_gas">
+                  <option>Sí</option>
+                  <option>No</option>
+                </select></div>
+
+              <div class="salav-field"><label for="lineas_cable">¿Cuentan con líneas de cable?</label><select
+                  id="lineas_cable" name="lineas_cable">
+                  <option>Sí</option>
+                  <option>No</option>
+                </select></div>
+              <div class="salav-field"><label for="escuelas">¿Cuentan con escuelas en la colonia?</label><select
+                  id="escuelas" name="escuelas">
+                  <option>Sí</option>
+                  <option>No</option>
+                </select></div>
+              <div class="salav-field"><label for="hospitales">¿Cuentan con hospitales en la colonia?</label><select
+                  id="hospitales" name="hospitales">
+                  <option>Sí</option>
+                  <option>No</option>
+                </select></div>
+              <div class="salav-field"><label for="centros_comerciales">¿Cuentan con centros comerciales en la
+                  colonia?</label><select id="centros_comerciales" name="centros_comerciales">
+                  <option>Sí</option>
+                  <option>No</option>
+                </select></div>
+              <div class="salav-field"><label for="club_social_colonia">¿Cuentan con club social o deportivo en la
+                  colonia?</label><select id="club_social_colonia" name="club_social_colonia">
+                  <option>Sí</option>
+                  <option>No</option>
+                </select></div>
+              <div class="salav-field"><label for="parques_recreativos">¿Cuentan con parques recreativos en la
+                  colonia?</label><select id="parques_recreativos" name="parques_recreativos">
+                  <option>Sí</option>
+                  <option>No</option>
+                </select></div>
+
+              <div class="salav-field"><label for="recoleccion_residuos">¿Cuentan con recolección de
+                  residuos?</label><select id="recoleccion_residuos" name="recoleccion_residuos">
+                  <option>Sí</option>
+                  <option>No</option>
+                </select></div>
+              <div class="salav-field"><label for="transporte_publico">¿Cuentan con transporte público?</label><select
+                  id="transporte_publico" name="transporte_publico">
+                  <option>Sí</option>
+                  <option>No</option>
+                </select></div>
+              <div class="salav-field"><label for="cuenta_metro">¿Cuentan con metro?</label><select id="cuenta_metro"
+                  name="cuenta_metro">
+                  <option>Sí</option>
+                  <option>No</option>
+                </select></div>
+              <div class="salav-field"><label for="cuenta_teleferico">¿Cuentan con teleférico /
+                  maxicable?</label><select id="cuenta_teleferico" name="cuenta_teleferico">
+                  <option>Sí</option>
+                  <option>No</option>
+                </select></div>
+            </div>
           </div>
-            <div class="file-name" id="nacimiento-name"></div>
-        </div>
-        <div class="salav-field">
-          <label for="acta_matrimonio">Acta de matrimonio</label>
-          <div class="file-upload" id="matrimonio-upload">
-                <span>Haga clic para subir</span>
-          <input id="acta_matrimonio" name="acta_matrimonio" type="file" accept="application/pdf,image/*" />
+
+          <!-- DATOS ACADÉMICOS: BASE Y agregado dinamico -->
+          <div class="salav-card">
+            <h2 class="section-title">Datos académicos</h2>
+            <div class="salav-grid">
+              <div class="salav-field">
+                <label for="ultimo_nivel">Último nivel académico</label>
+                <select id="ultimo_nivel" name="ultimo_nivel">
+                  <option value="">--</option>
+                  <option>Primaria</option>
+                  <option>Secundaria</option>
+                  <option>Preparatoria</option>
+                  <option>Carrera técnica</option>
+                  <option>Licenciatura</option>
+                  <option>Maestría</option>
+                  <option>Doctorado</option>
+                </select>
+              </div>
+
+              <div class="salav-field">
+                <label for="institucion">Institución</label>
+                <input id="institucion" name="institucion" type="text" />
+              </div>
+
+              <div class="salav-field">
+                <label for="entidad_federativa">Entidad federativa</label>
+                <input id="entidad_federativa" name="entidad_federativa" type="text" />
+              </div>
+
+              <div class="salav-field salav-full">
+                <label for="documento_recibido">Documento recibido</label>
+                <input id="documento_recibido" name="documento_recibido" type="text"
+                  placeholder="Ej: certificado, constancia, etc." />
+              </div>
+            </div>
+
+            <div id="niveles-wrap" class="salav-grid" style="gap:8px;margin-top:8px"></div>
+
+            <div style="margin-top:10px">
+              <button type="button" id="add-nivel-btn" class="btn salav-small-btn">+ Agregar otro nivel
+                académico</button>
+            </div>
           </div>
-            <div class="file-name" id="matrimonio-name"></div>
-        </div>
-        <div class="salav-field">
-          <label for="acta_nacimiento_hijos">Acta de nacimiento de los hijos</label>
-          <div class="file-upload" id="actahijo-upload">
-                <span>Haga clic para subir</span>
-          <input id="acta_nacimiento_hijos" name="acta_nacimiento_hijos" type="file" accept="application/pdf,image/*" multiple />
+
+          <!-- DATOS ACADEMICOS ACTUALES -->
+          <div class="salav-card">
+            <h2 class="section-title">Datos academicos — Actuales</h2>
+            <div class="salav-grid">
+              <div class="salav-field salav-full">
+                <label>¿Estudia actualmente?</label>
+                <div>
+                  <label><input type="radio" name="estudia_actualmente" value="Sí"> Sí</label>
+                  <label style="margin-left:8px"><input type="radio" name="estudia_actualmente" value="No" checked>
+                    No</label>
+                </div>
+              </div>
+              <div class="salav-field" id="que_estudia_field" style="display:none">
+                <label for="que_estudia">¿Qué estudia?</label>
+                <input id="que_estudia" name="que_estudia" type="text" />
+              </div>
+            </div>
           </div>
-            <div class="file-name" id="actahijo-name"></div>
-        </div>
-        <div class="salav-field">
-          <label for="acta_nacimiento_conyuge">Acta de nacimiento del cónyuge</label>
-          <div class="file-upload" id="actaconyuge-upload">
-                <span>Haga clic para subir</span>
-          <input id="acta_nacimiento_conyuge" name="acta_nacimiento_conyuge" type="file" accept="application/pdf,image/*" />
+
+          <!-- CURSOS Y CERTIFICADOS -->
+          <div class="salav-card">
+            <h2 class="section-title">Datos academicos — Cursos y certificados</h2>
+            <div id="cursos-wrap" class="salav-grid"></div>
+            <div style="margin-top:10px">
+              <button type="button" id="add-curso-btn" class="btn salav-small-btn">+ Agregar curso o
+                certificación</button>
+            </div>
           </div>
-            <div class="file-name" id="actaconyuge-name"></div>
-        </div>
-      </div>
-    </div>
 
-    <!-- CONCLUSIONES Y EVALUACIÓN FINAL -->
-    <div class="salav-card">
-      <h2 class="section-title">Conclusiones y evaluación final</h2>
-      <div class="salav-grid">
-        <div class="salav-field">
-          <label for="info_coincide_final">¿La información que el candidato proporcionó coincide con lo observado en la visita?</label>
-          <select id="info_coincide_final" name="info_coincide_final"><option>Sí</option><option>No</option></select>
-        </div>
+          <!-- INVESTIGACIÓN LABORAL (dinámica) -->
+          <div class="salav-card">
+            <h2 class="section-title">Investigación laboral (últimas empresas)</h2>
+            <div id="empresas-wrap" class="salav-grid"></div>
+            <div style="margin-top:10px">
+              <button type="button" id="add-empresa-btn" class="btn salav-small-btn">+ Agregar empresa</button>
+            </div>
+          </div>
 
-        <div class="salav-field">
-          <label for="vivienda_corresponde">¿La vivienda corresponde al entorno que el candidato refiere?</label>
-          <select id="vivienda_corresponde" name="vivienda_corresponde"><option>Sí</option><option>No</option></select>
-        </div>
+          <!-- REFERENCIAS (4 tipos) -->
+          <div class="salav-card">
+            <h2 class="section-title">Referencias</h2>
+            <p class="salav-meta">Agrega referencias personales, laborales, vecinales y familiares. Cada referencia
+              incluye pregunta "Tiempo de conocerse".</p>
 
-        <div class="salav-field">
-          <label for="entorno_adecuado">¿El entorno socioeconómico del candidato es acorde a su puesto y sueldo?</label>
-          <select id="entorno_adecuado" name="entorno_adecuado"><option>Sí</option><option>No</option></select>
-        </div>
+            <h3 style="margin-top:12px">Personales</h3>
+            <div id="refs-personales-wrap" class="salav-grid"></div>
+            <button type="button" id="add-ref-personal" class="btn salav-small-btn" style="margin-top:8px">+ Agregar
+              referencia personal</button>
 
-        <div class="salav-field">
-          <label for="problemas_analisis">¿Se tuvo algún problema durante el proceso de análisis de la información? (¿Cuál?)</label>
-          <input id="problemas_analisis" name="problemas_analisis" type="text" />
-        </div>
+            <h3 style="margin-top:12px">Laborales</h3>
+            <div id="refs-laborales-wrap" class="salav-grid"></div>
+            <button type="button" id="add-ref-laboral" class="btn salav-small-btn" style="margin-top:8px">+ Agregar
+              referencia laboral</button>
 
-        <div class="salav-field">
-          <label for="problemas_visita">¿Se tuvo algún problema durante el proceso de visita al candidato? (¿Cuál?)</label>
-          <input id="problemas_visita" name="problemas_visita" type="text" />
-        </div>
+            <h3 style="margin-top:12px">Vecinal</h3>
+            <div id="refs-vecinal-wrap" class="salav-grid"></div>
+            <button type="button" id="add-ref-vecinal" class="btn salav-small-btn" style="margin-top:8px">+ Agregar
+              referencia vecinal</button>
 
-        <div class="salav-field">
-          <label for="problemas_agenda">¿Se tuvo algún problema durante el proceso de agenda de la investigación? (¿Cuál?)</label>
-          <input id="problemas_agenda" name="problemas_agenda" type="text" />
-        </div>
+            <h3 style="margin-top:12px">Familiar</h3>
+            <div id="refs-familiar-wrap" class="salav-grid"></div>
+            <button type="button" id="add-ref-familiar" class="btn salav-small-btn" style="margin-top:8px">+ Agregar
+              referencia familiar</button>
+          </div>
 
-        <div class="salav-field">
-          <label for="candidato_proporciono_toda_info">¿El candidato proporcionó toda la información solicitada?</label>
-          <select id="candidato_proporciono_toda_info" name="candidato_proporciono_toda_info"><option>Sí</option><option>No</option></select>
-        </div>
+          <!-- CUESTIONARIO - ESTADO DE SALUD (extenso con condicionales) -->
+          <div class="salav-card">
+            <h2 class="section-title">Cuestionario — Estado de salud</h2>
+            <div class="salav-grid">
+              <div class="salav-field"><label for="nss">Número de Seguridad Social (NSS)</label><input id="nss"
+                  name="nss" type="text" /></div>
+              <div class="salav-field"><label for="tipo_sangre">Tipo de sangre y RH</label><input id="tipo_sangre"
+                  name="tipo_sangre" type="text" /></div>
+              <div class="salav-field"><label for="estatura">Estatura</label><input id="estatura" name="estatura"
+                  type="text" /></div>
+              <div class="salav-field"><label for="peso">Peso</label><input id="peso" name="peso" type="text" /></div>
 
-        <div class="salav-field">
-          <label for="obtencion_info_dentro_domicilio">¿La obtención de información se realizó dentro del domicilio del candidato?</label>
-          <select id="obtencion_info_dentro_domicilio" name="obtencion_info_dentro_domicilio"><option>Sí</option><option>No</option></select>
-        </div>
+              <div class="salav-field salav-full">
+                <label>¿Utiliza lentes actualmente?</label>
+                <div><label><input type="radio" name="utiliza_lentes" value="Sí"> Sí</label><label
+                    style="margin-left:8px"><input type="radio" name="utiliza_lentes" value="No" checked> No</label>
+                </div>
+              </div>
+              <div class="salav-field salav-full"><label for="justificacion_lentes">Justificación (si
+                  aplica)</label><input id="justificacion_lentes" name="justificacion_lentes" type="text" /></div>
 
-        <div class="salav-field">
-          <label for="actitud_candidato">¿El candidato mostró buena actitud para proporcionar la información?</label>
-          <select id="actitud_candidato" name="actitud_candidato"><option>Sí</option><option>No</option></select>
-        </div>
-      </div>
-    </div>
+              <!-- a partir de aquí varias preguntas con condicionales: si "Sí" → aparece campo detalle/justificación -->
+              <div class="salav-field salav-full">
+                <label>¿Ha consultado algún médico últimamente?</label>
+                <div><label><input type="radio" name="ha_consultado_medico" value="Sí"> Sí</label><label
+                    style="margin-left:8px"><input type="radio" name="ha_consultado_medico" value="No" checked>
+                    No</label></div>
+                <input id="ha_consultado_medico_just" name="ha_consultado_medico_just" type="text"
+                  placeholder="¿Por qué razón? (justificación)" style="margin-top:6px;display:none" />
+              </div>
 
-    <!-- Enviar -->
-    <div style="display:flex;justify-content:flex-end;gap:12px;margin-top:8px">
-      <button type="submit" class="salav-btn-submit" style="display: none;">Enviar formulario</button>
-    </div>
-  </form>
-</section>
+              <div class="salav-field salav-full">
+                <label>¿Ha sufrido alguna intervención quirúrgica (operación)?</label>
+                <div><label><input type="radio" name="ha_sufrido_cirugia" value="Sí"> Sí</label><label
+                    style="margin-left:8px"><input type="radio" name="ha_sufrido_cirugia" value="No" checked> No</label>
+                </div>
+                <input id="ha_sufrido_cirugia_just" name="ha_sufrido_cirugia_just" type="text"
+                  placeholder="¿Por qué razón? (justificación)" style="margin-top:6px;display:none" />
+              </div>
+
+              <div class="salav-field salav-full">
+                <label>¿Tiene alguna discapacidad?</label>
+                <div><label><input type="radio" name="tiene_discapacidad" value="Sí"> Sí</label><label
+                    style="margin-left:8px"><input type="radio" name="tiene_discapacidad" value="No" checked> No</label>
+                </div>
+                <input id="tiene_discapacidad_just" name="tiene_discapacidad_just" type="text"
+                  placeholder="¿Cuál? (justificación)" style="margin-top:6px;display:none" />
+              </div>
+
+              <div class="salav-field salav-full">
+                <label>¿Le han practicado estudios especiales para diagnosticar alguna enfermedad?</label>
+                <div><label><input type="radio" name="practicado_estudios" value="Sí"> Sí</label><label
+                    style="margin-left:8px"><input type="radio" name="practicado_estudios" value="No" checked>
+                    No</label></div>
+                <input id="practicado_estudios_just" name="practicado_estudios_just" type="text"
+                  placeholder="¿Cuáles? (justificación)" style="margin-top:6px;display:none" />
+              </div>
+
+              <div class="salav-field salav-full">
+                <label>¿Actualmente está bajo algún tratamiento (toma algún medicamento)?</label>
+                <div><label><input type="radio" name="bajo_tratamiento" value="Sí"> Sí</label><label
+                    style="margin-left:8px"><input type="radio" name="bajo_tratamiento" value="No" checked> No</label>
+                </div>
+                <input id="bajo_tratamiento_just" name="bajo_tratamiento_just" type="text"
+                  placeholder="¿Cuáles? (justificación)" style="margin-top:6px;display:none" />
+              </div>
+
+              <div class="salav-field salav-full">
+                <label>¿Ha tenido transfusiones sanguíneas en los últimos 2 años?</label>
+                <div><label><input type="radio" name="transfusiones" value="Sí"> Sí</label><label
+                    style="margin-left:8px"><input type="radio" name="transfusiones" value="No" checked> No</label>
+                </div>
+                <input id="transfusiones_just" name="transfusiones_just" type="text"
+                  placeholder="¿Por qué razón? (justificación)" style="margin-top:6px;display:none" />
+              </div>
+
+              <div class="salav-field salav-full">
+                <label>¿Utiliza drogas (medicamentos) por prescripción médica?</label>
+                <div><label><input type="radio" name="usa_drogas_prescripcion" value="Sí"> Sí</label><label
+                    style="margin-left:8px"><input type="radio" name="usa_drogas_prescripcion" value="No" checked>
+                    No</label></div>
+                <input id="usa_drogas_prescripcion_just" name="usa_drogas_prescripcion_just" type="text"
+                  placeholder="¿Cuál y por qué razón? (justificación)" style="margin-top:6px;display:none" />
+              </div>
+
+              <!-- Enfermedades: piel/sangre -->
+              <div class="salav-field salav-full">
+                <label>¿Padece/ha padecido enfermedades de la piel o de la sangre (ej.: leucemia, lupus, cáncer de piel,
+                  alergia)?</label>
+                <div><label><input type="radio" name="enf_piel_sangre" value="Sí"> Sí</label><label
+                    style="margin-left:8px"><input type="radio" name="enf_piel_sangre" value="No" checked> No</label>
+                </div>
+                <input id="enf_piel_sangre_just" name="enf_piel_sangre_just" type="text"
+                  placeholder="¿Cuáles? (justificación)" style="margin-top:6px;display:none" />
+              </div>
+
+              <!-- Ojos / oídos -->
+              <div class="salav-field salav-full">
+                <label>¿Padece/ha padecido enfermedades de los ojos u oídos (ej.: conjuntivitis, infecciones,
+                  etc.)?</label>
+                <div><label><input type="radio" name="enf_ojo_oido" value="Sí"> Sí</label><label
+                    style="margin-left:8px"><input type="radio" name="enf_ojo_oido" value="No" checked> No</label></div>
+                <input id="enf_ojo_oido_just" name="enf_ojo_oido_just" type="text"
+                  placeholder="¿Cuáles? (justificación)" style="margin-top:6px;display:none" />
+              </div>
+
+              <!-- Corazón -->
+              <div class="salav-field salav-full">
+                <label>¿Padece/ha padecido infarto al miocardio, insuficiencia cardiaca u otro padecimiento del
+                  corazón?</label>
+                <div><label><input type="radio" name="enf_corazon" value="Sí"> Sí</label><label
+                    style="margin-left:8px"><input type="radio" name="enf_corazon" value="No" checked> No</label></div>
+                <input id="enf_corazon_just" name="enf_corazon_just" type="text" placeholder="Justificación"
+                  style="margin-top:6px;display:none" />
+              </div>
+
+              <!-- Pulmones -->
+              <div class="salav-field salav-full">
+                <label>¿Padece asma, tuberculosis o cualquier otra enfermedad de bronquios o pulmones?</label>
+                <div><label><input type="radio" name="enf_pulmones" value="Sí"> Sí</label><label
+                    style="margin-left:8px"><input type="radio" name="enf_pulmones" value="No" checked> No</label></div>
+                <input id="enf_pulmones_just" name="enf_pulmones_just" type="text"
+                  placeholder="¿Cuáles? (justificación)" style="margin-top:6px;display:none" />
+              </div>
+
+              <!-- Sistema nervioso -->
+              <div class="salav-field salav-full">
+                <label>¿Padece epilepsia o cualquier otro padecimiento del sistema nervioso?</label>
+                <div><label><input type="radio" name="enf_sistema_nervioso" value="Sí"> Sí</label><label
+                    style="margin-left:8px"><input type="radio" name="enf_sistema_nervioso" value="No" checked>
+                    No</label></div>
+                <input id="enf_sistema_nervioso_just" name="enf_sistema_nervioso_just" type="text"
+                  placeholder="¿Cuál? (justificación)" style="margin-top:6px;display:none" />
+              </div>
+
+              <!-- Diabetes / glandular -->
+              <div class="salav-field salav-full">
+                <label>¿Padece diabetes o cualquier otro padecimiento del sistema glandular?</label>
+                <div><label><input type="radio" name="enf_glandular" value="Sí"> Sí</label><label
+                    style="margin-left:8px"><input type="radio" name="enf_glandular" value="No" checked> No</label>
+                </div>
+                <input id="enf_glandular_just" name="enf_glandular_just" type="text"
+                  placeholder="¿Cuál? (justificación)" style="margin-top:6px;display:none" />
+              </div>
+
+              <!-- Digestivo -->
+              <div class="salav-field salav-full">
+                <label>¿Padece úlcera del estómago, intestinos u otro padecimiento del aparato digestivo?</label>
+                <div><label><input type="radio" name="enf_digestivo" value="Sí"> Sí</label><label
+                    style="margin-left:8px"><input type="radio" name="enf_digestivo" value="No" checked> No</label>
+                </div>
+                <input id="enf_digestivo_just" name="enf_digestivo_just" type="text"
+                  placeholder="¿Cuál? (justificación)" style="margin-top:6px;display:none" />
+              </div>
+
+              <!-- Músculo-esquelético -->
+              <div class="salav-field salav-full">
+                <label>¿Padece artritis, trastornos de la columna u otro padecimiento del sistema
+                  músculo-esquelético?</label>
+                <div><label><input type="radio" name="enf_musculo_esqueletico" value="Sí"> Sí</label><label
+                    style="margin-left:8px"><input type="radio" name="enf_musculo_esqueletico" value="No" checked>
+                    No</label></div>
+                <input id="enf_musculo_esqueletico_just" name="enf_musculo_esqueletico_just" type="text"
+                  placeholder="¿Cuál? (justificación)" style="margin-top:6px;display:none" />
+              </div>
+
+              <!-- Hernias -->
+              <div class="salav-field salav-full">
+                <label>¿Padece hernias?</label>
+                <div><label><input type="radio" name="enf_hernias" value="Sí"> Sí</label><label
+                    style="margin-left:8px"><input type="radio" name="enf_hernias" value="No" checked> No</label></div>
+                <input id="enf_hernias_just" name="enf_hernias_just" type="text" placeholder="¿Cuáles? (justificación)"
+                  style="margin-top:6px;display:none" />
+              </div>
+
+              <!-- Alergias medicamentos -->
+              <div class="salav-field salav-full">
+                <label>¿Es alérgico a algún medicamento (ej.: penicilina…)?</label>
+                <div><label><input type="radio" name="alergico_medicamento" value="Sí"> Sí</label><label
+                    style="margin-left:8px"><input type="radio" name="alergico_medicamento" value="No" checked>
+                    No</label></div>
+                <input id="alergico_medicamento_just" name="alergico_medicamento_just" type="text"
+                  placeholder="¿Cuáles? (justificación)" style="margin-top:6px;display:none" />
+              </div>
+
+              <div class="salav-field salav-full">
+                <label>¿Ha padecido cualquier otra enfermedad o lesión distinta a las mencionadas?</label>
+                <div><label><input type="radio" name="otras_enfermedades" value="Sí"> Sí</label><label
+                    style="margin-left:8px"><input type="radio" name="otras_enfermedades" value="No" checked> No</label>
+                </div>
+                <input id="otras_enfermedades_just" name="otras_enfermedades_just" type="text"
+                  placeholder="¿Cuáles? (justificación)" style="margin-top:6px;display:none" />
+              </div>
+
+              <div class="salav-field salav-full">
+                <label>¿Algún familiar cercano padece/ha padecido de diabetes, cáncer, problemas del corazón,
+                  tuberculosis?</label>
+                <div><label><input type="radio" name="familiar_enfermedad" value="Sí"> Sí</label><label
+                    style="margin-left:8px"><input type="radio" name="familiar_enfermedad" value="No" checked>
+                    No</label></div>
+                <input id="familiar_enfermedad_just" name="familiar_enfermedad_just" type="text"
+                  placeholder="¿Cuáles? (justificación)" style="margin-top:6px;display:none" />
+              </div>
+
+              <div class="salav-field salav-full">
+                <label>¿Padece ansiedad u otra enfermedad relacionada?</label>
+                <div><label><input type="radio" name="padece_ansiedad" value="Sí"> Sí</label><label
+                    style="margin-left:8px"><input type="radio" name="padece_ansiedad" value="No" checked> No</label>
+                </div>
+                <input id="padece_ansiedad_just" name="padece_ansiedad_just" type="text"
+                  placeholder="¿Cuál? (justificación)" style="margin-top:6px;display:none" />
+              </div>
+            </div>
+          </div>
+
+          <!-- CONTACTOS DE EMERGENCIA -->
+          <div class="salav-card">
+            <h2 class="section-title">Contactos de emergencia</h2>
+            <div class="salav-grid">
+              <div class="salav-field">
+                <label for="emergencia1_nombre">En caso de emergencia avisar a (persona 1)</label>
+                <input id="emergencia1_nombre" name="emergencia1_nombre" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="emergencia1_parentesco">Parentesco</label>
+                <input id="emergencia1_parentesco" name="emergencia1_parentesco" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="emergencia1_telefono">Teléfono</label>
+                <input id="emergencia1_telefono" name="emergencia1_telefono" type="text" />
+              </div>
+
+              <div class="salav-field">
+                <label for="emergencia2_nombre">En caso de emergencia avisar a (persona 2)</label>
+                <input id="emergencia2_nombre" name="emergencia2_nombre" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="emergencia2_parentesco">Parentesco</label>
+                <input id="emergencia2_parentesco" name="emergencia2_parentesco" type="text" />
+              </div>
+              <div class="salav-field">
+                <label for="emergencia2_telefono">Teléfono</label>
+                <input id="emergencia2_telefono" name="emergencia2_telefono" type="text" />
+              </div>
+            </div>
+          </div>
+
+          <!-- DOCUMENTACIÓN -->
+          <div class="salav-card">
+            <h2 class="section-title">Documentación (sube archivos relevantes)</h2>
+            <div class="salav-grid">
+              <div class="salav-field">
+                <label for="cv">CV o solicitud de empleo</label>
+                <div class="file-upload" id="cv-upload">
+                  <span>Haga clic para subir</span>
+                  <input id="cv" name="cv" type="file" accept="application/pdf,image/*" />
+                </div>
+                <div class="file-name" id="cv-name"></div>
+              </div>
+              <div class="salav-field">
+                <label for="comprobante_estudios">Último comprobante de estudios</label>
+                <div class="file-upload" id="comprobante-upload">
+                  <span>Haga clic para subir</span>
+                  <input id="comprobante_estudios" name="comprobante_estudios" type="file"
+                    accept="application/pdf,image/*" />
+                </div>
+                <div class="file-name" id="comprobante-name"></div>
+              </div>
+              <div class="salav-field">
+                <label for="identificacion_oficial">Identificación oficial (INE, etc.)</label>
+                <div class="file-upload" id="ine-upload">
+                  <span>Haga clic para subir</span>
+                  <input id="identificacion_oficial" name="identificacion_oficial" type="file"
+                    accept="image/*,application/pdf" />
+                </div>
+                <div class="file-name" id="ine-name"></div>
+              </div>
+
+              <div class="salav-field">
+                <label for="cedula_profesional">Cédula profesional</label>
+                <div class="file-upload" id="cedula-upload">
+                  <span>Haga clic para subir</span>
+                  <input id="cedula_profesional" name="cedula_profesional" type="file"
+                    accept="application/pdf,image/*" />
+                </div>
+                <div class="file-name" id="cedula-name"></div>
+              </div>
+              <div class="salav-field">
+                <label for="constancia_laboral">Constancia laboral (2)</label>
+                <div class="file-upload" id="constancia-upload">
+                  <span>Haga clic para subir</span>
+                  <input id="constancia_laboral" name="constancia_laboral" type="file" accept="application/pdf,image/*"
+                    multiple />
+                </div>
+                <div class="file-name" id="constancia-name"></div>
+              </div>
+              <div class="salav-field">
+                <label for="cartas_recomendacion">Cartas de recomendación personales (2)</label>
+                <div class="file-upload" id="cartas-upload">
+                  <span>Haga clic para subir</span>
+                  <input id="cartas_recomendacion" name="cartas_recomendacion" type="file"
+                    accept="application/pdf,image/*" multiple />
+                </div>
+                <div class="file-name" id="cartas-name"></div>
+              </div>
+
+              <div class="salav-field">
+                <label for="curp">CURP actualizado</label>
+                <div class="file-upload" id="curp-upload">
+                  <span>Haga clic para subir</span>
+                  <input id="curp" name="curp" type="file" accept="application/pdf,image/*" />
+                </div>
+                <div class="file-name" id="curp-name"></div>
+              </div>
+              <div class="salav-field">
+                <label for="afore">AFORE</label>
+                <div class="file-upload" id="afore-upload">
+                  <span>Haga clic para subir</span>
+                  <input id="afore" name="afore" type="file" accept="application/pdf,image/*" />
+                </div>
+                <div class="file-name" id="afore-name"></div>
+              </div>
+              <div class="salav-field">
+                <label for="constancia_fiscal">Constancia de situación fiscal</label>
+                <div class="file-upload" id="fiscal-upload">
+                  <span>Haga clic para subir</span>
+                  <input id="constancia_fiscal" name="constancia_fiscal" type="file" accept="application/pdf,image/*" />
+                </div>
+                <div class="file-name" id="fiscal-name"></div>
+              </div>
+
+              <div class="salav-field">
+                <label for="licencia_manejo">Licencia de manejo</label>
+                <div class="file-upload" id="licencia-upload">
+                  <span>Haga clic para subir</span>
+                  <input id="licencia_manejo" name="licencia_manejo" type="file" accept="application/pdf,image/*" />
+                </div>
+                <div class="file-name" id="licencia-name"></div>
+              </div>
+              <div class="salav-field">
+                <label for="comprobante_domicilio">Comprobante de domicilio (no mayor a 3 meses)</label>
+                <div class="file-upload" id="domicilio-upload">
+                  <span>Haga clic para subir</span>
+                  <input id="comprobante_domicilio" name="comprobante_domicilio" type="file"
+                    accept="application/pdf,image/*" />
+                </div>
+                <div class="file-name" id="domicilio-name"></div>
+              </div>
+              <div class="salav-field">
+                <label for="constancia_nss">Constancia de localización del NSS</label>
+                <div class="file-upload" id="nss-upload">
+                  <span>Haga clic para subir</span>
+                  <input id="constancia_nss" name="constancia_nss" type="file" accept="application/pdf,image/*" />
+                </div>
+                <div class="file-name" id="nss-name"></div>
+              </div>
+
+              <div class="salav-field">
+                <label for="acta_nacimiento_candidato">Acta de nacimiento del candidato</label>
+                <div class="file-upload" id="nacimiento-upload">
+                  <span>Haga clic para subir</span>
+                  <input id="acta_nacimiento_candidato" name="acta_nacimiento_candidato" type="file"
+                    accept="application/pdf,image/*" />
+                </div>
+                <div class="file-name" id="nacimiento-name"></div>
+              </div>
+              <div class="salav-field">
+                <label for="acta_matrimonio">Acta de matrimonio</label>
+                <div class="file-upload" id="matrimonio-upload">
+                  <span>Haga clic para subir</span>
+                  <input id="acta_matrimonio" name="acta_matrimonio" type="file" accept="application/pdf,image/*" />
+                </div>
+                <div class="file-name" id="matrimonio-name"></div>
+              </div>
+              <div class="salav-field">
+                <label for="acta_nacimiento_hijos">Acta de nacimiento de los hijos</label>
+                <div class="file-upload" id="actahijo-upload">
+                  <span>Haga clic para subir</span>
+                  <input id="acta_nacimiento_hijos" name="acta_nacimiento_hijos" type="file"
+                    accept="application/pdf,image/*" multiple />
+                </div>
+                <div class="file-name" id="actahijo-name"></div>
+              </div>
+              <div class="salav-field">
+                <label for="acta_nacimiento_conyuge">Acta de nacimiento del cónyuge</label>
+                <div class="file-upload" id="actaconyuge-upload">
+                  <span>Haga clic para subir</span>
+                  <input id="acta_nacimiento_conyuge" name="acta_nacimiento_conyuge" type="file"
+                    accept="application/pdf,image/*" />
+                </div>
+                <div class="file-name" id="actaconyuge-name"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONCLUSIONES Y EVALUACIÓN FINAL -->
+          <div class="salav-card">
+            <h2 class="section-title">Conclusiones y evaluación final</h2>
+            <div class="salav-grid">
+              <div class="salav-field">
+                <label for="info_coincide_final">¿La información que el candidato proporcionó coincide con lo observado
+                  en la visita?</label>
+                <select id="info_coincide_final" name="info_coincide_final">
+                  <option>Sí</option>
+                  <option>No</option>
+                </select>
+              </div>
+
+              <div class="salav-field">
+                <label for="vivienda_corresponde">¿La vivienda corresponde al entorno que el candidato refiere?</label>
+                <select id="vivienda_corresponde" name="vivienda_corresponde">
+                  <option>Sí</option>
+                  <option>No</option>
+                </select>
+              </div>
+
+              <div class="salav-field">
+                <label for="entorno_adecuado">¿El entorno socioeconómico del candidato es acorde a su puesto y
+                  sueldo?</label>
+                <select id="entorno_adecuado" name="entorno_adecuado">
+                  <option>Sí</option>
+                  <option>No</option>
+                </select>
+              </div>
+
+              <div class="salav-field">
+                <label for="problemas_analisis">¿Se tuvo algún problema durante el proceso de análisis de la
+                  información? (¿Cuál?)</label>
+                <input id="problemas_analisis" name="problemas_analisis" type="text" />
+              </div>
+
+              <div class="salav-field">
+                <label for="problemas_visita">¿Se tuvo algún problema durante el proceso de visita al candidato?
+                  (¿Cuál?)</label>
+                <input id="problemas_visita" name="problemas_visita" type="text" />
+              </div>
+
+              <div class="salav-field">
+                <label for="problemas_agenda">¿Se tuvo algún problema durante el proceso de agenda de la investigación?
+                  (¿Cuál?)</label>
+                <input id="problemas_agenda" name="problemas_agenda" type="text" />
+              </div>
+
+              <div class="salav-field">
+                <label for="candidato_proporciono_toda_info">¿El candidato proporcionó toda la información
+                  solicitada?</label>
+                <select id="candidato_proporciono_toda_info" name="candidato_proporciono_toda_info">
+                  <option>Sí</option>
+                  <option>No</option>
+                </select>
+              </div>
+
+              <div class="salav-field">
+                <label for="obtencion_info_dentro_domicilio">¿La obtención de información se realizó dentro del
+                  domicilio del candidato?</label>
+                <select id="obtencion_info_dentro_domicilio" name="obtencion_info_dentro_domicilio">
+                  <option>Sí</option>
+                  <option>No</option>
+                </select>
+              </div>
+
+              <div class="salav-field">
+                <label for="actitud_candidato">¿El candidato mostró buena actitud para proporcionar la
+                  información?</label>
+                <select id="actitud_candidato" name="actitud_candidato">
+                  <option>Sí</option>
+                  <option>No</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Enviar -->
+          <div style="display:flex;justify-content:flex-end;gap:12px;margin-top:8px">
+            <button type="submit" class="salav-btn-submit" style="display: none;">Enviar formulario</button>
+          </div>
+        </form>
+      </section>
 
     </div>
 
   </plantilla-salav>
 
   <div id="modalAlert" class="modal">
-        <div class="modal-contenido" id="modal-contenido">
-        </div>
+    <div class="modal-contenido" id="modal-contenido">
     </div>
+  </div>
 
   <script src="estudiosFormulario.css"></script>
   <script src="../../config.js"></script>
-   <script src="../../utilities.js"></script>
+  <script src="../../utilities.js"></script>
   <script src="../../plantilla.js"></script>
   <script src="reviewform.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-  
+
 </body>
 
 </html>

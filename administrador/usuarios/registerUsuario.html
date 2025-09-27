@@ -16,7 +16,9 @@
     </div>
     <plantilla-salav>
         <div class="slot-header" slot="header">
-            <img style="width: 150px;" src="../../img/Silueta Clara.png" alt="">
+            <a href="../inicioAdmin.html">
+                <img style="width: 150px;" src="../../img/Silueta Clara.png" alt="">
+            </a>
             <nav id="menu">
                 <div class="menu-item">
                     <a href="#">Usuarios ▾</a>
@@ -52,7 +54,7 @@
 
                 <!-- Formulario -->
                 <form id="userForm">
-                    
+
                     <!-- Tipo de Rol: ahora lo primero -->
                     <label for="rol"> - Tipo de usuario</label>
                     <select id="rol" required>
@@ -93,14 +95,14 @@
             </div>
         </div>
     </plantilla-salav>
-   <!-- Modal personalizado -->
+    <!-- Modal personalizado -->
     <div id="modalAlert" class="modal">
         <div class="modal-contenido" id="modal-contenido">
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../../config.js"></script>
-     <script src="../../utilities.js"></script>
+    <script src="../../utilities.js"></script>
     <script src="registerUsuario.js"></script>
     <script src="../../plantilla.js"></script>
 
@@ -121,4 +123,5 @@
         });
     </script>
 </body>
+
 </html>
