@@ -92,6 +92,13 @@ async function prefillForm() {
     prefillComfortsData(formObject.comodidades);
     prefillServicesData(formObject.servicios_zona);
     prefillConclusionsData(formObject.conclusiones);
+    prefillContactosEmergencia(formObject.contactos_emergencia);
+    
+    // Activar secciones condicionales después de prellenar
+    setTimeout(() => {
+        activateConditionalSections();
+    }, 400);
+
     
     // Prellenar secciones dinámicas (después de un breve delay para asegurar que el DOM esté listo)
     setTimeout(() => {
@@ -221,6 +228,26 @@ function prefillEconomicData(economica) {
         });
     }
 }
+
+//PrellenarContactos
+function prefillContactosEmergencia(contactos) {
+    if (!contactos) return;
+    
+    // Primer contacto
+    if (contactos.contacto1) {
+        setValue('emergencia1_nombre', contactos.contacto1.nombre);
+        setValue('emergencia1_parentesco', contactos.contacto1.parentesco);
+        setValue('emergencia1_telefono', contactos.contacto1.telefono);
+    }
+    
+    // Segundo contacto
+    if (contactos.contacto2) {
+        setValue('emergencia2_nombre', contactos.contacto2.nombre);
+        setValue('emergencia2_parentesco', contactos.contacto2.parentesco);
+        setValue('emergencia2_telefono', contactos.contacto2.telefono);
+    }
+}
+
 
 // Prellenar comodidades
 function prefillComfortsData(comodidades) {
@@ -399,6 +426,33 @@ function prefillReferencesDynamic(referencias) {
                 addReferenciaPrefilled('refs-familiar-wrap', 'familiar', ref);
             });
         }
+    }
+}
+
+
+function activateConditionalSections() {
+    // Motocicleta
+    const cuentaMotocicleta = document.getElementById('cuenta_motocicleta');
+    if (cuentaMotocicleta && cuentaMotocicleta.value === 'Sí') {
+        toggleDisplay('#motocicleta-block', true);
+    }
+    
+    // Celular
+    const cuentaCelular = document.getElementById('cuenta_celular');
+    if (cuentaCelular && cuentaCelular.value === 'Sí') {
+        toggleDisplay('#celular-block', true);
+    }
+    
+    // Estudia actualmente
+    const estudiaActualmente = document.querySelector('input[name="estudia_actualmente"]:checked');
+    if (estudiaActualmente && estudiaActualmente.value === 'Sí') {
+        toggleDisplay('#que_estudia_field', true);
+    }
+    
+    // Vehículo
+    const tieneVehiculo = document.querySelector('input[name="tiene_vehiculo"]:checked');
+    if (tieneVehiculo) {
+        toggleDisplay('#vehiculo-block', tieneVehiculo.value === 'Sí');
     }
 }
 
@@ -1266,6 +1320,27 @@ async function handleFormSubmit() {
     health.padece_ansiedad = document.querySelector('input[name="padece_ansiedad"]:checked') ? document.querySelector('input[name="padece_ansiedad"]:checked').value : 'No';
     health.padece_ansiedad_just = document.getElementById('padece_ansiedad_just').value;
 
+    // CONTACTOS DE EMERGENCIA
+    const contacto_emergencia_nombre = document.getElementById('emergencia1_nombre').value;
+    const contacto_emergencia_parentesco = document.getElementById('emergencia1_parentesco').value;
+    const contacto_emergencia_telefono = document.getElementById('emergencia1_telefono').value;
+    const contacto_emergencia_nombre2 = document.getElementById('emergencia2_nombre').value;
+    const contacto_emergencia_parentesco2 = document.getElementById('emergencia2_parentesco').value;
+    const contacto_emergencia_telefono2 = document.getElementById('emergencia2_telefono').value;
+    
+    const contactos_emergencia = {
+        contacto1: {
+            nombre: contacto_emergencia_nombre,
+            parentesco: contacto_emergencia_parentesco,
+            telefono: contacto_emergencia_telefono
+        },
+        contacto2: {
+            nombre: contacto_emergencia_nombre2,
+            parentesco: contacto_emergencia_parentesco2,
+            telefono: contacto_emergencia_telefono2
+        }
+    };
+
     // documentos (nombres de archivos)
     function filesList(id){ return document.getElementById(id) && document.getElementById(id).files.length ? Array.from(document.getElementById(id).files).map(f=>f.name) : null; }
     const cv = filesList('cv');
@@ -1336,6 +1411,7 @@ async function handleFormSubmit() {
       investigacion_laboral: empresas,
       referencias: { personales: refs_personales, laborales: refs_laborales, vecinal: refs_vecinal, familiar: refs_familiar },
       salud: { nss, tipo_sangre, estatura, peso, utiliza_lentes, justificacion_lentes, detalles: health },
+      contactos_emergencia: contactos_emergencia,
       documentos: { cv, comprobante_estudios, identificacion_oficial, cedula_profesional, constancia_laboral, cartas_recomendacion, curp, afore, constancia_fiscal, licencia_manejo, comprobante_domicilio, constancia_nss, acta_nacimiento_candidato, acta_matrimonio, acta_nacimiento_hijos, acta_nacimiento_conyuge },
       conclusiones: { info_coincide_final, vivienda_corresponde, entorno_adecuado, problemas_analisis, problemas_visita, problemas_agenda, candidato_proporciono_toda_info, obtencion_info_dentro_domicilio, actitud_candidato }
     };

@@ -559,6 +559,29 @@ document.getElementById('add-nivel-btn').addEventListener('click', function() {
     health.padece_ansiedad = document.querySelector('input[name="padece_ansiedad"]:checked') ? document.querySelector('input[name="padece_ansiedad"]:checked').value : 'No';
     health.padece_ansiedad_just = document.getElementById('padece_ansiedad_just').value;
 
+    //Contactos de emergencia
+
+    // CONTACTOS DE EMERGENCIA
+    const contacto_emergencia_nombre = document.getElementById('emergencia1_nombre').value;
+    const contacto_emergencia_parentesco = document.getElementById('emergencia1_parentesco').value;
+    const contacto_emergencia_telefono = document.getElementById('emergencia1_telefono').value;
+    const contacto_emergencia_nombre2 = document.getElementById('emergencia2_nombre').value;
+    const contacto_emergencia_parentesco2 = document.getElementById('emergencia2_parentesco').value;
+    const contacto_emergencia_telefono2 = document.getElementById('emergencia2_telefono').value;
+    
+    const contactos_emergencia = {
+        contacto1: {
+            nombre: contacto_emergencia_nombre,
+            parentesco: contacto_emergencia_parentesco,
+            telefono: contacto_emergencia_telefono
+        },
+        contacto2: {
+            nombre: contacto_emergencia_nombre2,
+            parentesco: contacto_emergencia_parentesco2,
+            telefono: contacto_emergencia_telefono2
+        }
+    };
+
     // documentos (nombres de archivos)
     function filesList(id){ return document.getElementById(id) && document.getElementById(id).files.length ? Array.from(document.getElementById(id).files).map(f=>f.name) : null; }
     const cv = filesList('cv');
@@ -843,6 +866,7 @@ document.getElementById('add-nivel-btn').addEventListener('click', function() {
       investigacion_laboral: empresas,
       referencias: { personales: refs_personales, laborales: refs_laborales, vecinal: refs_vecinal, familiar: refs_familiar },
       salud: { nss, tipo_sangre, estatura, peso, utiliza_lentes, justificacion_lentes, detalles: health },
+      contactos_emergencia: contactos_emergencia,
       documentos: { cv, comprobante_estudios, identificacion_oficial, cedula_profesional, constancia_laboral, cartas_recomendacion, curp, afore, constancia_fiscal, licencia_manejo, comprobante_domicilio, constancia_nss, acta_nacimiento_candidato, acta_matrimonio, acta_nacimiento_hijos, acta_nacimiento_conyuge },
       conclusiones: { info_coincide_final, vivienda_corresponde, entorno_adecuado, problemas_analisis, problemas_visita, problemas_agenda, candidato_proporciono_toda_info, obtencion_info_dentro_domicilio, actitud_candidato }
     };
