@@ -54,8 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 .toLowerCase()
                 .includes(query);
         });
-        currentPage = 1;
-        renderSolicitudes();
+
         if (filteredUsuarios.length === 0) {
             tbody.innerHTML = `<tr><td colspan="2" style="text-align:start; color:#888;">
                 No se encontraron resultados
@@ -63,6 +62,9 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementsByClassName("pagination")[0].style.display = "none";
         } else {
             document.getElementsByClassName("pagination")[0].style.display = "flex";
+
+            currentPage = 1;
+            renderSolicitudes();
         }
     });
 
@@ -140,41 +142,41 @@ function renderSolicitudes() {
         $(select).on("select2:select", toggleButton);
         $(select).on("select2:clear", toggleButton);
 
-   btnAsignar.addEventListener("click", async () => {
-    const freelancerId = select.value;
-// console.log({
-//   solicitud: solicitud._id,
-//   freelance_id: freelancerId,
-//   accepted: true
-// });
-    try {
-        await axios.patch(
-            `${API_URL}form-request/${solicitud._id}`, 
-            {
-                freelance_id: freelancerId,
-                accepted: false                       
-            },
-            {
-                headers: { 
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "application/json"
-                }
+        btnAsignar.addEventListener("click", async () => {
+            const freelancerId = select.value;
+            // console.log({
+            //   solicitud: solicitud._id,
+            //   freelance_id: freelancerId,
+            //   accepted: true
+            // });
+            try {
+                await axios.patch(
+                    `${API_URL}form-request/${solicitud._id}`,
+                    {
+                        freelance_id: freelancerId,
+                        accepted: false
+                    },
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            "Content-Type": "application/json"
+                        }
+                    }
+                );
+
+                mostrarModalMensaje(
+                    `Freelancer asignado correctamente a ${select.options[select.selectedIndex].text} ✅`
+                );
+
+                // Si quieres quitar la fila de la tabla:
+                tr.remove();
+                filteredUsuarios = filteredUsuarios.filter(a => a._id !== solicitud._id);
+                renderSolicitudes();
+            } catch (err) {
+                console.error("Error al asignar freelancer ❌", err);
+                mostrarModalMensaje("Error al asignar freelancer ❌");
             }
-        );
-
-        mostrarModalMensaje(
-            `Freelancer asignado correctamente a ${select.options[select.selectedIndex].text} ✅`
-        );
-
-        // Si quieres quitar la fila de la tabla:
-         tr.remove();
-         filteredUsuarios = filteredUsuarios.filter(a => a._id !== solicitud._id);
-         renderSolicitudes();
-    } catch (err) {
-        console.error("Error al asignar freelancer ❌", err);
-        mostrarModalMensaje("Error al asignar freelancer ❌");
-    }
-});
+        });
 
 
 
@@ -192,18 +194,5 @@ function renderSolicitudes() {
         });
     });
 
-    // 📌 Actualizar paginación
-    pageInput.min = 1;
-    pageInput.max = totalPages;
-    // 🔹 Calcula total de páginas
-    const totalPagesCalc = Math.ceil(filteredUsuarios.length / usersPerPage) || 1;
-
-    // 🔹 Actualiza info en ambos lugares
-    pageInfo.textContent = `Página ${currentPage} de ${totalPagesCalc}`;
-    document.getElementById("totalPages").textContent = totalPagesCalc;
-    pageInput.value = currentPage;
-
-
-    prevBtn.disabled = currentPage === 1;
-    nextBtn.disabled = currentPage === totalPages;
+    actualizarPaginacion();
 }

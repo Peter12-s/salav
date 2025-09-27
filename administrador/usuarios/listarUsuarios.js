@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
    pageInput = document.getElementById("pageInput");
    totalPages = document.getElementById("totalPages");
    goPageBtn = document.getElementById("goPage");
+   tablaB= document.querySelector("tbody");
 
     if (!token) {
         mostrarModalMensaje("No hay sesión activa. Por favor, inicia sesión ❌");
@@ -77,30 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
    
-    // Navegación
-    prevBtn.addEventListener("click", () => {
-        if (currentPage > 1) {
-            currentPage--;
-            renderSolicitudes();
-        }
-    });
-
-    nextBtn.addEventListener("click", () => {
-        const totalPages = Math.ceil(filteredUsuarios.length / usersPerPage);
-        if (currentPage < totalPages) {
-            currentPage++;
-            renderSolicitudes();
-        }
-    });
-
-    goPageBtn.addEventListener("click", () => {
-        const totalPages = Math.ceil(filteredUsuarios.length / usersPerPage);
-        let page = parseInt(pageInput.value);
-        if (page >= 1 && page <= totalPages) {
-            currentPage = page;
-            renderSolicitudes();
-        }
-    });
+  eventosPaginacion();
 
     // Filtrar usuarios (incluye company_name si es EMPRESA)
     searchInput.addEventListener("input", () => {
@@ -111,8 +89,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 : `${user.name || ""} ${user.f_surname || ""} ${user.s_surname || ""}`;
             return displayName.toLowerCase().includes(query);
         });
-        currentPage = 1;
-        renderSolicitudes();
+        if (filteredUsuarios.length === 0) {
+            tablaB.innerHTML = `<tr><td colspan="2" style="text-align:start; color:#888;">
+                No se encontraron resultados
+            </td></tr>`;
+            document.getElementsByClassName("pagination")[0].style.display = "none";
+        } else {
+            document.getElementsByClassName("pagination")[0].style.display = "flex";
+
+            currentPage = 1;
+            renderSolicitudes();
+        }
     });
 
     // Llamada inicial
@@ -152,17 +139,5 @@ function renderSolicitudes() {
         `;
         userTable.appendChild(row);
     });
-    // 📌 Actualizar paginación
-    pageInput.min = 1;
-    pageInput.max = totalPages;
-     // 🔹 Calcula total de páginas
-    const totalPagesCalc = Math.ceil(filteredUsuarios.length / usersPerPage) || 1;
-
-    // 🔹 Actualiza info en ambos lugares
-    pageInfo.textContent = `Página ${currentPage} de ${totalPagesCalc}`;
-    document.getElementById("totalPages").textContent = totalPagesCalc;
-    pageInput.value = currentPage;
-
-    prevBtn.disabled = currentPage === 1;
-    nextBtn.disabled = currentPage === totalPagesCalc;
+  actualizarPaginacion();
 }

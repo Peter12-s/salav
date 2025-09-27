@@ -1,4 +1,3 @@
-let usuarios = [];
 let usuarioSeleccionado = null; // ✅ usuario en el que se hizo clic para adjuntar
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -12,6 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
   goPageBtn = document.getElementById("goPage");
   totalPagesSpan = document.getElementById("totalPages");
   tabla = document.querySelector("table");
+  tablaB= document.querySelector("tbody");
+
   searchInput = document.getElementById("searchInput");
 
   eventosPaginacion();
@@ -22,8 +23,17 @@ document.addEventListener("DOMContentLoaded", () => {
     filteredUsuarios = usuarios.filter(u =>
       u.applicant_fullname.toLowerCase().includes(query)
     );
-    currentPage = 1;
-    renderSolicitudes();
+    if (filteredUsuarios.length === 0) {
+      tablaB.innerHTML = `<tr><td colspan="2" style="text-align:start; color:#888;">
+                No se encontraron resultados
+            </td></tr>`;
+      document.getElementsByClassName("pagination")[0].style.display = "none";
+    } else {
+      document.getElementsByClassName("pagination")[0].style.display = "flex";
+
+      currentPage = 1;
+      renderSolicitudes();
+    }
   });
 
   // 📌 Inicializar
@@ -146,6 +156,7 @@ function renderSolicitudes() {
 
     tabla.appendChild(tr);
   });
+    actualizarPaginacion();
 }
 
 async function finalizarTarea(userId, etapaKey) {

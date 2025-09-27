@@ -57,9 +57,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const query = searchInput.value.toLowerCase();
     filteredUsuarios = usuarios.filter(u =>
       (u.applicant_fullname || "").toLowerCase().includes(query)
-    );
-    currentPage = 1;
+    );if (filteredUsuarios.length === 0) {
+            tablaUsuarios.innerHTML = `<tr><td colspan="2" style="text-align:start; color:#888;">
+                No se encontraron resultados
+            </td></tr>`;
+            document.getElementsByClassName("pagination")[0].style.display = "none";
+        } else {
+            document.getElementsByClassName("pagination")[0].style.display = "flex";
+             currentPage = 1;
     renderSolicitudes();
+        }
+  
   });
 
   (async () => {
@@ -269,7 +277,5 @@ function renderSolicitudes() {
     tablaUsuarios.appendChild(tr);
   });
 
-  // 📌 Habilitar/deshabilitar botones de paginación
-  prevBtn.disabled = currentPage === 1;
-  nextBtn.disabled = currentPage === totalPages;
+  actualizarPaginacion();
 }

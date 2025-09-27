@@ -3,7 +3,7 @@ let seleccionado = null;
 let tooltipTimeout;
 
 document.addEventListener("DOMContentLoaded", () => {
-obtenerLocalStorage();
+    obtenerLocalStorage();
     // Contenedores y botones
     const listaCandidatos = document.getElementById("listaCandidatos");
     const acciones = document.querySelector(".acciones");
