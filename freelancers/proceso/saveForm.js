@@ -4,6 +4,65 @@
   const USER_PROGRESS = urlParams.get('userprogress') || sessionStorage.getItem('salav:currentUserId') || 'anonymous_user';
   const formEl = document.getElementById('salav-form');
   const FORM_SLUG = (formEl && formEl.getAttribute('data-form')) ? formEl.getAttribute('data-form') : 'estudio_socioeconomico';
+  const usuarioname = sessionStorage.getItem('nombre_seleccionado');
+  const token_a = localStorage.getItem("access_token");
+  
+  let url_fotografia_upload = "";
+  let url_croquis_upload = "";
+  let url_ext_upload = "";
+  let url_int_upload = "";
+  let url_sala_upload = "";
+  let url_docs_upload = "";
+  let url_cv_upload = "";
+  let url_comprobante_upload = "";
+  let url_ine_upload = "";
+  let url_cedula_upload = "";
+  let url_constancia_upload = "";
+  let url_cartas_upload = "";
+  let url_curp_upload = "";
+  let url_afore_upload = "";
+  let url_fiscal_upload = "";
+  let url_licencia_upload = "";
+  let url_domicilio_upload = "";
+  let url_nss_upload = "";
+  let url_nacimiento_upload = "";
+  let url_matrimonio_upload = "";
+  let url_actahijo_upload = "";
+  let url_actaconyuge_upload = "";
+
+
+
+
+  function setUploadUrl(safeUploadId, url) {
+  // safeUploadId ejemplo: "fotografia_upload"
+  switch (String(safeUploadId)) {
+    case 'fotografia_upload': url_fotografia_upload = url; break;
+    case 'croquis_upload': url_croquis_upload = url; break;
+    case 'ext_upload': url_ext_upload = url; break;
+    case 'int_upload': url_int_upload = url; break;
+    case 'sala_upload': url_sala_upload = url; break;
+    case 'docs_upload': url_docs_upload = url; break;
+    case 'cv_upload': url_cv_upload = url; break;
+    case 'comprobante_upload': url_comprobante_upload = url; break;
+    case 'ine_upload': url_ine_upload = url; break;
+    case 'cedula_upload': url_cedula_upload = url; break;
+    case 'constancia_upload': url_constancia_upload = url; break;
+    case 'cartas_upload': url_cartas_upload = url; break;
+    case 'curp_upload': url_curp_upload = url; break;
+    case 'afore_upload': url_afore_upload = url; break;
+    case 'fiscal_upload': url_fiscal_upload = url; break;
+    case 'licencia_upload': url_licencia_upload = url; break;
+    case 'domicilio_upload': url_domicilio_upload = url; break;
+    case 'nss_upload': url_nss_upload = url; break;
+    case 'nacimiento_upload': url_nacimiento_upload = url; break;
+    case 'matrimonio_upload': url_matrimonio_upload = url; break;
+    case 'actahijo_upload': url_actahijo_upload = url; break;
+    case 'actaconyuge_upload': url_actaconyuge_upload = url; break;
+    default:
+      console.warn('setUploadUrl: safeUploadId no mapeado ->', safeUploadId);
+      break;
+  }
+}
 
   async function finalizarTarea(userId, etapaKey, token) {
     
@@ -13,7 +72,7 @@
         const body = { [etapaKey]: true };
 
         const res = await axios.patch(`${API_URL}user-progress/${userId}`, body, {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token_a}` }
         });
 
         mostrarModalMensaje("Tarea finalizada con éxito ✅");
@@ -831,12 +890,12 @@ document.getElementById('add-nivel-btn').addEventListener('click', function() {
        ----------------------- */
     const formJSON = {
       meta: { generado_en: new Date().toISOString() },
-      datos_generales: { correo, folio, fecha_solicitud, fecha_visita, puesto, fotografia },
+      datos_generales: { correo, folio, fecha_solicitud, fecha_visita, puesto, url_fotografia_upload },
       empresa_valuadora: { valuador_nombre},
       empresa_solicitante: { solicitante_razon2, solicitante_contacto, solicitante_email },
       candidato: { candidato_nombre, edad, fecha_nacimiento, rfc, telefono, telefono_recados, lugar_nacimiento, estado, pais, estado_civil, num_hijos, direccion, colonia, ciudad, codigo_postal, familia_empresa, nombre_familiar },
-      croquis: croquis,
-      fotos_domicilio: { foto_fachada_exterior, foto_fachada_interior, foto_sala, foto_entregando_documentos },
+      croquis: url_croquis_upload,
+      fotos_domicilio: { url_ext_upload, url_int_upload, url_sala_upload, url_docs_upload },
       familiares: familiares,
       situacion_economica: {
         estilo_vida: { sueldo_actual, ingresos_negocio, ingresos_oficio, otros_ingresos },
@@ -867,7 +926,7 @@ document.getElementById('add-nivel-btn').addEventListener('click', function() {
       referencias: { personales: refs_personales, laborales: refs_laborales, vecinal: refs_vecinal, familiar: refs_familiar },
       salud: { nss, tipo_sangre, estatura, peso, utiliza_lentes, justificacion_lentes, detalles: health },
       contactos_emergencia: contactos_emergencia,
-      documentos: { cv, comprobante_estudios, identificacion_oficial, cedula_profesional, constancia_laboral, cartas_recomendacion, curp, afore, constancia_fiscal, licencia_manejo, comprobante_domicilio, constancia_nss, acta_nacimiento_candidato, acta_matrimonio, acta_nacimiento_hijos, acta_nacimiento_conyuge },
+      documentos: { url_cv_upload, url_comprobante_upload, url_ine_upload, url_cedula_upload, url_constancia_upload, url_cartas_upload, url_curp_upload, url_afore_upload, url_fiscal_upload, url_licencia_upload, url_domicilio_upload, url_nss_upload, url_nacimiento_upload, url_matrimonio_upload, url_actahijo_upload, url_actaconyuge_upload },
       conclusiones: { info_coincide_final, vivienda_corresponde, entorno_adecuado, problemas_analisis, problemas_visita, problemas_agenda, candidato_proporciono_toda_info, obtencion_info_dentro_domicilio, actitud_candidato }
     };
 
@@ -889,13 +948,13 @@ document.getElementById('add-nivel-btn').addEventListener('click', function() {
 
     //alert('Formulario procesado. Revisa la consola para ver variables individuales y el JSON completo.');
 
-    const token = localStorage.getItem("access_token");
+    
     
 
     console.log("Aplicante ", USER_ID);
     console.log("ID PROGRESO ", USER_PROGRESS);
     console.log("Loggeado ", userId);
-    console.log("Token ", token);
+    console.log("Token ", token_a);
 
     const body = {
         applicant_id: USER_ID,
@@ -906,14 +965,14 @@ document.getElementById('add-nivel-btn').addEventListener('click', function() {
 
         const response = axios.post(`${API_URL}form`, body, {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token_a}`,
             "Content-Type": "application/json",
           },
         });
 
         mostrarModalMensajeForm("✅ Formulario guardado");
 
-        finalizarTarea(USER_PROGRESS, "documenting_information", token);
+        finalizarTarea(USER_PROGRESS, "documenting_information", token_a);
 
         
         setTimeout(() => {
@@ -1071,14 +1130,66 @@ function formatBytes(bytes) {
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 
+/*
+  const fileUploads = document.querySelectorAll('.file-upload');
+  fileUploads.forEach(upload => {
+    const input = upload.querySelector('input');
+    const fileName = upload.nextElementSibling;
+
+    upload.addEventListener('click', () => input.click());
+
+    input.addEventListener('change', () => {
+      if (!input.files || input.files.length === 0) {
+        fileName.textContent = '';
+        return;
+      }
+
+      const files = Array.from(input.files);
+      const oversize = files.filter(f => f.size > MAX_BYTES);
+
+      if (oversize.length > 0) {
+        // Mensaje al usuario: puedes cambiar alert por un toast o un <span> en el DOM
+        const listNames = oversize.map(f => `${f.name} (${formatBytes(f.size)})`).join(', ');
+        //alert(`El/los archivo(s) ${listNames} excede(n) el tamaño máximo de ${MAX_MB} MB.`);
+        mostrarModalMensajeForm(`El archivo ${listNames} debe pesar menos de  ${MAX_MB} MB. ❌`);
+        // limpiar el input para evitar subirlo accidentalmente
+        input.value = '';
+        fileName.textContent = '';
+        // opcional: deshabilitar el botón de enviar
+        const form = upload.closest('form');
+        if (form) {
+          const submit = form.querySelector('[type="submit"]');
+          if (submit) submit.disabled = true;
+        }
+        return;
+      }
+
+      // si todo ok:
+      // - actualizar nombre / contador
+      if (input.multiple) {
+        fileName.textContent = `${files.length} archivos seleccionados`;
+      } else {
+        fileName.textContent = files[0].name;
+      }
+      // opcional: volver a habilitar submit si estaba deshabilitado
+      const form = upload.closest('form');
+      if (form) {
+        const submit = form.querySelector('[type="submit"]');
+        if (submit) submit.disabled = false;
+      }
+    });
+  });
+*/
+
 const fileUploads = document.querySelectorAll('.file-upload');
+
 fileUploads.forEach(upload => {
   const input = upload.querySelector('input');
   const fileName = upload.nextElementSibling;
 
   upload.addEventListener('click', () => input.click());
 
-  input.addEventListener('change', () => {
+  input.addEventListener('change', async () => {
     if (!input.files || input.files.length === 0) {
       fileName.textContent = '';
       return;
@@ -1088,14 +1199,10 @@ fileUploads.forEach(upload => {
     const oversize = files.filter(f => f.size > MAX_BYTES);
 
     if (oversize.length > 0) {
-      // Mensaje al usuario: puedes cambiar alert por un toast o un <span> en el DOM
       const listNames = oversize.map(f => `${f.name} (${formatBytes(f.size)})`).join(', ');
-      //alert(`El/los archivo(s) ${listNames} excede(n) el tamaño máximo de ${MAX_MB} MB.`);
-      mostrarModalMensajeForm(`El archivo ${listNames} debe pesar menos de  ${MAX_MB} MB. ❌`);
-      // limpiar el input para evitar subirlo accidentalmente
+      mostrarModalMensajeForm(`El archivo ${listNames} debe pesar menos de ${MAX_MB} MB. ❌`);
       input.value = '';
       fileName.textContent = '';
-      // opcional: deshabilitar el botón de enviar
       const form = upload.closest('form');
       if (form) {
         const submit = form.querySelector('[type="submit"]');
@@ -1104,18 +1211,60 @@ fileUploads.forEach(upload => {
       return;
     }
 
-    // si todo ok:
-    // - actualizar nombre / contador
     if (input.multiple) {
       fileName.textContent = `${files.length} archivos seleccionados`;
     } else {
       fileName.textContent = files[0].name;
     }
-    // opcional: volver a habilitar submit si estaba deshabilitado
     const form = upload.closest('form');
     if (form) {
       const submit = form.querySelector('[type="submit"]');
       if (submit) submit.disabled = false;
+    }
+
+    // Subida (primer archivo por defecto)
+    const file = files[0];
+
+    // construir carpeta dinámica
+    const rawName = (typeof usuarioname === 'string') ? usuarioname.trim() : '';
+    const nombres = rawName.split(/\s+/);
+    const nombre = nombres[0] || '';
+    const apellido = nombres[1] || '';
+    const carpeta = (nombre.slice(0, 3) + apellido.slice(0, 2)) || 'SinNom';
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("path", `${carpeta}/Form`);
+
+      const res = await axios.post(`${API_URL}google/upload`, formData, {
+        headers: { Authorization: `Bearer ${token_a}` }
+      });
+
+      const lastUploadResponse = res.data;
+      const fileId = lastUploadResponse && lastUploadResponse.id;
+
+      if (!fileId) {
+        console.error('Respuesta de upload no contiene id:', lastUploadResponse);
+        mostrarModalMensajeForm('Error al subir el archivo: respuesta inválida del servidor. ❌');
+        return;
+      }
+
+      const url = `https://drive.google.com/file/d/${fileId}/view`;
+
+      // sanitizar upload.id: reemplazar "-" por "_" y eliminar espacios
+      const safeUploadId = String(upload.id || '')
+        .replace(/-/g, '_')
+        .replace(/\s+/g, '_');
+
+      setUploadUrl(safeUploadId, url);
+
+      console.log('safeUploadId ->', safeUploadId);
+      console.log('Asignada URL ->', url);
+
+    } catch (err) {
+      console.error('Error subiendo archivo:', err);
+      mostrarModalMensajeForm('Error al subir el archivo. Revisa la consola para más detalles. ❌');
     }
   });
 });
@@ -1438,7 +1587,7 @@ async function fetchUserProgress() {
     try {
       const res = await axios.get(`${API_URL}user-progress`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token_a}`,
         },
         params: {
           freelance_id: userId,
@@ -1461,5 +1610,7 @@ async function fetchUserProgress() {
       }
     }
   }
+
+  
 
 })();

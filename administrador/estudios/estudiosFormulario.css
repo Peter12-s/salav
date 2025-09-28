@@ -152,3 +152,109 @@
             font-size: 14px;
             color: var(--gray);
         }
+
+        .thumbnail-container {
+    margin: 5px 0;
+}
+
+.thumbnail-container img {
+    max-width: 100px;
+    max-height: 100px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: transform 0.2s;
+}
+
+.thumbnail-container img:hover {
+    transform: scale(1.05);
+}
+
+
+.drive-thumb {
+      width: 250px;
+      height: 250px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+      border: 1px solid rgba(0,0,0,0.06);
+      background: linear-gradient(180deg,#ffffff,#fbfdff);
+      cursor: pointer;
+      margin: 8px;
+      position: relative;
+      display: inline-block;
+    }
+    .drive-thumb:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 14px 40px rgba(0,0,0,0.18); }
+    .drive-thumb iframe { width: 100%; height: 100%; border: 0; display: block; pointer-events: none; } /* pointer-events:none asegura que el overlay capture los clics */
+    .drive-thumb .thumb-label {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      padding: 8px 10px;
+      backdrop-filter: blur(4px);
+      background: linear-gradient(180deg, rgba(255,255,255,0.0), rgba(0,0,0,0.45));
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      z-index: 1;
+    }
+    /* overlay que cubre todo el thumb y captura clics */
+    .drive-thumb .thumb-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      cursor: pointer;
+      background: transparent;
+    }
+    /* máscara pequeña en la esquina para ocultar el icono de expandir */
+    .drive-thumb .icon-mask {
+      position: absolute;
+      right: 8px;
+      bottom: 8px;
+      width: 48px;
+      height: 48px;
+      z-index: 3;
+      border-radius: 8px;
+      /* fondo que mezcla con el thumb para tapar icono; ajusta opacidad si necesitas */
+      background: linear-gradient(180deg, rgba(255,255,255,0.0), rgba(251,253,255,0.95));
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      pointer-events: none;
+    }
+
+    .drive-modal {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.78);
+      z-index: 100000;
+      padding: 20px;
+    }
+    .drive-modal .modal-content {
+      width: calc(100% - 40px);
+      max-width: 1100px;
+      max-height: 90vh;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      position: relative;
+    }
+    .drive-modal .modal-iframe { width: 100%; height: 80vh; border: 0; display: block; background: #000; }
+    .drive-modal .close-btn {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .drive-modal .close-btn:focus { outline: 2px solid #fff; }

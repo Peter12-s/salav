@@ -108,6 +108,8 @@ function renderSolicitudes() {
   const pageData = filteredUsuarios.slice(start, end);
 
   pageData.forEach(usuario => {
+    //console.log(usuario.applicant_fullname);
+
     const tr = document.createElement("tr");
 
     // 📌 Columna nombre
@@ -118,6 +120,7 @@ function renderSolicitudes() {
 
     // 📌 Columnas etapas
     etapas.forEach(etapa => {
+      
       const td = document.createElement("td");
       const completado = usuario[etapa.key];
       // ✅ Estilos según estado
@@ -133,6 +136,7 @@ function renderSolicitudes() {
 
         if (etapa.key === "documenting_information") {
           td.addEventListener("click", () => {
+            sessionStorage.setItem('nombre_seleccionado', usuario.applicant_fullname);
             window.location.href = `estudiosFormulario.html?user=${encodeURIComponent(usuario.applicant_id)}&userprogress=${encodeURIComponent(usuario._id)}`;
           });
         } else {

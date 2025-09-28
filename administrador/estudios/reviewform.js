@@ -7,15 +7,316 @@ const FORM_SLUG = (formEl && formEl.getAttribute('data-form')) ? formEl.getAttri
 var token_a = localStorage.getItem("access_token");
 var id_form = null;
 
+
+let url_fotografia_upload = "";
+let url_croquis_upload = "";
+let url_ext_upload = "";
+let url_int_upload = "";
+let url_sala_upload = "";
+let url_docs_upload = "";
+let url_cv_upload = "";
+let url_comprobante_upload = "";
+let url_ine_upload = "";
+let url_cedula_upload = "";
+let url_constancia_upload = "";
+let url_cartas_upload = "";
+let url_curp_upload = "";
+let url_afore_upload = "";
+let url_fiscal_upload = "";
+let url_licencia_upload = "";
+let url_domicilio_upload = "";
+let url_nss_upload = "";
+let url_nacimiento_upload = "";
+let url_matrimonio_upload = "";
+let url_actahijo_upload = "";
+let url_actaconyuge_upload = "";
+
 // Variables para secciones dinámicas
 const familiaresWrap = document.getElementById('familiares-wrap');
 let familiarCount = 0;
 let cursoCount = 0;
 let empresaCount = 0;
 
+
+
+  function setUploadUrl(safeUploadId, url) {
+  // safeUploadId ejemplo: "fotografia_upload"
+  switch (String(safeUploadId)) {
+    case 'fotografia_upload': url_fotografia_upload = url; break;
+    case 'croquis_upload': url_croquis_upload = url; break;
+    case 'ext_upload': url_ext_upload = url; break;
+    case 'int_upload': url_int_upload = url; break;
+    case 'sala_upload': url_sala_upload = url; break;
+    case 'docs_upload': url_docs_upload = url; break;
+    case 'cv_upload': url_cv_upload = url; break;
+    case 'comprobante_upload': url_comprobante_upload = url; break;
+    case 'ine_upload': url_ine_upload = url; break;
+    case 'cedula_upload': url_cedula_upload = url; break;
+    case 'constancia_upload': url_constancia_upload = url; break;
+    case 'cartas_upload': url_cartas_upload = url; break;
+    case 'curp_upload': url_curp_upload = url; break;
+    case 'afore_upload': url_afore_upload = url; break;
+    case 'fiscal_upload': url_fiscal_upload = url; break;
+    case 'licencia_upload': url_licencia_upload = url; break;
+    case 'domicilio_upload': url_domicilio_upload = url; break;
+    case 'nss_upload': url_nss_upload = url; break;
+    case 'nacimiento_upload': url_nacimiento_upload = url; break;
+    case 'matrimonio_upload': url_matrimonio_upload = url; break;
+    case 'actahijo_upload': url_actahijo_upload = url; break;
+    case 'actaconyuge_upload': url_actaconyuge_upload = url; break;
+    default:
+      console.warn('setUploadUrl: safeUploadId no mapeado ->', safeUploadId);
+      break;
+  }
+}
+
 /* -----------------------
    FUNCIONES PARA OBTENER Y PRELLENAR DATOS
    ----------------------- */
+
+   function prefillFileThumbnails(formObject) {
+    if (!formObject) return;
+    
+    // Datos generales - Fotografía
+    if (formObject.datos_generales && formObject.datos_generales.url_fotografia_upload) {
+        showExistingThumbnail(
+            formObject.datos_generales.url_fotografia_upload, 
+            'fotografia_thumbnail',
+            'Fotografía'
+        );
+    }
+    
+    // Croquis
+    if (formObject.croquis) {
+        showExistingThumbnail(formObject.croquis, 'croquis_thumbnail', 'Croquis');
+    }
+    
+    // Fotos domicilio
+    if (formObject.fotos_domicilio) {
+        if (formObject.fotos_domicilio.url_ext_upload) {
+            showExistingThumbnail(formObject.fotos_domicilio.url_ext_upload, 'foto_fachada_exterior_thumbnail', 'Fachada exterior');
+        }
+        if (formObject.fotos_domicilio.url_int_upload) {
+            showExistingThumbnail(formObject.fotos_domicilio.url_int_upload, 'foto_fachada_interior_thumbnail', 'Fachada interior');
+        }
+        if (formObject.fotos_domicilio.url_sala_upload) {
+            showExistingThumbnail(formObject.fotos_domicilio.url_sala_upload, 'foto_sala_thumbnail', 'Sala');
+        }
+        if (formObject.fotos_domicilio.url_docs_upload) {
+            showExistingThumbnail(formObject.fotos_domicilio.url_docs_upload, 'foto_entregando_documentos_thumbnail', 'Entrega de documentos');
+        }
+    }
+    
+    // Documentos
+    if (formObject.documentos) {
+        const docs = formObject.documentos;
+        if (docs.url_cv_upload) showExistingThumbnail(docs.url_cv_upload, 'cv_thumbnail', 'CV');
+        if (docs.url_ine_upload) showExistingThumbnail(docs.url_ine_upload, 'identificacion_oficial_thumbnail', 'INE');
+        if (docs.url_nss_upload) showExistingThumbnail(docs.url_nss_upload, 'constancia_nss_thumbnail', 'NSS');
+        if (docs.url_curp_upload) showExistingThumbnail(docs.url_curp_upload, 'curp_thumbnail', 'CURP');
+        if (docs.url_afore_upload) showExistingThumbnail(docs.url_afore_upload, 'afore_thumbnail', 'AFORE');
+        if (docs.url_cartas_upload) showExistingThumbnail(docs.url_cartas_upload, 'cartas_recomendacion_thumbnail', 'Cartas recomendación');
+        if (docs.url_cedula_upload) showExistingThumbnail(docs.url_cedula_upload, 'cedula_profesional_thumbnail', 'Cédula profesional');
+        if (docs.url_fiscal_upload) showExistingThumbnail(docs.url_fiscal_upload, 'constancia_fiscal_thumbnail', 'Constancia fiscal');
+        if (docs.url_actahijo_upload) showExistingThumbnail(docs.url_actahijo_upload, 'acta_nacimiento_hijos_thumbnail', 'Acta hijos');
+        if (docs.url_licencia_upload) showExistingThumbnail(docs.url_licencia_upload, 'licencia_manejo_thumbnail', 'Licencia manejo');
+        if (docs.url_domicilio_upload) showExistingThumbnail(docs.url_domicilio_upload, 'comprobante_domicilio_thumbnail', 'Comprobante domicilio');
+        if (docs.url_constancia_upload) showExistingThumbnail(docs.url_constancia_upload, 'constancia_laboral_thumbnail', 'Constancia laboral');
+        if (docs.url_matrimonio_upload) showExistingThumbnail(docs.url_matrimonio_upload, 'acta_matrimonio_thumbnail', 'Acta matrimonio');
+        if (docs.url_nacimiento_upload) showExistingThumbnail(docs.url_nacimiento_upload, 'acta_nacimiento_candidato_thumbnail', 'Acta nacimiento');
+        if (docs.url_comprobante_upload) showExistingThumbnail(docs.url_comprobante_upload, 'comprobante_estudios_thumbnail', 'Comprobante estudios');
+    }
+}
+
+// Agregar esta función auxiliar para mostrar miniaturas existentes
+function showExistingThumbnail(url, containerId, fileName) {
+    const container = document.getElementById(containerId);
+    if (!container || !url) return;
+    
+    // Crear contenedor si no existe
+    if (!container) {
+        const newContainer = document.createElement('div');
+        newContainer.id = containerId;
+        newContainer.style.marginTop = '5px';
+        // Buscar el input correspondiente y insertar después
+        const inputId = containerId.replace('_thumbnail', '');
+        const input = document.getElementById(inputId);
+        if (input && input.parentNode) {
+            input.parentNode.insertBefore(newContainer, input.nextSibling);
+        }
+    }
+    
+    container.innerHTML = '';
+    
+    const isImage = /\.(jpg|jpeg|png|gif|bmp|webp)$/i.test(url) || 
+                   url.includes('drive.google.com') && url.includes('/view');
+    
+    if (isImage) {
+       let previewUrl = url.replace(/\/view(?:\?.*)?$/, '/preview');
+
+
+// crear el thumb (iframe pequeño)
+const wrapper = document.createElement('div');
+wrapper.className = 'drive-thumb';
+wrapper.setAttribute('role', 'button');
+wrapper.setAttribute('tabindex', '0');
+wrapper.setAttribute('aria-label', `Abrir vista previa: ${fileName || 'Imagen'}`);
+
+const thumbIframe = document.createElement('iframe');
+thumbIframe.src = previewUrl;
+thumbIframe.title = fileName || 'Preview';
+thumbIframe.loading = 'lazy';
+
+// etiqueta en la parte inferior
+const label = document.createElement('div');
+label.className = 'thumb-label';
+label.textContent = fileName || 'Imagen';
+
+// overlay transparente que captura clics en toda la superficie del thumb
+const overlay = document.createElement('div');
+overlay.className = 'thumb-overlay';
+overlay.setAttribute('role', 'button');
+overlay.setAttribute('tabindex', '0');
+overlay.setAttribute('aria-label', `Abrir vista previa: ${fileName || 'Imagen'}`);
+
+
+
+// ensamblar
+wrapper.appendChild(thumbIframe);
+wrapper.appendChild(label);
+wrapper.appendChild(overlay);
+
+// abrir modal con iframe grande
+function openDriveModal() {
+  if (document.querySelector('.drive-modal')) return; // ya está abierto
+  const prevOverflow = document.body.style.overflow;
+  document.body.style.overflow = 'hidden';
+
+  const modal = document.createElement('div');
+  modal.className = 'drive-modal';
+  modal.setAttribute('role', 'dialog');
+  modal.setAttribute('aria-modal', 'true');
+
+  const content = document.createElement('div');
+  content.className = 'modal-content';
+
+  const bigIframe = document.createElement('iframe');
+  bigIframe.className = 'modal-iframe';
+  bigIframe.src = previewUrl;
+  bigIframe.title = fileName || 'Vista previa';
+  bigIframe.allowFullscreen = true;
+
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'close-btn';
+  closeBtn.innerHTML = '✕';
+  closeBtn.setAttribute('aria-label', 'Cerrar vista previa');
+
+  function closeModal() {
+    document.body.style.overflow = prevOverflow || '';
+    window.removeEventListener('keydown', onKeyDown);
+    modal.remove();
+  }
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+  function onKeyDown(e) {
+    if (e.key === 'Escape') closeModal();
+  }
+  window.addEventListener('keydown', onKeyDown);
+
+  content.appendChild(closeBtn);
+  content.appendChild(bigIframe);
+  modal.appendChild(content);
+  document.body.appendChild(modal);
+
+  // focus accesible
+  closeBtn.focus();
+}
+
+// abrir por click o teclado (Enter / Space) — overlay captura clics en todo el frame
+overlay.addEventListener('click', openDriveModal);
+overlay.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    openDriveModal();
+  }
+});
+
+// también permitir abrir con Enter/Space sobre el wrapper
+wrapper.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    openDriveModal();
+  }
+});
+
+// añadir al contenedor
+container.appendChild(wrapper);
+
+        
+        // Agregar botón para eliminar
+        /*
+        const removeBtn = document.createElement('button');
+        removeBtn.textContent = '×';
+        removeBtn.style.background = '#ff4444';
+        removeBtn.style.color = 'white';
+        removeBtn.style.border = 'none';
+        removeBtn.style.borderRadius = '50%';
+        removeBtn.style.width = '25px';
+        removeBtn.style.height = '25px';
+        removeBtn.style.cursor = 'pointer';
+        removeBtn.style.marginLeft = '5px';
+        removeBtn.title = 'Eliminar archivo';
+        
+        removeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            container.innerHTML = '';
+            // También limpiar el input file si existe
+            const inputId = containerId.replace('_thumbnail', '');
+            const input = document.getElementById(inputId);
+            if (input) input.value = '';
+        });
+        
+        container.appendChild(removeBtn);*/
+    } else {
+        const link = document.createElement('a');
+        link.href = url;
+        link.target = '_blank';
+        link.innerHTML = '📄 ' + (fileName || 'Ver archivo');
+        link.style.display = 'inline-block';
+        link.style.padding = '5px';
+        link.style.textDecoration = 'none';
+        link.style.color = '#007bff';
+        link.style.border = '1px solid #ddd';
+        link.style.borderRadius = '4px';
+        link.style.margin = '5px';
+        container.appendChild(link);
+        
+        // Botón eliminar para archivos no imagen
+        /*
+        const removeBtn = document.createElement('button');
+        removeBtn.textContent = '×';
+        removeBtn.style.background = '#ff4444';
+        removeBtn.style.color = 'white';
+        removeBtn.style.border = 'none';
+        removeBtn.style.borderRadius = '50%';
+        removeBtn.style.width = '25px';
+        removeBtn.style.height = '25px';
+        removeBtn.style.cursor = 'pointer';
+        removeBtn.style.marginLeft = '5px';
+        removeBtn.title = 'Eliminar archivo';
+        
+        removeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            container.innerHTML = '';
+            const inputId = containerId.replace('_thumbnail', '');
+            const input = document.getElementById(inputId);
+            if (input) input.value = '';
+        });
+        
+        container.appendChild(removeBtn);*/
+    }
+}
 
 // Función para obtener los datos del formulario desde el API
 async function fetchFormData() {
@@ -95,6 +396,7 @@ async function prefillForm() {
     prefillServicesData(formObject.servicios_zona);
     prefillConclusionsData(formObject.conclusiones);
     prefillContactosEmergencia(formObject.contactos_emergencia);
+    prefillFileThumbnails(formObject);
     
     // Activar secciones condicionales después de prellenar
     setTimeout(() => {
@@ -1001,6 +1303,7 @@ function setupConditionalLogic() {
 }
 
 // Configurar manejo de archivos
+// Configurar manejo de archivos
 function setupFileUploads() {
     const MAX_MB = 3;
     const MAX_BYTES = MAX_MB * 1024 * 1024;
@@ -1014,16 +1317,152 @@ function setupFileUploads() {
         return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
     }
 
+    // Función para crear miniaturas
+    function createThumbnail(file, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        
+        // Limpiar contenedor existente
+        container.innerHTML = '';
+        
+        if (file.type.startsWith('image/')) {
+            const img = document.createElement('img');
+            img.src = URL.createObjectURL(file);
+            img.style.maxWidth = '100px';
+            img.style.maxHeight = '100px';
+            img.style.cursor = 'pointer';
+            img.style.margin = '5px';
+            img.style.border = '1px solid #ddd';
+            img.style.borderRadius = '4px';
+            
+            // Hacer clic para ampliar
+            img.addEventListener('click', () => {
+                const modal = document.createElement('div');
+                modal.style.position = 'fixed';
+                modal.style.top = '0';
+                modal.style.left = '0';
+                modal.style.width = '100%';
+                modal.style.height = '100%';
+                modal.style.backgroundColor = 'rgba(0,0,0,0.8)';
+                modal.style.display = 'flex';
+                modal.style.justifyContent = 'center';
+                modal.style.alignItems = 'center';
+                modal.style.zIndex = '1000';
+                
+                const modalImg = document.createElement('img');
+                modalImg.src = img.src;
+                modalImg.style.maxWidth = '90%';
+                modalImg.style.maxHeight = '90%';
+                modalImg.style.objectFit = 'contain';
+                
+                modal.appendChild(modalImg);
+                modal.addEventListener('click', () => document.body.removeChild(modal));
+                document.body.appendChild(modal);
+            });
+            
+            container.appendChild(img);
+        } else {
+            // Para archivos no imagen, mostrar icono
+            const icon = document.createElement('div');
+            icon.innerHTML = '📄';
+            icon.style.fontSize = '50px';
+            icon.style.textAlign = 'center';
+            icon.style.cursor = 'pointer';
+            icon.title = 'Haz clic para ver el archivo';
+            
+            icon.addEventListener('click', () => {
+                const url = URL.createObjectURL(file);
+                window.open(url, '_blank');
+            });
+            
+            container.appendChild(icon);
+        }
+    }
+
+    // Función para mostrar miniatura desde URL existente
+    function showExistingThumbnail(url, containerId, fileName) {
+        const container = document.getElementById(containerId);
+        if (!container || !url) return;
+        
+        container.innerHTML = '';
+        
+        // Verificar si es imagen por extensión o tipo MIME
+        const isImage = /\.(jpg|jpeg|png|gif|bmp|webp)$/i.test(url) || 
+                       url.includes('drive.google.com') && !url.includes('/edit');
+        
+        if (isImage) {
+            const img = document.createElement('img');
+            img.src = url;
+            img.style.maxWidth = '100px';
+            img.style.maxHeight = '100px';
+            img.style.cursor = 'pointer';
+            img.style.margin = '5px';
+            img.style.border = '1px solid #ddd';
+            img.style.borderRadius = '4px';
+            img.alt = fileName || 'Imagen';
+            
+            img.addEventListener('click', () => {
+                const modal = document.createElement('div');
+                modal.style.position = 'fixed';
+                modal.style.top = '0';
+                modal.style.left = '0';
+                modal.style.width = '100%';
+                modal.style.height = '100%';
+                modal.style.backgroundColor = 'rgba(0,0,0,0.8)';
+                modal.style.display = 'flex';
+                modal.style.justifyContent = 'center';
+                modal.style.alignItems = 'center';
+                modal.style.zIndex = '1000';
+                
+                const modalImg = document.createElement('img');
+                modalImg.src = url;
+                modalImg.style.maxWidth = '90%';
+                modalImg.style.maxHeight = '90%';
+                modalImg.style.objectFit = 'contain';
+                
+                modal.appendChild(modalImg);
+                modal.addEventListener('click', () => document.body.removeChild(modal));
+                document.body.appendChild(modal);
+            });
+            
+            container.appendChild(img);
+        } else {
+            // Para archivos no imagen
+            const link = document.createElement('a');
+            link.href = url;
+            link.target = '_blank';
+            link.innerHTML = '📄 ' + (fileName || 'Ver archivo');
+            link.style.display = 'block';
+            link.style.padding = '5px';
+            link.style.textDecoration = 'none';
+            link.style.color = '#007bff';
+            container.appendChild(link);
+        }
+    }
+
     const fileUploads = document.querySelectorAll('.file-upload');
+
     fileUploads.forEach(upload => {
         const input = upload.querySelector('input');
         const fileName = upload.nextElementSibling;
+        
+        // Crear contenedor para miniatura si no existe
+        const thumbnailId = input.id + '_thumbnail';
+        if (!document.getElementById(thumbnailId)) {
+            const thumbnailContainer = document.createElement('div');
+            thumbnailContainer.id = thumbnailId;
+            thumbnailContainer.style.marginTop = '5px';
+            upload.parentNode.insertBefore(thumbnailContainer, fileName.nextSibling);
+        }
 
         upload.addEventListener('click', () => input.click());
 
-        input.addEventListener('change', () => {
+        input.addEventListener('change', async () => {
             if (!input.files || input.files.length === 0) {
-                if (fileName) fileName.textContent = '';
+                fileName.textContent = '';
+                // Limpiar miniatura
+                const thumbnailContainer = document.getElementById(thumbnailId);
+                if (thumbnailContainer) thumbnailContainer.innerHTML = '';
                 return;
             }
 
@@ -1032,16 +1471,60 @@ function setupFileUploads() {
 
             if (oversize.length > 0) {
                 const listNames = oversize.map(f => `${f.name} (${formatBytes(f.size)})`).join(', ');
-                mostrarModalMensajeForm(`El archivo ${listNames} debe pesar menos de  ${MAX_MB} MB. ❌`);
+                mostrarModalMensajeForm(`El archivo ${listNames} debe pesar menos de ${MAX_MB} MB. ❌`);
                 input.value = '';
-                if (fileName) fileName.textContent = '';
+                fileName.textContent = '';
+                // Limpiar miniatura
+                const thumbnailContainer = document.getElementById(thumbnailId);
+                if (thumbnailContainer) thumbnailContainer.innerHTML = '';
                 return;
             }
 
+            // Mostrar miniatura del nuevo archivo
+            createThumbnail(files[0], thumbnailId);
+
             if (input.multiple) {
-                if (fileName) fileName.textContent = `${files.length} archivos seleccionados`;
+                fileName.textContent = `${files.length} archivos seleccionados`;
             } else {
-                if (fileName) fileName.textContent = files[0].name;
+                fileName.textContent = files[0].name;
+            }
+
+            // Subida a Google Drive
+            const file = files[0];
+            const rawName = (typeof usuarioname === 'string') ? usuarioname.trim() : '';
+            const nombres = rawName.split(/\s+/);
+            const nombre = nombres[0] || '';
+            const apellido = nombres[1] || '';
+            const carpeta = (nombre.slice(0, 3) + apellido.slice(0, 2)) || 'SinNom';
+
+            try {
+                const formData = new FormData();
+                formData.append("file", file);
+                formData.append("path", `${carpeta}/Form`);
+
+                const res = await axios.post(`${API_URL}google/upload`, formData, {
+                    headers: { Authorization: `Bearer ${token_a}` }
+                });
+
+                const lastUploadResponse = res.data;
+                const fileId = lastUploadResponse && lastUploadResponse.id;
+
+                if (!fileId) {
+                    console.error('Respuesta de upload no contiene id:', lastUploadResponse);
+                    mostrarModalMensajeForm('Error al subir el archivo: respuesta inválida del servidor. ❌');
+                    return;
+                }
+
+                const url = `https://drive.google.com/file/d/${fileId}/view`;
+                const safeUploadId = String(upload.id || '')
+                    .replace(/-/g, '_')
+                    .replace(/\s+/g, '_');
+
+                setUploadUrl(safeUploadId, url);
+
+            } catch (err) {
+                console.error('Error subiendo archivo:', err);
+                mostrarModalMensajeForm('Error al subir el archivo. Revisa la consola para más detalles. ❌');
             }
         });
     });
@@ -1378,11 +1861,11 @@ async function handleFormSubmit() {
        ----------------------- */
     const formJSON = {
       meta: { generado_en: new Date().toISOString() },
-      datos_generales: { correo, folio, fecha_solicitud, fecha_visita, puesto, fotografia },
+      datos_generales: { correo, folio, fecha_solicitud, fecha_visita, puesto, url_fotografia_upload },
       empresa_valuadora: { valuador_nombre},
       empresa_solicitante: { solicitante_razon2, solicitante_contacto, solicitante_email },
       candidato: { candidato_nombre, edad, fecha_nacimiento, rfc, telefono, telefono_recados, lugar_nacimiento, estado, pais, estado_civil, num_hijos, direccion, colonia, ciudad, codigo_postal, familia_empresa, nombre_familiar },
-      croquis: croquis,
+      croquis: url_croquis_upload,
       fotos_domicilio: { foto_fachada_exterior, foto_fachada_interior, foto_sala, foto_entregando_documentos },
       familiares: familiares,
       situacion_economica: {
@@ -1414,7 +1897,7 @@ async function handleFormSubmit() {
       referencias: { personales: refs_personales, laborales: refs_laborales, vecinal: refs_vecinal, familiar: refs_familiar },
       salud: { nss, tipo_sangre, estatura, peso, utiliza_lentes, justificacion_lentes, detalles: health },
       contactos_emergencia: contactos_emergencia,
-      documentos: { cv, comprobante_estudios, identificacion_oficial, cedula_profesional, constancia_laboral, cartas_recomendacion, curp, afore, constancia_fiscal, licencia_manejo, comprobante_domicilio, constancia_nss, acta_nacimiento_candidato, acta_matrimonio, acta_nacimiento_hijos, acta_nacimiento_conyuge },
+      documentos: { url_cv_upload, url_comprobante_upload, url_ine_upload, url_cedula_upload, url_constancia_upload, url_cartas_upload, url_curp_upload, url_afore_upload, url_fiscal_upload, url_licencia_upload, url_domicilio_upload, url_nss_upload, url_nacimiento_upload, url_matrimonio_upload, url_actahijo_upload, url_actaconyuge_upload },
       conclusiones: { info_coincide_final, vivienda_corresponde, entorno_adecuado, problemas_analisis, problemas_visita, problemas_agenda, candidato_proporciono_toda_info, obtencion_info_dentro_domicilio, actitud_candidato }
     };
 
