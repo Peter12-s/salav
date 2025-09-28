@@ -120,11 +120,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const id_creado = response.data.applicant._id;
 
       // Actualizar progreso SOLO si la subida fue exitosa
-      const body = { background_check: true, cv_url: lastUploadResponse.id };
+      const body = {cv_url: lastUploadResponse.id };
       await axios.patch(`${API_URL}user-progress/${id_creado}`, body, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      
+
       form.reset();
       fileInput.disabled = true;
       fileInput.value = "";
