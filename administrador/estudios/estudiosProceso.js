@@ -153,6 +153,7 @@ btnGuardar.onclick = async () => {
 
     lastUploadResponse = res.data;
     mostrarModalMensaje("Archivo subido correctamente. ✅");
+    searchInput.value = ""; // ✅ limpiar el input
 
     // 📌 Refrescar progreso del usuario
     try {
@@ -192,7 +193,6 @@ btnGuardar.onclick = async () => {
 
 function renderSolicitudes() {
   tablaUsuarios.innerHTML = "";
-  searchInput.value = ""; // ✅ limpiar el input
 
   // 📌 Actualizar paginación
   pageInput.min = 1;

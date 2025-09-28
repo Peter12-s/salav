@@ -82,7 +82,6 @@ async function fetchUserProgress() {
 
 function renderSolicitudes() {
   tabla.innerHTML = ""; // limpiar
-  searchInput.value = ""; // ✅ limpiar el input
 
   const totalPages = Math.ceil(filteredUsuarios.length / usersPerPage) || 1;
   totalPagesSpan.textContent = totalPages;
@@ -174,6 +173,8 @@ async function finalizarTarea(userId, etapaKey) {
 
     await fetchUserProgress();
     mostrarModalMensaje("Tarea finalizada con éxito ✅");
+    searchInput.value = ""; // ✅ limpiar el input
+
   } catch (error) {
     console.error("Error finalizarTarea:", error);
     mostrarModalMensaje("❌ Ocurrió un error al finalizar la tarea");

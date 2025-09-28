@@ -87,7 +87,6 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 function renderSolicitudes() {
   tablaB.innerHTML = ""; // ✅ limpiamos solo el tbody, no toda la tabla
-  searchInput.value = ""; // ✅ limpiar el input
 
   if (filteredUsuarios.length === 0) {
     const tr = document.createElement("tr");
@@ -129,12 +128,6 @@ function renderSolicitudes() {
       }
 
       td.textContent = etapa.label;
-
-      // ✅ listener de click para revisar
-      td.addEventListener("click", () => {
-        console.log(`Click en etapa: ${etapa.label} del usuario ${usuario.applicant_fullname}`);
-        // aquí puedes abrir modal o detalle
-      });
 
       tr.appendChild(td);
     });

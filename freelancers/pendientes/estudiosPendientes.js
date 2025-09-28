@@ -133,6 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }, { headers: { Authorization: `Bearer ${token}` } });
 
             mostrarModalMensaje("✅ Solicitud aceptada correctamente");
+            searchInput.value = ""; // ✅ limpiar el input
 
             animacion();
             eliminarCandidato();
