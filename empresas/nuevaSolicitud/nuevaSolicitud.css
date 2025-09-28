@@ -186,3 +186,9 @@
      gap: 20px;
      text-align: center;
  }
+
+ button:disabled {
+  opacity: 0.5;           /* Botón opaco */
+  cursor: not-allowed;    /* Cursor de prohibido */
+   pointer-events: none;   /* Desactiva hover y clic */
+}

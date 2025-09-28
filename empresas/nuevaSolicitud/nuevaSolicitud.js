@@ -1,45 +1,60 @@
-  let lastUploadResponse = null; // Variable para guardar respuesta de subida
+let lastUploadResponse = null; // Guardar respuesta de subida
 
 document.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("access_token");
   const form = document.querySelector(".form");
   const fileInput = document.getElementById("cv");
+  const submitBtn = form.querySelector('button[type="submit"]'); // botón de enviar
 
-  // Campos que se usan para crear la carpeta
   const nombreInput = document.getElementById("nombres");
   const apellidoInput = document.getElementById("apellidoPaterno");
 
-  // Inicialmente deshabilitar el input de archivo
+  // Inicialmente deshabilitar input y botón
   fileInput.disabled = true;
+  submitBtn.disabled = true;
 
-  // Función para habilitar o deshabilitar input según campos
+  // Revisar si el botón de submit puede habilitarse
+  const revisarSubmit = () => {
+    const camposCompletos = nombreInput.value.trim() && apellidoInput.value.trim();
+    submitBtn.disabled = !(lastUploadResponse && camposCompletos);
+  };
+
+  // Revisar si se habilita el input de archivo
   const revisarCampos = () => {
     if (nombreInput.value.trim() && apellidoInput.value.trim()) {
       fileInput.disabled = false;
     } else {
       fileInput.disabled = true;
       fileInput.value = "";
+      lastUploadResponse = null;
     }
+    revisarSubmit();
   };
 
   nombreInput.addEventListener("input", revisarCampos);
   apellidoInput.addEventListener("input", revisarCampos);
 
-  let lastFormResponse = null;   // Variable para guardar respuesta del formulario
-
   fileInput.addEventListener("change", async () => {
     const file = fileInput.files[0];
-    if (!file) return;
+    if (!file) {
+      lastUploadResponse = null;
+      revisarSubmit();
+      return;
+    }
 
     if (file.type !== "application/pdf") {
       mostrarModalMensaje("Solo se permiten archivos PDF. ❌");
       fileInput.value = "";
+      lastUploadResponse = null;
+      revisarSubmit();
       return;
     }
 
     if (file.size > 3 * 1024 * 1024) {
       mostrarModalMensaje("El archivo supera el límite de 3 MB. ❌");
       fileInput.value = "";
+      lastUploadResponse = null;
+      revisarSubmit();
       return;
     }
 
@@ -57,16 +72,23 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
 
-      lastUploadResponse = response.data; // Guardar la respuesta
-    //   localStorage.setItem("lastUploadResponse", JSON.stringify(lastUploadResponse)); // opcional
+      lastUploadResponse = response.data;
       mostrarModalMensaje("Archivo subido correctamente. ✅");
+      revisarSubmit(); // habilitar submit
     } catch (error) {
+      lastUploadResponse = null;
+      revisarSubmit();
       mostrarModalMensaje(`Error al subir el archivo: ${error.response?.data?.message || error.message} ❌`);
     }
   });
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+
+    if (!lastUploadResponse) {
+      mostrarModalMensaje("Debes subir un archivo antes de enviar la solicitud ❌");
+      return;
+    }
 
     const data = {
       name: nombreInput.value.trim(),
@@ -90,16 +112,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      const response = await axios.post(`${API_URL}form-request/from-enterprise`, data, {
+      const responseProgres = await axios.post(`${API_URL}form-request/from-enterprise`, data, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-    //   localStorage.setItem("", JSON.stringify(lastFormResponse)); // opcional
-
       mostrarModalMensaje("Solicitud enviada correctamente ✅");
+      const id_creado = response.data.applicant._id;
+
+      // Actualizar progreso SOLO si la subida fue exitosa
+      const body = { background_check: true, cv_url: lastUploadResponse.id };
+      await axios.patch(`${API_URL}user-progress/${id_creado}`, body, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      
       form.reset();
       fileInput.disabled = true;
       fileInput.value = "";
+      lastUploadResponse = null;
+      submitBtn.disabled = true;
     } catch (err) {
       mostrarModalMensaje("Error al enviar la solicitud ❌");
     }

@@ -140,55 +140,47 @@ btnGuardar.onclick = async () => {
 
 
   try {
-    // 📌 Crear FormData con file y path
+    // 📌 Subida de archivo
     const formData = new FormData();
-    formData.append("file", file);               // 👈 campo que espera Multer
+    formData.append("file", file);
     formData.append("path", carpeta + "/Background");
 
-    // 📌 Enviar al backend (NestJS)
     const res = await axios.post(`${API_URL}google/upload`, formData, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
+      headers: { Authorization: `Bearer ${token}` }
     });
 
     lastUploadResponse = res.data;
 
-    mostrarModalMensaje("Archivo subido correctamente. ✅");
-    searchInput.value = ""; // ✅ limpiar el input
+    // 📌 Actualizar progreso SOLO si la subida fue exitosa
+    const body = { background_check: true ,bg_check_url:lastUploadResponse.id};
+    const resProgress = await axios.patch(
+      `${API_URL}user-progress/${usuarioSeleccionado._id}`,
+      body,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    mostrarModalMensaje("Archivo subido y progreso actualizado. ✅");
+    // 🔹 Actualizar el objeto en memoria
+    usuarioSeleccionado.background_check = true;
 
-    // 📌 Refrescar progreso del usuario
-    try {
-      const resProgress = await axios.get(`${API_URL}user-progress`, {
-        headers: { Authorization: `Bearer ${token}` },
-        body: {
-          "background_check": true
-        },
-        params: {
-          freelance_id: userId,
-
-        },
-      });
-
-      usuarios = resProgress.data;
-      filteredUsuarios = [...usuarios];
-      renderSolicitudes();
-      return resProgress.data;
-
-    } catch (error) {
-      console.error("Error fetchUserProgress:", error);
-      mostrarModalMensaje("Error al obtener progreso del usuario ❌");
+    // 🔹 Actualizar el array completo
+    const index = usuarios.findIndex(u => u._id === usuarioSeleccionado._id);
+    if (index !== -1) {
+      usuarios[index].background_check = true;
     }
 
+    // 🔹 Renderizar nuevamente la tabla
+    renderSolicitudes();
   } catch (error) {
+    console.error(error);
     if (error.response) {
-      mostrarModalMensaje(`Error al subir el archivo: ${error.response.data?.message || "Desconocido"} ❌`);
+      mostrarModalMensaje(`Error: ${error.response.data?.message || "Desconocido"} ❌`);
     } else if (error.request) {
       mostrarModalMensaje("No hubo respuesta del servidor. ❌");
     } else {
-      mostrarModalMensaje(`Error al configurar la petición: ${error.message} ❌`);
+      mostrarModalMensaje(`Error: ${error.message} ❌`);
     }
   }
+
 }
 
 
