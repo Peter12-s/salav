@@ -21,8 +21,11 @@ document.addEventListener("DOMContentLoaded", () => {
     async function fetchFormRequest() {
         try {
             const res = await axios.get(`${API_URL}form-request`, {
-                headers: { Authorization: `Bearer ${token}` },
-                params: { accepted: false }
+                params: {                     // 👈 aquí van los parámetros
+                    accepted: false,
+                    freelance_id: null
+                },
+                headers: { Authorization: `Bearer ${token}` }
             });
 
             candidatosData = res.data;
@@ -32,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
             listaCandidatos.textContent = "Error al cargar candidatos";
         }
     }
-
     fetchFormRequest();
 
     // Función para pintar los candidatos
@@ -134,14 +136,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }, { headers: { Authorization: `Bearer ${token}` } });
 
             mostrarModalMensaje("✅ Solicitud aceptada correctamente");
-            searchInput.value = ""; // ✅ limpiar el input
 
             animacion();
             eliminarCandidato();
             validarCandidatos();
 
         } catch (err) {
-            console.error(err);
             mostrarModalMensaje("❌ Error al aceptar la solicitud");
         }
     };

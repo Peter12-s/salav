@@ -143,17 +143,15 @@ function renderSolicitudes() {
 
         btnAsignar.addEventListener("click", async () => {
             const freelancerId = select.value;
-            // console.log({
-            //   solicitud: solicitud._id,
-            //   freelance_id: freelancerId,
-            //   accepted: true
-            // });
+            console.log({
+              solicitud: solicitud._id,
+              freelance_id: freelancerId,
+            });
             try {
                 await axios.patch(
                     `${API_URL}form-request/${solicitud._id}`,
                     {
-                        freelance_id: freelancerId,
-                        accepted: false
+                        "freelance_id": freelancerId
                     },
                     {
                         headers: {
