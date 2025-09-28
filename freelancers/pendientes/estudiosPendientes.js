@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const tooltip = document.getElementById("tooltip");
     const btnAceptar = document.querySelector(".btn-aceptar");
     const btnRechazar = document.querySelector(".btn-rechazar");
+    searchInput = document.querySelector("#searchInput");
 
     // Inicializamos botones y ocultamos acciones
     acciones.hidden = true;

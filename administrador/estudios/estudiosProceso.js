@@ -111,6 +111,7 @@ btnCerrar.onclick = () => {
 
 // 📌 Guardar archivos y actualizar progreso
 btnGuardar.onclick = async () => {
+  modalAdjuntar.style.display = "none";
   const fileInput = document.getElementById("archivoInput");
   const file = fileInput.files[0];
 
@@ -152,6 +153,7 @@ btnGuardar.onclick = async () => {
     });
 
     lastUploadResponse = res.data;
+   
     mostrarModalMensaje("Archivo subido correctamente. ✅");
     searchInput.value = ""; // ✅ limpiar el input
 
@@ -183,9 +185,7 @@ btnGuardar.onclick = async () => {
     } else {
       mostrarModalMensaje(`Error al configurar la petición: ${error.message} ❌`);
     }
-  } finally {
-    modalAdjuntar.style.display = "none";
-  }
+  } 
 }
 
 
