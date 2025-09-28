@@ -153,7 +153,7 @@ btnGuardar.onclick = async () => {
     });
 
     lastUploadResponse = res.data;
-   
+
     mostrarModalMensaje("Archivo subido correctamente. ✅");
     searchInput.value = ""; // ✅ limpiar el input
 
@@ -161,9 +161,12 @@ btnGuardar.onclick = async () => {
     try {
       const resProgress = await axios.get(`${API_URL}user-progress`, {
         headers: { Authorization: `Bearer ${token}` },
+        body: {
+          "background_check": true
+        },
         params: {
           freelance_id: userId,
-          application_accepted: true
+
         },
       });
 
@@ -185,7 +188,7 @@ btnGuardar.onclick = async () => {
     } else {
       mostrarModalMensaje(`Error al configurar la petición: ${error.message} ❌`);
     }
-  } 
+  }
 }
 
 
@@ -257,10 +260,10 @@ function renderSolicitudes() {
         if (usuarios[etapa.key] == false) {
           td.classList.add("clickable");
           td.style.cursor = "pointer"; // indicar que es clickeable
+          td.addEventListener("click", () => {
+            finalizarTarea(usuarios._id, etapa.key);
+          });
         }
-        td.addEventListener("click", () => {
-          finalizarTarea(usuarios._id, etapa.key);
-        });
       }
       tr.appendChild(td);
     });
