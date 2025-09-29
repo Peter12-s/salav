@@ -478,3 +478,42 @@
  .clickable:hover {
      background-color: #fb665b !important;
  }
+
+ .clickable-blue {
+    text-decoration: underline;
+    cursor: pointer;
+    position: relative;
+    animation: pulse-blue 1s infinite;
+}
+
+/* ✨ Animación azul */
+@keyframes pulse-blue {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
+        background-color: #d5e4f3 !important;
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
+        background-color: #d8dee5 !important;
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+        background-color: #b0c7e5b1 !important;
+    }
+}
+
+.clickable-blue:hover {
+    background-color: #3399ff !important;
+    color: white;
+}
+
+
+ .clickable-blue:hover {
+    background-color: #1a5692 !important;
+ }
+
+
+.clickable-blue svg:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}

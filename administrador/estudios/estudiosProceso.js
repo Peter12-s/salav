@@ -272,6 +272,20 @@ function renderSolicitudes() {
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path d="M5 20h14v-2H5v2zM12 2v12l4-4h-3V2h-2v8H8l4 4z"/>
                 </svg>`;
+
+    // ✅ Verificar si todas las etapas están en true
+    const todasEtapasCompletadas = etapas.every(etapa => usuarios[etapa.key] === true);
+
+    if (todasEtapasCompletadas) {
+      tdDescargar.classList.add("clickable-blue");
+      tdDescargar.style.cursor = "pointer";
+
+      tdDescargar.addEventListener("click", () => {
+        // Aquí defines lo que hace el botón de descarga
+        console.log(`Descargar datos de ${usuarios.applicant_fullname}`);
+        // window.location.href = "ruta/descarga/file.pdf";
+      });
+    }
     tr.appendChild(tdDescargar);
 
     tablaUsuarios.appendChild(tr);
