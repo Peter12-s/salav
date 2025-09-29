@@ -26,7 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       usuarios = res.data;
       filteredUsuarios = [...usuarios];
-      // mostrarModalMensaje("Petición realizada. ✅");
+
+
       renderSolicitudes();
     } catch (error) {
       if (error.response && error.response.status === 401) {
@@ -152,22 +153,26 @@ btnGuardar.onclick = async () => {
     lastUploadResponse = res.data;
 
     // 📌 Actualizar progreso SOLO si la subida fue exitosa
-    const body = { background_check: true ,bg_check_url:lastUploadResponse.id};
+    const body = { background_check: true, bg_check_url: lastUploadResponse.id };
     const resProgress = await axios.patch(
       `${API_URL}user-progress/${usuarioSeleccionado._id}`,
       body,
       { headers: { Authorization: `Bearer ${token}` } }
     );
     mostrarModalMensaje("Archivo subido y progreso actualizado. ✅");
+
+
+    // 🔹 Actualizar el array completo
     // 🔹 Actualizar el objeto en memoria
     usuarioSeleccionado.background_check = true;
+    usuarioSeleccionado.bg_check_url = lastUploadResponse.id; // <--- agregar esto
 
     // 🔹 Actualizar el array completo
     const index = usuarios.findIndex(u => u._id === usuarioSeleccionado._id);
     if (index !== -1) {
       usuarios[index].background_check = true;
+      usuarios[index].bg_check_url = lastUploadResponse.id; // <--- agregar esto
     }
-
     // 🔹 Renderizar nuevamente la tabla
     renderSolicitudes();
   } catch (error) {
