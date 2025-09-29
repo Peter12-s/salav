@@ -125,7 +125,34 @@ let empresaCount = 0;
         if (docs.url_matrimonio_upload) showExistingThumbnail(docs.url_matrimonio_upload, 'acta_matrimonio_thumbnail', 'Acta matrimonio');
         if (docs.url_nacimiento_upload) showExistingThumbnail(docs.url_nacimiento_upload, 'acta_nacimiento_candidato_thumbnail', 'Acta nacimiento');
         if (docs.url_comprobante_upload) showExistingThumbnail(docs.url_comprobante_upload, 'comprobante_estudios_thumbnail', 'Comprobante estudios');
+        if (docs.url_actaconyuge_upload) showExistingThumbnail(docs.url_actaconyuge_upload, 'acta_nacimiento_conyuge_thumbnail', 'Acta nacimiento conyuge');
     }
+
+    //Pre llenar variables
+
+    url_fotografia_upload = formObject.datos_generales.url_fotografia_upload;
+    url_croquis_upload = formObject.croquis;
+    url_ext_upload = formObject.croquis;
+    url_int_upload = formObject.fotos_domicilio.url_int_upload;
+    url_sala_upload = formObject.fotos_domicilio.url_sala_upload;
+    url_docs_upload = formObject.fotos_domicilio.url_docs_upload;
+    url_cv_upload = formObject.documentos.url_cv_upload;
+    url_comprobante_upload = formObject.documentos.url_comprobante_upload;
+    url_ine_upload = formObject.documentos.url_ine_upload;
+    url_cedula_upload = formObject.documentos.url_cedula_upload;
+    url_constancia_upload = formObject.documentos.url_constancia_upload;
+    url_cartas_upload = formObject.documentos.url_cartas_upload;
+    url_curp_upload = formObject.documentos.url_curp_upload;
+    url_afore_upload = formObject.documentos.url_afore_upload;
+    url_fiscal_upload = formObject.documentos.url_fiscal_upload;
+    url_licencia_upload = formObject.documentos.url_licencia_upload;
+    url_domicilio_upload = formObject.documentos.url_domicilio_upload;
+    url_nss_upload = formObject.documentos.url_nss_upload;
+    url_nacimiento_upload = formObject.documentos.url_nacimiento_upload;
+    url_matrimonio_upload = formObject.documentos.url_matrimonio_upload;
+    url_actahijo_upload = formObject.documentos.url_actahijo_upload;
+    url_actaconyuge_upload = formObject.documentos.url_actaconyuge_upload;
+
 }
 
 // Agregar esta función auxiliar para mostrar miniaturas existentes
@@ -1866,7 +1893,7 @@ async function handleFormSubmit() {
       empresa_solicitante: { solicitante_razon2, solicitante_contacto, solicitante_email },
       candidato: { candidato_nombre, edad, fecha_nacimiento, rfc, telefono, telefono_recados, lugar_nacimiento, estado, pais, estado_civil, num_hijos, direccion, colonia, ciudad, codigo_postal, familia_empresa, nombre_familiar },
       croquis: url_croquis_upload,
-      fotos_domicilio: { foto_fachada_exterior, foto_fachada_interior, foto_sala, foto_entregando_documentos },
+      fotos_domicilio: { url_ext_upload, url_int_upload, url_sala_upload, url_docs_upload },
       familiares: familiares,
       situacion_economica: {
         estilo_vida: { sueldo_actual, ingresos_negocio, ingresos_oficio, otros_ingresos },
