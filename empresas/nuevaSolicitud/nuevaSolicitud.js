@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   
       // 3. Actualizar progreso con el CV
-      const body = { cv_url: lastUploadResponse.id };
+      const body = { cv_url: lastUploadResponse.id, number: numeroPeticion };
       await axios.patch(`${API_URL}user-progress/${id_creado}`, body, {
         headers: { Authorization: `Bearer ${token}` }
       });

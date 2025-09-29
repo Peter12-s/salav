@@ -138,13 +138,15 @@ btnGuardar.onclick = async () => {
   const nombre = nombres[0] || "";
   const apellido = nombres[1] || "";
   const carpeta = nombre.slice(0, 3) + apellido.slice(0, 2); // ej: "PedEs"
+  const numeroSolicitud = usuarioSeleccionado.number;
+
 
 
   try {
     // 📌 Subida de archivo
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("path", carpeta + "/Background");
+    formData.append("path",numeroSolicitud +"_"+carpeta + "/Background");
 
     const res = await axios.post(`${API_URL}google/upload`, formData, {
       headers: { Authorization: `Bearer ${token}` }
