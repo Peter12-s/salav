@@ -6,6 +6,7 @@
   const FORM_SLUG = (formEl && formEl.getAttribute('data-form')) ? formEl.getAttribute('data-form') : 'estudio_socioeconomico';
   const usuarioname = sessionStorage.getItem('nombre_seleccionado');
   const token_a = localStorage.getItem("access_token");
+  const numerosolicitud = sessionStorage.getItem('numero_solicitud');
   
   let url_fotografia_upload = "";
   let url_croquis_upload = "";
@@ -1236,7 +1237,10 @@ fileUploads.forEach(upload => {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("path", `${carpeta}/Form`);
+      //formData.append("path", `${carpeta}/Form`);
+      formData.append("path", `${numerosolicitud}_${carpeta}/Form`);
+
+      console.log(`${numerosolicitud}_${carpeta}/Form`);
 
       const res = await axios.post(`${API_URL}google/upload`, formData, {
         headers: { Authorization: `Bearer ${token_a}` }

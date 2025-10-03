@@ -6,6 +6,8 @@ const formEl = document.getElementById('salav-form');
 const FORM_SLUG = (formEl && formEl.getAttribute('data-form')) ? formEl.getAttribute('data-form') : 'estudio_socioeconomico';
 var token_a = localStorage.getItem("access_token");
 var id_form = null;
+const usuarioname = sessionStorage.getItem('nombre_seleccionado');
+const numerosolicitud = sessionStorage.getItem('numero_solicitud');
 
 
 let url_fotografia_upload = "";
@@ -1523,11 +1525,13 @@ function setupFileUploads() {
             const nombre = nombres[0] || '';
             const apellido = nombres[1] || '';
             const carpeta = (nombre.slice(0, 3) + apellido.slice(0, 2)) || 'SinNom';
+           
 
             try {
                 const formData = new FormData();
                 formData.append("file", file);
-                formData.append("path", `${carpeta}/Form`);
+                //formData.append("path", `${carpeta}/Form`);
+                formData.append("path", `${numerosolicitud}_${carpeta}/Form`);
 
                 const res = await axios.post(`${API_URL}google/upload`, formData, {
                     headers: { Authorization: `Bearer ${token_a}` }

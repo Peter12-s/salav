@@ -247,6 +247,8 @@ function renderSolicitudes() {
         td.style.cursor = "pointer"; // indicar que es clickeable
 
         td.addEventListener("click", () => {
+          sessionStorage.setItem('nombre_seleccionado', usuario.applicant_fullname);
+          sessionStorage.setItem('numero_solicitud', usuario.number);
           window.location.href = `estudiosFormulario.html?user=${encodeURIComponent(usuarios.applicant_id)}&userprogress=${encodeURIComponent(usuarios._id)}`;
         });
 

@@ -108,7 +108,7 @@ function renderSolicitudes() {
 
   pageData.forEach(usuario => {
     //console.log(usuario.applicant_fullname);
-
+    console.log(usuario);
     const tr = document.createElement("tr");
 
     // 📌 Columna nombre
@@ -135,7 +135,9 @@ function renderSolicitudes() {
 
         if (etapa.key === "documenting_information") {
           td.addEventListener("click", () => {
+            
             sessionStorage.setItem('nombre_seleccionado', usuario.applicant_fullname);
+            sessionStorage.setItem('numero_solicitud', usuario.number);
             window.location.href = `estudiosFormulario.html?user=${encodeURIComponent(usuario.applicant_id)}&userprogress=${encodeURIComponent(usuario._id)}`;
           });
         } else {
