@@ -96,3 +96,16 @@ function recargarPagina() {
     window.location.reload();
   }, 1000);
 }
+
+axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      mostrarModalMensaje("⚠️ Token expirado o inválido. Cerrando sesión...");
+        setTimeout(() => {
+      errorServer();
+      }, 1000);
+    }
+    return Promise.reject(error);
+  }
+);
