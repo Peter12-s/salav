@@ -4,7 +4,7 @@ const mensajeWhatsApp = encodeURIComponent("Hola, quisiera solicitar una cuenta"
 
 
 // Número de teléfono para llamar y conseguir cuenta 
-const numeroLlamada = "7226371602"; 
+const numeroLlamada = "7226371602";
 const numeroWhatsApp = "7226371602";
 
 // ===================== PRELOADER =====================
@@ -79,7 +79,7 @@ if (document.getElementById("btnLogout")) {
     try {
       localStorage.clear();
       window.location.href = "/login.html";
-    } catch (e) {      
+    } catch (e) {
       mostrarModalMensaje("No se pudo cerrar la sesión. Intenta de nuevo.");
     }
   });
@@ -102,8 +102,8 @@ axios.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       mostrarModalMensaje("⚠️ Token expirado o inválido. Cerrando sesión...");
-        setTimeout(() => {
-      errorServer();
+      setTimeout(() => {
+        errorServer();
       }, 1000);
     }
     return Promise.reject(error);
