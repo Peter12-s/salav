@@ -4,8 +4,8 @@ const mensajeWhatsApp = encodeURIComponent("Hola, quisiera solicitar una cuenta"
 
 
 // Número de teléfono para llamar y conseguir cuenta 
-const numeroLlamada = "7226371602";
-const numeroWhatsApp = "7226371602";
+const numeroLlamada = "7731154556";
+const numeroWhatsApp = "7731154556";
 
 // ===================== PRELOADER =====================
 const preloader = document.getElementById("preloader");
