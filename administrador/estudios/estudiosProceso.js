@@ -146,7 +146,7 @@ btnGuardar.onclick = async () => {
     // 📌 Subida de archivo
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("path",numeroSolicitud +"_"+carpeta + "/Background");
+    formData.append("path", numeroSolicitud + "_" + carpeta + "/Background");
 
     const res = await axios.post(`${API_URL}google/upload`, formData, {
       headers: { Authorization: `Bearer ${token}` }
@@ -236,38 +236,55 @@ function renderSolicitudes() {
     tr.appendChild(tdNombre);
 
     // 📌 Columna etapas
+    // 📌 Columna etapas
     etapas.forEach(etapa => {
       const td = document.createElement("td");
-      // Si es la etapa documenting_information, usar clase especial
       const completado = usuarios[etapa.key];
-      // ✅ Estilos según estado
-      if (etapa.key === "documenting_information" && completado) {
-        td.className = "bloque status-evaluation"; // naranja
-        td.classList.add("clickable");
-        td.style.cursor = "pointer"; // indicar que es clickeable
 
-        td.addEventListener("click", () => {
-          sessionStorage.setItem('nombre_seleccionado', usuario.applicant_fullname);
-          sessionStorage.setItem('numero_solicitud', usuario.number);
-          window.location.href = `estudiosFormulario.html?user=${encodeURIComponent(usuarios.applicant_id)}&userprogress=${encodeURIComponent(usuarios._id)}`;
-        });
-
-      } else {
-        td.className = "bloque " + (completado ? "status-completado" : "status-proceso");
-      } 
-      td.textContent = etapa.label;
-      // ✅ Si la etapa está en etapasConAccion, agregamos evento de clic
-      if (etapasConAccion.includes(etapa.key)&&etapa.key != "documenting_information") {
-        if (usuarios[etapa.key] == false) {
+      // 🔸 Caso especial para documenting_information
+      if (etapa.key === "documenting_information") {
+        if (completado && !usuarios.evaluation_complete) {
+          // 📌 Naranja y clickeable si está documentando pero aún no evalúa
+          td.className = "bloque status-evaluation";
           td.classList.add("clickable");
-          td.style.cursor = "pointer"; // indicar que es clickeable
+          td.style.cursor = "pointer";
+          td.textContent = etapa.label;
+
           td.addEventListener("click", () => {
-            finalizarTarea(usuarios._id, etapa.key);
+            sessionStorage.setItem('nombre_seleccionado', usuarios.applicant_fullname);
+            sessionStorage.setItem('numero_solicitud', usuarios.number);
+            window.location.href = `estudiosFormulario.html?user=${encodeURIComponent(usuarios.applicant_id)}&userprogress=${encodeURIComponent(usuarios._id)}`;
           });
+        } else if (usuarios.evaluation_complete) {
+          // 📌 Verde si ya está completada la evaluación
+          td.className = "bloque status-completado";
+          td.textContent = etapa.label;
+        } else {
+          // 📌 En proceso (gris o color normal)
+          td.className = "bloque status-proceso";
+          td.textContent = etapa.label;
         }
       }
+      else {
+        // 🔸 Resto de etapas
+        td.className = "bloque " + (completado ? "status-completado" : "status-proceso");
+        td.textContent = etapa.label;
+
+        // 📌 Etapas con acción
+        if (etapasConAccion.includes(etapa.key)) {
+          if (!usuarios[etapa.key]) {
+            td.classList.add("clickable");
+            td.style.cursor = "pointer";
+            td.addEventListener("click", () => {
+              finalizarTarea(usuarios._id, etapa.key);
+            });
+          }
+        }
+      }
+
       tr.appendChild(td);
     });
+
 
     // 📌 Columna descarga
     const tdDescargar = document.createElement("td");
