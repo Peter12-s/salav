@@ -311,16 +311,22 @@ document.getElementById('add-nivel-btn').addEventListener('click', function() {
   document.getElementById('tiene_vehiculo_si').addEventListener('change', ()=> toggleDisplay('#vehiculo-block', true));
   document.getElementById('tiene_vehiculo_no').addEventListener('change', ()=> toggleDisplay('#vehiculo-block', false));
 
-  // motocicleta
-  document.getElementById('cuenta_motocicleta').addEventListener('change', (e) => {
-    toggleDisplay('#motocicleta-block', e.target.value === 'Sí');
-  });
-
-  // celular
-  document.getElementById('cuenta_celular').addEventListener('change', (e) => {
-    toggleDisplay('#celular-block', e.target.value === 'Sí');
-  });
-
+    // motocicleta
+    const cuentaMotocicleta = document.getElementById('cuenta_motocicleta');
+    if (cuentaMotocicleta) {
+        cuentaMotocicleta.addEventListener('change', (e) => {
+            toggleDisplay('#motocicleta-block-HasData', e.target.value === 'Sí');
+            toggleDisplay('#motocicleta-block-NullData', e.target.value === 'No');
+        });
+    }
+    // celular
+    const cuentaCelular = document.getElementById('cuenta_celular');
+    if (cuentaCelular) {
+        cuentaCelular.addEventListener('change', (e) => {
+            toggleDisplay('#celular-block-HasData', e.target.value === 'Sí');
+            toggleDisplay('#celular-block-NullData', e.target.value === 'No');
+        });
+    }
   // estudia actualmente
   document.querySelectorAll('input[name="estudia_actualmente"]').forEach(r => r.addEventListener('change', (e) => {
     toggleDisplay('#que_estudia_field', e.target.value === 'Sí');

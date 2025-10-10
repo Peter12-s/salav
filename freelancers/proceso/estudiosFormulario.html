@@ -576,27 +576,34 @@
             </div>
           </div>
 
-          <!-- MOTOCICLETA (condicional) -->
-          <div id="motocicleta-block" class="salav-card" style="display:none">
-            <h2 class="section-title">Estilo de vida — Comodidades (motocicleta)</h2>
-            <div class="salav-grid">
-              <div class="salav-field">
-                <label for="moto_marca">Marca</label>
-                <input id="moto_marca" name="moto_marca" type="text" />
-              </div>
-              <div class="salav-field">
-                <label for="moto_modelo">Modelo</label>
-                <input id="moto_modelo" name="moto_modelo" type="text" />
-              </div>
-              <div class="salav-field">
-                <label for="moto_ano">Año</label>
-                <input id="moto_ano" name="moto_ano" type="text" />
-              </div>
-              <div class="salav-field">
-                <label for="moto_color">Color</label>
-                <input id="moto_color" name="moto_color" type="text" />
+         <!-- MOTOCICLETA (condicional) -->
+          <div id="motocicleta-block" class="salav-card">
+            <div id="motocicleta-block-HasData" style="display:none;">
+              <h2 class="section-title">Estilo de vida — Comodidades (motocicleta)</h2>
+              <div class="salav-grid">
+                <div class="salav-field">
+                  <label for="moto_marca">Marca</label>
+                  <input id="moto_marca" name="moto_marca" type="text" />
+                </div>
+                <div class="salav-field">
+                  <label for="moto_modelo">Modelo</label>
+                  <input id="moto_modelo" name="moto_modelo" type="text" />
+                </div>
+                <div class="salav-field">
+                  <label for="moto_ano">Año</label>
+                  <input id="moto_ano" name="moto_ano" type="text" />
+                </div>
+                <div class="salav-field">
+                  <label for="moto_color">Color</label>
+                  <input id="moto_color" name="moto_color" type="text" />
+                </div>
               </div>
             </div>
+            <div id="motocicleta-block-NullData" style="display:none;">
+              <p>No tienes motocicleta ❌</p>
+              <p> Salta a la siguiente sección...</p>
+            </div>
+
           </div>
 
           <!-- ESTILO DE VIDA COMODIDADES 3 -->
@@ -670,19 +677,29 @@
           </div>
 
           <!-- COMODIDADES - CELULAR (condicional) -->
-          <div id="celular-block" class="salav-card" style="display:none">
-            <h2 class="section-title">Comodidades — Celular</h2>
-            <div class="salav-grid">
-              <div class="salav-field">
-                <label for="cel_marca">Marca</label>
-                <input id="cel_marca" name="cel_marca" type="text" />
-              </div>
-              <div class="salav-field">
-                <label for="cel_modelo">Modelo</label>
-                <input id="cel_modelo" name="cel_modelo" type="text" />
+         <!-- COMODIDADES - CELULAR (condicional) -->
+          <div id="celular-block" class="salav-card">
+            <div id="celular-block-HasData" style="display:none;">
+              <h2 class="section-title">Comodidades — Celular</h2>
+              <div class="salav-grid">
+                <div class="salav-field">
+                  <label for="cel_marca">Marca</label>
+                  <input id="cel_marca" name="cel_marca" type="text" />
+                </div>
+                <div class="salav-field">
+                  <label for="cel_modelo">Modelo</label>
+                  <input id="cel_modelo" name="cel_modelo" type="text" />
+                </div>
               </div>
             </div>
+
+              <div id="celular-block-NullData" style="display:none;">
+                <p>No tienes Celular ❌</p>
+                <p> Salta a la siguiente sección...</p>
+              </div>
+            
           </div>
+
 
           <!-- ESTILO DE VIDA COMODIDADES 4 -->
           <div class="salav-card">
