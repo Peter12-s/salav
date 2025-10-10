@@ -67,7 +67,7 @@
 
   async function finalizarTarea(userId, etapaKey, token) {
     
-    console.log(etapaKey, userId);
+    //console.log(etapaKey, userId);
     try {
         // Crear un objeto dinámico con la clave de la etapa a actualizar
         const body = { [etapaKey]: true };
@@ -678,219 +678,219 @@ document.getElementById('add-nivel-btn').addEventListener('click', function() {
     const obtencion_info_dentro_domicilio = document.getElementById('obtencion_info_dentro_domicilio').value;
     const actitud_candidato = document.getElementById('actitud_candidato').value;
 
-    console.log('correo:', correo);
-    console.log('folio:', folio);
-    console.log('fecha_solicitud:', fecha_solicitud);
-    console.log('fecha_visita:', fecha_visita);
-    console.log('puesto:', puesto);
-    console.log('fotografia:', fotografia);
+    //console.log('correo:', correo);
+    //console.log('folio:', folio);
+    //console.log('fecha_solicitud:', fecha_solicitud);
+    //console.log('fecha_visita:', fecha_visita);
+    //console.log('puesto:', puesto);
+    //console.log('fotografia:', fotografia);
 
-    console.log('valuador_nombre:', valuador_nombre);
+    //console.log('valuador_nombre:', valuador_nombre);
 
-    console.log('solicitante_razon2:', solicitante_razon2);
-    console.log('solicitante_contacto:', solicitante_contacto);
-    console.log('solicitante_email:', solicitante_email);
+    //console.log('solicitante_razon2:', solicitante_razon2);
+    //console.log('solicitante_contacto:', solicitante_contacto);
+    //console.log('solicitante_email:', solicitante_email);
 
-    console.log('candidato_nombre:', candidato_nombre);
-    console.log('edad:', edad);
-    console.log('fecha_nacimiento:', fecha_nacimiento);
-    console.log('rfc:', rfc);
-    console.log('telefono:', telefono);
-    console.log('telefono_recados:', telefono_recados);
-    console.log('lugar_nacimiento:', lugar_nacimiento);
-    console.log('estado:', estado);
-    console.log('pais:', pais);
-    console.log('estado_civil:', estado_civil);
-    console.log('num_hijos:', num_hijos);
-    console.log('direccion:', direccion);
-    console.log('colonia:', colonia);
-    console.log('ciudad:', ciudad);
-    console.log('codigo_postal:', codigo_postal);
-    console.log('familia_empresa:', familia_empresa);
-    console.log('nombre_familiar:', nombre_familiar);
+    //console.log('candidato_nombre:', candidato_nombre);
+    //console.log('edad:', edad);
+    //console.log('fecha_nacimiento:', fecha_nacimiento);
+    //console.log('rfc:', rfc);
+    //console.log('telefono:', telefono);
+    //console.log('telefono_recados:', telefono_recados);
+    //console.log('lugar_nacimiento:', lugar_nacimiento);
+    //console.log('estado:', estado);
+    //console.log('pais:', pais);
+    //console.log('estado_civil:', estado_civil);
+    //console.log('num_hijos:', num_hijos);
+    //console.log('direccion:', direccion);
+    //console.log('colonia:', colonia);
+    //console.log('ciudad:', ciudad);
+    //console.log('codigo_postal:', codigo_postal);
+    //console.log('familia_empresa:', familia_empresa);
+    //console.log('nombre_familiar:', nombre_familiar);
 
-    console.log('croquis:', croquis);
-    console.log('foto_fachada_exterior:', foto_fachada_exterior);
-    console.log('foto_fachada_interior:', foto_fachada_interior);
-    console.log('foto_sala:', foto_sala);
-    console.log('foto_entregando_documentos:', foto_entregando_documentos);
+    //console.log('croquis:', croquis);
+    //console.log('foto_fachada_exterior:', foto_fachada_exterior);
+    //console.log('foto_fachada_interior:', foto_fachada_interior);
+    //console.log('foto_sala:', foto_sala);
+    //console.log('foto_entregando_documentos:', foto_entregando_documentos);
 
     // imprimir familiares individualmente
     familiares.forEach((f, i) => {
-      console.log(`familiar_${i+1}_nombre:`, f.nombre);
-      console.log(`familiar_${i+1}_edad:`, f.edad);
-      console.log(`familiar_${i+1}_parentesco:`, f.parentesco);
-      console.log(`familiar_${i+1}_estudios:`, f.estudios);
-      console.log(`familiar_${i+1}_ocupacion:`, f.ocupacion);
-      console.log(`familiar_${i+1}_empresa:`, f.empresa);
-      console.log(`familiar_${i+1}_telefono:`, f.telefono);
+      //console.log(`familiar_${i+1}_nombre:`, f.nombre);
+      //console.log(`familiar_${i+1}_edad:`, f.edad);
+      //console.log(`familiar_${i+1}_parentesco:`, f.parentesco);
+      //console.log(`familiar_${i+1}_estudios:`, f.estudios);
+      //console.log(`familiar_${i+1}_ocupacion:`, f.ocupacion);
+      //console.log(`familiar_${i+1}_empresa:`, f.empresa);
+      //console.log(`familiar_${i+1}_telefono:`, f.telefono);
     });
 
     // imprimir economía/gastos
-    console.log('sueldo_actual:', sueldo_actual);
-    console.log('ingresos_negocio:', ingresos_negocio);
-    console.log('ingresos_oficio:', ingresos_oficio);
-    console.log('otros_ingresos:', otros_ingresos);
-    console.log('ingresos_conyuge:', ingresos_conyuge);
-    console.log('ingresos_padres:', ingresos_padres);
-    console.log('ingresos_hijos:', ingresos_hijos);
-    console.log('ingresos_hermanos:', ingresos_hermanos);
-    console.log('otros_ingresos_familiares:', otros_ingresos_familiares);
+    //console.log('sueldo_actual:', sueldo_actual);
+    //console.log('ingresos_negocio:', ingresos_negocio);
+    //console.log('ingresos_oficio:', ingresos_oficio);
+    //console.log('otros_ingresos:', otros_ingresos);
+    //console.log('ingresos_conyuge:', ingresos_conyuge);
+    //console.log('ingresos_padres:', ingresos_padres);
+    //console.log('ingresos_hijos:', ingresos_hijos);
+    //console.log('ingresos_hermanos:', ingresos_hermanos);
+    //console.log('otros_ingresos_familiares:', otros_ingresos_familiares);
 
-    console.log('gasto_pasajes:', gasto_pasajes);
-    console.log('gasto_taxi:', gasto_taxi);
-    console.log('gasto_gasolina:', gasto_gasolina);
-    console.log('gasto_casetas:', gasto_casetas);
+    //console.log('gasto_pasajes:', gasto_pasajes);
+    //console.log('gasto_taxi:', gasto_taxi);
+    //console.log('gasto_gasolina:', gasto_gasolina);
+    //console.log('gasto_casetas:', gasto_casetas);
 
-    console.log('gasto_alimentacion:', gasto_alimentacion);
-    console.log('gasto_agua_potable:', gasto_agua_potable);
-    console.log('gasto_luz:', gasto_luz);
-    console.log('gasto_internet:', gasto_internet);
-    console.log('gasto_telefonia:', gasto_telefonia);
-    console.log('gasto_streaming:', gasto_streaming);
-    console.log('gasto_mantenimiento_hogar:', gasto_mantenimiento_hogar);
-    console.log('gasto_mantenimiento_vehicular:', gasto_mantenimiento_vehicular);
-    console.log('gasto_pension_alimenticia:', gasto_pension_alimenticia);
-    console.log('gasto_salidas_recreativas:', gasto_salidas_recreativas);
-    console.log('gasto_membresias:', gasto_membresias);
-    console.log('gasto_seguros_vida:', gasto_seguros_vida);
-    console.log('gasto_seguro_vehiculo:', gasto_seguro_vehiculo);
-    console.log('gasto_credito_vivienda:', gasto_credito_vivienda);
-    console.log('gasto_credito_vehicular:', gasto_credito_vehicular);
-    console.log('gasto_hipoteca:', gasto_hipoteca);
-    console.log('gasto_mascotas:', gasto_mascotas);
-    console.log('gasto_consultas_medicas:', gasto_consultas_medicas);
-    console.log('gasto_educacion:', gasto_educacion);
-    console.log('gasto_ropa_calzado:', gasto_ropa_calzado);
+    //console.log('gasto_alimentacion:', gasto_alimentacion);
+    //console.log('gasto_agua_potable:', gasto_agua_potable);
+    //console.log('gasto_luz:', gasto_luz);
+    //console.log('gasto_internet:', gasto_internet);
+    //console.log('gasto_telefonia:', gasto_telefonia);
+    //console.log('gasto_streaming:', gasto_streaming);
+    //console.log('gasto_mantenimiento_hogar:', gasto_mantenimiento_hogar);
+    //console.log('gasto_mantenimiento_vehicular:', gasto_mantenimiento_vehicular);
+    //console.log('gasto_pension_alimenticia:', gasto_pension_alimenticia);
+    //console.log('gasto_salidas_recreativas:', gasto_salidas_recreativas);
+    //console.log('gasto_membresias:', gasto_membresias);
+    //console.log('gasto_seguros_vida:', gasto_seguros_vida);
+    //console.log('gasto_seguro_vehiculo:', gasto_seguro_vehiculo);
+    //console.log('gasto_credito_vivienda:', gasto_credito_vivienda);
+    //console.log('gasto_credito_vehicular:', gasto_credito_vehicular);
+    //console.log('gasto_hipoteca:', gasto_hipoteca);
+    //console.log('gasto_mascotas:', gasto_mascotas);
+    //console.log('gasto_consultas_medicas:', gasto_consultas_medicas);
+    //console.log('gasto_educacion:', gasto_educacion);
+    //console.log('gasto_ropa_calzado:', gasto_ropa_calzado);
 
     // comodidades
-    console.log('tiene_vehiculo:', tiene_vehiculo);
-    console.log('veh_marca:', veh_marca);
-    console.log('veh_modelo:', veh_modelo);
-    console.log('veh_ano:', veh_ano);
-    console.log('veh_color:', veh_color);
+    //console.log('tiene_vehiculo:', tiene_vehiculo);
+    //console.log('veh_marca:', veh_marca);
+    //console.log('veh_modelo:', veh_modelo);
+    //console.log('veh_ano:', veh_ano);
+    //console.log('veh_color:', veh_color);
 
-    console.log('cuenta_computadora:', cuenta_computadora);
-    console.log('cuenta_bicicleta:', cuenta_bicicleta);
-    console.log('cuenta_tablet:', cuenta_tablet);
-    console.log('cuenta_refri:', cuenta_refri);
-    console.log('cuenta_tv:', cuenta_tv);
-    console.log('cuenta_microondas:', cuenta_microondas);
-    console.log('cuenta_estufa:', cuenta_estufa);
-    console.log('cuenta_lavadora:', cuenta_lavadora);
-    console.log('cuenta_motocicleta:', cuenta_motocicleta);
+    //console.log('cuenta_computadora:', cuenta_computadora);
+    //console.log('cuenta_bicicleta:', cuenta_bicicleta);
+    //console.log('cuenta_tablet:', cuenta_tablet);
+    //console.log('cuenta_refri:', cuenta_refri);
+    //console.log('cuenta_tv:', cuenta_tv);
+    //console.log('cuenta_microondas:', cuenta_microondas);
+    //console.log('cuenta_estufa:', cuenta_estufa);
+    //console.log('cuenta_lavadora:', cuenta_lavadora);
+    //console.log('cuenta_motocicleta:', cuenta_motocicleta);
 
-    console.log('moto_marca:', moto_marca);
-    console.log('moto_modelo:', moto_modelo);
-    console.log('moto_ano:', moto_ano);
-    console.log('moto_color:', moto_color);
+    //console.log('moto_marca:', moto_marca);
+    //console.log('moto_modelo:', moto_modelo);
+    //console.log('moto_ano:', moto_ano);
+    //console.log('moto_color:', moto_color);
 
-    console.log('cuenta_camara:', cuenta_camara);
-    console.log('cuenta_freidora:', cuenta_freidora);
-    console.log('cuenta_horno_electrico:', cuenta_horno_electrico);
-    console.log('cuenta_batidora:', cuenta_batidora);
-    console.log('cuenta_tostador:', cuenta_tostador);
-    console.log('cuenta_dispensador:', cuenta_dispensador);
-    console.log('cuenta_licuadora:', cuenta_licuadora);
-    console.log('cuenta_tanque_gas:', cuenta_tanque_gas);
-    console.log('cuenta_celular:', cuenta_celular);
+    //console.log('cuenta_camara:', cuenta_camara);
+    //console.log('cuenta_freidora:', cuenta_freidora);
+    //console.log('cuenta_horno_electrico:', cuenta_horno_electrico);
+    //console.log('cuenta_batidora:', cuenta_batidora);
+    //console.log('cuenta_tostador:', cuenta_tostador);
+    //console.log('cuenta_dispensador:', cuenta_dispensador);
+    //console.log('cuenta_licuadora:', cuenta_licuadora);
+    //console.log('cuenta_tanque_gas:', cuenta_tanque_gas);
+    //console.log('cuenta_celular:', cuenta_celular);
 
-    console.log('cel_marca:', cel_marca);
-    console.log('cel_modelo:', cel_modelo);
+    //console.log('cel_marca:', cel_marca);
+    //console.log('cel_modelo:', cel_modelo);
 
-    console.log('cuenta_cama:', cuenta_cama);
-    console.log('cuenta_sala:', cuenta_sala);
-    console.log('cuenta_cocina_integral:', cuenta_cocina_integral);
-    console.log('cuenta_closet:', cuenta_closet);
-    console.log('cuenta_banio:', cuenta_banio);
-    console.log('cuenta_calentador_solar:', cuenta_calentador_solar);
-    console.log('cuenta_calentador_boiler:', cuenta_calentador_boiler);
-    console.log('cuenta_panel_solar:', cuenta_panel_solar);
+    //console.log('cuenta_cama:', cuenta_cama);
+    //console.log('cuenta_sala:', cuenta_sala);
+    //console.log('cuenta_cocina_integral:', cuenta_cocina_integral);
+    //console.log('cuenta_closet:', cuenta_closet);
+    //console.log('cuenta_banio:', cuenta_banio);
+    //console.log('cuenta_calentador_solar:', cuenta_calentador_solar);
+    //console.log('cuenta_calentador_boiler:', cuenta_calentador_boiler);
+    //console.log('cuenta_panel_solar:', cuenta_panel_solar);
 
-    console.log('agua_potable:', agua_potable);
-    console.log('energia_electrica:', energia_electrica);
-    console.log('drenaje:', drenaje);
-    console.log('pavimentacion:', pavimentacion);
-    console.log('alumbrado_publico:', alumbrado_publico);
-    console.log('lineas_telefonicas:', lineas_telefonicas);
-    console.log('lineas_internet:', lineas_internet);
-    console.log('lineas_gas:', lineas_gas);
-    console.log('lineas_cable:', lineas_cable);
-    console.log('hospitales:', hospitales);
-    console.log('escuelas:', escuelas);
-    console.log('centros_comerciales:', centros_comerciales);
-    console.log('club_social_colonia:', club_social_colonia);
-    console.log('parques_recreativos:', parques_recreativos);
-    console.log('recoleccion_residuos:', recoleccion_residuos);
-    console.log('transporte_publico:', transporte_publico);
-    console.log('cuenta_metro:', cuenta_metro);
-    console.log('cuenta_teleferico:', cuenta_teleferico);
+    //console.log('agua_potable:', agua_potable);
+    //console.log('energia_electrica:', energia_electrica);
+    //console.log('drenaje:', drenaje);
+    //console.log('pavimentacion:', pavimentacion);
+    //console.log('alumbrado_publico:', alumbrado_publico);
+    //console.log('lineas_telefonicas:', lineas_telefonicas);
+    //console.log('lineas_internet:', lineas_internet);
+    //console.log('lineas_gas:', lineas_gas);
+    //console.log('lineas_cable:', lineas_cable);
+    //console.log('hospitales:', hospitales);
+    //console.log('escuelas:', escuelas);
+    //console.log('centros_comerciales:', centros_comerciales);
+    //console.log('club_social_colonia:', club_social_colonia);
+    //console.log('parques_recreativos:', parques_recreativos);
+    //console.log('recoleccion_residuos:', recoleccion_residuos);
+    //console.log('transporte_publico:', transporte_publico);
+    //console.log('cuenta_metro:', cuenta_metro);
+    //console.log('cuenta_teleferico:', cuenta_teleferico);
 
-    console.log('ultimo_nivel:', ultimo_nivel);
-    console.log('institucion:', institucion);
-    console.log('entidad_federativa:', entidad_federativa);
-    console.log('documento_recibido:', documento_recibido);
+    //console.log('ultimo_nivel:', ultimo_nivel);
+    //console.log('institucion:', institucion);
+    //console.log('entidad_federativa:', entidad_federativa);
+    //console.log('documento_recibido:', documento_recibido);
 
-    console.log('estudia_actualmente:', estudia_actualmente);
-    console.log('que_estudia:', que_estudia);
+    //console.log('estudia_actualmente:', estudia_actualmente);
+    //console.log('que_estudia:', que_estudia);
 
     // cursos
     cursos.forEach((c,i) => {
-      console.log(`curso_${i+1}_nombre:`, c.nombre);
-      console.log(`curso_${i+1}_duracion_horas:`, c.duracion_horas);
+      //console.log(`curso_${i+1}_nombre:`, c.nombre);
+      //console.log(`curso_${i+1}_duracion_horas:`, c.duracion_horas);
     });
 
     // empresas (laboral)
-    empresas.forEach((e,i) => {
-      console.log(`empresa_${i+1}_nombre:`, e.nombre);
-      console.log(`empresa_${i+1}_periodo:`, e.periodo);
-      console.log(`empresa_${i+1}_prestaciones:`, e.prestaciones);
-      console.log(`empresa_${i+1}_motivo_fin:`, e.motivo_fin);
-    });
+    // empresas.forEach((e,i) => {
+    //   //console.log(`empresa_${i+1}_nombre:`, e.nombre);
+    //   //console.log(`empresa_${i+1}_periodo:`, e.periodo);
+    //   //console.log(`empresa_${i+1}_prestaciones:`, e.prestaciones);
+    //   //console.log(`empresa_${i+1}_motivo_fin:`, e.motivo_fin);
+    // });
 
-    // referencias
-    refs_personales.forEach((r,i)=> console.log(`ref_personal_${i+1}:`, r));
-    refs_laborales.forEach((r,i)=> console.log(`ref_laboral_${i+1}:`, r));
-    refs_vecinal.forEach((r,i)=> console.log(`ref_vecinal_${i+1}:`, r));
-    refs_familiar.forEach((r,i)=> console.log(`ref_familiar_${i+1}:`, r));
+    // // referencias
+    // refs_personales.forEach((r,i)=> //console.log(`ref_personal_${i+1}:`, r));
+    // refs_laborales.forEach((r,i)=> //console.log(`ref_laboral_${i+1}:`, r));
+    // refs_vecinal.forEach((r,i)=> //console.log(`ref_vecinal_${i+1}:`, r));
+    // refs_familiar.forEach((r,i)=> //console.log(`ref_familiar_${i+1}:`, r));
 
     // salud
-    console.log('nss:', nss);
-    console.log('tipo_sangre:', tipo_sangre);
-    console.log('estatura:', estatura);
-    console.log('peso:', peso);
-    console.log('utiliza_lentes:', utiliza_lentes);
-    console.log('justificacion_lentes:', justificacion_lentes);
-    console.log('health detalle:', health);
+    //console.log('nss:', nss);
+    //console.log('tipo_sangre:', tipo_sangre);
+    //console.log('estatura:', estatura);
+    //console.log('peso:', peso);
+    //console.log('utiliza_lentes:', utiliza_lentes);
+    //console.log('justificacion_lentes:', justificacion_lentes);
+    //console.log('health detalle:', health);
 
     // documentos
-    console.log('cv:', cv);
-    console.log('comprobante_estudios:', comprobante_estudios);
-    console.log('identificacion_oficial:', identificacion_oficial);
-    console.log('cedula_profesional:', cedula_profesional);
-    console.log('constancia_laboral:', constancia_laboral);
-    console.log('cartas_recomendacion:', cartas_recomendacion);
-    console.log('curp:', curp);
-    console.log('afore:', afore);
-    console.log('constancia_fiscal:', constancia_fiscal);
-    console.log('licencia_manejo:', licencia_manejo);
-    console.log('comprobante_domicilio:', comprobante_domicilio);
-    console.log('constancia_nss:', constancia_nss);
-    console.log('acta_nacimiento_candidato:', acta_nacimiento_candidato);
-    console.log('acta_matrimonio:', acta_matrimonio);
-    console.log('acta_nacimiento_hijos:', acta_nacimiento_hijos);
-    console.log('acta_nacimiento_conyuge:', acta_nacimiento_conyuge);
+    //console.log('cv:', cv);
+    //console.log('comprobante_estudios:', comprobante_estudios);
+    //console.log('identificacion_oficial:', identificacion_oficial);
+    //console.log('cedula_profesional:', cedula_profesional);
+    //console.log('constancia_laboral:', constancia_laboral);
+    //console.log('cartas_recomendacion:', cartas_recomendacion);
+    //console.log('curp:', curp);
+    //console.log('afore:', afore);
+    //console.log('constancia_fiscal:', constancia_fiscal);
+    //console.log('licencia_manejo:', licencia_manejo);
+    //console.log('comprobante_domicilio:', comprobante_domicilio);
+    //console.log('constancia_nss:', constancia_nss);
+    //console.log('acta_nacimiento_candidato:', acta_nacimiento_candidato);
+    //console.log('acta_matrimonio:', acta_matrimonio);
+    //console.log('acta_nacimiento_hijos:', acta_nacimiento_hijos);
+    //console.log('acta_nacimiento_conyuge:', acta_nacimiento_conyuge);
 
     // conclusiones
-    console.log('info_coincide_final:', info_coincide_final);
-    console.log('vivienda_corresponde:', vivienda_corresponde);
-    console.log('entorno_adecuado:', entorno_adecuado);
-    console.log('problemas_analisis:', problemas_analisis);
-    console.log('problemas_visita:', problemas_visita);
-    console.log('problemas_agenda:', problemas_agenda);
-    console.log('candidato_proporciono_toda_info:', candidato_proporciono_toda_info);
-    console.log('obtencion_info_dentro_domicilio:', obtencion_info_dentro_domicilio);
-    console.log('actitud_candidato:', actitud_candidato);
+    //console.log('info_coincide_final:', info_coincide_final);
+    //console.log('vivienda_corresponde:', vivienda_corresponde);
+    //console.log('entorno_adecuado:', entorno_adecuado);
+    //console.log('problemas_analisis:', problemas_analisis);
+    //console.log('problemas_visita:', problemas_visita);
+    //console.log('problemas_agenda:', problemas_agenda);
+    //console.log('candidato_proporciono_toda_info:', candidato_proporciono_toda_info);
+    //console.log('obtencion_info_dentro_domicilio:', obtencion_info_dentro_domicilio);
+    //console.log('actitud_candidato:', actitud_candidato);
 
     /* -----------------------
        JSON completo
@@ -952,17 +952,17 @@ document.getElementById('add-nivel-btn').addEventListener('click', function() {
     formJSON.academicos.niveles = niveles;
 
 
-    console.log('formJSON:', JSON.stringify(formJSON, null, 2));
+    //console.log('formJSON:', JSON.stringify(formJSON, null, 2));
 
     //alert('Formulario procesado. Revisa la consola para ver variables individuales y el JSON completo.');
 
     
     
 
-    console.log("Aplicante ", USER_ID);
-    console.log("ID PROGRESO ", USER_PROGRESS);
-    console.log("Loggeado ", userId);
-    console.log("Token ", token_a);
+    //console.log("Aplicante ", USER_ID);
+    //console.log("ID PROGRESO ", USER_PROGRESS);
+    //console.log("Loggeado ", userId);
+    //console.log("Token ", token_a);
 
     const body = {
         applicant_id: USER_ID,
@@ -1249,7 +1249,7 @@ fileUploads.forEach(upload => {
       //formData.append("path", `${carpeta}/Form`);
       formData.append("path", `${numerosolicitud}_${carpeta}/Form`);
 
-      console.log(`${numerosolicitud}_${carpeta}/Form`);
+      //console.log(`${numerosolicitud}_${carpeta}/Form`);
 
       const res = await axios.post(`${API_URL}google/upload`, formData, {
         headers: { Authorization: `Bearer ${token_a}` }
@@ -1273,8 +1273,8 @@ fileUploads.forEach(upload => {
 
       setUploadUrl(safeUploadId, url);
 
-      console.log('safeUploadId ->', safeUploadId);
-      console.log('Asignada URL ->', url);
+      //console.log('safeUploadId ->', safeUploadId);
+      //console.log('Asignada URL ->', url);
 
     } catch (err) {
       console.error('Error subiendo archivo:', err);
@@ -1298,8 +1298,8 @@ Autosave & restore form (vanilla JS)
   // --- Obtener userId (querystring o sessionStorage) y form slug ---
   
 
-  console.log(USER_ID);
-  console.log(USER_PROGRESS);
+  //console.log(USER_ID);
+  //console.log(USER_PROGRESS);
   // --- Claves dinámicas por usuario+form ---
   const FORM_ID = 'salav-form';
   const STORAGE_KEY = `salav:form:draft:v1:${USER_ID}:${FORM_SLUG}`;
@@ -1549,7 +1549,7 @@ Autosave & restore form (vanilla JS)
     // const resp = await fetch('/tu-endpoint', { method: 'POST', body: formData });
     // if (resp.ok) clearDraft();
 
-    console.log('Formulario listo para enviar; FormData preparado. (Simulación)');
+    //console.log('Formulario listo para enviar; FormData preparado. (Simulación)');
     clearDraft();
   });
 
@@ -1561,7 +1561,7 @@ Autosave & restore form (vanilla JS)
     try { await idbDelete(FILE_KEY); } catch(_) {}
     broadcastDraftCleared();
     if (fileNameDiv) fileNameDiv.textContent = '';
-    console.log('Draft cleared');
+    //console.log('Draft cleared');
   }
 
   // --- BroadcastChannel to sync tabs (channel scoped per user+form) ---
@@ -1610,7 +1610,7 @@ async function fetchUserProgress() {
       });
 
       usuarios = res.data; // Actualiza la variable global con los datos recibidos
-      // console.log("User Progress:", usuarios);
+      // //console.log("User Progress:", usuarios);
       filteredUsuarios = [...usuarios];
       renderSolicitudes(); // Llama a la función para renderizar la tabla con los nuevos datos
       return res.data;

@@ -303,7 +303,7 @@ function renderSolicitudes() {
 
       tdDescargar.addEventListener("click", () => {
         // Aquí defines lo que hace el botón de descarga
-        console.log(`Descargar datos de ${usuarios.applicant_fullname}`);
+        //console.log(`Descargar datos de ${usuarios.applicant_fullname}`);
         // window.location.href = "ruta/descarga/file.pdf";
       });
     }

@@ -411,12 +411,12 @@ function setSelectValue(elementId, value) {
 async function prefillForm() {
     const formData = await fetchFormData();
     if (!formData) {
-        console.log('No se encontraron datos para prellenar');
+        //console.log('No se encontraron datos para prellenar');
         return;
     }
 
     const formObject = formData.form_object;
-    console.log('Datos del formulario a prellenar:', formObject);
+    //console.log('Datos del formulario a prellenar:', formObject);
     id_form = formData._id;
 
     // Prellenar secciones en orden
@@ -442,7 +442,7 @@ async function prefillForm() {
         prefillDynamicSections(formObject);
     }, 300);
 
-    console.log('Formulario prellenado exitosamente');
+    //console.log('Formulario prellenado exitosamente');
 }
 
 // Prellenar datos generales
@@ -665,7 +665,7 @@ function prefillConclusionsData(conclusiones) {
 function prefillDynamicSections(formObject) {
     // Familiares
     if (formObject.familiares && formObject.familiares.length > 0) {
-        console.log('Prellenando familiares:', formObject.familiares);
+        //console.log('Prellenando familiares:', formObject.familiares);
         // Limpiar familiares existentes
         familiaresWrap.innerHTML = '';
 
@@ -676,7 +676,7 @@ function prefillDynamicSections(formObject) {
 
     // Niveles académicos
     if (formObject.academicos && formObject.academicos.niveles && formObject.academicos.niveles.length > 0) {
-        console.log('Prellenando niveles académicos:', formObject.academicos.niveles);
+        //console.log('Prellenando niveles académicos:', formObject.academicos.niveles);
         const nivelesContainer = document.getElementById('niveles-wrap');
         if (nivelesContainer) {
             nivelesContainer.innerHTML = '';
@@ -689,7 +689,7 @@ function prefillDynamicSections(formObject) {
 
     // Cursos
     if (formObject.academicos && formObject.academicos.cursos && formObject.academicos.cursos.length > 0) {
-        console.log('Prellenando cursos:', formObject.academicos.cursos);
+        //console.log('Prellenando cursos:', formObject.academicos.cursos);
         const cursosContainer = document.getElementById('cursos-wrap');
         if (cursosContainer) {
             cursosContainer.innerHTML = '';
@@ -702,7 +702,7 @@ function prefillDynamicSections(formObject) {
 
     // Investigación laboral (empresas)
     if (formObject.investigacion_laboral && formObject.investigacion_laboral.length > 0) {
-        console.log('Prellenando empresas:', formObject.investigacion_laboral);
+        //console.log('Prellenando empresas:', formObject.investigacion_laboral);
         const empresasContainer = document.getElementById('empresas-wrap');
         if (empresasContainer) {
             empresasContainer.innerHTML = '';
@@ -772,7 +772,7 @@ function activateConditionalSections() {
     const cuentaMotocicleta = document.getElementById('cuenta_motocicleta');
     if (cuentaMotocicleta && cuentaMotocicleta.value === 'Sí') {
         toggleDisplay('#motocicleta-block-HasData', true);
-    }else {
+    } else {
         toggleDisplay('#motocicleta-block-NullData', true);
     }
 
@@ -780,7 +780,7 @@ function activateConditionalSections() {
     const cuentaCelular = document.getElementById('cuenta_celular');
     if (cuentaCelular && cuentaCelular.value === 'Sí') {
         toggleDisplay('#celular-block-HasData', true);
-    }else {
+    } else {
         toggleDisplay('#celular-block-NullData', true);
     }
 
@@ -794,7 +794,7 @@ function activateConditionalSections() {
     const tieneVehiculo = document.querySelector('input[name="tiene_vehiculo"]:checked');
     if (tieneVehiculo) {
         toggleDisplay('#vehiculo-block', tieneVehiculo.value === 'Sí');
-    } 
+    }
 }
 
 /* -----------------------
@@ -1062,7 +1062,7 @@ function addReferenciaPrefilled(wrapId, tipo, prefill = {}) {
 
 // Finalizar tarea
 async function finalizarTarea(userId, etapaKey, token) {
-    console.log(etapaKey, userId);
+    //console.log(etapaKey, userId);
     try {
         const body = { [etapaKey]: true };
         const res = await axios.patch(`${API_URL}user-progress/${userId}`, body, {
@@ -1956,18 +1956,18 @@ async function handleFormSubmit() {
     formJSON.academicos.niveles = niveles;
 
 
-    console.log('formJSON:', JSON.stringify(formJSON, null, 2));
-    console.log("form data ", id_form);
+    //console.log('formJSON:', JSON.stringify(formJSON, null, 2));
+    //console.log("form data ", id_form);
     const body = {
         applicant_id: USER_ID,
         form_object: formJSON
     };
 
     try {
-        console.log("📄 Generando y subiendo PDF...");
+        //console.log("📄 Generando y subiendo PDF...");
         // 1️⃣ Generar y subir PDF primero
         await generarYSubirPDF({ form_object: body }, token_a);
-        console.log("✅ PDF generado y 'estudio_url' actualizado.");
+        //console.log("✅ PDF generado y 'estudio_url' actualizado.");
 
         // 2️⃣ Actualizar el formulario
         const response = await axios.patch(`${API_URL}form/${id_form}`, body, {
@@ -2001,9 +2001,9 @@ async function handleFormSubmit() {
 
 async function generarYSubirPDF(formBody, token_a) {
     try {
-        console.log("🧾 [generarYSubirPDF] Iniciando proceso...");
-        console.log("📥 formBody recibido:", formBody);
-        console.log("🔑 token recibido:", token_a ? "✅ presente" : "❌ no existe");
+        //console.log("🧾 [generarYSubirPDF] Iniciando proceso...");
+        //console.log("📥 formBody recibido:", formBody);
+        //console.log("🔑 token recibido:", token_a ? "✅ presente" : "❌ no existe");
 
         //const API_URL = "http://localhost:8080/api/";
         const formJSON = formBody.form_object;
@@ -2014,16 +2014,16 @@ async function generarYSubirPDF(formBody, token_a) {
 
         // === Obtener USER_PROGRESS ===
         const progressId = formJSON?.form_object?.identificadores?.USER_PROGRESS;
-        console.log("📘 USER_PROGRESS:", progressId);
+        //console.log("📘 USER_PROGRESS:", progressId);
         if (!progressId) throw new Error("El JSON no tiene identificadores.USER_PROGRESS");
 
         // === Descargar info de user-progress ===
-        console.log("📡 Consultando datos del candidato...");
+        //console.log("📡 Consultando datos del candidato...");
         const progressRes = await axios.get(`${API_URL}user-progress/${progressId}`, {
             headers: { Authorization: `Bearer ${token_a}` },
         });
         const { number: numeroSolicitud, bg_check_url: bgId, cv_url: cvId } = progressRes.data || {};
-        console.log("✅ Datos obtenidos:", { numeroSolicitud, bgId, cvId });
+        //console.log("✅ Datos obtenidos:", { numeroSolicitud, bgId, cvId });
 
         // === Funciones auxiliares ===
         function toTitleCase(key) {
@@ -2156,7 +2156,7 @@ async function generarYSubirPDF(formBody, token_a) {
         // === Anexar PDF externos (bg_check_url, cv_url) ===
         async function anexarPDF(fileId, label) {
             if (!fileId) return;
-            console.log(`📄 Anexando ${label}...`);
+            //console.log(`📄 Anexando ${label}...`);
             const bytes = await downloadDriveFile(fileId);
             if (!bytes) return;
             const externo = await PDFDocument.load(bytes);
@@ -2176,7 +2176,7 @@ async function generarYSubirPDF(formBody, token_a) {
         const blob = new Blob([pdfBytes], { type: "application/pdf" });
 
         // === Subir a Google Drive ===
-        console.log("📤 Subiendo PDF final...");
+        //console.log("📤 Subiendo PDF final...");
         const formData = new FormData();
         formData.append("file", blob, nombreArchivo);
         formData.append("path", `${numeroSolicitud || carpeta}/Cuestionario`);
@@ -2185,7 +2185,7 @@ async function generarYSubirPDF(formBody, token_a) {
             headers: { Authorization: `Bearer ${token_a}` },
         });
 
-        console.log("✅ PDF subido con éxito:", uploadRes.data);
+        //console.log("✅ PDF subido con éxito:", uploadRes.data);
 
         // === Actualizar user-progress con estudio_url ===
         if (uploadRes.data?.id) {
@@ -2194,7 +2194,7 @@ async function generarYSubirPDF(formBody, token_a) {
                 { estudio_url: uploadRes.data.id },
                 { headers: { Authorization: `Bearer ${token_a}` } }
             );
-            console.log("✅ 'estudio_url' actualizado:", resProgress.data);
+            //console.log("✅ 'estudio_url' actualizado:", resProgress.data);
         }
 
     } catch (err) {

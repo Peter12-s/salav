@@ -143,10 +143,10 @@ function renderSolicitudes() {
 
         btnAsignar.addEventListener("click", async () => {
             const freelancerId = select.value;
-            console.log({
-              solicitud: solicitud._id,
-              freelance_id: freelancerId,
-            });
+            //console.log({
+            //  solicitud: solicitud._id,
+              //freelance_id: freelancerId,
+            //});
             try {
                 await axios.patch(
                     `${API_URL}form-request/${solicitud._id}`,
@@ -171,7 +171,7 @@ function renderSolicitudes() {
                 filteredUsuarios = filteredUsuarios.filter(a => a._id !== solicitud._id);
                 renderSolicitudes();
             } catch (err) {
-                console.error("Error al asignar freelancer ❌", err);
+                //console.error("Error al asignar freelancer ❌", err);
                 mostrarModalMensaje("Error al asignar freelancer ❌");
             }
         });
