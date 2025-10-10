@@ -254,10 +254,10 @@ function renderSolicitudes() {
 
       } else {
         td.className = "bloque " + (completado ? "status-completado" : "status-proceso");
-      } td.textContent = etapa.label;
-
+      } 
+      td.textContent = etapa.label;
       // ✅ Si la etapa está en etapasConAccion, agregamos evento de clic
-      if (etapasConAccion.includes(etapa.key)) {
+      if (etapasConAccion.includes(etapa.key)&&etapa.key != "documenting_information") {
         if (usuarios[etapa.key] == false) {
           td.classList.add("clickable");
           td.style.cursor = "pointer"; // indicar que es clickeable
