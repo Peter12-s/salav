@@ -41,58 +41,58 @@ let empresaCount = 0;
 
 
 
-  function setUploadUrl(safeUploadId, url) {
-  // safeUploadId ejemplo: "fotografia_upload"
-  switch (String(safeUploadId)) {
-    case 'fotografia_upload': url_fotografia_upload = url; break;
-    case 'croquis_upload': url_croquis_upload = url; break;
-    case 'ext_upload': url_ext_upload = url; break;
-    case 'int_upload': url_int_upload = url; break;
-    case 'sala_upload': url_sala_upload = url; break;
-    case 'docs_upload': url_docs_upload = url; break;
-    case 'cv_upload': url_cv_upload = url; break;
-    case 'comprobante_upload': url_comprobante_upload = url; break;
-    case 'ine_upload': url_ine_upload = url; break;
-    case 'cedula_upload': url_cedula_upload = url; break;
-    case 'constancia_upload': url_constancia_upload = url; break;
-    case 'cartas_upload': url_cartas_upload = url; break;
-    case 'curp_upload': url_curp_upload = url; break;
-    case 'afore_upload': url_afore_upload = url; break;
-    case 'fiscal_upload': url_fiscal_upload = url; break;
-    case 'licencia_upload': url_licencia_upload = url; break;
-    case 'domicilio_upload': url_domicilio_upload = url; break;
-    case 'nss_upload': url_nss_upload = url; break;
-    case 'nacimiento_upload': url_nacimiento_upload = url; break;
-    case 'matrimonio_upload': url_matrimonio_upload = url; break;
-    case 'actahijo_upload': url_actahijo_upload = url; break;
-    case 'actaconyuge_upload': url_actaconyuge_upload = url; break;
-    default:
-      console.warn('setUploadUrl: safeUploadId no mapeado ->', safeUploadId);
-      break;
-  }
+function setUploadUrl(safeUploadId, url) {
+    // safeUploadId ejemplo: "fotografia_upload"
+    switch (String(safeUploadId)) {
+        case 'fotografia_upload': url_fotografia_upload = url; break;
+        case 'croquis_upload': url_croquis_upload = url; break;
+        case 'ext_upload': url_ext_upload = url; break;
+        case 'int_upload': url_int_upload = url; break;
+        case 'sala_upload': url_sala_upload = url; break;
+        case 'docs_upload': url_docs_upload = url; break;
+        case 'cv_upload': url_cv_upload = url; break;
+        case 'comprobante_upload': url_comprobante_upload = url; break;
+        case 'ine_upload': url_ine_upload = url; break;
+        case 'cedula_upload': url_cedula_upload = url; break;
+        case 'constancia_upload': url_constancia_upload = url; break;
+        case 'cartas_upload': url_cartas_upload = url; break;
+        case 'curp_upload': url_curp_upload = url; break;
+        case 'afore_upload': url_afore_upload = url; break;
+        case 'fiscal_upload': url_fiscal_upload = url; break;
+        case 'licencia_upload': url_licencia_upload = url; break;
+        case 'domicilio_upload': url_domicilio_upload = url; break;
+        case 'nss_upload': url_nss_upload = url; break;
+        case 'nacimiento_upload': url_nacimiento_upload = url; break;
+        case 'matrimonio_upload': url_matrimonio_upload = url; break;
+        case 'actahijo_upload': url_actahijo_upload = url; break;
+        case 'actaconyuge_upload': url_actaconyuge_upload = url; break;
+        default:
+            console.warn('setUploadUrl: safeUploadId no mapeado ->', safeUploadId);
+            break;
+    }
 }
 
 /* -----------------------
    FUNCIONES PARA OBTENER Y PRELLENAR DATOS
    ----------------------- */
 
-   function prefillFileThumbnails(formObject) {
+function prefillFileThumbnails(formObject) {
     if (!formObject) return;
-    
+
     // Datos generales - Fotografía
     if (formObject.datos_generales && formObject.datos_generales.url_fotografia_upload) {
         showExistingThumbnail(
-            formObject.datos_generales.url_fotografia_upload, 
+            formObject.datos_generales.url_fotografia_upload,
             'fotografia_thumbnail',
             'Fotografía'
         );
     }
-    
+
     // Croquis
     if (formObject.croquis) {
         showExistingThumbnail(formObject.croquis, 'croquis_thumbnail', 'Croquis');
     }
-    
+
     // Fotos domicilio
     if (formObject.fotos_domicilio) {
         if (formObject.fotos_domicilio.url_ext_upload) {
@@ -108,7 +108,7 @@ let empresaCount = 0;
             showExistingThumbnail(formObject.fotos_domicilio.url_docs_upload, 'foto_entregando_documentos_thumbnail', 'Entrega de documentos');
         }
     }
-    
+
     // Documentos
     if (formObject.documentos) {
         const docs = formObject.documentos;
@@ -161,7 +161,7 @@ let empresaCount = 0;
 function showExistingThumbnail(url, containerId, fileName) {
     const container = document.getElementById(containerId);
     if (!container || !url) return;
-    
+
     // Crear contenedor si no existe
     if (!container) {
         const newContainer = document.createElement('div');
@@ -174,115 +174,115 @@ function showExistingThumbnail(url, containerId, fileName) {
             input.parentNode.insertBefore(newContainer, input.nextSibling);
         }
     }
-    
+
     container.innerHTML = '';
-    
-    const isImage = /\.(jpg|jpeg|png|gif|bmp|webp)$/i.test(url) || 
-                   url.includes('drive.google.com') && url.includes('/view');
-    
+
+    const isImage = /\.(jpg|jpeg|png|gif|bmp|webp)$/i.test(url) ||
+        url.includes('drive.google.com') && url.includes('/view');
+
     if (isImage) {
-       let previewUrl = url.replace(/\/view(?:\?.*)?$/, '/preview');
+        let previewUrl = url.replace(/\/view(?:\?.*)?$/, '/preview');
 
 
-// crear el thumb (iframe pequeño)
-const wrapper = document.createElement('div');
-wrapper.className = 'drive-thumb';
-wrapper.setAttribute('role', 'button');
-wrapper.setAttribute('tabindex', '0');
-wrapper.setAttribute('aria-label', `Abrir vista previa: ${fileName || 'Imagen'}`);
+        // crear el thumb (iframe pequeño)
+        const wrapper = document.createElement('div');
+        wrapper.className = 'drive-thumb';
+        wrapper.setAttribute('role', 'button');
+        wrapper.setAttribute('tabindex', '0');
+        wrapper.setAttribute('aria-label', `Abrir vista previa: ${fileName || 'Imagen'}`);
 
-const thumbIframe = document.createElement('iframe');
-thumbIframe.src = previewUrl;
-thumbIframe.title = fileName || 'Preview';
-thumbIframe.loading = 'lazy';
+        const thumbIframe = document.createElement('iframe');
+        thumbIframe.src = previewUrl;
+        thumbIframe.title = fileName || 'Preview';
+        thumbIframe.loading = 'lazy';
 
-// etiqueta en la parte inferior
-const label = document.createElement('div');
-label.className = 'thumb-label';
-label.textContent = fileName || 'Imagen';
+        // etiqueta en la parte inferior
+        const label = document.createElement('div');
+        label.className = 'thumb-label';
+        label.textContent = fileName || 'Imagen';
 
-// overlay transparente que captura clics en toda la superficie del thumb
-const overlay = document.createElement('div');
-overlay.className = 'thumb-overlay';
-overlay.setAttribute('role', 'button');
-overlay.setAttribute('tabindex', '0');
-overlay.setAttribute('aria-label', `Abrir vista previa: ${fileName || 'Imagen'}`);
+        // overlay transparente que captura clics en toda la superficie del thumb
+        const overlay = document.createElement('div');
+        overlay.className = 'thumb-overlay';
+        overlay.setAttribute('role', 'button');
+        overlay.setAttribute('tabindex', '0');
+        overlay.setAttribute('aria-label', `Abrir vista previa: ${fileName || 'Imagen'}`);
 
 
 
-// ensamblar
-wrapper.appendChild(thumbIframe);
-wrapper.appendChild(label);
-wrapper.appendChild(overlay);
+        // ensamblar
+        wrapper.appendChild(thumbIframe);
+        wrapper.appendChild(label);
+        wrapper.appendChild(overlay);
 
-// abrir modal con iframe grande
-function openDriveModal() {
-  if (document.querySelector('.drive-modal')) return; // ya está abierto
-  const prevOverflow = document.body.style.overflow;
-  document.body.style.overflow = 'hidden';
+        // abrir modal con iframe grande
+        function openDriveModal() {
+            if (document.querySelector('.drive-modal')) return; // ya está abierto
+            const prevOverflow = document.body.style.overflow;
+            document.body.style.overflow = 'hidden';
 
-  const modal = document.createElement('div');
-  modal.className = 'drive-modal';
-  modal.setAttribute('role', 'dialog');
-  modal.setAttribute('aria-modal', 'true');
+            const modal = document.createElement('div');
+            modal.className = 'drive-modal';
+            modal.setAttribute('role', 'dialog');
+            modal.setAttribute('aria-modal', 'true');
 
-  const content = document.createElement('div');
-  content.className = 'modal-content';
+            const content = document.createElement('div');
+            content.className = 'modal-content';
 
-  const bigIframe = document.createElement('iframe');
-  bigIframe.className = 'modal-iframe';
-  bigIframe.src = previewUrl;
-  bigIframe.title = fileName || 'Vista previa';
-  bigIframe.allowFullscreen = true;
+            const bigIframe = document.createElement('iframe');
+            bigIframe.className = 'modal-iframe';
+            bigIframe.src = previewUrl;
+            bigIframe.title = fileName || 'Vista previa';
+            bigIframe.allowFullscreen = true;
 
-  const closeBtn = document.createElement('button');
-  closeBtn.className = 'close-btn';
-  closeBtn.innerHTML = '✕';
-  closeBtn.setAttribute('aria-label', 'Cerrar vista previa');
+            const closeBtn = document.createElement('button');
+            closeBtn.className = 'close-btn';
+            closeBtn.innerHTML = '✕';
+            closeBtn.setAttribute('aria-label', 'Cerrar vista previa');
 
-  function closeModal() {
-    document.body.style.overflow = prevOverflow || '';
-    window.removeEventListener('keydown', onKeyDown);
-    modal.remove();
-  }
-  closeBtn.addEventListener('click', closeModal);
-  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+            function closeModal() {
+                document.body.style.overflow = prevOverflow || '';
+                window.removeEventListener('keydown', onKeyDown);
+                modal.remove();
+            }
+            closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
-  function onKeyDown(e) {
-    if (e.key === 'Escape') closeModal();
-  }
-  window.addEventListener('keydown', onKeyDown);
+            function onKeyDown(e) {
+                if (e.key === 'Escape') closeModal();
+            }
+            window.addEventListener('keydown', onKeyDown);
 
-  content.appendChild(closeBtn);
-  content.appendChild(bigIframe);
-  modal.appendChild(content);
-  document.body.appendChild(modal);
+            content.appendChild(closeBtn);
+            content.appendChild(bigIframe);
+            modal.appendChild(content);
+            document.body.appendChild(modal);
 
-  // focus accesible
-  closeBtn.focus();
-}
+            // focus accesible
+            closeBtn.focus();
+        }
 
-// abrir por click o teclado (Enter / Space) — overlay captura clics en todo el frame
-overlay.addEventListener('click', openDriveModal);
-overlay.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault();
-    openDriveModal();
-  }
-});
+        // abrir por click o teclado (Enter / Space) — overlay captura clics en todo el frame
+        overlay.addEventListener('click', openDriveModal);
+        overlay.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openDriveModal();
+            }
+        });
 
-// también permitir abrir con Enter/Space sobre el wrapper
-wrapper.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault();
-    openDriveModal();
-  }
-});
+        // también permitir abrir con Enter/Space sobre el wrapper
+        wrapper.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openDriveModal();
+            }
+        });
 
-// añadir al contenedor
-container.appendChild(wrapper);
+        // añadir al contenedor
+        container.appendChild(wrapper);
 
-        
+
         // Agregar botón para eliminar
         /*
         const removeBtn = document.createElement('button');
@@ -320,7 +320,7 @@ container.appendChild(wrapper);
         link.style.borderRadius = '4px';
         link.style.margin = '5px';
         container.appendChild(link);
-        
+
         // Botón eliminar para archivos no imagen
         /*
         const removeBtn = document.createElement('button');
@@ -356,7 +356,7 @@ async function fetchFormData() {
                 'Authorization': `Bearer ${token_a}`
             }
         });
-        
+
         // La respuesta es un array, tomamos el primer elemento
         if (response.data && response.data.length > 0) {
             return response.data[0];
@@ -372,7 +372,7 @@ async function fetchFormData() {
 // Función helper para setear valores
 function setValue(elementId, value) {
     if (value === null || value === undefined) return;
-    
+
     const element = document.getElementById(elementId);
     if (element) {
         element.value = value;
@@ -382,7 +382,7 @@ function setValue(elementId, value) {
 // Función helper para setear radio buttons
 function setRadioValue(name, value) {
     if (!value) return;
-    
+
     const radio = document.querySelector(`input[name="${name}"][value="${value}"]`);
     if (radio) {
         radio.checked = true;
@@ -396,7 +396,7 @@ function setRadioValue(name, value) {
 // Función helper para setear selects
 function setSelectValue(elementId, value) {
     if (!value) return;
-    
+
     const element = document.getElementById(elementId);
     if (element) {
         element.value = value;
@@ -413,8 +413,8 @@ async function prefillForm() {
 
     const formObject = formData.form_object;
     console.log('Datos del formulario a prellenar:', formObject);
-    id_form =  formData._id;
-    
+    id_form = formData._id;
+
     // Prellenar secciones en orden
     prefillGeneralData(formObject);
     prefillCandidateData(formObject.candidato);
@@ -426,7 +426,7 @@ async function prefillForm() {
     prefillConclusionsData(formObject.conclusiones);
     prefillContactosEmergencia(formObject.contactos_emergencia);
     prefillFileThumbnails(formObject);
-    
+
     // Activar secciones condicionales después de prellenar
     setTimeout(() => {
         activateConditionalSections();
@@ -437,14 +437,14 @@ async function prefillForm() {
     setTimeout(() => {
         prefillDynamicSections(formObject);
     }, 300);
-    
+
     console.log('Formulario prellenado exitosamente');
 }
 
 // Prellenar datos generales
 function prefillGeneralData(data) {
     if (!data) return;
-    
+
     if (data.datos_generales) {
         setValue('correo', data.datos_generales.correo);
         setValue('folio', data.datos_generales.folio);
@@ -452,11 +452,11 @@ function prefillGeneralData(data) {
         setValue('fecha_visita', data.datos_generales.fecha_visita);
         setValue('puesto', data.datos_generales.puesto);
     }
-    
+
     if (data.empresa_valuadora) {
         setValue('valuador_nombre', data.empresa_valuadora.valuador_nombre);
     }
-    
+
     if (data.empresa_solicitante) {
         setValue('solicitante_razon2', data.empresa_solicitante.solicitante_razon2);
         setValue('solicitante_contacto', data.empresa_solicitante.solicitante_contacto);
@@ -467,7 +467,7 @@ function prefillGeneralData(data) {
 // Prellenar datos del candidato
 function prefillCandidateData(candidato) {
     if (!candidato) return;
-    
+
     setValue('candidato_nombre', candidato.candidato_nombre);
     setValue('edad', candidato.edad);
     setValue('fecha_nacimiento', candidato.fecha_nacimiento);
@@ -490,14 +490,14 @@ function prefillCandidateData(candidato) {
 // Prellenar datos de salud
 function prefillHealthData(salud) {
     if (!salud) return;
-    
+
     setValue('nss', salud.nss);
     setValue('tipo_sangre', salud.tipo_sangre);
     setValue('estatura', salud.estatura);
     setValue('peso', salud.peso);
     setRadioValue('utiliza_lentes', salud.utiliza_lentes);
     setValue('justificacion_lentes', salud.justificacion_lentes);
-    
+
     // Prellenar detalles de salud
     if (salud.detalles) {
         const detalles = salud.detalles;
@@ -515,7 +515,7 @@ function prefillHealthData(salud) {
 // Prellenar datos académicos
 function prefillAcademicData(academicos) {
     if (!academicos) return;
-    
+
     setValue('ultimo_nivel', academicos.ultimo_nivel);
     setValue('institucion', academicos.institucion);
     setValue('entidad_federativa', academicos.entidad_federativa);
@@ -527,7 +527,7 @@ function prefillAcademicData(academicos) {
 // Prellenar situación económica
 function prefillEconomicData(economica) {
     if (!economica) return;
-    
+
     // Estilo de vida
     if (economica.estilo_vida) {
         setValue('sueldo_actual', economica.estilo_vida.sueldo_actual);
@@ -535,7 +535,7 @@ function prefillEconomicData(economica) {
         setValue('ingresos_oficio', economica.estilo_vida.ingresos_oficio);
         setValue('otros_ingresos', economica.estilo_vida.otros_ingresos);
     }
-    
+
     // Ingresos familiares
     if (economica.ingresos_familiares) {
         setValue('ingresos_conyuge', economica.ingresos_familiares.ingresos_conyuge);
@@ -544,7 +544,7 @@ function prefillEconomicData(economica) {
         setValue('ingresos_hermanos', economica.ingresos_familiares.ingresos_hermanos);
         setValue('otros_ingresos_familiares', economica.ingresos_familiares.otros_ingresos_familiares);
     }
-    
+
     // Gastos de traslado
     if (economica.gastos_traslado) {
         setValue('gasto_pasajes', economica.gastos_traslado.gasto_pasajes);
@@ -552,7 +552,7 @@ function prefillEconomicData(economica) {
         setValue('gasto_gasolina', economica.gastos_traslado.gasto_gasolina);
         setValue('gasto_casetas', economica.gastos_traslado.gasto_casetas);
     }
-    
+
     // Egresos mensuales
     if (economica.egresos_mensuales_candidato) {
         const egresos = economica.egresos_mensuales_candidato;
@@ -565,14 +565,14 @@ function prefillEconomicData(economica) {
 //PrellenarContactos
 function prefillContactosEmergencia(contactos) {
     if (!contactos) return;
-    
+
     // Primer contacto
     if (contactos.contacto1) {
         setValue('emergencia1_nombre', contactos.contacto1.nombre);
         setValue('emergencia1_parentesco', contactos.contacto1.parentesco);
         setValue('emergencia1_telefono', contactos.contacto1.telefono);
     }
-    
+
     // Segundo contacto
     if (contactos.contacto2) {
         setValue('emergencia2_nombre', contactos.contacto2.nombre);
@@ -585,13 +585,13 @@ function prefillContactosEmergencia(contactos) {
 // Prellenar comodidades
 function prefillComfortsData(comodidades) {
     if (!comodidades) return;
-    
+
     setRadioValue('tiene_vehiculo', comodidades.tiene_vehiculo);
     setValue('veh_marca', comodidades.veh_marca);
     setValue('veh_modelo', comodidades.veh_modelo);
     setValue('veh_ano', comodidades.veh_ano);
     setValue('veh_color', comodidades.veh_color);
-    
+
     setValue('cuenta_computadora', comodidades.cuenta_computadora);
     setValue('cuenta_bicicleta', comodidades.cuenta_bicicleta);
     setValue('cuenta_tablet', comodidades.cuenta_tablet);
@@ -601,7 +601,7 @@ function prefillComfortsData(comodidades) {
     setValue('cuenta_estufa', comodidades.cuenta_estufa);
     setValue('cuenta_lavadora', comodidades.cuenta_lavadora);
     setValue('cuenta_motocicleta', comodidades.cuenta_motocicleta);
-    
+
     // Motocicleta
     if (comodidades.motocicleta) {
         setValue('moto_marca', comodidades.motocicleta.moto_marca);
@@ -609,7 +609,7 @@ function prefillComfortsData(comodidades) {
         setValue('moto_ano', comodidades.motocicleta.moto_ano);
         setValue('moto_color', comodidades.motocicleta.moto_color);
     }
-    
+
     // Aparatos
     if (comodidades.aparatos) {
         const aparatos = comodidades.aparatos;
@@ -617,13 +617,13 @@ function prefillComfortsData(comodidades) {
             setValue(key, aparatos[key]);
         });
     }
-    
+
     // Celular
     if (comodidades.celular) {
         setValue('cel_marca', comodidades.celular.cel_marca);
         setValue('cel_modelo', comodidades.celular.cel_modelo);
     }
-    
+
     // Hogar
     if (comodidades.hogar) {
         const hogar = comodidades.hogar;
@@ -636,7 +636,7 @@ function prefillComfortsData(comodidades) {
 // Prellenar servicios de zona
 function prefillServicesData(servicios) {
     if (!servicios) return;
-    
+
     Object.keys(servicios).forEach(key => {
         setValue(key, servicios[key]);
     });
@@ -645,7 +645,7 @@ function prefillServicesData(servicios) {
 // Prellenar conclusiones
 function prefillConclusionsData(conclusiones) {
     if (!conclusiones) return;
-    
+
     setValue('info_coincide_final', conclusiones.info_coincide_final);
     setValue('vivienda_corresponde', conclusiones.vivienda_corresponde);
     setValue('entorno_adecuado', conclusiones.entorno_adecuado);
@@ -664,51 +664,51 @@ function prefillDynamicSections(formObject) {
         console.log('Prellenando familiares:', formObject.familiares);
         // Limpiar familiares existentes
         familiaresWrap.innerHTML = '';
-        
+
         formObject.familiares.forEach(familiar => {
             addFamiliar(familiar);
         });
     }
-    
+
     // Niveles académicos
     if (formObject.academicos && formObject.academicos.niveles && formObject.academicos.niveles.length > 0) {
         console.log('Prellenando niveles académicos:', formObject.academicos.niveles);
         const nivelesContainer = document.getElementById('niveles-wrap');
         if (nivelesContainer) {
             nivelesContainer.innerHTML = '';
-            
+
             formObject.academicos.niveles.forEach(nivel => {
                 addNivelAcademic(nivel);
             });
         }
     }
-    
+
     // Cursos
     if (formObject.academicos && formObject.academicos.cursos && formObject.academicos.cursos.length > 0) {
         console.log('Prellenando cursos:', formObject.academicos.cursos);
         const cursosContainer = document.getElementById('cursos-wrap');
         if (cursosContainer) {
             cursosContainer.innerHTML = '';
-            
+
             formObject.academicos.cursos.forEach(curso => {
                 addCursoPrefilled(curso);
             });
         }
     }
-    
+
     // Investigación laboral (empresas)
     if (formObject.investigacion_laboral && formObject.investigacion_laboral.length > 0) {
         console.log('Prellenando empresas:', formObject.investigacion_laboral);
         const empresasContainer = document.getElementById('empresas-wrap');
         if (empresasContainer) {
             empresasContainer.innerHTML = '';
-            
+
             formObject.investigacion_laboral.forEach(empresa => {
                 addEmpresaPrefilled(empresa);
             });
         }
     }
-    
+
     // Referencias
     prefillReferencesDynamic(formObject.referencias);
 }
@@ -716,7 +716,7 @@ function prefillDynamicSections(formObject) {
 // Prellenar referencias dinámicas
 function prefillReferencesDynamic(referencias) {
     if (!referencias) return;
-    
+
     // Referencias personales
     if (referencias.personales && referencias.personales.length > 0) {
         const container = document.getElementById('refs-personales-wrap');
@@ -727,7 +727,7 @@ function prefillReferencesDynamic(referencias) {
             });
         }
     }
-    
+
     // Referencias laborales
     if (referencias.laborales && referencias.laborales.length > 0) {
         const container = document.getElementById('refs-laborales-wrap');
@@ -738,7 +738,7 @@ function prefillReferencesDynamic(referencias) {
             });
         }
     }
-    
+
     // Referencias vecinales
     if (referencias.vecinal && referencias.vecinal.length > 0) {
         const container = document.getElementById('refs-vecinal-wrap');
@@ -749,7 +749,7 @@ function prefillReferencesDynamic(referencias) {
             });
         }
     }
-    
+
     // Referencias familiares
     if (referencias.familiar && referencias.familiar.length > 0) {
         const container = document.getElementById('refs-familiar-wrap');
@@ -769,19 +769,19 @@ function activateConditionalSections() {
     if (cuentaMotocicleta && cuentaMotocicleta.value === 'Sí') {
         toggleDisplay('#motocicleta-block', true);
     }
-    
+
     // Celular
     const cuentaCelular = document.getElementById('cuenta_celular');
     if (cuentaCelular && cuentaCelular.value === 'Sí') {
         toggleDisplay('#celular-block', true);
     }
-    
+
     // Estudia actualmente
     const estudiaActualmente = document.querySelector('input[name="estudia_actualmente"]:checked');
     if (estudiaActualmente && estudiaActualmente.value === 'Sí') {
         toggleDisplay('#que_estudia_field', true);
     }
-    
+
     // Vehículo
     const tieneVehiculo = document.querySelector('input[name="tiene_vehiculo"]:checked');
     if (tieneVehiculo) {
@@ -796,7 +796,7 @@ function activateConditionalSections() {
 // Helper para crear elementos DOM
 function el(tag, attrs = {}, children = []) {
     const node = document.createElement(tag);
-    Object.entries(attrs).forEach(([k,v]) => {
+    Object.entries(attrs).forEach(([k, v]) => {
         if (k === 'class') node.className = v;
         else if (k === 'html') node.innerHTML = v;
         else node.setAttribute(k, v);
@@ -818,13 +818,13 @@ function addFamiliar(prefill = {}) {
 
     // fields: nombre, edad, parentesco, estudios, ocupacion, empresa, telefono
     const fields = [
-        {id:`${id}_nombre`, label:'Nombre', type:'text', class:'salav-field'},
-        {id:`${id}_edad`, label:'Edad', type:'number', class:'salav-field'},
-        {id:`${id}_parentesco`, label:'Parentesco', type:'text', class:'salav-field'},
-        {id:`${id}_estudios`, label:'Último grado de estudios', type:'select', options:['','Primaria','Secundaria','Preparatoria','Licenciatura','Maestría','Doctorado'], class:'salav-field'},
-        {id:`${id}_ocupacion`, label:'Ocupación', type:'text', class:'salav-field'},
-        {id:`${id}_empresa`, label:'Empresa para la que trabaja', type:'text', class:'salav-field'},
-        {id:`${id}_telefono`, label:'Teléfono', type:'text', class:'salav-field'}
+        { id: `${id}_nombre`, label: 'Nombre', type: 'text', class: 'salav-field' },
+        { id: `${id}_edad`, label: 'Edad', type: 'number', class: 'salav-field' },
+        { id: `${id}_parentesco`, label: 'Parentesco', type: 'text', class: 'salav-field' },
+        { id: `${id}_estudios`, label: 'Último grado de estudios', type: 'select', options: ['', 'Primaria', 'Secundaria', 'Preparatoria', 'Licenciatura', 'Maestría', 'Doctorado'], class: 'salav-field' },
+        { id: `${id}_ocupacion`, label: 'Ocupación', type: 'text', class: 'salav-field' },
+        { id: `${id}_empresa`, label: 'Empresa para la que trabaja', type: 'text', class: 'salav-field' },
+        { id: `${id}_telefono`, label: 'Teléfono', type: 'text', class: 'salav-field' }
     ];
 
     fields.forEach(f => {
@@ -834,8 +834,8 @@ function addFamiliar(prefill = {}) {
         if (f.type === 'select') {
             const s = el('select', { id: f.id, name: f.id });
             f.options.forEach(opt => {
-                const op = document.createElement('option'); 
-                op.innerText = opt; 
+                const op = document.createElement('option');
+                op.innerText = opt;
                 if (opt === '') op.value = '';
                 s.appendChild(op);
             });
@@ -870,7 +870,7 @@ function addFamiliar(prefill = {}) {
 
 // Niveles académicos con prefill
 function addNivelAcademic(prefill = {}) {
-    const idx = Date.now(); 
+    const idx = Date.now();
     const wrapper = el('div', { class: 'salav-grid', id: `nivel_wrap_${idx}` });
     wrapper.style.border = '1px dashed rgba(27,27,27,0.06)';
     wrapper.style.padding = '10px';
@@ -881,10 +881,10 @@ function addNivelAcademic(prefill = {}) {
     const nivelField = el('div', { class: 'salav-field' });
     nivelField.appendChild(el('label', { for: `ultimo_nivel_${idx}`, html: 'Último nivel académico' }));
     const select = el('select', { id: `ultimo_nivel_${idx}`, name: 'ultimo_nivel[]' });
-    ['', 'Primaria','Secundaria','Preparatoria','Carrera técnica','Licenciatura','Maestría','Doctorado']
+    ['', 'Primaria', 'Secundaria', 'Preparatoria', 'Carrera técnica', 'Licenciatura', 'Maestría', 'Doctorado']
         .forEach(opt => {
-            const o = document.createElement('option'); 
-            o.value = opt; 
+            const o = document.createElement('option');
+            o.value = opt;
             o.text = opt || '--';
             select.appendChild(o);
         });
@@ -933,117 +933,117 @@ function addNivelAcademic(prefill = {}) {
 function addCursoPrefilled(prefill = {}) {
     cursoCount++;
     const id = 'curso_' + cursoCount;
-    const cont = el('div', { class: 'salav-grid', id: id+'_wrap' });
+    const cont = el('div', { class: 'salav-grid', id: id + '_wrap' });
     cont.style.border = '1px dashed rgba(27,27,27,0.06)';
     cont.style.padding = '8px';
     cont.style.borderRadius = '8px';
 
     const nombre = el('div', { class: 'salav-field' });
-    nombre.appendChild(el('label', { for: id+'_nombre', html: 'Nombre del curso o certificación' }));
-    nombre.appendChild(el('input', { id: id+'_nombre', name: id+'_nombre', type:'text' }));
+    nombre.appendChild(el('label', { for: id + '_nombre', html: 'Nombre del curso o certificación' }));
+    nombre.appendChild(el('input', { id: id + '_nombre', name: id + '_nombre', type: 'text' }));
 
     const duracion = el('div', { class: 'salav-field' });
-    duracion.appendChild(el('label', { for: id+'_duracion', html: 'Duración en horas' }));
-    duracion.appendChild(el('input', { id: id+'_duracion', name: id+'_duracion', type:'number' }));
+    duracion.appendChild(el('label', { for: id + '_duracion', html: 'Duración en horas' }));
+    duracion.appendChild(el('input', { id: id + '_duracion', name: id + '_duracion', type: 'number' }));
 
-    const remove = el('button', { type:'button', class:'btn salav-small-btn', html:'Eliminar' });
+    const remove = el('button', { type: 'button', class: 'btn salav-small-btn', html: 'Eliminar' });
     remove.addEventListener('click', () => cont.remove());
 
-    cont.appendChild(nombre); 
-    cont.appendChild(duracion); 
+    cont.appendChild(nombre);
+    cont.appendChild(duracion);
     cont.appendChild(remove);
-    
+
     const cursosWrap = document.getElementById('cursos-wrap');
     if (cursosWrap) cursosWrap.appendChild(cont);
 
     // Prefill values
-    if (prefill.nombre) setValue(id+'_nombre', prefill.nombre);
-    if (prefill.duracion_horas) setValue(id+'_duracion', prefill.duracion_horas);
+    if (prefill.nombre) setValue(id + '_nombre', prefill.nombre);
+    if (prefill.duracion_horas) setValue(id + '_duracion', prefill.duracion_horas);
 }
 
 // Empresas con prefill
 function addEmpresaPrefilled(prefill = {}) {
     empresaCount++;
     const id = 'empresa_' + empresaCount;
-    const cont = el('div',{class:'salav-grid', id:id+'_wrap'});
-    cont.style.border='1px dashed rgba(27,27,27,0.06)'; 
-    cont.style.padding='8px'; 
-    cont.style.borderRadius='8px';
+    const cont = el('div', { class: 'salav-grid', id: id + '_wrap' });
+    cont.style.border = '1px dashed rgba(27,27,27,0.06)';
+    cont.style.padding = '8px';
+    cont.style.borderRadius = '8px';
 
-    const nombre = el('div',{class:'salav-field'}); 
-    nombre.appendChild(el('label',{for:id+'_nombre',html:'Nombre / Razón social'})); 
-    nombre.appendChild(el('input',{id:id+'_nombre',name:id+'_nombre',type:'text'}));
-    
-    const periodo = el('div',{class:'salav-field'}); 
-    periodo.appendChild(el('label',{for:id+'_periodo',html:'Periodo'})); 
-    periodo.appendChild(el('input',{id:id+'_periodo',name:id+'_periodo',type:'text'}));
-    
-    const prestaciones = el('div',{class:'salav-field'}); 
-    prestaciones.appendChild(el('label',{for:id+'_prestaciones',html:'Prestaciones con las que contaba'})); 
-    const sel = el('select',{id:id+'_prestaciones',name:id+'_prestaciones'}); 
-    ['No contaba','Prestaciones de ley','Prestaciones superiores'].forEach(o=>{
-        const op=document.createElement('option');
-        op.innerText=o;
+    const nombre = el('div', { class: 'salav-field' });
+    nombre.appendChild(el('label', { for: id + '_nombre', html: 'Nombre / Razón social' }));
+    nombre.appendChild(el('input', { id: id + '_nombre', name: id + '_nombre', type: 'text' }));
+
+    const periodo = el('div', { class: 'salav-field' });
+    periodo.appendChild(el('label', { for: id + '_periodo', html: 'Periodo' }));
+    periodo.appendChild(el('input', { id: id + '_periodo', name: id + '_periodo', type: 'text' }));
+
+    const prestaciones = el('div', { class: 'salav-field' });
+    prestaciones.appendChild(el('label', { for: id + '_prestaciones', html: 'Prestaciones con las que contaba' }));
+    const sel = el('select', { id: id + '_prestaciones', name: id + '_prestaciones' });
+    ['No contaba', 'Prestaciones de ley', 'Prestaciones superiores'].forEach(o => {
+        const op = document.createElement('option');
+        op.innerText = o;
         sel.appendChild(op);
     });
     prestaciones.appendChild(sel);
-    
-    const motivo = el('div',{class:'salav-field'}); 
-    motivo.appendChild(el('label',{for:id+'_motivo',html:'Motivo de finalización'})); 
-    motivo.appendChild(el('input',{id:id+'_motivo',name:id+'_motivo',type:'text'}));
-    
-    const rem = el('button',{type:'button',class:'btn salav-small-btn',html:'Eliminar'}); 
-    rem.addEventListener('click',()=>cont.remove());
 
-    cont.appendChild(nombre); 
-    cont.appendChild(periodo); 
-    cont.appendChild(prestaciones); 
-    cont.appendChild(motivo); 
+    const motivo = el('div', { class: 'salav-field' });
+    motivo.appendChild(el('label', { for: id + '_motivo', html: 'Motivo de finalización' }));
+    motivo.appendChild(el('input', { id: id + '_motivo', name: id + '_motivo', type: 'text' }));
+
+    const rem = el('button', { type: 'button', class: 'btn salav-small-btn', html: 'Eliminar' });
+    rem.addEventListener('click', () => cont.remove());
+
+    cont.appendChild(nombre);
+    cont.appendChild(periodo);
+    cont.appendChild(prestaciones);
+    cont.appendChild(motivo);
     cont.appendChild(rem);
-    
+
     const empresasWrap = document.getElementById('empresas-wrap');
     if (empresasWrap) empresasWrap.appendChild(cont);
 
     // Prefill values
-    if (prefill.nombre) setValue(id+'_nombre', prefill.nombre);
-    if (prefill.periodo) setValue(id+'_periodo', prefill.periodo);
-    if (prefill.prestaciones) setValue(id+'_prestaciones', prefill.prestaciones);
-    if (prefill.motivo_fin) setValue(id+'_motivo', prefill.motivo_fin);
+    if (prefill.nombre) setValue(id + '_nombre', prefill.nombre);
+    if (prefill.periodo) setValue(id + '_periodo', prefill.periodo);
+    if (prefill.prestaciones) setValue(id + '_prestaciones', prefill.prestaciones);
+    if (prefill.motivo_fin) setValue(id + '_motivo', prefill.motivo_fin);
 }
 
 // Referencias con prefill
 function addReferenciaPrefilled(wrapId, tipo, prefill = {}) {
     const wrap = document.getElementById(wrapId);
     if (!wrap) return;
-    
-    const cont = el('div',{class:'salav-grid'});
-    cont.style.border='1px dashed rgba(27,27,27,0.06)'; 
-    cont.style.padding='8px'; 
-    cont.style.borderRadius='8px';
 
-    const nombre = el('div',{class:'salav-field'}); 
-    nombre.appendChild(el('label',{html:'Nombre'})); 
-    nombre.appendChild(el('input',{type:'text', value: prefill.nombre || ''}));
-    
-    const relacion = el('div',{class:'salav-field'}); 
-    relacion.appendChild(el('label',{html: tipo === 'laboral' ? 'Puesto' : 'Parentesco'})); 
-    relacion.appendChild(el('input',{type:'text', value: prefill.relacion || ''}));
-    
-    const telefono = el('div',{class:'salav-field'}); 
-    telefono.appendChild(el('label',{html:'Teléfono / WhatsApp'})); 
-    telefono.appendChild(el('input',{type:'text', value: prefill.telefono || ''}));
-    
-    const tiempo = el('div',{class:'salav-field'}); 
-    tiempo.appendChild(el('label',{html:'¿Tiempo de conocerse?'})); 
-    tiempo.appendChild(el('input',{type:'text', value: prefill.tiempo_conocerse || ''}));
-    
-    const rem = el('button',{type:'button',class:'btn salav-small-btn',html:'Eliminar'}); 
-    rem.addEventListener('click',()=>cont.remove());
+    const cont = el('div', { class: 'salav-grid' });
+    cont.style.border = '1px dashed rgba(27,27,27,0.06)';
+    cont.style.padding = '8px';
+    cont.style.borderRadius = '8px';
 
-    cont.appendChild(nombre); 
-    cont.appendChild(relacion); 
-    cont.appendChild(telefono); 
-    cont.appendChild(tiempo); 
+    const nombre = el('div', { class: 'salav-field' });
+    nombre.appendChild(el('label', { html: 'Nombre' }));
+    nombre.appendChild(el('input', { type: 'text', value: prefill.nombre || '' }));
+
+    const relacion = el('div', { class: 'salav-field' });
+    relacion.appendChild(el('label', { html: tipo === 'laboral' ? 'Puesto' : 'Parentesco' }));
+    relacion.appendChild(el('input', { type: 'text', value: prefill.relacion || '' }));
+
+    const telefono = el('div', { class: 'salav-field' });
+    telefono.appendChild(el('label', { html: 'Teléfono / WhatsApp' }));
+    telefono.appendChild(el('input', { type: 'text', value: prefill.telefono || '' }));
+
+    const tiempo = el('div', { class: 'salav-field' });
+    tiempo.appendChild(el('label', { html: '¿Tiempo de conocerse?' }));
+    tiempo.appendChild(el('input', { type: 'text', value: prefill.tiempo_conocerse || '' }));
+
+    const rem = el('button', { type: 'button', class: 'btn salav-small-btn', html: 'Eliminar' });
+    rem.addEventListener('click', () => cont.remove());
+
+    cont.appendChild(nombre);
+    cont.appendChild(relacion);
+    cont.appendChild(telefono);
+    cont.appendChild(tiempo);
     cont.appendChild(rem);
     wrap.appendChild(cont);
 }
@@ -1089,19 +1089,19 @@ function toggleDisplay(selector, show) {
    ----------------------- */
 
 // Configurar event listeners cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Inicializar navegación y otros elementos
     initializeNavigation();
-    
+
     // Configurar event listeners para elementos dinámicos
     setupDynamicEventListeners();
-    
+
     // Configurar lógica condicional
     setupConditionalLogic();
-    
+
     // Configurar manejo de archivos
     setupFileUploads();
-    
+
     // Prellenar formulario si hay datos
     if (USER_ID && USER_ID !== 'anonymous_user') {
         setTimeout(() => {
@@ -1123,11 +1123,11 @@ function initializeNavigation() {
         dotsContainer.innerHTML = '';
 
         sections.forEach((_, i) => {
-            const dot = document.createElement('div');                       
+            const dot = document.createElement('div');
             dot.className = 'section-dot' + (i === 0 ? ' active' : '');
-            dot.dataset.section = i;                                         
+            dot.dataset.section = i;
             dot.title = `Ir a sección ${i + 1}`;
-            dot.setAttribute('role', 'button');                             
+            dot.setAttribute('role', 'button');
             dot.tabIndex = 0;
 
             dot.addEventListener('click', () => goTo(i));
@@ -1159,7 +1159,7 @@ function initializeNavigation() {
         prev.addEventListener('click', () => goTo(current - 1));
         nav.appendChild(prev);
     }
-    
+
     if (!nav.querySelector('.btn-next')) {
         const next = document.createElement('button');
         next.type = 'button';
@@ -1168,7 +1168,7 @@ function initializeNavigation() {
         next.addEventListener('click', () => goTo(current + 1));
         nav.appendChild(next);
     }
-    
+
     if (!nav.querySelector('.btn-submit')) {
         const submit = document.createElement('button');
         submit.type = 'submit';
@@ -1188,7 +1188,7 @@ function initializeNavigation() {
         current = index;
         sections.forEach((s, i) => s.classList.toggle('active', i === current));
         updateProgress();
-       
+
         const active = sections[current];
         if (active) active.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
@@ -1203,17 +1203,17 @@ function initializeNavigation() {
         const progressFill = document.getElementById('progressFill');
         const progressLabel = document.getElementById('progressLabel');
         const progressPercent = document.getElementById('progressPercent');
-        
+
         if (progressFill) progressFill.style.width = pct + '%';
         if (progressLabel) progressLabel.textContent = `Sección ${current + 1} / ${total}`;
         if (progressPercent) progressPercent.textContent = `${pct}%`;
-        
+
         Array.from(document.querySelectorAll('.section-dot')).forEach((d, idx) => {
             d.classList.toggle('active', idx === current);
             d.classList.toggle('completed', idx < current);
         });
     }
-    
+
     goTo(0);
 
     document.addEventListener('keydown', (e) => {
@@ -1233,7 +1233,7 @@ function setupDynamicEventListeners() {
     // Botón agregar nivel académico
     const addNivelBtn = document.getElementById('add-nivel-btn');
     if (addNivelBtn) {
-        addNivelBtn.addEventListener('click', function() {
+        addNivelBtn.addEventListener('click', function () {
             addNivelAcademic();
         });
     }
@@ -1259,11 +1259,11 @@ function setupDynamicEventListeners() {
     const addRefLaboral = document.getElementById('add-ref-laboral');
     const addRefVecinal = document.getElementById('add-ref-vecinal');
     const addRefFamiliar = document.getElementById('add-ref-familiar');
-    
-    if (addRefPersonal) addRefPersonal.addEventListener('click', ()=> addReferenciaPrefilled('refs-personales-wrap','personal'));
-    if (addRefLaboral) addRefLaboral.addEventListener('click', ()=> addReferenciaPrefilled('refs-laborales-wrap','laboral'));
-    if (addRefVecinal) addRefVecinal.addEventListener('click', ()=> addReferenciaPrefilled('refs-vecinal-wrap','vecinal'));
-    if (addRefFamiliar) addRefFamiliar.addEventListener('click', ()=> addReferenciaPrefilled('refs-familiar-wrap','familiar'));
+
+    if (addRefPersonal) addRefPersonal.addEventListener('click', () => addReferenciaPrefilled('refs-personales-wrap', 'personal'));
+    if (addRefLaboral) addRefLaboral.addEventListener('click', () => addReferenciaPrefilled('refs-laborales-wrap', 'laboral'));
+    if (addRefVecinal) addRefVecinal.addEventListener('click', () => addReferenciaPrefilled('refs-vecinal-wrap', 'vecinal'));
+    if (addRefFamiliar) addRefFamiliar.addEventListener('click', () => addReferenciaPrefilled('refs-familiar-wrap', 'familiar'));
 }
 
 // Configurar lógica condicional
@@ -1271,9 +1271,9 @@ function setupConditionalLogic() {
     // vehículo
     const tieneVehiculoSi = document.getElementById('tiene_vehiculo_si');
     const tieneVehiculoNo = document.getElementById('tiene_vehiculo_no');
-    
-    if (tieneVehiculoSi) tieneVehiculoSi.addEventListener('change', ()=> toggleDisplay('#vehiculo-block', true));
-    if (tieneVehiculoNo) tieneVehiculoNo.addEventListener('change', ()=> toggleDisplay('#vehiculo-block', false));
+
+    if (tieneVehiculoSi) tieneVehiculoSi.addEventListener('change', () => toggleDisplay('#vehiculo-block', true));
+    if (tieneVehiculoNo) tieneVehiculoNo.addEventListener('change', () => toggleDisplay('#vehiculo-block', false));
 
     // motocicleta
     const cuentaMotocicleta = document.getElementById('cuenta_motocicleta');
@@ -1321,7 +1321,7 @@ function setupConditionalLogic() {
         ['familiar_enfermedad', 'familiar_enfermedad_just'],
         ['padece_ansiedad', 'padece_ansiedad_just']
     ];
-    
+
     healthPairs.forEach(([radioName, justId]) => {
         document.querySelectorAll(`input[name="${radioName}"]`).forEach(r => {
             r.addEventListener('change', (e) => {
@@ -1350,10 +1350,10 @@ function setupFileUploads() {
     function createThumbnail(file, containerId) {
         const container = document.getElementById(containerId);
         if (!container) return;
-        
+
         // Limpiar contenedor existente
         container.innerHTML = '';
-        
+
         if (file.type.startsWith('image/')) {
             const img = document.createElement('img');
             img.src = URL.createObjectURL(file);
@@ -1363,7 +1363,7 @@ function setupFileUploads() {
             img.style.margin = '5px';
             img.style.border = '1px solid #ddd';
             img.style.borderRadius = '4px';
-            
+
             // Hacer clic para ampliar
             img.addEventListener('click', () => {
                 const modal = document.createElement('div');
@@ -1377,18 +1377,18 @@ function setupFileUploads() {
                 modal.style.justifyContent = 'center';
                 modal.style.alignItems = 'center';
                 modal.style.zIndex = '1000';
-                
+
                 const modalImg = document.createElement('img');
                 modalImg.src = img.src;
                 modalImg.style.maxWidth = '90%';
                 modalImg.style.maxHeight = '90%';
                 modalImg.style.objectFit = 'contain';
-                
+
                 modal.appendChild(modalImg);
                 modal.addEventListener('click', () => document.body.removeChild(modal));
                 document.body.appendChild(modal);
             });
-            
+
             container.appendChild(img);
         } else {
             // Para archivos no imagen, mostrar icono
@@ -1398,12 +1398,12 @@ function setupFileUploads() {
             icon.style.textAlign = 'center';
             icon.style.cursor = 'pointer';
             icon.title = 'Haz clic para ver el archivo';
-            
+
             icon.addEventListener('click', () => {
                 const url = URL.createObjectURL(file);
                 window.open(url, '_blank');
             });
-            
+
             container.appendChild(icon);
         }
     }
@@ -1412,13 +1412,13 @@ function setupFileUploads() {
     function showExistingThumbnail(url, containerId, fileName) {
         const container = document.getElementById(containerId);
         if (!container || !url) return;
-        
+
         container.innerHTML = '';
-        
+
         // Verificar si es imagen por extensión o tipo MIME
-        const isImage = /\.(jpg|jpeg|png|gif|bmp|webp)$/i.test(url) || 
-                       url.includes('drive.google.com') && !url.includes('/edit');
-        
+        const isImage = /\.(jpg|jpeg|png|gif|bmp|webp)$/i.test(url) ||
+            url.includes('drive.google.com') && !url.includes('/edit');
+
         if (isImage) {
             const img = document.createElement('img');
             img.src = url;
@@ -1429,7 +1429,7 @@ function setupFileUploads() {
             img.style.border = '1px solid #ddd';
             img.style.borderRadius = '4px';
             img.alt = fileName || 'Imagen';
-            
+
             img.addEventListener('click', () => {
                 const modal = document.createElement('div');
                 modal.style.position = 'fixed';
@@ -1442,18 +1442,18 @@ function setupFileUploads() {
                 modal.style.justifyContent = 'center';
                 modal.style.alignItems = 'center';
                 modal.style.zIndex = '1000';
-                
+
                 const modalImg = document.createElement('img');
                 modalImg.src = url;
                 modalImg.style.maxWidth = '90%';
                 modalImg.style.maxHeight = '90%';
                 modalImg.style.objectFit = 'contain';
-                
+
                 modal.appendChild(modalImg);
                 modal.addEventListener('click', () => document.body.removeChild(modal));
                 document.body.appendChild(modal);
             });
-            
+
             container.appendChild(img);
         } else {
             // Para archivos no imagen
@@ -1474,7 +1474,7 @@ function setupFileUploads() {
     fileUploads.forEach(upload => {
         const input = upload.querySelector('input');
         const fileName = upload.nextElementSibling;
-        
+
         // Crear contenedor para miniatura si no existe
         const thumbnailId = input.id + '_thumbnail';
         if (!document.getElementById(thumbnailId)) {
@@ -1525,7 +1525,7 @@ function setupFileUploads() {
             const nombre = nombres[0] || '';
             const apellido = nombres[1] || '';
             const carpeta = (nombre.slice(0, 3) + apellido.slice(0, 2)) || 'SinNom';
-           
+
 
             try {
                 const formData = new FormData();
@@ -1567,7 +1567,7 @@ function setupFileUploads() {
 
 // Event listener para el envío del formulario
 if (formEl) {
-    formEl.addEventListener('submit', function(e) {
+    formEl.addEventListener('submit', function (e) {
         e.preventDefault();
         handleFormSubmit();
     });
@@ -1575,13 +1575,13 @@ if (formEl) {
 
 // Función para manejar el envío del formulario
 async function handleFormSubmit() {
-     // variables independientes 
+    // variables independientes 
     const correo = document.getElementById('correo').value;
     const folio = document.getElementById('folio').value;
     const fecha_solicitud = document.getElementById('fecha_solicitud').value;
     const fecha_visita = document.getElementById('fecha_visita').value;
     const puesto = document.getElementById('puesto').value;
-    const fotografia = document.getElementById('fotografia').files.length ? Array.from(document.getElementById('fotografia').files).map(f=>f.name) : null;
+    const fotografia = document.getElementById('fotografia').files.length ? Array.from(document.getElementById('fotografia').files).map(f => f.name) : null;
 
     const valuador_nombre = document.getElementById('valuador_nombre').value;
 
@@ -1608,25 +1608,25 @@ async function handleFormSubmit() {
     const nombre_familiar = document.getElementById('nombre_familiar').value;
 
     // croquis / fotos
-    const croquis = document.getElementById('croquis').files.length ? Array.from(document.getElementById('croquis').files).map(f=>f.name) : null;
-    const foto_fachada_exterior = document.getElementById('foto_fachada_exterior').files.length ? Array.from(document.getElementById('foto_fachada_exterior').files).map(f=>f.name) : null;
-    const foto_fachada_interior = document.getElementById('foto_fachada_interior').files.length ? Array.from(document.getElementById('foto_fachada_interior').files).map(f=>f.name) : null;
-    const foto_sala = document.getElementById('foto_sala').files.length ? Array.from(document.getElementById('foto_sala').files).map(f=>f.name) : null;
-    const foto_entregando_documentos = document.getElementById('foto_entregando_documentos').files.length ? Array.from(document.getElementById('foto_entregando_documentos').files).map(f=>f.name) : null;
+    const croquis = document.getElementById('croquis').files.length ? Array.from(document.getElementById('croquis').files).map(f => f.name) : null;
+    const foto_fachada_exterior = document.getElementById('foto_fachada_exterior').files.length ? Array.from(document.getElementById('foto_fachada_exterior').files).map(f => f.name) : null;
+    const foto_fachada_interior = document.getElementById('foto_fachada_interior').files.length ? Array.from(document.getElementById('foto_fachada_interior').files).map(f => f.name) : null;
+    const foto_sala = document.getElementById('foto_sala').files.length ? Array.from(document.getElementById('foto_sala').files).map(f => f.name) : null;
+    const foto_entregando_documentos = document.getElementById('foto_entregando_documentos').files.length ? Array.from(document.getElementById('foto_entregando_documentos').files).map(f => f.name) : null;
 
     // familiares: leer dinámicos
     const familiares = [];
     document.querySelectorAll('#familiares-wrap > div').forEach((wrap, idx) => {
-      const pref = {
-        nombre: wrap.querySelector('input[id$="_nombre"]') ? wrap.querySelector('input[id$="_nombre"]').value : '',
-        edad: wrap.querySelector('input[id$="_edad"]') ? wrap.querySelector('input[id$="_edad"]').value : '',
-        parentesco: wrap.querySelector('input[id$="_parentesco"]') ? wrap.querySelector('input[id$="_parentesco"]').value : '',
-        estudios: wrap.querySelector('select[id$="_estudios"]') ? wrap.querySelector('select[id$="_estudios"]').value : '',
-        ocupacion: wrap.querySelector('input[id$="_ocupacion"]') ? wrap.querySelector('input[id$="_ocupacion"]').value : '',
-        empresa: wrap.querySelector('input[id$="_empresa"]') ? wrap.querySelector('input[id$="_empresa"]').value : '',
-        telefono: wrap.querySelector('input[id$="_telefono"]') ? wrap.querySelector('input[id$="_telefono"]').value : ''
-      };
-      familiares.push(pref);
+        const pref = {
+            nombre: wrap.querySelector('input[id$="_nombre"]') ? wrap.querySelector('input[id$="_nombre"]').value : '',
+            edad: wrap.querySelector('input[id$="_edad"]') ? wrap.querySelector('input[id$="_edad"]').value : '',
+            parentesco: wrap.querySelector('input[id$="_parentesco"]') ? wrap.querySelector('input[id$="_parentesco"]').value : '',
+            estudios: wrap.querySelector('select[id$="_estudios"]') ? wrap.querySelector('select[id$="_estudios"]').value : '',
+            ocupacion: wrap.querySelector('input[id$="_ocupacion"]') ? wrap.querySelector('input[id$="_ocupacion"]').value : '',
+            empresa: wrap.querySelector('input[id$="_empresa"]') ? wrap.querySelector('input[id$="_empresa"]').value : '',
+            telefono: wrap.querySelector('input[id$="_telefono"]') ? wrap.querySelector('input[id$="_telefono"]').value : ''
+        };
+        familiares.push(pref);
     });
 
     // economía
@@ -1750,36 +1750,36 @@ async function handleFormSubmit() {
     // cursos 
     const cursos = [];
     document.querySelectorAll('#cursos-wrap > div').forEach(c => {
-      cursos.push({
-        nombre: c.querySelector('input[type="text"]') ? c.querySelector('input[type="text"]').value : '',
-        duracion_horas: c.querySelector('input[type="number"]') ? c.querySelector('input[type="number"]').value : ''
-      });
+        cursos.push({
+            nombre: c.querySelector('input[type="text"]') ? c.querySelector('input[type="text"]').value : '',
+            duracion_horas: c.querySelector('input[type="number"]') ? c.querySelector('input[type="number"]').value : ''
+        });
     });
 
     // investigacion laboral 
     const empresas = [];
     document.querySelectorAll('#empresas-wrap > div').forEach(e => {
-      empresas.push({
-        nombre: e.querySelector('input[id$="_nombre"]') ? e.querySelector('input[id$="_nombre"]').value : '',
-        periodo: e.querySelector('input[id$="_periodo"]') ? e.querySelector('input[id$="_periodo"]').value : '',
-        prestaciones: e.querySelector('select[id$="_prestaciones"]') ? e.querySelector('select[id$="_prestaciones"]').value : '',
-        motivo_fin: e.querySelector('input[id$="_motivo"]') ? e.querySelector('input[id$="_motivo"]').value : ''
-      });
+        empresas.push({
+            nombre: e.querySelector('input[id$="_nombre"]') ? e.querySelector('input[id$="_nombre"]').value : '',
+            periodo: e.querySelector('input[id$="_periodo"]') ? e.querySelector('input[id$="_periodo"]').value : '',
+            prestaciones: e.querySelector('select[id$="_prestaciones"]') ? e.querySelector('select[id$="_prestaciones"]').value : '',
+            motivo_fin: e.querySelector('input[id$="_motivo"]') ? e.querySelector('input[id$="_motivo"]').value : ''
+        });
     });
 
     // referencias (por tipo)
     function readRefs(wrapperId) {
-      const arr = [];
-      document.querySelectorAll(`#${wrapperId} > div`).forEach(r => {
-        const inputs = r.querySelectorAll('input');
-        arr.push({
-          nombre: inputs[0] ? inputs[0].value : '',
-          relacion: inputs[1] ? inputs[1].value : '',
-          telefono: inputs[2] ? inputs[2].value : '',
-          tiempo_conocerse: inputs[3] ? inputs[3].value : ''
+        const arr = [];
+        document.querySelectorAll(`#${wrapperId} > div`).forEach(r => {
+            const inputs = r.querySelectorAll('input');
+            arr.push({
+                nombre: inputs[0] ? inputs[0].value : '',
+                relacion: inputs[1] ? inputs[1].value : '',
+                telefono: inputs[2] ? inputs[2].value : '',
+                tiempo_conocerse: inputs[3] ? inputs[3].value : ''
+            });
         });
-      });
-      return arr;
+        return arr;
     }
     const refs_personales = readRefs('refs-personales-wrap');
     const refs_laborales = readRefs('refs-laborales-wrap');
@@ -1843,7 +1843,7 @@ async function handleFormSubmit() {
     const contacto_emergencia_nombre2 = document.getElementById('emergencia2_nombre').value;
     const contacto_emergencia_parentesco2 = document.getElementById('emergencia2_parentesco').value;
     const contacto_emergencia_telefono2 = document.getElementById('emergencia2_telefono').value;
-    
+
     const contactos_emergencia = {
         contacto1: {
             nombre: contacto_emergencia_nombre,
@@ -1858,7 +1858,7 @@ async function handleFormSubmit() {
     };
 
     // documentos (nombres de archivos)
-    function filesList(id){ return document.getElementById(id) && document.getElementById(id).files.length ? Array.from(document.getElementById(id).files).map(f=>f.name) : null; }
+    function filesList(id) { return document.getElementById(id) && document.getElementById(id).files.length ? Array.from(document.getElementById(id).files).map(f => f.name) : null; }
     const cv = filesList('cv');
     const comprobante_estudios = filesList('comprobante_estudios');
     const identificacion_oficial = filesList('identificacion_oficial');
@@ -1891,67 +1891,67 @@ async function handleFormSubmit() {
        JSON completo
        ----------------------- */
     const formJSON = {
-      meta: { generado_en: new Date().toISOString() },
-      datos_generales: { correo, folio, fecha_solicitud, fecha_visita, puesto, url_fotografia_upload },
-      empresa_valuadora: { valuador_nombre},
-      empresa_solicitante: { solicitante_razon2, solicitante_contacto, solicitante_email },
-      candidato: { candidato_nombre, edad, fecha_nacimiento, rfc, telefono, telefono_recados, lugar_nacimiento, estado, pais, estado_civil, num_hijos, direccion, colonia, ciudad, codigo_postal, familia_empresa, nombre_familiar },
-      croquis: url_croquis_upload,
-      fotos_domicilio: { url_ext_upload, url_int_upload, url_sala_upload, url_docs_upload },
-      familiares: familiares,
-      situacion_economica: {
-        estilo_vida: { sueldo_actual, ingresos_negocio, ingresos_oficio, otros_ingresos },
-        ingresos_familiares: { ingresos_conyuge, ingresos_padres, ingresos_hijos, ingresos_hermanos, otros_ingresos_familiares },
-        gastos_traslado: { gasto_pasajes, gasto_taxi, gasto_gasolina, gasto_casetas },
-        egresos_mensuales_candidato: {
-          gasto_alimentacion, gasto_agua_potable, gasto_luz, gasto_internet, gasto_telefonia, gasto_streaming, gasto_mantenimiento_hogar,
-          gasto_mantenimiento_vehicular, gasto_pension_alimenticia, gasto_salidas_recreativas,
-          gasto_membresias, gasto_seguros_vida, gasto_seguro_vehiculo, gasto_credito_vivienda,
-          gasto_credito_vehicular, gasto_hipoteca, gasto_mascotas, gasto_consultas_medicas,
-          gasto_educacion, gasto_ropa_calzado
-        }
-      },
-      comodidades: {
-        tiene_vehiculo, veh_marca, veh_modelo, veh_ano, veh_color,
-        cuenta_computadora, cuenta_bicicleta, cuenta_tablet, cuenta_refri,  cuenta_tv, cuenta_microondas,
-        cuenta_estufa, cuenta_lavadora, cuenta_motocicleta,
-        motocicleta: { moto_marca, moto_modelo, moto_ano, moto_color },
-        aparatos: { cuenta_camara, cuenta_freidora, cuenta_horno_electrico, cuenta_batidora, cuenta_tostador, cuenta_dispensador, cuenta_licuadora, cuenta_tanque_gas, cuenta_celular },
-        celular: { cel_marca, cel_modelo },
-        hogar: { cuenta_cama, cuenta_sala, cuenta_cocina_integral, cuenta_closet, cuenta_banio, cuenta_calentador_solar, cuenta_calentador_boiler, cuenta_panel_solar }
-      },
-      servicios_zona: {
-        agua_potable, energia_electrica, drenaje, pavimentacion, alumbrado_publico, lineas_telefonicas, lineas_internet, lineas_gas, lineas_cable, escuelas, hospitales, centros_comerciales, club_social_colonia, parques_recreativos, recoleccion_residuos, transporte_publico, cuenta_metro, cuenta_teleferico
-      },
-      academicos: { ultimo_nivel, institucion, entidad_federativa, documento_recibido, estudia_actualmente, que_estudia, cursos },
-      investigacion_laboral: empresas,
-      referencias: { personales: refs_personales, laborales: refs_laborales, vecinal: refs_vecinal, familiar: refs_familiar },
-      salud: { nss, tipo_sangre, estatura, peso, utiliza_lentes, justificacion_lentes, detalles: health },
-      contactos_emergencia: contactos_emergencia,
-      documentos: { url_cv_upload, url_comprobante_upload, url_ine_upload, url_cedula_upload, url_constancia_upload, url_cartas_upload, url_curp_upload, url_afore_upload, url_fiscal_upload, url_licencia_upload, url_domicilio_upload, url_nss_upload, url_nacimiento_upload, url_matrimonio_upload, url_actahijo_upload, url_actaconyuge_upload },
-      conclusiones: { info_coincide_final, vivienda_corresponde, entorno_adecuado, problemas_analisis, problemas_visita, problemas_agenda, candidato_proporciono_toda_info, obtencion_info_dentro_domicilio, actitud_candidato },
-      identificadores: {USER_PROGRESS, USER_ID}
+        meta: { generado_en: new Date().toISOString() },
+        datos_generales: { correo, folio, fecha_solicitud, fecha_visita, puesto, url_fotografia_upload },
+        empresa_valuadora: { valuador_nombre },
+        empresa_solicitante: { solicitante_razon2, solicitante_contacto, solicitante_email },
+        candidato: { candidato_nombre, edad, fecha_nacimiento, rfc, telefono, telefono_recados, lugar_nacimiento, estado, pais, estado_civil, num_hijos, direccion, colonia, ciudad, codigo_postal, familia_empresa, nombre_familiar },
+        croquis: url_croquis_upload,
+        fotos_domicilio: { url_ext_upload, url_int_upload, url_sala_upload, url_docs_upload },
+        familiares: familiares,
+        situacion_economica: {
+            estilo_vida: { sueldo_actual, ingresos_negocio, ingresos_oficio, otros_ingresos },
+            ingresos_familiares: { ingresos_conyuge, ingresos_padres, ingresos_hijos, ingresos_hermanos, otros_ingresos_familiares },
+            gastos_traslado: { gasto_pasajes, gasto_taxi, gasto_gasolina, gasto_casetas },
+            egresos_mensuales_candidato: {
+                gasto_alimentacion, gasto_agua_potable, gasto_luz, gasto_internet, gasto_telefonia, gasto_streaming, gasto_mantenimiento_hogar,
+                gasto_mantenimiento_vehicular, gasto_pension_alimenticia, gasto_salidas_recreativas,
+                gasto_membresias, gasto_seguros_vida, gasto_seguro_vehiculo, gasto_credito_vivienda,
+                gasto_credito_vehicular, gasto_hipoteca, gasto_mascotas, gasto_consultas_medicas,
+                gasto_educacion, gasto_ropa_calzado
+            }
+        },
+        comodidades: {
+            tiene_vehiculo, veh_marca, veh_modelo, veh_ano, veh_color,
+            cuenta_computadora, cuenta_bicicleta, cuenta_tablet, cuenta_refri, cuenta_tv, cuenta_microondas,
+            cuenta_estufa, cuenta_lavadora, cuenta_motocicleta,
+            motocicleta: { moto_marca, moto_modelo, moto_ano, moto_color },
+            aparatos: { cuenta_camara, cuenta_freidora, cuenta_horno_electrico, cuenta_batidora, cuenta_tostador, cuenta_dispensador, cuenta_licuadora, cuenta_tanque_gas, cuenta_celular },
+            celular: { cel_marca, cel_modelo },
+            hogar: { cuenta_cama, cuenta_sala, cuenta_cocina_integral, cuenta_closet, cuenta_banio, cuenta_calentador_solar, cuenta_calentador_boiler, cuenta_panel_solar }
+        },
+        servicios_zona: {
+            agua_potable, energia_electrica, drenaje, pavimentacion, alumbrado_publico, lineas_telefonicas, lineas_internet, lineas_gas, lineas_cable, escuelas, hospitales, centros_comerciales, club_social_colonia, parques_recreativos, recoleccion_residuos, transporte_publico, cuenta_metro, cuenta_teleferico
+        },
+        academicos: { ultimo_nivel, institucion, entidad_federativa, documento_recibido, estudia_actualmente, que_estudia, cursos },
+        investigacion_laboral: empresas,
+        referencias: { personales: refs_personales, laborales: refs_laborales, vecinal: refs_vecinal, familiar: refs_familiar },
+        salud: { nss, tipo_sangre, estatura, peso, utiliza_lentes, justificacion_lentes, detalles: health },
+        contactos_emergencia: contactos_emergencia,
+        documentos: { url_cv_upload, url_comprobante_upload, url_ine_upload, url_cedula_upload, url_constancia_upload, url_cartas_upload, url_curp_upload, url_afore_upload, url_fiscal_upload, url_licencia_upload, url_domicilio_upload, url_nss_upload, url_nacimiento_upload, url_matrimonio_upload, url_actahijo_upload, url_actaconyuge_upload },
+        conclusiones: { info_coincide_final, vivienda_corresponde, entorno_adecuado, problemas_analisis, problemas_visita, problemas_agenda, candidato_proporciono_toda_info, obtencion_info_dentro_domicilio, actitud_candidato },
+        identificadores: { USER_PROGRESS, USER_ID }
     };
 
     const niveles = [];
     document.querySelectorAll('#niveles-wrap > div').forEach(w => {
-    const idSuffix = w.id.split('_').pop();
-    niveles.push({
-        ultimo_nivel: document.getElementById(`ultimo_nivel_${idSuffix}`) ? document.getElementById(`ultimo_nivel_${idSuffix}`).value : '',
-        institucion: document.getElementById(`institucion_${idSuffix}`) ? document.getElementById(`institucion_${idSuffix}`).value : '',
-        entidad_federativa: document.getElementById(`entidad_federativa_${idSuffix}`) ? document.getElementById(`entidad_federativa_${idSuffix}`).value : '',
-        documento_recibido: document.getElementById(`documento_recibido_${idSuffix}`) ? document.getElementById(`documento_recibido_${idSuffix}`).value : ''
-    });
+        const idSuffix = w.id.split('_').pop();
+        niveles.push({
+            ultimo_nivel: document.getElementById(`ultimo_nivel_${idSuffix}`) ? document.getElementById(`ultimo_nivel_${idSuffix}`).value : '',
+            institucion: document.getElementById(`institucion_${idSuffix}`) ? document.getElementById(`institucion_${idSuffix}`).value : '',
+            entidad_federativa: document.getElementById(`entidad_federativa_${idSuffix}`) ? document.getElementById(`entidad_federativa_${idSuffix}`).value : '',
+            documento_recibido: document.getElementById(`documento_recibido_${idSuffix}`) ? document.getElementById(`documento_recibido_${idSuffix}`).value : ''
+        });
     });
     formJSON.academicos = formJSON.academicos || {};
     formJSON.academicos.niveles = niveles;
 
 
     console.log('formJSON:', JSON.stringify(formJSON, null, 2));
-    console.log("form data ",id_form);
+    console.log("form data ", id_form);
 
-    
-    
+
+
     const body = {
         applicant_id: USER_ID,
         form_object: formJSON
@@ -1963,13 +1963,14 @@ async function handleFormSubmit() {
                 Authorization: `Bearer ${token_a}`
             },
         });
-
-        mostrarModalMensajeForm("✅ Formulario guardado");
-        //await finalizarTarea(USER_PROGRESS, "documenting_information", token);
-        /*
-        setTimeout(() => {
-            window.location.replace("estudiosProceso.html");
-        }, 5000);*/
+        // 📌 Actualizar progreso SOLO si la subida fue exitosa
+        const bodyProgress = { evaluation_complete: true };
+        const actualizarProgress = await axios.patch(
+            `${API_URL}user-progress/${USER_ID}`,
+            bodyProgress,
+            { headers: { Authorization: `Bearer ${token_a}` } }
+        );
+         mostrarModalMensajeForm("✅ Formulario guardado");
     } catch (err) {
         mostrarModalMensajeForm(
             "❌ Error al guardar el form: " +
