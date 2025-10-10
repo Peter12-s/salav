@@ -45,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
 const etapasConAccion = [
   "candidate_contacted",
   "visit_scheduled",
-  "visit_complete",
   "documenting_information"
 ];
 

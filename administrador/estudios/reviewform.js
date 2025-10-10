@@ -1,3 +1,7 @@
+import { PDFDocument, rgb, StandardFonts } from "https://esm.sh/pdf-lib";
+
+import axios from "https://cdn.skypack.dev/axios";
+
 // Variables globales
 const urlParams = new URLSearchParams(window.location.search);
 const USER_ID = urlParams.get('user') || sessionStorage.getItem('salav:currentUserId') || 'anonymous_user';
@@ -767,13 +771,17 @@ function activateConditionalSections() {
     // Motocicleta
     const cuentaMotocicleta = document.getElementById('cuenta_motocicleta');
     if (cuentaMotocicleta && cuentaMotocicleta.value === 'Sí') {
-        toggleDisplay('#motocicleta-block', true);
+        toggleDisplay('#motocicleta-block-HasData', true);
+    }else {
+        toggleDisplay('#motocicleta-block-NullData', true);
     }
 
     // Celular
     const cuentaCelular = document.getElementById('cuenta_celular');
     if (cuentaCelular && cuentaCelular.value === 'Sí') {
-        toggleDisplay('#celular-block', true);
+        toggleDisplay('#celular-block-HasData', true);
+    }else {
+        toggleDisplay('#celular-block-NullData', true);
     }
 
     // Estudia actualmente
@@ -786,7 +794,7 @@ function activateConditionalSections() {
     const tieneVehiculo = document.querySelector('input[name="tiene_vehiculo"]:checked');
     if (tieneVehiculo) {
         toggleDisplay('#vehiculo-block', tieneVehiculo.value === 'Sí');
-    }
+    } 
 }
 
 /* -----------------------
@@ -1279,15 +1287,16 @@ function setupConditionalLogic() {
     const cuentaMotocicleta = document.getElementById('cuenta_motocicleta');
     if (cuentaMotocicleta) {
         cuentaMotocicleta.addEventListener('change', (e) => {
-            toggleDisplay('#motocicleta-block', e.target.value === 'Sí');
+            toggleDisplay('#motocicleta-block-HasData', e.target.value === 'Sí');
+            toggleDisplay('#motocicleta-block-NullData', e.target.value === 'No');
         });
     }
-
     // celular
     const cuentaCelular = document.getElementById('cuenta_celular');
     if (cuentaCelular) {
         cuentaCelular.addEventListener('change', (e) => {
-            toggleDisplay('#celular-block', e.target.value === 'Sí');
+            toggleDisplay('#celular-block-HasData', e.target.value === 'Sí');
+            toggleDisplay('#celular-block-NullData', e.target.value === 'No');
         });
     }
 
@@ -1949,32 +1958,247 @@ async function handleFormSubmit() {
 
     console.log('formJSON:', JSON.stringify(formJSON, null, 2));
     console.log("form data ", id_form);
-
-
-
     const body = {
         applicant_id: USER_ID,
         form_object: formJSON
     };
 
     try {
+        console.log("📄 Generando y subiendo PDF...");
+        // 1️⃣ Generar y subir PDF primero
+        await generarYSubirPDF({ form_object: body }, token_a);
+        console.log("✅ PDF generado y 'estudio_url' actualizado.");
+
+        // 2️⃣ Actualizar el formulario
         const response = await axios.patch(`${API_URL}form/${id_form}`, body, {
             headers: {
                 Authorization: `Bearer ${token_a}`
             },
         });
-        // 📌 Actualizar progreso SOLO si la subida fue exitosa
+
+        // 3️⃣ Actualizar progreso solo si el PDF se generó correctamente
         const bodyProgress = { evaluation_complete: true };
-        const actualizarProgress = await axios.patch(
-            `${API_URL}user-progress/${USER_ID}`,
-            bodyProgress,
-            { headers: { Authorization: `Bearer ${token_a}` } }
-        );
-         mostrarModalMensajeForm("✅ Formulario guardado");
+        await axios.patch(`${API_URL}user-progress/${USER_PROGRESS}`, bodyProgress, {
+            headers: { Authorization: `Bearer ${token_a}` }
+        });
+
+        mostrarModalMensajeForm("✅ Formulario guardado");
+        setTimeout(() => {
+            window.location.replace("estudiosProceso.html");
+        }, 5000);
+
     } catch (err) {
+        // ❌ Si falla la generación o cualquier patch, no se marca como completado
         mostrarModalMensajeForm(
-            "❌ Error al guardar el form: " +
+            "❌ Error al guardar el form o generar el PDF: " +
             (err.response?.data?.message || err.message)
         );
+    }
+
+}
+
+
+
+async function generarYSubirPDF(formBody, token_a) {
+    try {
+        console.log("🧾 [generarYSubirPDF] Iniciando proceso...");
+        console.log("📥 formBody recibido:", formBody);
+        console.log("🔑 token recibido:", token_a ? "✅ presente" : "❌ no existe");
+
+        //const API_URL = "http://localhost:8080/api/";
+        const formJSON = formBody.form_object;
+
+        if (!formJSON) {
+            throw new Error("❌ No se encontró 'form_object' dentro de formBody");
+        }
+
+        // === Obtener USER_PROGRESS ===
+        const progressId = formJSON?.form_object?.identificadores?.USER_PROGRESS;
+        console.log("📘 USER_PROGRESS:", progressId);
+        if (!progressId) throw new Error("El JSON no tiene identificadores.USER_PROGRESS");
+
+        // === Descargar info de user-progress ===
+        console.log("📡 Consultando datos del candidato...");
+        const progressRes = await axios.get(`${API_URL}user-progress/${progressId}`, {
+            headers: { Authorization: `Bearer ${token_a}` },
+        });
+        const { number: numeroSolicitud, bg_check_url: bgId, cv_url: cvId } = progressRes.data || {};
+        console.log("✅ Datos obtenidos:", { numeroSolicitud, bgId, cvId });
+
+        // === Funciones auxiliares ===
+        function toTitleCase(key) {
+            return key
+                .split("_")
+                .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+                .join(" ");
+        }
+
+        function generarCarpeta(nombreCompleto) {
+            const nombres = nombreCompleto.split(" ");
+            const nombre = nombres[0] || "";
+            const apellido = nombres[1] || "";
+            return nombre.slice(0, 3) + apellido.slice(0, 2);
+        }
+
+        async function downloadDriveFile(fileId) {
+            if (!fileId) return null;
+            const url = `https://drive.google.com/uc?id=${fileId}&export=download`;
+            const res = await fetch(url);
+            if (!res.ok) return null;
+            return await res.arrayBuffer();
+        }
+
+        // === Preparar imágenes ===
+        const fondoBytes = await fetch("../../img/FONDO CLARO.png").then(r => r.arrayBuffer());
+        const logoBytes = await fetch("../../img/FONDO CLARO.png").then(r => r.arrayBuffer());
+        const pieBytes = await fetch("../../img/Pie_salav.jpeg").then(r => r.arrayBuffer());
+
+        // === Crear PDF ===
+        const pdfDoc = await PDFDocument.create();
+        let page = pdfDoc.addPage([612, 792]);
+        const { width, height } = page.getSize();
+
+        const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+        const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+
+        const fondoImg = await pdfDoc.embedPng(fondoBytes);
+        const logoImg = await pdfDoc.embedPng(logoBytes);
+        const pieImg = await pdfDoc.embedJpg(pieBytes);
+
+        function drawBackground(p) {
+            const fondoDims = fondoImg.scale(1);
+            const scale = Math.min(width / fondoDims.width, height / fondoDims.height) * 0.9;
+            const imgWidth = fondoDims.width * scale;
+            const imgHeight = fondoDims.height * scale;
+            const x = (width - imgWidth) / 2;
+            const y = (height - imgHeight) / 2;
+
+            p.drawImage(fondoImg, { x, y, width: imgWidth, height: imgHeight, opacity: 0.15 });
+            p.drawImage(logoImg, { x: width - 140, y: height - 60, width: 120, height: 40 });
+
+            const pieDims = pieImg.scale(0.4);
+            const pieWidth = pieDims.width;
+            const pieHeight = pieDims.height;
+            const pieX = (width - pieWidth) / 2;
+            const pieY = 0;
+            p.drawImage(pieImg, { x: pieX, y: pieY, width: pieWidth, height: pieHeight });
+        }
+
+        drawBackground(page);
+        let yPos = height - 120;
+
+        function checkSpace(rows = 1) {
+            if (yPos - rows * 20 < 100) {
+                page = pdfDoc.addPage([612, 792]);
+                drawBackground(page);
+                yPos = height - 100;
+            }
+        }
+
+        async function drawField(label, value) {
+            checkSpace(2);
+            page.drawRectangle({
+                x: 45,
+                y: yPos - 4,
+                width: width - 90,
+                height: 18,
+                borderColor: rgb(0.8, 0.8, 0.8),
+                borderWidth: 0.5,
+            });
+            page.drawText(`${label}: ${value ?? ""}`, {
+                x: 50,
+                y: yPos,
+                size: 9,
+                font,
+                color: rgb(0.2, 0.2, 0.2),
+            });
+            yPos -= 20;
+        }
+
+        async function drawObject(title, obj) {
+            checkSpace(2);
+            page.drawText(title, {
+                x: 50,
+                y: yPos,
+                size: 13,
+                font: fontBold,
+                color: rgb(0, 0, 0.6),
+            });
+            yPos -= 20;
+            for (const [key, value] of Object.entries(obj)) {
+                if (value && typeof value === "object" && !Array.isArray(value)) {
+                    await drawObject(toTitleCase(key), value);
+                } else if (Array.isArray(value)) {
+                    for (const item of value) {
+                        if (typeof item === "object") await drawObject(toTitleCase(key), item);
+                        else await drawField(toTitleCase(key), item);
+                    }
+                } else {
+                    await drawField(toTitleCase(key), value);
+                }
+            }
+        }
+
+        page.drawText("Formulario Salav", {
+            x: width / 2 - 60,
+            y: yPos,
+            size: 18,
+            font: fontBold,
+            color: rgb(0, 0, 0),
+        });
+        yPos -= 40;
+
+        for (const [key, value] of Object.entries(formJSON)) {
+            if (typeof value === "object") await drawObject(toTitleCase(key), value);
+            else await drawField(toTitleCase(key), value);
+        }
+
+        // === Anexar PDF externos (bg_check_url, cv_url) ===
+        async function anexarPDF(fileId, label) {
+            if (!fileId) return;
+            console.log(`📄 Anexando ${label}...`);
+            const bytes = await downloadDriveFile(fileId);
+            if (!bytes) return;
+            const externo = await PDFDocument.load(bytes);
+            const pages = await pdfDoc.copyPages(externo, externo.getPageIndices());
+            pages.forEach((p) => pdfDoc.addPage(p));
+        }
+
+        await anexarPDF(bgId, "Verificación de antecedentes");
+        await anexarPDF(cvId, "Currículum");
+
+        // === Guardar PDF en memoria ===
+        const candidatoNombre = formJSON.form_object?.candidato?.candidato_nombre || "GENERIC";
+        const carpeta = generarCarpeta(candidatoNombre);
+        const nombreArchivo = `${numeroSolicitud || Date.now()}_${carpeta}_Cuestionario.pdf`;
+
+        const pdfBytes = await pdfDoc.save();
+        const blob = new Blob([pdfBytes], { type: "application/pdf" });
+
+        // === Subir a Google Drive ===
+        console.log("📤 Subiendo PDF final...");
+        const formData = new FormData();
+        formData.append("file", blob, nombreArchivo);
+        formData.append("path", `${numeroSolicitud || carpeta}/Cuestionario`);
+
+        const uploadRes = await axios.post(`${API_URL}google/upload`, formData, {
+            headers: { Authorization: `Bearer ${token_a}` },
+        });
+
+        console.log("✅ PDF subido con éxito:", uploadRes.data);
+
+        // === Actualizar user-progress con estudio_url ===
+        if (uploadRes.data?.id) {
+            const resProgress = await axios.patch(
+                `${API_URL}user-progress/${progressId}`,
+                { estudio_url: uploadRes.data.id },
+                { headers: { Authorization: `Bearer ${token_a}` } }
+            );
+            console.log("✅ 'estudio_url' actualizado:", resProgress.data);
+        }
+
+    } catch (err) {
+        console.error("❌ Error al generar o subir el PDF:", err);
+        throw err;
     }
 }

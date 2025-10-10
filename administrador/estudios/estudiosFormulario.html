@@ -332,28 +332,28 @@
           <!-- SITUACIÓN ECONÓMICA — ESTILO DE VIDA (termina en 'otros ingresos') -->
           <div class="salav-card">
             <h2 class="section-title">Situación económica - Estilo de vida</h2>
-              <div class="salav-grid">
-                <div class="salav-field salav-full">
-                  <label for="sueldo_actual">Sueldo actual del candidato</label>
-                  <input id="sueldo_actual" name="sueldo_actual" type="text" />
-                </div>
-
-                <div class="salav-field">
-                  <label for="ingresos_negocio">Ingresos por negocio</label>
-                  <input id="ingresos_negocio" name="ingresos_negocio" type="text" />
-                </div>
-
-                <div class="salav-field">
-                  <label for="ingresos_oficio">Ingresos por oficio</label>
-                  <input id="ingresos_oficio" name="ingresos_oficio" type="text" />
-                </div>
-
-                <div class="salav-field salav-full">
-                  <label for="otros_ingresos">Otros ingresos (especificar)</label>
-                  <input id="otros_ingresos" name="otros_ingresos" type="text"
-                    placeholder="Especifique de dónde provienen sus otros ingresos" />
-                </div>
+            <div class="salav-grid">
+              <div class="salav-field salav-full">
+                <label for="sueldo_actual">Sueldo actual del candidato</label>
+                <input id="sueldo_actual" name="sueldo_actual" type="text" />
               </div>
+
+              <div class="salav-field">
+                <label for="ingresos_negocio">Ingresos por negocio</label>
+                <input id="ingresos_negocio" name="ingresos_negocio" type="text" />
+              </div>
+
+              <div class="salav-field">
+                <label for="ingresos_oficio">Ingresos por oficio</label>
+                <input id="ingresos_oficio" name="ingresos_oficio" type="text" />
+              </div>
+
+              <div class="salav-field salav-full">
+                <label for="otros_ingresos">Otros ingresos (especificar)</label>
+                <input id="otros_ingresos" name="otros_ingresos" type="text"
+                  placeholder="Especifique de dónde provienen sus otros ingresos" />
+              </div>
+            </div>
           </div>
 
           <!-- SITUACIÓN ECONÓMICA — INGRESOS FAMILIARES -->
@@ -590,27 +590,35 @@
           </div>
 
           <!-- MOTOCICLETA (condicional) -->
-          <div id="motocicleta-block" class="salav-card" style="display:none">
-            <h2 class="section-title">Estilo de vida — Comodidades (motocicleta)</h2>
-            <div class="salav-grid">
-              <div class="salav-field">
-                <label for="moto_marca">Marca</label>
-                <input id="moto_marca" name="moto_marca" type="text" />
-              </div>
-              <div class="salav-field">
-                <label for="moto_modelo">Modelo</label>
-                <input id="moto_modelo" name="moto_modelo" type="text" />
-              </div>
-              <div class="salav-field">
-                <label for="moto_ano">Año</label>
-                <input id="moto_ano" name="moto_ano" type="text" />
-              </div>
-              <div class="salav-field">
-                <label for="moto_color">Color</label>
-                <input id="moto_color" name="moto_color" type="text" />
+          <div id="motocicleta-block" class="salav-card">
+            <div id="motocicleta-block-HasData" style="display:none;">
+              <h2 class="section-title">Estilo de vida — Comodidades (motocicleta)</h2>
+              <div class="salav-grid">
+                <div class="salav-field">
+                  <label for="moto_marca">Marca</label>
+                  <input id="moto_marca" name="moto_marca" type="text" />
+                </div>
+                <div class="salav-field">
+                  <label for="moto_modelo">Modelo</label>
+                  <input id="moto_modelo" name="moto_modelo" type="text" />
+                </div>
+                <div class="salav-field">
+                  <label for="moto_ano">Año</label>
+                  <input id="moto_ano" name="moto_ano" type="text" />
+                </div>
+                <div class="salav-field">
+                  <label for="moto_color">Color</label>
+                  <input id="moto_color" name="moto_color" type="text" />
+                </div>
               </div>
             </div>
+            <div id="motocicleta-block-NullData" style="display:none;">
+              <p>No tienes motocicleta ❌</p>
+              <p> Salta a la siguiente sección...</p>
+            </div>
+
           </div>
+
 
           <!-- ESTILO DE VIDA COMODIDADES 3 -->
           <div class="salav-card">
@@ -683,18 +691,27 @@
           </div>
 
           <!-- COMODIDADES - CELULAR (condicional) -->
-          <div id="celular-block" class="salav-card" style="display:none">
-            <h2 class="section-title">Comodidades — Celular</h2>
-            <div class="salav-grid">
-              <div class="salav-field">
-                <label for="cel_marca">Marca</label>
-                <input id="cel_marca" name="cel_marca" type="text" />
-              </div>
-              <div class="salav-field">
-                <label for="cel_modelo">Modelo</label>
-                <input id="cel_modelo" name="cel_modelo" type="text" />
+          <div id="celular-block" class="salav-card">
+            <div id="celular-block-HasData" style="display:none;">
+              <h2 class="section-title">Comodidades — Celular</h2>
+              <div class="salav-grid">
+                <div class="salav-field">
+                  <label for="cel_marca">Marca</label>
+                  <input id="cel_marca" name="cel_marca" type="text" />
+                </div>
+                <div class="salav-field">
+                  <label for="cel_modelo">Modelo</label>
+                  <input id="cel_modelo" name="cel_modelo" type="text" />
+                </div>
               </div>
             </div>
+
+              <div id="celular-block-NullData" style="display:none;">
+                <p>No tienes Celular ❌</p>
+                <p> Salta a la siguiente sección...</p>
+              </div>
+
+            
           </div>
 
           <!-- ESTILO DE VIDA COMODIDADES 4 -->
@@ -918,7 +935,7 @@
               <div class="salav-field" id="que_estudia_field" style="display:none">
                 <label for="que_estudia">¿Qué estudia?</label>
                 <input id="que_estudia" name="que_estudia" type="text" />
-              </div>
+              </div>  
             </div>
           </div>
 
@@ -1455,14 +1472,12 @@
     <div class="modal-contenido" id="modal-contenido">
     </div>
   </div>
-  
+
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="../../config.js"></script>
   <script src="../../utilities.js"></script>
   <script src="../../plantilla.js"></script>
-  <script src="reviewform.js"></script>
-
-
+  <script type="module" src="./reviewform.js"></script>
 </body>
 
 </html>

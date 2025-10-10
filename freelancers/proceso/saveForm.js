@@ -971,12 +971,15 @@ document.getElementById('add-nivel-btn').addEventListener('click', function() {
             "Content-Type": "application/json",
           },
         });
-
+ // 📌 Actualizar progreso SOLO si la subida fue exitosa
+    const body = { documenting_information: true, visit_complete: true };
+    const resProgress =  axios.patch(
+      `${API_URL}user-progress/${usuarioSeleccionado._id}`,
+      body,
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
         mostrarModalMensajeForm("✅ Formulario guardado");
 
-        finalizarTarea(USER_PROGRESS, "documenting_information", token_a);
-
-        
         setTimeout(() => {
             window.location.replace("estudiosProceso.html");
         }, 5000);
