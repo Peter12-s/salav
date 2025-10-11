@@ -2001,35 +2001,23 @@ async function handleFormSubmit() {
 
 async function generarYSubirPDF(formBody, token_a) {
     try {
-        //console.log("🧾 [generarYSubirPDF] Iniciando proceso...");
-        //console.log("📥 formBody recibido:", formBody);
-        //console.log("🔑 token recibido:", token_a ? "✅ presente" : "❌ no existe");
-
-        //const API_URL = "http://localhost:8080/api/";
         const formJSON = formBody.form_object;
+        if (!formJSON) throw new Error("❌ No se encontró 'form_object' dentro de formBody");
 
-        if (!formJSON) {
-            throw new Error("❌ No se encontró 'form_object' dentro de formBody");
-        }
-
-        // === Obtener USER_PROGRESS ===
         const progressId = formJSON?.form_object?.identificadores?.USER_PROGRESS;
-        //console.log("📘 USER_PROGRESS:", progressId);
         if (!progressId) throw new Error("El JSON no tiene identificadores.USER_PROGRESS");
 
-        // === Descargar info de user-progress ===
-        //console.log("📡 Consultando datos del candidato...");
+        // === Obtener datos del candidato ===
         const progressRes = await axios.get(`${API_URL}user-progress/${progressId}`, {
             headers: { Authorization: `Bearer ${token_a}` },
         });
         const { number: numeroSolicitud, bg_check_url: bgId, cv_url: cvId } = progressRes.data || {};
-        //console.log("✅ Datos obtenidos:", { numeroSolicitud, bgId, cvId });
 
         // === Funciones auxiliares ===
         function toTitleCase(key) {
             return key
                 .split("_")
-                .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+                .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
                 .join(" ");
         }
 
@@ -2048,12 +2036,11 @@ async function generarYSubirPDF(formBody, token_a) {
             return await res.arrayBuffer();
         }
 
-        // === Preparar imágenes ===
+        // === Cargar imágenes base ===
         const fondoBytes = await fetch("../../img/FONDO CLARO.png").then(r => r.arrayBuffer());
         const logoBytes = await fetch("../../img/FONDO CLARO.png").then(r => r.arrayBuffer());
         const pieBytes = await fetch("../../img/Pie_salav.jpeg").then(r => r.arrayBuffer());
 
-        // === Crear PDF ===
         const pdfDoc = await PDFDocument.create();
         let page = pdfDoc.addPage([612, 792]);
         const { width, height } = page.getSize();
@@ -2065,6 +2052,7 @@ async function generarYSubirPDF(formBody, token_a) {
         const logoImg = await pdfDoc.embedPng(logoBytes);
         const pieImg = await pdfDoc.embedJpg(pieBytes);
 
+        // === Fondo general ===
         function drawBackground(p) {
             const fondoDims = fondoImg.scale(1);
             const scale = Math.min(width / fondoDims.width, height / fondoDims.height) * 0.9;
@@ -2095,8 +2083,55 @@ async function generarYSubirPDF(formBody, token_a) {
             }
         }
 
+        // === Dibujar campos e imágenes ===
         async function drawField(label, value) {
             checkSpace(2);
+
+            // 🔹 Si el valor es una URL de Google Drive → insertar imagen centrada
+            if (typeof value === "string" && value.includes("drive.google.com")) {
+                const match = value.match(/\/d\/(.*?)\//);
+                const fileId = match ? match[1] : null;
+                const buffer = await downloadDriveFile(fileId);
+                if (buffer) {
+                    try {
+                        let img;
+                        try {
+                            img = await pdfDoc.embedJpg(buffer);
+                        } catch {
+                            img = await pdfDoc.embedPng(buffer);
+                        }
+
+                        // Texto con el nombre del campo
+                        checkSpace(3);
+                        page.drawText(`${label}:`, {
+                            x: width / 2 - 100,
+                            y: yPos,
+                            size: 12,
+                            font: fontBold,
+                            color: rgb(0, 0, 0.5),
+                        });
+                        yPos -= 15;
+
+                        // Imagen centrada y de media página
+                        const imgMaxWidth = width * 0.6;
+                        const imgMaxHeight = height / 2;
+                        const ratio = Math.min(imgMaxWidth / img.width, imgMaxHeight / img.height);
+                        const imgWidth = img.width * ratio;
+                        const imgHeight = img.height * ratio;
+                        const x = (width - imgWidth) / 2;
+                        const y = yPos - imgHeight;
+
+                        // Agregar imagen
+                        page.drawImage(img, { x, y, width: imgWidth, height: imgHeight });
+                        yPos -= imgHeight + 20;
+                        return;
+                    } catch {
+                        value = "[Imagen no disponible]";
+                    }
+                }
+            }
+
+            // 🔸 Campo normal (texto)
             page.drawRectangle({
                 x: 45,
                 y: yPos - 4,
@@ -2139,6 +2174,7 @@ async function generarYSubirPDF(formBody, token_a) {
             }
         }
 
+        // === Construcción principal del PDF ===
         page.drawText("Formulario Salav", {
             x: width / 2 - 60,
             y: yPos,
@@ -2153,10 +2189,9 @@ async function generarYSubirPDF(formBody, token_a) {
             else await drawField(toTitleCase(key), value);
         }
 
-        // === Anexar PDF externos (bg_check_url, cv_url) ===
+        // === Anexar PDF externos ===
         async function anexarPDF(fileId, label) {
             if (!fileId) return;
-            //console.log(`📄 Anexando ${label}...`);
             const bytes = await downloadDriveFile(fileId);
             if (!bytes) return;
             const externo = await PDFDocument.load(bytes);
@@ -2167,7 +2202,7 @@ async function generarYSubirPDF(formBody, token_a) {
         await anexarPDF(bgId, "Verificación de antecedentes");
         await anexarPDF(cvId, "Currículum");
 
-        // === Guardar PDF en memoria ===
+        // === Guardar PDF ===
         const candidatoNombre = formJSON.form_object?.candidato?.candidato_nombre || "GENERIC";
         const carpeta = generarCarpeta(candidatoNombre);
         const nombreArchivo = `${numeroSolicitud || Date.now()}_${carpeta}_Cuestionario.pdf`;
@@ -2176,7 +2211,6 @@ async function generarYSubirPDF(formBody, token_a) {
         const blob = new Blob([pdfBytes], { type: "application/pdf" });
 
         // === Subir a Google Drive ===
-        //console.log("📤 Subiendo PDF final...");
         const formData = new FormData();
         formData.append("file", blob, nombreArchivo);
         formData.append("path", `${numeroSolicitud || carpeta}/Cuestionario`);
@@ -2185,16 +2219,13 @@ async function generarYSubirPDF(formBody, token_a) {
             headers: { Authorization: `Bearer ${token_a}` },
         });
 
-        //console.log("✅ PDF subido con éxito:", uploadRes.data);
-
         // === Actualizar user-progress con estudio_url ===
         if (uploadRes.data?.id) {
-            const resProgress = await axios.patch(
+            await axios.patch(
                 `${API_URL}user-progress/${progressId}`,
                 { estudio_url: uploadRes.data.id },
                 { headers: { Authorization: `Bearer ${token_a}` } }
             );
-            //console.log("✅ 'estudio_url' actualizado:", resProgress.data);
         }
 
     } catch (err) {
