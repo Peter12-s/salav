@@ -1,5 +1,6 @@
 
 const API_URL = "https://nest-api-217870254419.us-central1.run.app/api/";
+const  FRONT="https://peter12-s.github.io/salav";
 const mensajeWhatsApp = encodeURIComponent("Hola, quisiera abrir una cuenta");
 
 
@@ -78,7 +79,7 @@ if (document.getElementById("btnLogout")) {
   document.getElementById("btnLogout").addEventListener("click", async () => {
     try {
       localStorage.clear();
-      window.location.href = "/login.html";
+      window.location.href = FRONT+"/login.html";
     } catch (e) {
       mostrarModalMensaje("No se pudo cerrar la sesión. Intenta de nuevo.");
     }
@@ -88,7 +89,7 @@ if (document.getElementById("btnLogout")) {
 
 function errorServer() {
   localStorage.clear();
-  window.location.href = "/login.html";
+  window.location.href = FRONT+"/login.html";
 }
 
 function recargarPagina() {
