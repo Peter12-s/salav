@@ -1,5 +1,4 @@
-import { PDFDocument, rgb, StandardFonts } from "https://esm.sh/pdf-lib";
-
+ import { PDFDocument, rgb, StandardFonts } from "https://cdn.skypack.dev/pdf-lib";  
 import axios from "https://cdn.skypack.dev/axios";
 
 // Variables globales
