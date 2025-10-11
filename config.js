@@ -1,5 +1,5 @@
 
-const API_URL = "http://localhost:8080/api/";
+const API_URL = "https://nest-api-217870254419.us-central1.run.app/api/";
 const mensajeWhatsApp = encodeURIComponent("Hola, quisiera abrir una cuenta");
 
 
