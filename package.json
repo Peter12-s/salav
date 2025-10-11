@@ -7,6 +7,9 @@
   "keywords": ["pdf", "pdf-lib", "node-fetch", "json"],
   "author": "",
   "license": "ISC",
+  "scripts": {
+    "start": "node pdf.js"
+  },
   "dependencies": {
     "node-fetch": "^3.3.2",
     "pdf-lib": "^1.17.1",
