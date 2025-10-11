@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             freelancers = res.data;
         } catch (err) {
-            mostrarModalMensaje("Error en peticion. Inicia sesión de nuevo. ❌");
+            mostrarModalMensaje("Error en la petición. Inicia sesión de nuevo. ❌");
             errorServer();
         }
     }
@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             applicants = res.data;
             filteredUsuarios = [...applicants];
-            // mostrarModalMensaje("Petición realizada. ✅");
             renderSolicitudes();
         } catch (error) {
             if (error.response && error.response.status === 401) {
@@ -35,16 +34,19 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     }
+
+    // 📌 Elementos del DOM
     prevBtn = document.getElementById("prevBtn");
     nextBtn = document.getElementById("nextBtn");
     pageInfo = document.getElementById("pageInfo");
     pageInput = document.getElementById("pageInput");
     goPageBtn = document.getElementById("goPage");
     tbody = document.querySelector("#tablaSolicitudes tbody");
-    usersPerPage = getUsersPerPage();
     searchInput = document.querySelector("#searchInput");
+    usersPerPage = getUsersPerPage();
 
     eventosPaginacion();
+
     // 📌 Filtro de búsqueda
     searchInput.addEventListener("input", () => {
         const query = searchInput.value.toLowerCase();
@@ -56,13 +58,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         if (filteredUsuarios.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="2" style="text-align:start; color:#888;">
-                No se encontraron resultados
-            </td></tr>`;
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="2" style="text-align:start; color:#888;">
+                        No se encontraron resultados
+                    </td>
+                </tr>`;
             document.getElementsByClassName("pagination")[0].style.display = "none";
         } else {
             document.getElementsByClassName("pagination")[0].style.display = "flex";
-
             currentPage = 1;
             renderSolicitudes();
         }
@@ -75,11 +79,24 @@ document.addEventListener("DOMContentLoaded", () => {
     })();
 });
 
-
-
 function renderSolicitudes() {
-
     tbody.innerHTML = "";
+
+    // 📌 Si no hay solicitudes
+    if (!filteredUsuarios || filteredUsuarios.length === 0) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="2" style="text-align:start; color:#888; padding:10px;">
+                    No hay solicitudes pendientes.
+                </td>
+            </tr>`;
+        document.getElementsByClassName("pagination")[0].style.display = "none";
+        return;
+    }
+
+    // 📌 Si hay solicitudes
+    document.getElementsByClassName("pagination")[0].style.display = "flex";
+
     const totalPages = Math.ceil(filteredUsuarios.length / usersPerPage) || 1;
     const start = (currentPage - 1) * usersPerPage;
     const end = start + usersPerPage;
@@ -143,16 +160,10 @@ function renderSolicitudes() {
 
         btnAsignar.addEventListener("click", async () => {
             const freelancerId = select.value;
-            //console.log({
-            //  solicitud: solicitud._id,
-              //freelance_id: freelancerId,
-            //});
             try {
                 await axios.patch(
                     `${API_URL}form-request/${solicitud._id}`,
-                    {
-                        "freelance_id": freelancerId
-                    },
+                    { freelance_id: freelancerId },
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -164,19 +175,15 @@ function renderSolicitudes() {
                 mostrarModalMensaje(
                     `Candidato asignado correctamente a ${select.options[select.selectedIndex].text} ✅`
                 );
-                searchInput.value = ""; // ✅ limpiar el input
 
-                // Si quieres quitar la fila de la tabla:
+                searchInput.value = ""; // limpiar búsqueda
                 tr.remove();
                 filteredUsuarios = filteredUsuarios.filter(a => a._id !== solicitud._id);
                 renderSolicitudes();
             } catch (err) {
-                //console.error("Error al asignar freelancer ❌", err);
                 mostrarModalMensaje("Error al asignar freelancer ❌");
             }
         });
-
-
 
         tdSelect.appendChild(select);
         tdSelect.appendChild(btnAsignar);
