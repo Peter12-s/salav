@@ -17,7 +17,7 @@
     <plantilla-salav>
         <div class="slot-header" slot="header">
             <a href="../inicioAdmin.html">
-                <img style="width: 150px;" src="../../img/Silueta Clara.png" alt="">
+                <img class="logo-header" style="width: 150px;" src="../img/SiluetaClara.png" alt="">
             </a>
             <nav id="menu">
                 <div class="menu-item">
@@ -64,11 +64,16 @@
                         <option value="EMPRESA">Empresa</option>
                     </select>
                     <!-- Campo visible solo si el rol es EMPRESA -->
-                    <input type="text" id="companyName" placeholder="Nombre de la empresa" style="display: none;">
+                    <div class="companyName">
+                        <label for="companyName"> - Nombre de la empresa</label>
+                        <input type="text" id="companyName" placeholder="Nombre de la empresa" style="display: none;">
+
+                    </div>
 
                     <div class="row">
-                        <label for="nombre"> - Nombre del candidato</label>
+
                         <div class="nombre">
+                            <label for="nombre"> - Nombre del candidato</label>
                             <input id="nombre" type="text" placeholder="Nombre del candidato">
                             <input id="apellidoPaterno" type="text" placeholder="Apellido paterno">
                             <input id="apellidoMaterno" type="text" placeholder="Apellido materno">
