@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       if (userData.user_type === "EMPRESA") {
-        const companyName = document.getElementById("companyName").value.trim();
+        const companyName = document.getElementById("companyNameField").value.trim();
         if (!companyName) {
           mostrarModalMensaje("Por favor, ingresa el nombre de la empresa.");
           return;
