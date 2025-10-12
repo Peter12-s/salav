@@ -64,10 +64,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 No se encontraron resultados
             </td></tr>`;
       document.getElementsByClassName("pagination")[0].style.display = "none";
-      searchInput.style.display = "none";
     } else {
       document.getElementsByClassName("pagination")[0].style.display = "flex";
-      searchInput.style.display = "block";
       currentPage = 1;
       renderSolicitudes();
     }
