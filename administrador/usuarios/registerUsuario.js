@@ -1,20 +1,18 @@
 
 document.addEventListener("DOMContentLoaded", () => {
- obtenerLocalStorage();
+  obtenerLocalStorage();
 
   const form = document.getElementById("userForm");
-   if (!token) {
-        mostrarModalMensaje("No tienes sesión activa. Inicia sesión primero.");
-        errorServer();
-      }
-      
+  if (!token) {
+    mostrarModalMensaje("No tienes sesión activa. Inicia sesión primero.");
+    errorServer();
+  }
+
   if (form) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      const userType = document.getElementById("rol").value.toUpperCase();
       const userData = {
-        name: document.getElementById("nombre").value.trim(),
-        f_surname: document.getElementById("apellidoPaterno").value.trim(),
-        s_surname: document.getElementById("apellidoMaterno").value.trim(),
         phone: document.getElementById("telefono").value.trim(),
         state: document.getElementById("Estado").value.trim(),
         town: document.getElementById("Municipio").value.trim(),
@@ -22,18 +20,21 @@ document.addEventListener("DOMContentLoaded", () => {
         address_references: document.getElementById("Refencias").value.trim(),
         email: document.getElementById("correo").value.trim(),
         password: document.getElementById("password").value,
-        user_type: document.getElementById("rol").value.toUpperCase(),
+        user_type: userType,
       };
 
-      if (userData.user_type === "EMPRESA") {
+      if (userType === "EMPRESA") {
         const companyName = document.getElementById("companyNameField").value.trim();
         if (!companyName) {
           mostrarModalMensaje("Por favor, ingresa el nombre de la empresa.");
           return;
         }
         userData.company_name = companyName;
+      } else {
+        userData.name = document.getElementById("nombre").value.trim();
+        userData.f_surname = document.getElementById("apellidoPaterno").value.trim();
+        userData.s_surname = document.getElementById("apellidoMaterno").value.trim();
       }
-
       try {
         const response = await axios.post(`${API_URL}user`, userData, {
           headers: {
@@ -49,12 +50,11 @@ document.addEventListener("DOMContentLoaded", () => {
       } catch (err) {
         mostrarModalMensaje(
           "❌ Error al registrar usuario: " +
-            (err.response?.data?.message || err.message)
+          (err.response?.data?.message || err.message)
         );
-        // console.error("Error detalle:", err.response?.data || err.message);
       }
     });
   }
 });
 
-function renderSolicitudes() {}
+function renderSolicitudes() { }
