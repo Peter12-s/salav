@@ -90,7 +90,6 @@ function renderSolicitudes() {
     const tr = document.createElement("tr");
     const td = document.createElement("td");
     td.colSpan = etapas.length + 2;
-    td.textContent = "No hay candidatos en proceso";
     td.style.textAlign = "start";
     td.style.fontStyle = "italic";
     tr.appendChild(td);
