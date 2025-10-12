@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", () => {
   obtenerLocalStorage();
 
@@ -24,17 +23,25 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       if (userType === "EMPRESA") {
+        // Asegúrate que el campo esté visible y tenga valor
         const companyName = document.getElementById("companyNameField").value.trim();
         if (!companyName) {
           mostrarModalMensaje("Por favor, ingresa el nombre de la empresa.");
           return;
         }
         userData.company_name = companyName;
+        // Elimina los campos de nombre si existen
+        delete userData.name;
+        delete userData.f_surname;
+        delete userData.s_surname;
       } else {
         userData.name = document.getElementById("nombre").value.trim();
         userData.f_surname = document.getElementById("apellidoPaterno").value.trim();
         userData.s_surname = document.getElementById("apellidoMaterno").value.trim();
+        // Elimina company_name si existe
+        delete userData.company_name;
       }
+
       try {
         const response = await axios.post(`${API_URL}user`, userData, {
           headers: {
@@ -46,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
         mostrarModalMensaje("✅ Usuario registrado con éxito!");
         form.reset();
         document.getElementById("companyName").style.display = "none";
-        document.getElementById("nombre").style.display = "grid";
+        document.querySelector(".nombre").style.display = "grid";
       } catch (err) {
         mostrarModalMensaje(
           "❌ Error al registrar usuario: " +
@@ -56,5 +63,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-
 function renderSolicitudes() { }
