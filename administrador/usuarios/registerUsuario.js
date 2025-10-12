@@ -44,7 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         mostrarModalMensaje("✅ Usuario registrado con éxito!");
         form.reset();
-        document.getElementById("companyNameField").style.display = "none";
+        document.getElementById("companyName").style.display = "none";
+        document.getElementById("nombre").style.display = "grid";
       } catch (err) {
         mostrarModalMensaje(
           "❌ Error al registrar usuario: " +
