@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         mostrarModalMensaje("✅ Usuario registrado con éxito!");
         form.reset();
-        document.getElementById("companyName").style.display = "none";
+        document.getElementById("companyNameField").style.display = "none";
       } catch (err) {
         mostrarModalMensaje(
           "❌ Error al registrar usuario: " +
@@ -55,3 +55,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+function renderSolicitudes() {}
