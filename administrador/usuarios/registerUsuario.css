@@ -53,11 +53,12 @@ h1 {
 
 /* ====== SECCIONES EN GRID ====== */
 .nombre,
+.companyName,
 .contacto,
 .direccion,
 .acceso {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* ✅ 2 columnas */
+    grid-template-columns: repeat(3, 1fr); 
     gap: 15px;
     margin-bottom: 15px;
 }
