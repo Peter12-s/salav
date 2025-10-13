@@ -505,9 +505,7 @@ function renderSolicitudes() {
       tdDescargar.style.cursor = "pointer";
 
       tdDescargar.addEventListener("click", () => {
-        // Aquí defines lo que hace el botón de descarga
-        //console.log(`Descargar datos de ${usuarios.applicant_fullname}`);
-        // window.location.href = "ruta/descarga/file.pdf";
+        window.open(`https://drive.google.com/uc?export=download&id=${usuarios.estudio_url}`, '_blank');
       });
     }
     tr.appendChild(tdDescargar);

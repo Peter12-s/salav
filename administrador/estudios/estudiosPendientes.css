@@ -33,7 +33,7 @@
 /* Encabezado */
 #tablaSolicitudes th {
     background-color: #9F38B8;
-    /* Morado */
+    width: 90%;
     color: white;
     text-align: left;
     font-weight: bold;
@@ -49,6 +49,7 @@
 @media (max-width: 768px) {
     #tablaSolicitudes {
         font-size: 14px;
+        min-width: 500px;
         /* más pequeño en móvil */
     }
 
@@ -109,7 +110,7 @@
     color: #c243c6;
     padding: 8px 12px;
     border-radius: 6px;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 1.4;
     white-space: pre-line;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
