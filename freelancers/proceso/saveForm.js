@@ -987,7 +987,7 @@ try {
 
     console.log("actualizar progreso");
     const resProgress = await axios.patch(
-      `${API_URL}user-progress/${usuarioSeleccionado._id}`,
+      `${API_URL}user-progress/${USER_ID}`,
       body2,
       {
         headers: {
