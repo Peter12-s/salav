@@ -972,7 +972,7 @@ document.getElementById('add-nivel-btn').addEventListener('click', function() {
 
     console.log("bodyForm", bodyForm);
 try {
-  console.log("Post Principal");
+  console.log("Post Principal VALITATION ERORR");
   // POST principal (esperamos la respuesta)
   const response = await axios.post(`${API_URL}form`, bodyForm, {
     headers: {
@@ -991,7 +991,7 @@ try {
       body2,
       {
         headers: {
-          Authorization: `Bearer ${token}`, // asegúrate cuál token corresponde
+          Authorization: `Bearer ${token_a}`, // asegúrate cuál token corresponde
           "Content-Type": "application/json",
         },
       }
