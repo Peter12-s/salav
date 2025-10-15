@@ -964,26 +964,26 @@ document.getElementById('add-nivel-btn').addEventListener('click', function() {
     //console.log("Loggeado ", userId);
     //console.log("Token ", token_a);
 
-    const body = {
+    const bodyForm = {
         applicant_id: USER_ID,
         form_object: formJSON
     };
 
     try {
 
-        const response = axios.post(`${API_URL}form`, body, {
+        const response = axios.post(`${API_URL}form`, bodyForm, {
           headers: {
             Authorization: `Bearer ${token_a}`,
             "Content-Type": "application/json",
           },
         });
- // 📌 Actualizar progreso SOLO si la subida fue exitosa
-    const body = { documenting_information: true, visit_complete: true };
-    const resProgress =  axios.patch(
-      `${API_URL}user-progress/${usuarioSeleccionado._id}`,
-      body,
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
+      // 📌 Actualizar progreso SOLO si la subida fue exitosa
+          const body2 = { documenting_information: true, visit_complete: true };
+          const resProgress =  axios.patch(
+            `${API_URL}user-progress/${usuarioSeleccionado._id}`,
+            body2,
+            { headers: { Authorization: `Bearer ${token}` } }
+          );
         mostrarModalMensajeForm("✅ Formulario guardado");
 
         setTimeout(() => {
