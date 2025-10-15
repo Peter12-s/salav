@@ -361,8 +361,12 @@ document.getElementById('add-nivel-btn').addEventListener('click', function() {
   });
 
   
-  document.getElementById('salav-form').addEventListener('submit', function(e) {
-    e.preventDefault();
+  document.getElementById('salav-form').addEventListener('submit', async function (e) {
+  e.preventDefault();
+
+    // opción: desactivar el botón para evitar dobles envíos
+    const submitBtn = this.querySelector('button[type="submit"]');
+    if (submitBtn) submitBtn.disabled = true;
 
     // variables independientes 
     const correo = document.getElementById('correo').value;
@@ -964,38 +968,49 @@ document.getElementById('add-nivel-btn').addEventListener('click', function() {
     //console.log("Loggeado ", userId);
     //console.log("Token ", token_a);
 
-    const bodyForm = {
-        applicant_id: USER_ID,
-        form_object: formJSON
-    };
+    const bodyForm = { applicant_id: USER_ID, form_object: formJSON };
 
-    try {
+    console.log("bodyForm", bodyForm);
+try {
+  console.log("Post Principal");
+  // POST principal (esperamos la respuesta)
+  const response = await axios.post(`${API_URL}form`, bodyForm, {
+    headers: {
+      Authorization: `Bearer ${token_a}`,
+      "Content-Type": "application/json",
+    },
+  });
 
-        const response = axios.post(`${API_URL}form`, bodyForm, {
-          headers: {
-            Authorization: `Bearer ${token_a}`,
-            "Content-Type": "application/json",
-          },
-        });
-      // 📌 Actualizar progreso SOLO si la subida fue exitosa
-          const body2 = { documenting_information: true, visit_complete: true };
-          const resProgress =  axios.patch(
-            `${API_URL}user-progress/${usuarioSeleccionado._id}`,
-            body2,
-            { headers: { Authorization: `Bearer ${token}` } }
-          );
-        mostrarModalMensajeForm("✅ Formulario guardado");
+  // Solo actualizar progreso si el POST fue OK
+  if (response.status >= 200 && response.status < 300) {
+    const body2 = { documenting_information: true, visit_complete: true };
 
-        setTimeout(() => {
-            window.location.replace("estudiosProceso.html");
-        }, 5000);
-
-      } catch (err) {
-        mostrarModalMensajeForm(
-          "❌ Error al guardar el form: " +
-            (err.response?.data?.message || err.message)
-        );
+    console.log("actualizar progreso");
+    const resProgress = await axios.patch(
+      `${API_URL}user-progress/${usuarioSeleccionado._id}`,
+      body2,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // asegúrate cuál token corresponde
+          "Content-Type": "application/json",
+        },
       }
+    );
+
+    mostrarModalMensajeForm("✅ Formulario guardado");
+    setTimeout(() => {
+      window.location.replace("estudiosProceso.html");
+    }, 2000);
+  } else {
+    throw new Error(`Respuesta inesperada: ${response.status}`);
+  }
+} catch (err) {
+  console.error(err);
+  mostrarModalMensajeForm(
+    "❌ Error al guardar el form: " +
+      (err.response?.data?.message || err.message || JSON.stringify(err))
+  );
+}
 
   });
 
