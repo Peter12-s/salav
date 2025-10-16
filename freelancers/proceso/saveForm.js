@@ -987,7 +987,8 @@ try {
     const body2 = { documenting_information: true, visit_complete: true };
 
     console.log("actualizar progreso");
-    const resProgress = await axios.patch(
+    console.log("body ", body2);
+    await axios.patch(
       `${API_URL}user-progress/${USER_PROGRESS}`,
       body2,
       {
@@ -998,7 +999,7 @@ try {
       }
     );
 
-    console.log("ACTUALIZAR PROGRESO ", USER_ID, body2);
+    console.log("ACTUALIZAR PROGRESO ", USER_PROGRESS, body2);
     console.log("reponse Progress ", resProgress);
 
     mostrarModalMensajeForm("✅ Formulario guardado");
