@@ -505,6 +505,7 @@
 .clickable-blue:hover {
     background-color: #3399ff !important;
     color: white;
+    cursor: pointer;
 }
 
 

@@ -56,7 +56,7 @@
  }
 
  /* Icono descarga centrado */
- .descargar svg {
+ /* .descargar svg {
      width: 20px;
      height: 20px;
      fill: white;
@@ -68,7 +68,7 @@
      animation: pulse 0.3s ease-in-out infinite;
      cursor: pointer;
 
- }
+ } */
 
  .descargar svg:hover {
      transform: scale(1.2);
@@ -310,3 +310,20 @@
          /* No romper texto */
      }
  }
+
+ .clickable-blue:hover {
+    background-color: #3399ff !important;
+    color: white;
+    cursor: pointer;
+}
+
+
+ .clickable-blue:hover {
+    background-color: #1a5692 !important;
+ }
+
+
+.clickable-blue svg:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
