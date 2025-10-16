@@ -1000,7 +1000,6 @@ try {
     );
 
     console.log("ACTUALIZAR PROGRESO ", USER_PROGRESS, body2);
-    console.log("reponse Progress ", resProgress);
 
     mostrarModalMensajeForm("✅ Formulario guardado");
     setTimeout(() => {
