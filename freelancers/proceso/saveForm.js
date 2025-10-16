@@ -981,13 +981,14 @@ try {
     },
   });
 
+  console.log("RESPONSE ",response);
   // Solo actualizar progreso si el POST fue OK
   if (response.status >= 200 && response.status < 300) {
     const body2 = { documenting_information: true, visit_complete: true };
 
     console.log("actualizar progreso");
     const resProgress = await axios.patch(
-      `${API_URL}user-progress/${USER_ID}`,
+      `${API_URL}user-progress/${USER_PROGRESS}`,
       body2,
       {
         headers: {
@@ -996,6 +997,9 @@ try {
         },
       }
     );
+
+    console.log("ACTUALIZAR PROGRESO ", USER_ID, body2);
+    console.log("reponse Progress ", resProgress);
 
     mostrarModalMensajeForm("✅ Formulario guardado");
     setTimeout(() => {
