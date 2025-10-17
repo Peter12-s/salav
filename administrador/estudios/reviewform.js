@@ -2027,12 +2027,32 @@ async function generarYSubirPDF(formBody, token_a) {
             return nombre.slice(0, 3) + apellido.slice(0, 2);
         }
 
+        //async function downloadDriveFile(fileId) {
+        //    if (!fileId) return null;
+        //    const url = `https://drive.google.com/uc?id=${fileId}&export=download`;
+        //    const res = await fetch(url);
+        //    if (!res.ok) return null;
+        //    return await res.arrayBuffer();
+        //}
+
         async function downloadDriveFile(fileId) {
-            if (!fileId) return null;
-            const url = `https://drive.google.com/uc?id=${fileId}&export=download`;
+        if (!fileId) return null;
+        try {
+            // 📎 URL pública directa de Google Drive (asegúrate de que el archivo esté compartido como "Cualquiera con el enlace")
+            const url = `https://drive.google.com/uc?export=download&id=${fileId}`;
             const res = await fetch(url);
-            if (!res.ok) return null;
-            return await res.arrayBuffer();
+            if (!res.ok) {
+            console.warn(`No se pudo descargar el archivo ${fileId}: ${res.status}`);
+            return null;
+            }
+
+            // 📦 Convertir el contenido a ArrayBuffer (para integrarlo al PDF)
+            const buffer = await res.arrayBuffer();
+            return buffer;
+        } catch (err) {
+            console.error(`Error al descargar el archivo ${fileId}:`, err);
+            return null;
+        }
         }
 
         // === Cargar imágenes base ===
