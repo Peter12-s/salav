@@ -1965,15 +1965,15 @@ async function handleFormSubmit() {
     try {
         //console.log("📄 Generando y subiendo PDF...");
         // 1️⃣ Generar y subir PDF primero
-        await generarYSubirPDF({ form_object: body }, token_a);
-        //console.log("✅ PDF generado y 'estudio_url' actualizado.");
+        // await generarYSubirPDF({ form_object: body }, token_a);
+        // //console.log("✅ PDF generado y 'estudio_url' actualizado.");
 
-        // 2️⃣ Actualizar el formulario
-        const response = await axios.patch(`${API_URL}form/${id_form}`, body, {
-            headers: {
-                Authorization: `Bearer ${token_a}`
-            },
-        });
+        // // 2️⃣ Actualizar el formulario
+        // const response = await axios.patch(`${API_URL}form/${id_form}`, body, {
+        //     headers: {
+        //         Authorization: `Bearer ${token_a}`
+        //     },
+        // });
 
         // 3️⃣ Actualizar progreso solo si el PDF se generó correctamente
         const bodyProgress = { evaluation_complete: true };
