@@ -132,12 +132,23 @@ function renderSolicitudes() {
         td.style.cursor = "pointer";
 
         if (etapa.key === "documenting_information") {
-          td.addEventListener("click", () => {
-            
-            sessionStorage.setItem('nombre_seleccionado', usuario.applicant_fullname);
-            sessionStorage.setItem('numero_solicitud', usuario.number);
-            window.location.href = `estudiosFormulario.html?user=${encodeURIComponent(usuario.applicant_id)}&userprogress=${encodeURIComponent(usuario._id)}`;
-          });
+          // agregar listener solo si TODAS las etapas anteriores están completadas
+          const idx = etapas.findIndex(e => e.key === etapa.key);
+          const anterioresCompletas = etapas
+            .slice(0, idx)
+            .every(e => !!usuario[e.key]);
+
+          if (anterioresCompletas) {
+            td.addEventListener("click", () => {
+              sessionStorage.setItem('nombre_seleccionado', usuario.applicant_fullname);
+              sessionStorage.setItem('numero_solicitud', usuario.number);
+              window.location.href = `estudiosFormulario.html?user=${encodeURIComponent(usuario.applicant_id)}&userprogress=${encodeURIComponent(usuario._id)}`;
+            });
+             } else {
+            // opcional: indicar por qué no se puede hacer click
+            td.style.cursor = "not-allowed";
+            td.title = "Completa las etapas anteriores para continuar";
+          }
         } else {
           td.addEventListener("click", () => {
             finalizarTarea(usuario._id, etapa.key);
