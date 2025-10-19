@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   goPageBtn = document.getElementById("goPage");
   totalPagesSpan = document.getElementById("totalPages");
   tabla = document.querySelector("table");
-  tablaB= document.querySelector("tbody");
+  tablaB = document.querySelector("tbody");
 
   searchInput = document.getElementById("searchInput");
 
@@ -117,7 +117,7 @@ function renderSolicitudes() {
 
     // 📌 Columnas etapas
     etapas.forEach(etapa => {
-      
+
       const td = document.createElement("td");
       const completado = usuario[etapa.key];
       // ✅ Estilos según estado
@@ -144,12 +144,11 @@ function renderSolicitudes() {
               sessionStorage.setItem('numero_solicitud', usuario.number);
               window.location.href = `estudiosFormulario.html?user=${encodeURIComponent(usuario.applicant_id)}&userprogress=${encodeURIComponent(usuario._id)}`;
             });
-             } else {
+          } else {
             // opcional: indicar por qué no se puede hacer click
             td.style.cursor = "not-allowed";
             td.title = "Completa las etapas anteriores para continuar";
           }
-           }
 
         } else if (etapa.key === "visit_scheduled") {
           // permitir agendar visita SOLO si 'candidate_contacted' ya está finalizada
@@ -163,8 +162,10 @@ function renderSolicitudes() {
           }
 
         } else {
-          
+
         }
+      }
+
       tr.appendChild(td);
     });
 
@@ -175,13 +176,13 @@ function renderSolicitudes() {
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M5 20h14v-2H5v2zM12 2v12l4-4h-3V2h-2v8H8l4 4z"/>
         </svg>`;
-        
+
 
     tr.appendChild(tdDescargar);
 
     tablaB.appendChild(tr); // ✅ siempre al tbody
   });
-    actualizarPaginacion();
+  actualizarPaginacion();
 }
 
 async function finalizarTarea(userId, etapaKey) {
