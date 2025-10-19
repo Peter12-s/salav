@@ -439,25 +439,27 @@ function renderSolicitudes() {
     tr.appendChild(tdNombre);
 
     // 📌 Columna etapas
-    // 📌 Columna etapas
     etapas.forEach(etapa => {
       const td = document.createElement("td");
       const completado = usuarios[etapa.key];
 
       // 🔸 Caso especial para documenting_information
       if (etapa.key === "documenting_information") {
-        if (completado && !usuarios.evaluation_complete&&usuarios.background_check) {
-          // 📌 Naranja y clickeable si está documentando pero aún no evalúa
-          td.className = "bloque status-evaluation";
+        if (completado && !usuarios.evaluation_complete) {
+         if (usuarios.background_check) { 
+          // 📌 Clickeable si está documentando pero aún no evalúa
           td.classList.add("clickable");
           td.style.cursor = "pointer";
-          td.textContent = etapa.label;
-
+        
           td.addEventListener("click", () => {
             sessionStorage.setItem('nombre_seleccionado', usuarios.applicant_fullname);
             sessionStorage.setItem('numero_solicitud', usuarios.number);
             window.location.href = `estudiosFormulario.html?user=${encodeURIComponent(usuarios.applicant_id)}&userprogress=${encodeURIComponent(usuarios._id)}`;
           });
+          }
+          td.textContent = etapa.label;
+          td.className = "bloque status-evaluation";
+          
         } else if (usuarios.evaluation_complete) {
           // 📌 Verde si ya está completada la evaluación
           td.className = "bloque status-completado";
