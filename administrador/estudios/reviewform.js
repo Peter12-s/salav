@@ -1996,8 +1996,7 @@ async function handleFormSubmit() {
 
 }
 
-
-
+/*
 async function generarYSubirPDF(formBody, token_a) {
     try {
         const formJSON = formBody.form_object;
@@ -2252,3 +2251,4 @@ async function generarYSubirPDF(formBody, token_a) {
         throw err;
     }
 }
+ */
