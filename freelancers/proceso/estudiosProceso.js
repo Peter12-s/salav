@@ -106,7 +106,7 @@ function renderSolicitudes() {
 
   pageData.forEach(usuario => {
     //console.log(usuario.applicant_fullname);
-    console.log(usuario);
+    // console.log(usuario);
     const tr = document.createElement("tr");
 
     // 📌 Columna nombre
@@ -163,9 +163,7 @@ function renderSolicitudes() {
           }
 
         } else {
-          td.addEventListener("click", () => {
-            finalizarTarea(usuario._id, etapa.key);
-          });
+          
         }
       tr.appendChild(td);
     });
