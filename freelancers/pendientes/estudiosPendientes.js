@@ -174,3 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
 });
+
+function renderSolicitudes() {
+    
+}
