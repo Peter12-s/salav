@@ -132,11 +132,9 @@ function renderSolicitudes() {
         td.style.cursor = "pointer";
 
         if (etapa.key === "documenting_information") {
-          // agregar listener solo si TODAS las etapas anteriores están completadas
-          const idx = etapas.findIndex(e => e.key === etapa.key);
-          const anterioresCompletas = etapas
-            .slice(0, idx)
-            .every(e => !!usuario[e.key]);
+          // comprobar solo estas 3 etapas previas: application_accepted, candidate_contacted, visit_scheduled
+          const requiredPrev = ["application_accepted", "candidate_contacted", "visit_scheduled"];
+          const anterioresCompletas = requiredPrev.every(k => !!usuario[k]);
 
           if (anterioresCompletas) {
             td.addEventListener("click", () => {
@@ -145,11 +143,9 @@ function renderSolicitudes() {
               window.location.href = `estudiosFormulario.html?user=${encodeURIComponent(usuario.applicant_id)}&userprogress=${encodeURIComponent(usuario._id)}`;
             });
           } else {
-            // opcional: indicar por qué no se puede hacer click
             td.style.cursor = "not-allowed";
-            td.title = "Completa las etapas anteriores para continuar";
+            td.title = "Completa: Solicitud aceptada, Candidato contactado y Visita agendada";
           }
-
         } else if (etapa.key === "visit_scheduled") {
           // permitir agendar visita SOLO si 'candidate_contacted' ya está finalizada
           if (usuario.candidate_contacted) {
