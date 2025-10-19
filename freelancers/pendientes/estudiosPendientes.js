@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const div = document.createElement("div");
             div.className = "candidato";
             div.setAttribute("data-id", c._id);
-            div.setAttribute("data-info", `• ${c.applicant.person.town}\n• ${c.applicant.person.state}\n• ${c.applicant.person.settlement}`);
+            div.setAttribute("data-info", `•${c.applicant.person.state} \n• ${c.applicant.person.town}\n• ${c.applicant.person.settlement}`);
             div.textContent = c.applicant.person.name;
             listaCandidatos.appendChild(div);
         });
