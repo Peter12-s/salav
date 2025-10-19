@@ -70,10 +70,10 @@
 
  } */
 
- .descargar svg:hover {
+ /* .descargar svg:hover {
      transform: scale(1.2);
      cursor: pointer;
- }
+ } */
 
 
 
@@ -222,16 +222,16 @@
      z-index: 1;
  }
 
- .descargar:hover {
+ /* .descargar:hover {
      background-color: #659fe6 !important;
      animation: pulse 0.3s ease-in-out infinite;
      cursor: pointer;
- }
+ } */
 
- .descargar svg:hover {
+ /* .descargar svg:hover {
      transform: scale(1.2);
      cursor: pointer;
- }
+ } */
 
  /* Buscador */
  .search-container {
