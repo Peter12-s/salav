@@ -46,11 +46,6 @@ a
   background-color: rgb(245, 127, 42);
 }
 
-    /* Estado en proceso */
-    .status-proceso {
-        background-color: #9d77b3; /* Morado medio */
-    }
-
 .descargar{
        background-color: #2196F3 !important;
 }

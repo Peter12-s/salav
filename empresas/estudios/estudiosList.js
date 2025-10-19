@@ -121,11 +121,8 @@ function renderSolicitudes() {
       const td = document.createElement("td");
 
       // ✅ regla extra para evaluation_complete -> naranja
-      if (etapa.key === "evaluation_complete" && usuario[etapa.key]) {
-        td.className = "bloque status-evaluation";
-      } else {
         td.className = "bloque " + (usuario[etapa.key] ? "status-completado" : "status-proceso");
-      }
+    
 
       td.textContent = etapa.label;
 
@@ -139,7 +136,7 @@ function renderSolicitudes() {
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path d="M5 20h14v-2H5v2zM12 2v12l4-4h-3V2h-2v8H8l4 4z"/>
           </svg>`;
-          
+
      // ✅ Verificar si todas las etapas están en true
     const todasEtapasCompletadas = etapas.every(etapa => usuarios[etapa.key] === true);
 
