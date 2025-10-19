@@ -446,7 +446,7 @@ function renderSolicitudes() {
 
       // 🔸 Caso especial para documenting_information
       if (etapa.key === "documenting_information") {
-        if (completado && !usuarios.evaluation_complete) {
+        if (completado && !usuarios.evaluation_complete&&usuarios.background_check) {
           // 📌 Naranja y clickeable si está documentando pero aún no evalúa
           td.className = "bloque status-evaluation";
           td.classList.add("clickable");
