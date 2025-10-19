@@ -162,10 +162,11 @@ function renderSolicitudes() {
           }
 
         } else {
-
+          td.addEventListener("click", () => {
+            finalizarTarea(usuario._id, etapa.key);
+          });
         }
       }
-
       tr.appendChild(td);
     });
 
