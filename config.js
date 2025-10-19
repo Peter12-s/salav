@@ -75,21 +75,32 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+
+function getBasePath() {
+  const parts = location.pathname.split('/').filter(Boolean);
+  return (location.hostname.endsWith('github.io') && parts.length) ? `/${parts[0]}` : '';
+}
+
+if (document.getElementById("btnLogout")) {
+  document.getElementById("btnLogout").addEventListener("click", () => {
+    localStorage.clear();
+    window.location.href = location.origin + getBasePath() + "/login.html";
+  });
+}
+
+function errorServer() {
+  localStorage.clear();
+  window.location.href = location.origin + getBasePath() + "/login.html";
+}
 if (document.getElementById("btnLogout")) {
   document.getElementById("btnLogout").addEventListener("click", async () => {
     try {
       localStorage.clear();
-      window.location.href = location.origin + "/login.html";
+      window.location.href = location.origin + getBasePath() + "/login.html";
     } catch (e) {
       mostrarModalMensaje("No se pudo cerrar la sesión. Intenta de nuevo.");
     }
   });
-}
-
-
-function errorServer() {
-  localStorage.clear();
-  window.location.href = FRONT+"/login.html";
 }
 
 function recargarPagina() {
