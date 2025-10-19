@@ -149,13 +149,24 @@ function renderSolicitudes() {
             td.style.cursor = "not-allowed";
             td.title = "Completa las etapas anteriores para continuar";
           }
+           }
+
+        } else if (etapa.key === "visit_scheduled") {
+          // permitir agendar visita SOLO si 'candidate_contacted' ya está finalizada
+          if (usuario.candidate_contacted) {
+            td.addEventListener("click", () => {
+              finalizarTarea(usuario._id, etapa.key);
+            });
+          } else {
+            td.style.cursor = "not-allowed";
+            td.title = "Primero finaliza 'Candidato contactado'";
+          }
+
         } else {
           td.addEventListener("click", () => {
             finalizarTarea(usuario._id, etapa.key);
           });
         }
-      }
-
       tr.appendChild(td);
     });
 
