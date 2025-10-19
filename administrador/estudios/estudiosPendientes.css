@@ -50,13 +50,14 @@
     #tablaSolicitudes {
         font-size: 14px;
         min-width: 500px;
+        
         /* más pequeño en móvil */
     }
 
     #tablaSolicitudes th,
     #tablaSolicitudes td {
         padding: 10px 12px;
-        min-width: 120px;
+        min-width: 360px;
         /* reduce ancho en móvil */
     }
 }
